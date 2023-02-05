@@ -1,0 +1,76 @@
+<template>
+    <!-- 하단 네비게이션바 -->
+    <div class="m-navigation type01">
+        <div class="navs">
+            <div :class="`nav-wrap ${$route.path === '/' ? 'active' : ''}`">
+                <a href="#" class="nav">
+                    <div class="img-wrap">
+                        <img src="/images/home.png" alt="">
+                    </div>
+
+                    <h3 class="title">홈</h3>
+                </a>
+            </div>
+
+            <div class="nav-wrap">
+                <a href="#" class="nav">
+                    <div class="img-wrap">
+                        <img src="/images/newspaper.png" alt="">
+                    </div>
+
+                    <h3 class="title">마을소식</h3>
+                </a>
+            </div>
+
+            <div class="nav-wrap">
+                <a href="#" class="nav">
+                    <div class="img-wrap">
+                        <img src="/images/location-marker.png" alt="">
+                    </div>
+
+                    <h3 class="title">내 근처</h3>
+                </a>
+            </div>
+
+            <div class="nav-wrap">
+                <a href="#" class="nav">
+                    <div class="img-wrap">
+                        <img src="/images/chat-alt-2.png" alt="">
+                    </div>
+
+                    <h3 class="title">채팅</h3>
+                </a>
+            </div>
+
+            <div class="nav-wrap">
+                <a href="#" class="nav">
+                    <div class="img-wrap">
+                        <img src="/images/user.png" alt="">
+                    </div>
+
+                    <h3 class="title">내 정보</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+export default {
+    props: {
+
+    },
+    data() {
+        return {
+
+        }
+    },
+
+    methods: {
+
+    },
+
+    mounted() {
+
+    }
+}
+</script>

@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi, minimal-ui"/>
+	<title>파일가이드</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+	<style>
+		html {background: #333;}
+		table {width:100%;}
+		.table-wrap {padding:40px; background-color:#fff; border-radius:10px;}
+		table th {border-bottom:1px solid #ccc; text-align: center;}
+		table th, table td {padding:10px 10px; text-align:center;}
+		.wrap-table {width:1200px; margin:80px auto}
+		.finish {background-color:lightgreen;}
+		.wrap-table > .title {
+			margin-bottom: 40px;
+			text-align: center;
+			font-size: 24px;
+			font-weight: bold;
+			color:#fff;
+		}
+
+
+		.table th {font-weight:600;}
+		.table a {text-decoration: underline;}
+
+		.table tbody tr {
+			border-bottom: 1px solid #e1e1e1;
+		}
+
+		.blue {color:blue;}
+		.green {color:green;}
+
+		@media screen and (max-width: 1400px) {
+			.wrap-table {width:100%; padding:0 20px;}
+		}
+		.btns {text-align:center; margin:20px 0;}
+		.btn {padding:10px 20px; background-color:#333; color:#fff;}
+		.filter {display:flex; width:1200px; position:fixed; top:0; left:50%; transform:translateX(-50%); z-index:10; border-top:1px solid #e1e1e1; background-color:#fff; box-shadow:0px 3px 6px rgba(0,0,0,0.16);}
+		.filter select {width:200px; padding:0 20px; border-right:1px solid #e1e1e1;}
+		.filter .input {flex:auto; position:relative;}
+		.filter .input input {width:100%; padding:10px 20px;}
+		.filter .input img {position:absolute; right:20px; top:50%; transform:translateY(-50%);}
+
+		.box-progresses {margin-bottom:20px; padding:40px; background-color:#fff; border-radius:10px;}
+		.box-progress {display:flex; align-items: center; margin-bottom:10px;}
+		.box-progress:last-of-type {margin-bottom:0;}
+		.box-progress .title {width:120px;  margin-right:10px; font-size:16px; font-weight:500; color:#333;}
+		.box-progress .title .count {font-size:14px; color:#999;}
+		.box-progress .title .count * {font-size:14px; color:#999;}
+		.box-progress .box-gage {flex:auto; position:relative;}
+		.box-progress .gage {content:""; flex:auto; width:100%; height:40px; position:relative; background-color:#eee;}
+		.box-progress .gage .active {height:100%; position:absolute; left:0; top:0; background-color:#333;}
+		.box-progress .box-gage .percent {position:absolute; bottom:-38px; right:0; font-size:14px; font-weight:500;}
+
+		tbody tr {
+
+		}
+		tbody tr.order2 {
+			background-color:#EBF1DE;
+		}
+		tbody tr.order3 {
+			background-color:#fff;
+		}
+
+		.colors {
+			display:flex; align-items: center; justify-content: center;
+			margin-bottom:20px;
+		}
+		.colors .square {
+			width:20px; height:20px;
+			margin-right:8px;
+			border:1px solid #e1e1e1;
+		}
+		.colors .color {
+			display:flex ;align-items: center;
+			margin-right:16px;
+		}
+		.colors .color .title {
+			font-size:14px;
+		}
+	</style>
+</head>
+<body>
+<div class="wrap-table" style="">
+	<h1 class="title" style="">퍼블리싱</h1>
+
+	<div class="box-progresses">
+
+
+		<div class="box-progress">
+			<h3 class="title">진행도 <span class="count">(<span class="active">0</span> / <span class="total">3</span>)</span></h3>
+
+			<div class="box-gage">
+				<div class="gage">
+					<div class="active">
+						<p class="percent">0%</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="table-wrap">
+		<!--
+		<div class="colors">
+			<div class="color">
+				<span class="square" style="background-color:#DAEEF3;"></span>
+				<h3 class="title">1순위</h3>
+			</div>
+
+			<div class="color">
+				<span class="square" style="background-color:#EBF1DE;"></span>
+				<h3 class="title">2순위</h3>
+			</div>
+
+			<div class="color">
+				<span class="square" style="background-color:#fff;"></span>
+				<h3 class="title">3순위</h3>
+			</div>
+		</div>
+		-->
+
+		<table class="table">
+			<thead>
+			<tr>
+				<th>1차메뉴</th>
+				<th>2차메뉴</th>
+				<th>3차메뉴</th>
+				<th>4차메뉴</th>
+				<th>파일명</th>
+				<th>유형</th>
+				<!--<th>진행상태</th>-->
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>메인</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<a href="index.html" target="_blank">index.html</a>
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>로그인</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<a href="로그인.html" target="_blank">로그인.html</a>
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>회원가입</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<a href="회원가입_정보입력.html" target="_blank">회원가입_정보입력.html</a>
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>회원가입환영</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<a href="회원가입_환영.html" target="_blank">회원가입_환영.html</a>
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>회원가입 개인정보수집</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<a href="회원가입_개인정보수집.html" target="_blank">회원가입_개인정보수집.html</a>
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>소개_01 자유마을이란?</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<a href="자유마을이란.html" target="_blank">자유마을이란.html</a>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>소개_02 10대 강령</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<a href="10대%20강령.html" target="_blank">10대 강령.html</a>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>02_마을소식</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<a href="마을소식.html" target="_blank">마을소식.html</a>
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_02_마을소식>카테고리별 > 마을소식,포토</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<a href="마을소식_소식상세.html" target="_blank">마을소식_소식상세.html</a>
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_02_마을소식>카테고리별 > 마을모임</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<a href="마을소식_모임상세.html" target="_blank">마을소식_모임상세.html</a>
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_02_글쓰기>마을소식,마을포토,마을질문</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<a href="글쓰기_마을소식,마을포토,마을질문.html" target="_blank">글쓰기_마을소식,마을포토,마을질문.html</a>
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_02_글쓰기 > 마을모임</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<a href="글쓰기_마을모음.html" target="_blank">글쓰기_마을모임.html</a>
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_02_글쓰기>마을영상</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+					<a href="글쓰기_마을영상.html" target="_blank">글쓰기_마을영상.html</a>
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_05_내정보</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_05_내정보>지역관리자</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_05_내정보>마을사랑온도</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_05_내정보>나의마을소식>내가쓴게시글, 내가쓴 댓글</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_05_내정보>내 마을 소개 > 등록</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_05_내정보>내 마을 임원진 > 등록</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_05_점세개</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_05_내정보 > 내가 쓴 게시글</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_05_내정보>내 마을 활동 > 등록</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_05_내정보>나의마을활동>내지갑</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_05_내지갑 편집</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_05_내지갑>타인공유</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_06_헤더_로고검색</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_06_공지</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_06_공지상세</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>Main_MENU</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>Main_02_로그인후_0125</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_01_홈 > 소개_01 ~동 소개</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_01_홈 > 소개_02_자유마을임원진</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_01_홈 > 소개_03_마을활동</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			<tr>
+				<td>SUB_01_홈 > 소개_03 총재인사말</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+
+				</td>
+				<td>
+					개발
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="filter">
+		<select name="" id="" onchange="changeType(event)">
+			<option value="" selected disabled>유형</option>
+			<option value="">전체</option>
+			<option value="개발">개발</option>
+			<option value="컨텐츠">컨텐츠</option>
+		</select>
+
+		<select name="" id="" onchange="changeState(event)">
+			<option value="" selected disabled>완료여부</option>
+			<option value="">전체</option>
+			<option value="완료">완료</option>
+			<option value="대기">대기</option>
+		</select>
+
+		<div class="input">
+			<input type="text" placeholder="페이지명을 입력하세요" onkeyup="changeWord(event)">
+
+			<img src="../comn/img/icon_search_black.png" alt="">
+		</div>
+	</div>
+</div>
+<script>
+	let word = "";
+	let type = "";
+	let state = "";
+	let componentsEl = $("tbody tr");
+
+	let filteredEl = [];
+
+	function changeState(event){
+		state = event.target.value;
+
+		filter();
+	}
+
+
+	function changeType(event){
+		type = event.target.value;
+
+		filter();
+	}
+
+	function changeWord(event){
+		word = event.target.value;
+
+		filter();
+	}
+
+	function filter(){
+		filteredEl = [];
+
+		componentsEl.each(function(index, item){
+			if($(item).text().includes(word) && $(item).find(".type").text().includes(type) && $(item).attr("class").includes(state))
+				filteredEl.push(item);
+		});
+
+		$("tbody").empty();
+
+		$("tbody").append(filteredEl);
+	}
+
+	$(".type").each(function(index, item){
+		$(item).text().includes("개발") ? $(this).addClass("blue") : $(this).addClass("green");
+	});
+
+	$("tr").each(function(index, item){
+		$(item).find("a").length ? $(this).addClass("완료") : $(this).addClass("대기");
+	});
+
+	let count = {
+		total : $("tbody tr").length,
+		finish: $("tbody .완료").length,
+	};
+
+	$(".box-progress .count .active").text(count.finish);
+	$(".box-progress .count .total").text(count.total);
+	$(".box-progress .gage .active").css("width", (count.finish / count.total * 100) + "%");
+	$(".box-progress .percent").text((count.finish / count.total * 100).toFixed(0) + "%");
+</script>
+</body>
+</html>
