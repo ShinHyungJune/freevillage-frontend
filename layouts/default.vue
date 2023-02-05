@@ -38,7 +38,7 @@ export default {
     }
   },
   mounted() {
-    window.form = Form;
+
   }
 }
 </script>

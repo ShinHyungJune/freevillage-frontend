@@ -1,4 +1,5 @@
 import {getDistrict, setDistrict} from '../utils/LocalStorage';
+
 export const state = () => ({
     district: getDistrict(),
 });

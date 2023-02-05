@@ -1,13 +1,13 @@
 import colors from 'vuetify/es5/util/colors'
+let baseUrl = process.env.NODE_ENV === "production" ? "http://api.jayuvillages.com" : "http://localhost";
+console.log(baseUrl);
 
 export default {
-  // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
-
+  dev: process.env.NODE_ENV !== 'production',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - sanctum-frontend',
-    title: 'sanctum-frontend',
+    titleTemplate: '%s - jayuvillage',
+    title: 'jayuvillage',
     htmlAttrs: {
       lang: 'en'
     },
@@ -36,7 +36,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
-    // '@nuxtjs/vuetify',
+    //'@nuxtjs/vuetify',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -45,7 +45,7 @@ export default {
     '@nuxtjs/auth-next'
   ],
   axios: {
-    baseUrl: 'http://localhost/api',
+    baseUrl: baseUrl + "/api",
     credentials: true
   },
   router: {
@@ -61,7 +61,7 @@ export default {
     strategies: {
       'laravelSanctum': {
         provider: 'laravel/sanctum',
-        url: 'http://localhost',
+        url: baseUrl,
         endpoints: {
           login: {url: '/api/auth/login'},
           logout: {url: '/api/auth/logout'}
@@ -69,7 +69,6 @@ export default {
       }
     }
   },
-
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -89,7 +88,6 @@ export default {
       }
     }
   },
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

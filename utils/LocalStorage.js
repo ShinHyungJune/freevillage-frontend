@@ -1,14 +1,16 @@
 export function getDistrict() {
-    const data = window.localStorage.getItem("district");
+  let data = null;
 
-    if(!data)
-        return null;
+  if (process.client)
+    data = localStorage.getItem("district");
 
-    return JSON.parse(data);
+  if (!data)
+    return null;
+
+  return JSON.parse(data);
 }
 
 export function setDistrict(data) {
-    console.log(data);
-    localStorage.setItem('bgcolor', 'red');
+  if (process.client)
     window.localStorage.setItem("district", JSON.stringify(data));
 }

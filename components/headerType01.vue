@@ -152,8 +152,8 @@
         <div class="m-header type01">
             <div class="wrap">
                 <div class="selects">
-                    <button :class="`btn-select ${district.id == 0 ? 'point' : ''}`" @click="active = true;">
-                        {{ district.district }}
+                    <button :class="`btn-select ${(district && district.id == 0) || !district ? 'point' : ''}`" @click="active = true;">
+                        {{ district ? district.district : "지역마을" }}
 
                         <img src="/images/chevron-down.png" alt="" class="deco">
                     </button>

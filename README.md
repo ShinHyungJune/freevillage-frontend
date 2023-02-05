@@ -1,4 +1,4 @@
-# sanctum-frontend
+# jayuvillage
 
 ## Build Setup
 
