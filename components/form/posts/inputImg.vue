@@ -43,7 +43,7 @@ export default {
             form.append("image", file);
             form.append("district_id", this.$store.state.district ? this.$store.state.district.id : 0);
 
-            this.$axios.post("/posts/notices/images", form)
+            this.$axios.post("/posts/images", form)
                 .then((response) => {
                     this.$emit("change", {
                         file: file,

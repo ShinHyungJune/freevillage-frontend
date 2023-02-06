@@ -44,10 +44,10 @@
                         <img src="/images/x-bold.png" alt="" class="filter-white" style="width:14px;">
                     </button>
 
-                    <a href="#" class="btn-login" v-if="!$auth.user">
+                    <nuxt-link to="/auth/login" class="btn-login" v-if="!$auth.user">
                         로그인 해주세요
                         <img src="/images/arrowRight.png" alt="" class="filter-white" style="width:10px;">
-                    </a>
+                    </nuxt-link>
                     <a href="#" class="btn-login" v-else>
                         안녕하세요, {{ $auth.user.name }}님!
                     </a>
@@ -69,13 +69,13 @@
                             <h3 class="title">내 마을</h3>
                         </nuxt-link>
 
-                        <nuxt-link to="/notices" class="link">
+                        <a href="#" class="link">
                             <div class="img-wrap">
                                 <img src="/images/notice.png" alt="" class="filter-white" style="width:30px;">
                             </div>
 
                             <h3 class="title">공지</h3>
-                        </nuxt-link>
+                        </a>
                     </div>
                 </div>
 

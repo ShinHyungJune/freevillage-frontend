@@ -250,7 +250,7 @@
                     <div class="m-title type02">
                         <h3 class="title">소식</h3>
 
-                        <nuxt-link to="/notices" class="btn-more">
+                        <nuxt-link to="/posts" class="btn-more">
                             <img src="/images/arrowRight-gray.png" alt="">
                         </nuxt-link>
                     </div>
@@ -280,7 +280,7 @@
                     <div class="m-title type02">
                         <h3 class="title">영상</h3>
 
-                        <nuxt-link to="/clips" class="btn-more">
+                        <nuxt-link to="/posts" class="btn-more">
                             <img src="/images/arrowRight-gray.png" alt="">
                         </nuxt-link>
                     </div>
@@ -313,7 +313,7 @@
                     <div class="m-title type02">
                         <h3 class="title">포토</h3>
 
-                        <nuxt-link to="/photos" class="btn-more">
+                        <nuxt-link to="/posts" class="btn-more">
                             <img src="/images/arrowRight-gray.png" alt="">
                         </nuxt-link>
                     </div>
@@ -348,7 +348,7 @@
                 </a>
             </section>
 
-            <quicks create-url="/notices/create" />
+            <quicks />
         </div>
 
         <navigation />
@@ -405,32 +405,36 @@ export default {
     mounted() {
         let districtId = this.district ?this.district.id : 0;
 
-        this.$axios.get("/posts/notices", {
+        this.$axios.get("/posts", {
             params: {
+                board: "notices",
                 district_id: districtId
             }
         }).then(response => {
             this.notices = response.data;
         });
 
-        this.$axios.get("/posts/clips", {
+        this.$axios.get("/posts", {
             params: {
+                board: "clips",
                 district_id: districtId,
             }
         }).then(response => {
             this.clips = response.data;
         });
 
-        this.$axios.get("/posts/photos", {
+        this.$axios.get("/posts", {
             params: {
+                board: "photos",
                 district_id: districtId,
             }
         }).then(response => {
             this.photos = response.data;
         });
 
-        this.$axios.get("/posts/asks", {
+        this.$axios.get("/posts", {
             params: {
+                board: "asks",
                 district_id: districtId,
             }
         }).then(response => {

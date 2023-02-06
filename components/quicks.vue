@@ -18,7 +18,7 @@ export default {
     props: {
         createUrl: {
             default(){
-                return "/notices/create";
+                return "/posts/create";
             }
         }
     },

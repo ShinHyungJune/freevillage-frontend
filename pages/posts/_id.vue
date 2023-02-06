@@ -1,19 +1,8 @@
 <template>
     <div class="area-news-show">
+
         <!-- 지갑 팝업 -->
-        <div class="m-pop type01" style="display:none;" id="pop1">
-            <div class="m-pop-inner">
-                <button class="btn-close m-script-pop" data-target="#pop1">
-                    <img src="/images/x.png" alt="" style="width:21px;">
-                </button>
-
-                <div class="m-pop-title">내 지갑에 추가</div>
-
-                <button type="button" class="m-btn type03 width-100">현지갑에 추가</button>
-                <div class="mt-4"></div>
-                <button type="button" class="m-btn type03 width-100 bg-revert-primary">지갑 선택하기</button>
-            </div>
-        </div>
+        <scrap-pop :post_id="item.id" v-if="activeScrapPop" @close="activeScrapPop = false" />
 
         <!-- 신고 팝업 -->
         <div class="m-pop type01" style="display:none;" id="pop2">
@@ -90,12 +79,12 @@
         <div class="container">
             <div class="mt-20"></div>
 
-            <div class="m-board-show type01 마을소식">
+            <div :class="`m-board-show type01 ${item.formatBoard}`">
                 <div class="wrap">
                     <div class="m-board-top">
                         <div class="fragment">
                             <div class="left">
-                                <p class="category">마을소식</p>
+                                <p class="category">{{ item.formatBoard }}</p>
                             </div>
                             <div class="right">
                                 <a href="#" class="btn-report" @click.prevent="activeReportPop = true">
@@ -106,41 +95,37 @@
                         <div class="fragment">
                             <div class="left">
                                 <div class="writer">
-                                    <div class="thumbnail" style="background-image:url('/images/example.png')"></div>
-                                    서정동네일샵
+                                    <div class="thumbnail" :style="`background-image:url('${item.user.img.url}')`" v-if="item.user.img"></div>
+                                    {{ item.user.name }}
                                 </div>
-                                <p class="date">2023-01-13</p>
+                                <p class="date">{{ item.created_at }}</p>
                             </div>
 
                             <div class="right">
                                 <div class="info">
                                     <img src="/images/eye-gray.png" alt="" style="width:16px;">
-                                    21
+                                    {{ item.view_count }}
                                 </div>
 
                                 <div class="info">
                                     <img src="/images/comment-gray.png" alt="" style="width:12px;">
-                                    21
+                                    {{item.comment_count}}
                                 </div>
 
                                 <div class="info">
                                     <img src="/images/heart-gray.png" alt="" style="width:12px;">
-                                    21
+                                    {{item.like_count}}
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="m-board-content">
-                        <h3 class="title">발의 법안 반대 부탁드립니다.</h3>
-                        <p class="body">
-                            저희 동네 더불어민주당 국회의원 홍길동의원이
-                            발의한 법안 입니다. 반대 의견등록 부탁드립니다.
-                            1월 20일까지! 꼭 많은 참여 부탁드립니다.
+                        <h3 class="title">{{ item.title }}</h3>
+                        <p class="body" v-if="item.content">
+                            {{item.content.replace(/<\/?[^>]+>/ig, " ")}}
                         </p>
-                        <div class="mt-8"></div>
-
-                        <div class="m-thumbnail type01" style="background-image:url('/images/example.png')"></div>
+                        <div class="m-thumbnail type01 mt-8" :style="`background-image:url(${item.img.url})`" v-if="item.img"></div>
                     </div>
                 </div>
 
@@ -150,20 +135,20 @@
                             <button class="btn-util">
                                 <!--<img src="/images/heart-inactive.png" alt="" style="width:14px;">-->
                                 <img src="/images/heart-active.png" alt="" style="width:14px;">
-                                좋아요 10
+                                좋아요 {{ item.like_count }}
                             </button>
 
                             <button class="btn-util">
                                 <img src="/images/comment-black.png" alt="" style="width:14px;">
-                                댓글 10
+                                댓글 {{ item.comment_count }}
                             </button>
 
-                            <button class="btn-util">
+                            <button class="btn-util" @click="activeScrapPop = true">
                                 <img src="/images/wallet.png" alt="" style="width:13px;">
-                                지갑 1
+                                지갑 {{item.scrap_item_count}}
                             </button>
 
-                            <button class="btn-util">
+                            <button class="btn-util" @click="share">
                                 <img src="/images/share.png" alt="" style="width:11px;">
                                 공유
                             </button>
@@ -275,29 +260,58 @@ import InputCamera from '../../components/form/posts/inputCamera';
 import InputLink from "../../components/form/posts/inputLink";
 import InputImg from "../../components/form/posts/inputImg";
 import InputThumbnail from "../../components/form/posts/inputThumbnail";
-
 export default {
     components: {InputThumbnail, InputImg, InputLink, InputCamera},
     auth: true,
     data() {
         return {
-            item: {},
+            item: {
+                user: {}
+            },
 
             form: {},
 
             errors: {},
+
+            activeScrapPop: false,
         }
     },
     methods: {
         store() {
 
         },
+
+        share() {
+            Kakao.init('75aa32499180f4887b38e7607514e26f');
+            Kakao.Link.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: this.item.title,
+                    description: '',
+                    imageUrl:
+                        this.item.img ? this.item.img.url : '',
+                    link: {
+                        mobileWebUrl: `http://jayuvillages.com/posts/${this.item.id}`,
+                        webUrl: `http://jayuvillages.com/posts/${this.item.id}`,
+                    },
+                },
+                buttons: [
+                    {
+                        title: '보러가기',
+                        link: {
+                            mobileWebUrl: `http://jayuvillages.com/posts/${this.item.id}`,
+                            webUrl: `http://jayuvillages.com/posts/${this.item.id}`,
+                        },
+                    },
+                ],
+            })
+        }
     },
 
     mounted() {
-        this.$axios.get("/posts/notices/" + this.$route.params.id)
+        this.$axios.get("/posts/" + this.$route.params.id)
             .then(response => {
-                this.item = response.data.post;
+                this.item = response.data.data;
             })
     }
 }

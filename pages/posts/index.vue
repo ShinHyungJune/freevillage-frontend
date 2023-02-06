@@ -1,0 +1,283 @@
+<template>
+    <div class="area-news">
+        <!-- 헤더영역 -->
+        <header-type01 />
+
+        <!-- 내용 영역 -->
+        <div class="container">
+            <div class="mt-20"></div>
+
+            <div class="menus-wrap">
+                <div class="wrap">
+                    <div class="menus">
+                        <div class="menu-wrap">
+                            <a href="" class="menu" @click.prevent="() => {form.board = 'notices'; getItems();}">
+                                <img src="/images/news01.png" alt="" class="">
+
+                                <h3 class="title">마을소식</h3>
+                            </a>
+                        </div>
+
+                        <div class="menu-wrap">
+                            <a href="" class="menu" @click.prevent="() => {form.board = 'clips'; getItems();}">
+                                <img src="/images/news02.png" alt="" class="">
+
+                                <h3 class="title">마을영상</h3>
+                            </a>
+                        </div>
+
+                        <div class="menu-wrap">
+                            <a href="" class="menu" @click.prevent="() => {form.board = 'photos'; getItems();}">
+                                <img src="/images/news03.png" alt="" class="">
+
+                                <h3 class="title">마을포토</h3>
+                            </a>
+                        </div>
+
+                        <div class="menu-wrap">
+                            <a href="" class="menu" @click.prevent="() => {form.board = 'asks'; getItems();}">
+                                <img src="/images/news04.png" alt="" class="">
+
+                                <h3 class="title">마을질문</h3>
+                            </a>
+                        </div>
+
+                        <div class="menu-wrap">
+                            <a href="" class="menu" @click.prevent="() => {form.board = 'meetings'; getItems();}">
+                                <img src="/images/news05.png" alt="" class="">
+
+                                <h3 class="title">마을모임</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="section-ranking">
+                <div class="wrap">
+                    <h3 class="section-title">이번주 인기상승</h3>
+
+                    <favorites />
+
+                    <div class="mt-12"></div>
+
+                    <div class="m-boards type01">
+                        <div :class="`m-board ${item.formatBoard}`" v-for="item in items.data" :key="item.id" @click="move(item)">
+                            <div class="m-board-top">
+                                <div class="left">
+                                    <p class="category">{{ item.formatBoard }}</p>
+                                </div>
+                                <div class="right">
+                                    <p class="writer">{{ item.user.name }}</p>
+                                    <p class="date">{{ item.diff_at }}</p>
+                                </div>
+                            </div>
+
+                            <div class="m-board-content">
+                                <h3 class="title">{{ item.title }}</h3>
+                                <p class="body" v-if="item.content">{{item.content.replace(/<\/?[^>]+>/ig, " ")}}</p>
+                                <div class="m-thumbnail type01 mt-8" :style="`background-image:url(${item.img.url})`" v-if="item.img">
+                                    <div class="m-thumbnail-base" v-if="item.board === 'clips'">
+                                        <img src="/images/circlePlay-white.png" alt="" class="deco" style="width:40px;">
+                                    </div>
+                                </div>
+
+                                <div class="infos" v-if="item.board === 'meetings'">
+                                    <div class="info">
+                                        <div class="icon-wrap">
+                                            <img src="/images/talk.png" alt="" class="icon" style="width:14px;">
+                                        </div>
+
+                                        {{ item.participant_type }}
+                                    </div>
+                                    <div class="info">
+                                        <div class="icon-wrap">
+                                            <img src="/images/calendar.png" alt="" class="icon" style="width:12px;">
+                                        </div>
+
+                                        {{ item.start_date }} ~ {{ item.end_date }}
+                                    </div>
+                                    <div class="info">
+                                        <div class="icon-wrap">
+                                            <img src="/images/users.png" alt="" class="icon" style="width:12px;">
+                                        </div>
+
+                                        {{item.participant_count}} / {{item.participant_available_count}}명 참여
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="m-board-bottom">
+                                <div class="utils">
+                                    <a href="#" class="btn-util" @click="(e) => toggleLike(e, item)">
+                                        <!--<span class="icon m-icon-heart-active"></span>-->
+                                        <span :class="`icon ${item.is_like ? 'm-icon-heart-active' : 'm-icon-heart'}`"></span>
+                                        <span class="text">좋아요 {{item.like_count}}</span>
+                                    </a>
+                                    <a href="#" class="btn-util">
+                                        <span class="icon m-icon-comment"></span>
+                                        <span class="text">댓글 {{item.comment_count}}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <no-ssr>
+                            <infinite-loading @infinite="loadMore" v-if="items.links.next" />
+                        </no-ssr>
+                    </div>
+
+                    <div class="mt-40"></div>
+                </div>
+            </section>
+
+            <quicks />
+        </div>
+
+        <!-- 하단 네비게이션바 -->
+        <div class="m-navigation type01">
+            <div class="navs">
+                <div class="nav-wrap active">
+                    <a href="#" class="nav">
+                        <div class="img-wrap">
+                            <img src="/images/home.png" alt="">
+                        </div>
+
+                        <h3 class="title">홈</h3>
+                    </a>
+                </div>
+
+                <div class="nav-wrap">
+                    <a href="#" class="nav">
+                        <div class="img-wrap">
+                            <img src="/images/newspaper.png" alt="">
+                        </div>
+
+                        <h3 class="title">마을소식</h3>
+                    </a>
+                </div>
+
+                <div class="nav-wrap">
+                    <a href="#" class="nav">
+                        <div class="img-wrap">
+                            <img src="/images/location-marker.png" alt="">
+                        </div>
+
+                        <h3 class="title">내 근처</h3>
+                    </a>
+                </div>
+
+                <div class="nav-wrap">
+                    <a href="#" class="nav">
+                        <div class="img-wrap">
+                            <img src="/images/chat-alt-2.png" alt="">
+                        </div>
+
+                        <h3 class="title">채팅</h3>
+                    </a>
+                </div>
+
+                <div class="nav-wrap">
+                    <a href="#" class="nav">
+                        <div class="img-wrap">
+                            <img src="/images/user.png" alt="">
+                        </div>
+
+                        <h3 class="title">내 정보</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import Form from '../../utils/Form';
+
+export default {
+    components: {},
+    auth: true,
+    data() {
+        return {
+            form: {
+                board: "",
+                page: 1,
+                district_id: this.$store.state.district.id,
+            },
+
+            items: {
+                data: [],
+                meta: {
+                    current_page: 1,
+                    last_page: 1,
+                },
+                links: {}
+            }
+        }
+    },
+    methods: {
+        loadMore(state) {
+            if(this.items.meta.current_page <= this.items.meta.last_page){
+                this.form.page += 1;
+
+                this.$axios.get("/posts", {
+                    params: this.form
+                }).then(response => {
+                    this.items = {
+                        ...response.data,
+                        data: [...this.items.data, ...response.data.data]
+                    };
+
+                    state.loaded();
+                });
+            }
+        },
+
+        getItems(){
+            this.form.page = 1;
+
+            this.$axios.get("/posts", {
+                params: this.form
+            }).then(response => {
+                this.items = response.data;
+
+            });
+        },
+
+        move(item){
+            this.$router.push("/posts/" + item.id);
+        },
+
+        toggleLike(e, item){
+            e.preventDefault();
+            e.stopPropagation();
+
+            if(item.is_like){
+                item.is_like = 0;
+                item.like_count -= 1;
+            }else{
+                item.is_like = 1;
+                item.like_count += 1;
+            }
+
+            this.items.data = this.items.data.map(itemData => {
+                if(itemData.id == item.id)
+                    return item;
+
+                return itemData;
+            });
+
+            this.$axios.put("/likes/posts/" + item.id);
+        },
+    },
+
+    mounted() {
+        this.getItems();
+    }
+}
+</script>
+
+<style scoped>
+
+</style>
