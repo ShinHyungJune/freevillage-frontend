@@ -20,6 +20,12 @@ html {
     padding:20px 0;
     outline:none;
 }
+.m-editor.type01 a {
+    font-weight:bold; text-decoration: underline;
+}
+.m-editor.type01 img {
+    max-width:100%;
+}
 
 [contenteditable=true]:empty:before {
     content: attr(placeholder);
@@ -1343,6 +1349,11 @@ html {
     flex:1; text-align: center;
 }
 .m-navigation.type01 .nav-wrap.active {
+}
+.m-navigation.type01 .nav-wrap.active .img-wrap {
+    filter: brightness(0) saturate(100%) invert(46%) sepia(80%) saturate(1947%) hue-rotate(80deg) brightness(93%) contrast(109%);
+}
+.m-navigation.type01 .nav-wrap.active .img-wrap > .title {
     filter: brightness(0) saturate(100%) invert(46%) sepia(80%) saturate(1947%) hue-rotate(80deg) brightness(93%) contrast(109%);
 }
 .m-navigation.type01 .nav .title {

@@ -1,14 +1,20 @@
-import {getDistrict, setDistrict} from '../utils/LocalStorage';
+// import {getDistrict, setDistrict} from '../utils/LocalStorage';
 
 export const state = () => ({
-    district: getDistrict(),
+    district: {
+        id: 0,
+        district: "지역마을"
+    },
 });
 
-export const getters = {}
+export const getters = {
+    getDistrict: (state) => {
+        return state.district
+    }
+}
 
 export const mutations = {
     changeDistrict(state, data) {
-        setDistrict(data);
         state.district = data;
     },
 }

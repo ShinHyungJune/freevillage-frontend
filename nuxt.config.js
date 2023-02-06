@@ -1,6 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
 let baseUrl = process.env.NODE_ENV === "production" ? "http://api.jayuvillages.com" : "http://localhost";
-console.log(baseUrl);
 
 export default {
   dev: process.env.NODE_ENV !== 'production',
@@ -28,6 +27,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+      { src: '~/plugins/persistedState.js'}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
