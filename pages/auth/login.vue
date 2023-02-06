@@ -78,10 +78,7 @@ export default {
         login() {
             this.$auth.loginWith('laravelSanctum', {data: this.form})
                 .then((response) => {
-                    this.$store.commit("changeDistrict", {
-                        id: this.$auth.user.district_id,
-                        district: "지역명 연동예정"
-                    });
+                    this.$store.commit("changeDistrict", this.$auth.user.district);
 
                     this.$router.push(this.$auth.$state.redirect ? this.$auth.$state.redirect : '/');
                 })

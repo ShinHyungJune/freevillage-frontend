@@ -1,25 +1,25 @@
 <template>
     <label :for="id" class="nav">
-        <input type="file" :id="id" accept="image/*" capture="camera" @change="changeFile" ref="file">
+        <input type="file" :id="id" accept="image/*" @change="changeFile" ref="file">
 
         <div class="img-wrap">
-            <img src="/images/camera.png" alt="" style="width:18px;">
+            <img src="/images/picturePlus.png" alt="" style="width:17px;">
         </div>
 
-        <h3 class="title">사진 촬영</h3>
+        <h3 class="title">대표이미지</h3>
     </label>
 </template>
 <script>
 export default {
     props: {
         defaultValue: {
-              default(){
-                  return "";
-              }
+            default(){
+                return "";
+            }
         },
         id: {
             default() {
-                return "camera";
+                return "thumbnail";
             }
         },
     },

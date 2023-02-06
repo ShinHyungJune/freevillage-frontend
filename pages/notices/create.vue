@@ -1,28 +1,5 @@
 <template>
     <div class="area-write">
-        <!-- 링크 추가 팝업 -->
-        <div class="m-pop type01" id="pop1" v-if="activeLinkPop">
-            <div class="m-pop-inner">
-                <button class="btn-close m-script-pop" data-target="#pop1" @click="activeLinkPop = false">
-                    <img src="/images/x.png" alt="" style="width:21px;">
-                </button>
-
-                <div class="m-pop-title">링크를 입력하세요</div>
-
-                <div class="m-input-text type01">
-                    <input type="text" placeholder="링크명">
-                </div>
-                <div class="mt-4"></div>
-                <div class="m-input-text type01">
-                    <input type="text" placeholder="https://example.com">
-                </div>
-
-                <div class="mt-20"></div>
-
-                <button type="button" class="m-btn type03 width-100">등록하기</button>
-            </div>
-        </div>
-
         <!-- 헤더영역 -->
         <div class="m-header type02">
             <div class="wrap">
@@ -51,10 +28,7 @@
 
                 <div class="m-input-error" v-if="errors.title">{{errors.title[0]}}</div>
 
-                <div contenteditable="true"
-                     placeholder="글을 입력해주세요" class="m-editor type01"
-                     v-html="form.content" ref="content"
-                     @input="(e) => {form.content = e.target.innerText;}"></div>
+                <div contenteditable="true" placeholder="글을 입력해주세요" class="m-editor type01" ref="content"></div>
 
                 <div class="m-input-error" v-if="errors.content">{{errors.content[0]}}</div>
 
@@ -66,37 +40,19 @@
         <div class="m-navigation type01">
             <div class="navs">
                 <div class="nav-wrap">
-                    <input-camera id="camera" />
+                    <input-camera id="camera" @change="(data) => {this.$refs.content.innerHTML += data.html}"/>
                 </div>
 
                 <div class="nav-wrap active">
-                    <a href="#" class="nav">
-                        <div class="img-wrap">
-                            <img src="/images/link.png" alt="" style="width:16px;">
-                        </div>
-
-                        <h3 class="title">링크 추가</h3>
-                    </a>
+                    <input-link id="link" @change="(data) => {this.$refs.content.innerHTML += data.html}"/>
                 </div>
 
                 <div class="nav-wrap">
-                    <a href="#" class="nav">
-                        <div class="img-wrap">
-                            <img src="/images/pictureMen.png" alt="" style="width:20px;">
-                        </div>
-
-                        <h3 class="title">사진이미지</h3>
-                    </a>
+                    <input-img id="camera" @change="(data) => {this.$refs.content.innerHTML += data.html}"/>
                 </div>
 
                 <div class="nav-wrap">
-                    <a href="#" class="nav">
-                        <div class="img-wrap">
-                            <img src="/images/picturePlus.png" alt="" style="width:17px;">
-                        </div>
-
-                        <h3 class="title">대표이미지</h3>
-                    </a>
+                    <input-thumbnail id="thumbnail" @change="(data) => {form.thumbnail = data.file}" />
                 </div>
             </div>
         </div>
@@ -107,9 +63,12 @@
 import {mapActions} from "vuex";
 import Form from '../../utils/Form';
 import InputCamera from '../../components/form/posts/inputCamera';
+import InputLink from "../../components/form/posts/inputLink";
+import InputImg from "../../components/form/posts/inputImg";
+import InputThumbnail from "../../components/form/posts/inputThumbnail";
 
 export default {
-    components: {InputCamera},
+    components: {InputThumbnail, InputImg, InputLink, InputCamera},
     auth: true,
     data() {
         return {
@@ -118,6 +77,7 @@ export default {
                 content: "",
                 category: "",
                 district_id: this.$store.state.district ? this.$store.state.district.id : 0,
+                thumbnail: "",
             },
 
             errors: {},
@@ -127,7 +87,13 @@ export default {
     },
     methods: {
         store() {
-            this.$axios.post("/posts/notices", this.form)
+            this.form.content = this.$refs.content.innerHTML;
+
+            let form = (new Form(this.form)).data();
+
+            console.log(form);
+
+            this.$axios.post("/posts/notices", form)
                 .then((response) => {
                     alert("성공적으로 등록되었습니다.");
 
