@@ -374,7 +374,8 @@ html {
     padding:30px 10px;
 }
 .m-sidebar.type01 .content .menus {
-    display:flex; flex-wrap:wrap; margin:-10px 0;
+    display:flex; flex-wrap:wrap; justify-content: flex-start;
+    margin:-10px 0;
 }
 .m-sidebar.type01 .content .menu-wrap {
     width:33.33%; padding:10px 0;
@@ -1538,6 +1539,9 @@ input[type="radio"] {display:none;}
     background:url("../images/checkbox-active.png") no-repeat; background-size:100%;
 }
 
+.editor-body img {
+    max-width:100%;
+}
 .m-input-textarea.type01 textarea {
     width:100%; padding:8px; max-height:175px; overflow-y:auto;
     white-space: pre-line; font-size:14px;
@@ -1548,6 +1552,12 @@ input[type="radio"] {display:none;}
     padding:8px; max-height:175px; overflow-y:auto;
     white-space: pre-line; font-size:14px;
     border:1px solid #e1e1e1; border-radius:5px;
+}
+.area-about .base {
+    width:100%;
+}
+.area-about .writer {
+    font-size:18px; text-align: center; font-weight:600;
 }
 
 label {
@@ -1688,8 +1698,11 @@ label {
 .area-mypage .box-info .info {
     display:flex; align-items: center;
 }
+.area-mypage .box-info .info .m-thumbnail {
+    margin-right:16px;
+}
 .area-mypage .box-info .info .title {
-    margin-left:20px;
+
     font-size:20px;
 }
 .area-mypage .m-temp .body {

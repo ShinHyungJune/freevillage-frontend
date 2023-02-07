@@ -172,9 +172,7 @@
                                 </div>
                             </div>
 
-                            <p class="body" v-if="item.content">
-                                {{item.content.replace(/<\/?[^>]+>/ig, " ")}}
-                            </p>
+                            <div class="editor-body" v-html="item.content"></div>
                         </div>
 
                     </div>

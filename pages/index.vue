@@ -48,7 +48,7 @@
 
                                         <div class="value">
                                             <div class="value-inner">
-                                                <p class="text">5,600명</p>
+                                                <p class="text">{{ registerRates.population.toLocaleString() }}명</p>
                                             </div>
                                         </div>
                                     </div>
@@ -60,7 +60,7 @@
 
                                         <div class="value">
                                             <div class="value-inner">
-                                                <p class="text">2,600명</p>
+                                                <p class="text">{{ registerRates.count.toLocaleString() }}명</p>
                                             </div>
                                         </div>
                                     </div>
@@ -72,7 +72,7 @@
 
                                         <div class="value">
                                             <div class="value-inner">
-                                                <p class="text">50%</p>
+                                                <p class="text">{{ registerRates.rate.toLocaleString() }}%</p>
                                             </div>
                                         </div>
                                     </div>
@@ -97,13 +97,13 @@
 
                             <div class="m-btns type01">
                                 <div class="m-btn-wrap">
-                                    <a href="#" class="m-btn type01">총재 인사말</a>
+                                    <nuxt-link to="/contents/greeting" class="m-btn type01">총재 인사말</nuxt-link>
                                 </div>
                                 <div class="m-btn-wrap">
-                                    <a href="#" class="m-btn type01">10대 강령</a>
+                                    <nuxt-link to="/contents/declares" class="m-btn type01">10대 강령</nuxt-link>
                                 </div>
                                 <div class="m-btn-wrap">
-                                    <a href="#" class="m-btn type01">자유마을이란</a>
+                                    <nuxt-link to="/contents/about" href="#" class="m-btn type01">자유마을이란</nuxt-link>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                             나의 <span class="point">마을 찾기</span>
                         </div>
 
-                        <input-region input-class="m-input-select type01" @change="(data) => {form.district_id = data.district_id}" />
+                        <input-region input-class="m-input-select type01" @change="(data) => {form.district = data.district}" />
 
                         <button class="m-btn type02 width-100" @click="search">검색하기</button>
                     </div>
@@ -267,7 +267,7 @@
                             </div>
 
                             <div class="content">
-                                <!-- <p class="subtitle">서울 장위동</p> -->
+                                <p class="subtitle">{{ notice.district.city }} {{notice.district.district}}</p>
                                 <h3 class="title">{{notice.title}}</h3>
                             </div>
                         </nuxt-link>
@@ -362,7 +362,8 @@ export default {
     data() {
         return {
             form: {
-                district_id: ""
+                district_id: "",
+                district: ""
             },
 
             notices: {
@@ -388,11 +389,17 @@ export default {
                 meta: {},
                 links: {}
             },
+
+            registerRates: {
+                population: 0,
+                count: 0,
+                rate: 0,
+            }
         }
     },
     methods: {
         search() {
-
+            this.$store.commit("changeDistrict", this.form.district);
         },
     },
 
@@ -403,7 +410,7 @@ export default {
     },
 
     mounted() {
-        let districtId = this.district ?this.district.id : 0;
+        let districtId = this.district ? this.district.id : 0;
 
         this.$axios.get("/posts", {
             params: {
@@ -411,7 +418,6 @@ export default {
                 district_id: districtId
             }
         }).then(response => {
-            console.log(response.data);
             this.notices = response.data;
         });
 
@@ -441,6 +447,16 @@ export default {
         }).then(response => {
             this.asks = response.data;
         });
+
+        this.$axios.get("/rankings/10")
+            .then(response => {
+                console.log(response.data);
+            });
+
+        this.$axios.get("/districts/" + this.district.id + "/register_rates")
+            .then(response => {
+                this.registerRates = response.data.registerRates;
+            })
     }
 }
 </script>

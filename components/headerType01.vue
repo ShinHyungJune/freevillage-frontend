@@ -12,27 +12,11 @@
                     나의 <span class="point">마을 찾기</span>
                 </div>
 
-                <div class="m-input-select type01">
-                    <select name="" id="">
-                        <option value="">시/도 선택</option>
-                    </select>
-                </div>
-                <div class="mt-8"></div>
-                <div class="m-input-select type01">
-                    <select name="" id="">
-                        <option value="">시/군/구 선택</option>
-                    </select>
-                </div>
-                <div class="mt-8"></div>
-                <div class="m-input-select type01">
-                    <select name="" id="">
-                        <option value="">읍/면/동 선택</option>
-                    </select>
-                </div>
+                <input-region @change="(data) => {form.district = data.district}"  />
 
                 <div class="mt-20"></div>
 
-                <button type="button" class="m-btn type03 width-100">검색하기</button>
+                <button type="button" class="m-btn type03 width-100" @click="search">검색하기</button>
             </div>
         </div>
 
@@ -181,8 +165,20 @@ export default {
         return {
             active: false,
             activeSidebar: false,
+            form: {
+                district: ""
+            }
         }
     },
+
+    methods: {
+        search() {
+            this.$store.commit("changeDistrict", this.form.district);
+
+            this.active = false;
+        },
+    },
+
     computed: {
         district(){
             return this.$store.state.district;

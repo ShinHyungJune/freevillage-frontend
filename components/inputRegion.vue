@@ -80,6 +80,7 @@ export default {
             this.$emit("change", {
                 state: this.stateData,
                 city: this.cityData,
+                district: this.districts.find(district => district.id == this.districtIdData),
                 district_id: this.districtIdData
             });
         },

@@ -3,23 +3,23 @@
     <div class="m-navigation type01">
         <div class="navs">
             <div :class="`nav-wrap ${$route.path === '/' ? 'active' : ''}`">
-                <a href="#" class="nav">
+                <nuxt-link to="/" class="nav">
                     <div class="img-wrap">
                         <img src="/images/home.png" alt="">
                     </div>
 
                     <h3 class="title">홈</h3>
-                </a>
+                </nuxt-link>
             </div>
 
-            <div class="nav-wrap">
-                <a href="#" class="nav">
+            <div :class="`nav-wrap ${$route.path === '/posts' ? 'active' : ''}`">
+                <nuxt-link to="/posts" class="nav">
                     <div class="img-wrap">
                         <img src="/images/newspaper.png" alt="">
                     </div>
 
                     <h3 class="title">마을소식</h3>
-                </a>
+                </nuxt-link>
             </div>
 
             <div class="nav-wrap">
@@ -42,14 +42,14 @@
                 </a>
             </div>
 
-            <div class="nav-wrap">
-                <a href="#" class="nav">
+            <div :class="`nav-wrap ${$route.path.includes('/mypage') ? 'active' : ''}`">
+                <nuxt-link to="/mypage" class="nav">
                     <div class="img-wrap">
                         <img src="/images/user.png" alt="">
                     </div>
 
                     <h3 class="title">내 정보</h3>
-                </a>
+                </nuxt-link>
             </div>
         </div>
     </div>

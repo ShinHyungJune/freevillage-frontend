@@ -143,13 +143,16 @@ import InputCamera from '../../components/form/posts/inputCamera';
 import InputLink from "../../components/form/posts/inputLink";
 import InputImg from "../../components/form/posts/inputImg";
 import InputThumbnail from "../../components/form/posts/inputThumbnail";
-import InputAddress from "../../components/form/InputAddress";
+import InputAddress from "../../components/form/inputAddress";
+import Form from "@/utils/Form";
 
 export default {
     components: {InputAddress, InputThumbnail, InputImg, InputLink, InputCamera},
     auth: true,
     data() {
         return {
+            item: "",
+
             form: {
                 title: "",
                 content: "",
@@ -185,9 +188,23 @@ export default {
 
             let form = (new Form(this.form)).data();
 
+            // update
+            if(this.item)
+                return this.$axios.post("/posts/update/" + this.item.id, form)
+                    .then((response) => {
+                        alert("성공적으로 처리되었습니다.");
+
+                        this.$router.back();
+                    })
+                    .catch((error) => {
+                        if (error.response && error.response.data)
+                            this.errors = error.response.data.errors;
+                    });
+
+            // store
             this.$axios.post("/posts", form)
                 .then((response) => {
-                    alert("성공적으로 등록되었습니다.");
+                    alert("성공적으로 처리되었습니다.");
 
                     this.$router.back();
                 })
@@ -239,7 +256,21 @@ export default {
     },
 
     mounted() {
+        if(this.$route.query.id){
+            this.$axios.get("/posts/" + this.$route.query.id)
+                .then(response => {
+                    this.item = response.data.data;
 
+                    this.form = {
+                        ...this.form,
+                        ...this.item,
+                        district_id: this.item.district.id,
+                        thumbnail: "",
+                    }
+
+                    this.$refs.content.innerHTML = this.item.content;
+                });
+        }
     }
 }
 </script>
