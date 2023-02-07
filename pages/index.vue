@@ -411,6 +411,7 @@ export default {
                 district_id: districtId
             }
         }).then(response => {
+            console.log(response.data);
             this.notices = response.data;
         });
 

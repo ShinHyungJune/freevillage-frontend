@@ -1026,6 +1026,10 @@ html {
     display:block;
     padding:16px 0; border-bottom:1px solid #e1e1e1;
 }
+[aria-grabbed="true"] {
+     background: #5cc1a6;
+     color: #fff;
+ }
 .m-boards.type02 .m-board-fragments {
     display:flex;
 }

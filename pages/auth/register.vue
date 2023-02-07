@@ -196,8 +196,6 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
-import Form from '../../utils/Form';
 import InputRegion from "~/components/inputRegion";
 
 export default {

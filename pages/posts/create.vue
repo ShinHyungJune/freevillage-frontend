@@ -139,8 +139,6 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
-import Form from '../../utils/Form';
 import InputCamera from '../../components/form/posts/inputCamera';
 import InputLink from "../../components/form/posts/inputLink";
 import InputImg from "../../components/form/posts/inputImg";

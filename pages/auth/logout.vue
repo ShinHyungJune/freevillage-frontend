@@ -3,8 +3,6 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
-import Form from '../../utils/Form';
 
 export default {
   name: "login",

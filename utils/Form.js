@@ -1,5 +1,4 @@
 import Errors from './Errors';
-import axios from 'axios';
 
 class Form {
     /**
@@ -16,6 +15,7 @@ class Form {
 
         this.errors = new Errors();
     }
+
 
     /**
      * Fetch all relevant data for the form.

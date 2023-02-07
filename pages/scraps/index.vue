@@ -52,160 +52,16 @@
 
                 <div class="mt-12"></div>
 
-                <div class="m-section type01">
-                    <div class="m-section-top">
-                        <h3 class="section-title">마을소식</h3>
-                    </div>
+                <scrap-items :scrap_id="form.scrap_id" board="notices" @removed="removed" @reorder="reorder" :edit-mode="editMode" />
 
-                    <div class="m-boards type02">
-                        <a href="#" class="m-board">
-                            <div class="m-board-fragments">
-                                <div class="m-board-fragment m-board-thumbnail">
-                                    <div class="m-thumbnail type02" style="background-image:url('/images/example.png')"></div>
-                                </div>
-                                <div class="m-board-fragment">
-                                    <div class="m-board-top">
-                                        <div class="left">
-                                            <p class="subtitle">자유일보</p>
-                                            <h3 class="title">
-                                                정치 내용입니다.
-                                            </h3>
-                                        </div>
-                                    </div>
+                <scrap-items :scrap_id="form.scrap_id" board="clips" @removed="removed" @reorder="reorder" :edit-mode="editMode" />
 
-                                    <div class="m-board-bottom">
-                                        <p class="date">2022-11-13 08:09:30</p>
+                <scrap-items :scrap_id="form.scrap_id" board="photos" @removed="removed" @reorder="reorder" :edit-mode="editMode" />
 
-                                        <div class="utils">
-                                            <button class="btn-util filter-gray">
-                                                <img src="/images/eye.png" alt="" style="width:20px;">
-                                                10
-                                            </button>
+                <scrap-items :scrap_id="form.scrap_id" board="asks" @removed="removed" @reorder="reorder" :edit-mode="editMode" />
 
-                                            <button class="btn-util filter-gray">
-                                                <img src="/images/comment-black.png" alt="" style="width:15px;">
-                                                10
-                                            </button>
+                <scrap-items :scrap_id="form.scrap_id" board="meetings" @removed="removed" @reorder="reorder" :edit-mode="editMode" />
 
-                                            <button class="btn-util filter-gray">
-                                                <img src="/images/heart-empty.png" alt="" style="width:15px;">
-                                                10
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="#" class="m-board">
-                            <div class="m-board-fragments">
-                                <div class="m-board-fragment">
-                                    <div class="m-board-top">
-                                        <div class="left">
-                                            <p class="subtitle">자유일보</p>
-                                            <h3 class="title">
-                                                정치 내용입니다.
-                                            </h3>
-                                        </div>
-                                    </div>
-
-                                    <div class="m-board-bottom">
-                                        <p class="date">2022-11-13 08:09:30</p>
-
-                                        <div class="utils">
-                                            <button class="btn-util filter-gray">
-                                                <img src="/images/eye.png" alt="" style="width:20px;">
-                                                10
-                                            </button>
-
-                                            <button class="btn-util filter-gray">
-                                                <img src="/images/comment-black.png" alt="" style="width:15px;">
-                                                10
-                                            </button>
-
-                                            <button class="btn-util filter-gray">
-                                                <img src="/images/heart-empty.png" alt="" style="width:15px;">
-                                                10
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="m-section type01">
-                    <div class="m-section-top">
-                        <h3 class="section-title">마을모임</h3>
-                    </div>
-
-                    <div class="m-boards type02">
-                        <a href="#" class="m-board">
-                            <div class="m-board-top">
-                                <div class="left">
-                                    <p class="subtitle">자유일보</p>
-                                    <h3 class="title">
-                                        정치 내용입니다.
-                                    </h3>
-                                </div>
-                            </div>
-
-                            <div class="m-board-bottom">
-                                <p class="date">2022-11-13 08:09:30</p>
-
-                                <div class="utils">
-                                    <button class="btn-util filter-gray">
-                                        <img src="/images/eye.png" alt="" style="width:20px;">
-                                        10
-                                    </button>
-
-                                    <button class="btn-util filter-gray">
-                                        <img src="/images/comment-black.png" alt="" style="width:15px;">
-                                        10
-                                    </button>
-
-                                    <button class="btn-util filter-gray">
-                                        <img src="/images/heart-empty.png" alt="" style="width:15px;">
-                                        10
-                                    </button>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="#" class="m-board">
-                            <div class="m-board-top">
-                                <div class="left">
-                                    <p class="subtitle">자유일보</p>
-                                    <h3 class="title">
-                                        정치 내용입니다.
-                                    </h3>
-                                </div>
-                            </div>
-
-                            <div class="m-board-bottom">
-                                <p class="date">2022-11-13 08:09:30</p>
-
-                                <div class="utils">
-                                    <button class="btn-util filter-gray">
-                                        <img src="/images/eye.png" alt="" style="width:20px;">
-                                        10
-                                    </button>
-
-                                    <button class="btn-util filter-gray">
-                                        <img src="/images/comment-black.png" alt="" style="width:15px;">
-                                        10
-                                    </button>
-
-                                    <button class="btn-util filter-gray">
-                                        <img src="/images/heart-empty.png" alt="" style="width:15px;">
-                                        10
-                                    </button>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
             </div>
 
         </div>
@@ -213,12 +69,17 @@
         <!-- 하단 네비게이션바 -->
         <div class="m-navigation type01">
             <div class="wrap">
-                <div class="m-btns type01">
+                <div class="m-btns type01" v-if="!editMode">
                     <div class="m-btn-wrap">
-                        <a href="#" class="m-btn type03 bg-revert-primary">공유하기</a>
+                        <a href="#" class="m-btn type03 bg-revert-primary" @click.prevent="share">공유하기</a>
                     </div>
                     <div class="m-btn-wrap">
-                        <a href="#" class="m-btn type03">편집하기</a>
+                        <a href="#" class="m-btn type03" @click.prevent="editMode = true">편집하기</a>
+                    </div>
+                </div>
+                <div class="m-btns type01" v-else>
+                    <div class="m-btn-wrap">
+                        <a href="#" class="m-btn type03" @click.prevent="editMode = false">편집종료</a>
                     </div>
                 </div>
             </div>
@@ -227,7 +88,7 @@
 </template>
 
 <script>
-import Form from '../../utils/Form';
+import KakaoHelper from "@/utils/KakaoHelper";
 
 export default {
     components: {},
@@ -240,6 +101,8 @@ export default {
                 scrap_id: this.$auth.user.scrap ? this.$auth.user.scrap.id : "",
                 title: "",
             },
+
+            editMode: false,
 
             items: {
                 data: [],
@@ -268,6 +131,24 @@ export default {
                 });
             }
         },*/
+        share() {
+            if(!this.$auth.user.scrap)
+                return alert("공유할 지갑을 선택해주세요.");
+
+            let kakaoHelper = new KakaoHelper(Kakao);
+
+            kakaoHelper.shareScrap(this.$auth.user.scrap);
+        },
+
+        removed(){
+
+        },
+
+        reorder(items){
+            this.$axios.post("/scrapItems/reorder", {
+                items: items
+            })
+        },
 
         getItems(){
             this.form.page = 1;

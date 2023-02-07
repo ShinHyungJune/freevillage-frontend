@@ -5,48 +5,7 @@
         <scrap-pop :post_id="item.id" v-if="activeScrapPop" @created="() => {this.item.scrap_item_count += 1;}" @close="activeScrapPop = false" />
 
         <!-- 신고 팝업 -->
-        <div class="m-pop type01" style="display:none;" id="pop2">
-            <div class="m-pop-inner">
-                <button class="btn-close m-script-pop" data-target="#pop2">
-                    <img src="/images/x.png" alt="" style="width:21px;">
-                </button>
-
-                <div class="m-pop-title">게시물 신고</div>
-
-                <div class="m-input-checkbox type01">
-                    <input type="checkbox">
-                    <label for="">음란 콘텐츠를 유포</label>
-                </div>
-                <div class="mt-4"></div>
-                <div class="m-input-checkbox type01">
-                    <input type="checkbox">
-                    <label for="">상품을 팔거나 광고 및 홍보활동</label>
-                </div>
-                <div class="mt-4"></div>
-                <div class="m-input-checkbox type01">
-                    <input type="checkbox">
-                    <label for="">비방이나 욕설, 타인의 명예를 훼손</label>
-                </div>
-                <div class="mt-4"></div>
-                <div class="m-input-checkbox type01">
-                    <input type="checkbox">
-                    <label for="">잠재적 위반 가능성</label>
-                </div>
-                <div class="mt-4"></div>
-                <div class="m-input-checkbox type01">
-                    <input type="checkbox" checked>
-                    <label for="">스팸 정보</label>
-                </div>
-                <!-- 스팸 정보 클릭시에만 노출 -->
-                <div class="m-input-textarea type01 mt-8">
-                    <textarea name="" id=""></textarea>
-                </div>
-
-                <div class="mt-20"></div>
-
-                <button type="button" class="m-btn type03 width-100">신고</button>
-            </div>
-        </div>
+        <spam-pop :target_id="item.id" target_model="posts" v-if="activeSpamPop" @close="activeSpamPop = false" />
 
         <!-- 헤더영역 -->
         <div class="m-header type01">
@@ -87,7 +46,7 @@
                                 <p class="category">{{ item.formatBoard }}</p>
                             </div>
                             <div class="right">
-                                <a href="#" class="btn-report" @click.prevent="activeReportPop = true">
+                                <a href="#" class="btn-report" @click.prevent="activeSpamPop = true">
                                     <img src="/images/report.png" alt="" style="width:18px;">
                                 </a>
                             </div>
@@ -262,12 +221,12 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
-import Form from '../../utils/Form';
 import InputCamera from '../../components/form/posts/inputCamera';
 import InputLink from "../../components/form/posts/inputLink";
 import InputImg from "../../components/form/posts/inputImg";
 import InputThumbnail from "../../components/form/posts/inputThumbnail";
+import KakaoHelper from '../../utils/KakaoHelper';
+
 export default {
     components: {InputThumbnail, InputImg, InputLink, InputCamera},
     auth: true,
@@ -286,6 +245,8 @@ export default {
             map: "",
 
             tabIndex: 0,
+
+            activeSpamPop: false,
         }
     },
     methods: {
@@ -309,28 +270,9 @@ export default {
         },
 
         share() {
-            Kakao.Link.sendDefault({
-                objectType: 'feed',
-                content: {
-                    title: this.item.title,
-                    description: '',
-                    imageUrl:
-                        this.item.img ? this.item.img.url : '',
-                    link: {
-                        mobileWebUrl: `http://jayuvillages.com/posts/${this.item.id}`,
-                        webUrl: `http://jayuvillages.com/posts/${this.item.id}`,
-                    },
-                },
-                buttons: [
-                    {
-                        title: '보러가기',
-                        link: {
-                            mobileWebUrl: `http://jayuvillages.com/posts/${this.item.id}`,
-                            webUrl: `http://jayuvillages.com/posts/${this.item.id}`,
-                        },
-                    },
-                ],
-            })
+            let kakaoHelper = new KakaoHelper(Kakao);
+
+            kakaoHelper.sharePost(this.item);
         },
 
         participate(){
