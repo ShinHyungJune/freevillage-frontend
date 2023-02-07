@@ -23,7 +23,7 @@ export default {
         script: [
             {src:'//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js'},
             {src:'//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=75aa32499180f4887b38e7607514e26f&libraries=services'},
-            {src: '//developers.kakao.com/sdk/js/kakao.min.js'}
+            {src: '//developers.kakao.com/sdk/js/kakao.min.js'},
         ]
     },
 
@@ -34,6 +34,7 @@ export default {
     plugins: [
         {src: '~/plugins/persistedState.js'},
         {src: '~/plugins/vue-infinite-loading.js'},
+        {src: '~/plugins/axios.js'},
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components

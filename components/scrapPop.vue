@@ -54,6 +54,9 @@ export default {
                 .then(response => {
                     alert(response.data.message);
 
+                    if(response.data.message.includes("성공"))
+                        this.$emit("created");
+
                     this.close();
             });
         },

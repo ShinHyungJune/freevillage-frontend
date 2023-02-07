@@ -8,7 +8,7 @@
                 </div>
                 <div class="center">
                     <div class="m-input-select type01">
-                        <select name="" id="" v-model="form.board">
+                        <select name="" id="" v-model="form.board" @change="changeBoard">
                             <option value="" disabled>카테고리 선택</option>
                             <option value="notices">마을소식</option>
                             <option value="clips">마을영상</option>
@@ -155,7 +155,7 @@ export default {
             form: {
                 title: "",
                 content: "",
-                board: "notices",
+                board: this.$route.query.board ? this.$route.query.board : "notices",
                 district_id: this.$store.state.district ? this.$store.state.district.id : 0,
                 thumbnail: "",
 
@@ -199,6 +199,10 @@ export default {
                 });
         },
 
+        changeBoard(){
+            this.reset();
+        },
+
         getYoutubeEmbedUrl(url){
             let match = url.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/);
 
@@ -208,6 +212,31 @@ export default {
                 return "https://www.youtube.com/embed/" + id;
 
             return "";
+        },
+
+        reset(){
+            this.$refs.content.innerHTML = "";
+
+            this.form = {
+                ...this.form,
+                title: "",
+                content: "",
+                thumbnail: "",
+
+                // 마을 영상 관련
+                video_url:"",
+
+                // 마을 모임 관련
+                participant_type: "",
+                start_date: "",
+                end_date: "",
+                x: "",
+                y: "",
+                participant_available_count: "",
+                price: "",
+                address: "",
+                address_detail: "",
+            }
         }
     },
 

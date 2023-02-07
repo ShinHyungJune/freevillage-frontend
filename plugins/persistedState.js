@@ -8,7 +8,7 @@ export default ({ store, req }) => {
         storage: {
             getItem: (key) => {
                 if (process.server) {
-                    const parsedCookies = cookie.parse(req.headers.cookie);
+                    const parsedCookies = cookie.parse(req.headers.cookie ?? "");
                     return parsedCookies[key];
                 } else {
                     return Cookies.get(key);

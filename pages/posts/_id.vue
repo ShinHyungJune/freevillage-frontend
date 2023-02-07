@@ -2,7 +2,7 @@
     <div class="area-news-show">
 
         <!-- 지갑 팝업 -->
-        <scrap-pop :post_id="item.id" v-if="activeScrapPop" @close="activeScrapPop = false" />
+        <scrap-pop :post_id="item.id" v-if="activeScrapPop" @created="() => {this.item.scrap_item_count += 1;}" @close="activeScrapPop = false" />
 
         <!-- 신고 팝업 -->
         <div class="m-pop type01" style="display:none;" id="pop2">
@@ -122,19 +122,111 @@
 
                     <div class="m-board-content">
                         <h3 class="title">{{ item.title }}</h3>
-                        <p class="body" v-if="item.content">
-                            {{item.content.replace(/<\/?[^>]+>/ig, " ")}}
-                        </p>
-                        <div class="m-thumbnail type01 mt-8" :style="`background-image:url(${item.img.url})`" v-if="item.img"></div>
+
+<!--                        <div class="m-thumbnail type01 mb-8" :style="`background-image:url(${item.img.url})`" v-if="item.img"></div>-->
+
+                        <!-- 마을모임용 상세 -->
+                        <div v-if="item.board === 'meetings'">
+                            <div class="infos">
+                                <div class="info">
+                                    <div class="title">
+                                        <img src="/images/chat-primary.png" alt="" style="width:16px;">
+                                        참여
+                                    </div>
+                                    <p class="body">
+                                        {{ item.participant_type }}
+                                    </p>
+                                </div>
+
+                                <div class="info">
+                                    <div class="title">
+                                        <img src="/images/calendar-primary.png" alt="" style="width:16px;">
+                                        행사시작
+                                    </div>
+                                    <p class="body">
+                                        {{ item.start_date }}
+                                    </p>
+                                </div>
+
+                                <div class="info">
+                                    <div class="title">
+                                        <img src="/images/calendar-clock-primary.png" alt="" style="width:16px;">
+                                        행사종료
+                                    </div>
+                                    <p class="body">
+                                        {{ item.end_date }}
+                                    </p>
+                                </div>
+
+                                <div class="info">
+                                    <div class="title">
+                                        <img src="/images/users-primary.png" alt="" style="width:16px;">
+                                        모집인원
+                                    </div>
+                                    <p class="body">
+                                        {{ item.participant_count }} / {{item.participant_available_count}}
+                                    </p>
+                                </div>
+
+                                <div class="info">
+                                    <div class="title">
+                                        <img src="/images/money-primary.png" alt="" style="width:16px;">
+                                        참가비
+                                    </div>
+                                    <p class="body">
+                                        {{ item.price }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="mt-16"></div>
+
+                            <div class="m-tabs type02">
+                                <button :class="`m-tab ${tabIndex === 0 ? 'active' : ''}`" @click="tabIndex = 0">상세내용</button>
+                                <button :class="`m-tab ${tabIndex === 1 ? 'active' : ''}`" @click="() => {tabIndex = 1; initMap();}">장소</button>
+                            </div>
+
+                            <div class="mt-16"></div>
+
+                            <div class="m-tabs-contents">
+                                <div :class="`m-tabs-content ${tabIndex === 0 ? 'active' : ''}`">
+                                    <div class="editor-body" v-html="item.content"></div>
+                                </div>
+
+                                <div :class="`m-tabs-content ${tabIndex === 1 ? 'active' : ''}`">
+                                    <div id="map" style="height:300px;"></div>
+                                </div>
+                            </div>
+
+                            <div class="mt-16"></div>
+
+                            <a href="#" class="m-btn type03 state03" v-if="!item.can_participate">행사종료</a>
+                            <a href="#" class="m-btn type03 state02" v-else-if="item.is_participate">참여중</a>
+                            <a href="#" class="m-btn type03" v-else @click.prevent="participate">참여하기</a>
+                        </div>
+
+                        <!-- 마을소식, 포토, 영상, 질문 등 -->
+                        <div v-else>
+                            <div class="m-ratioBox-wrap m-video type01 mb-8" v-if="item.video_url">
+                                <div class="m-ratioBox">
+                                    <iframe :src="item.video_url"></iframe>
+                                </div>
+                            </div>
+
+                            <p class="body" v-if="item.content">
+                                {{item.content.replace(/<\/?[^>]+>/ig, " ")}}
+                            </p>
+                        </div>
+
                     </div>
                 </div>
 
                 <div class="m-board-bottom">
                     <div class="wrap">
                         <div class="utils">
-                            <button class="btn-util">
-                                <!--<img src="/images/heart-inactive.png" alt="" style="width:14px;">-->
-                                <img src="/images/heart-active.png" alt="" style="width:14px;">
+                            <button class="btn-util" @click="toggleLike">
+                                <img src="/images/heart-active.png" alt="" style="width:14px;" v-if="item.is_like">
+                                <img src="/images/heart-inactive.png" alt="" style="width:14px;" v-else>
                                 좋아요 {{ item.like_count }}
                             </button>
 
@@ -157,99 +249,15 @@
                 </div>
 
                 <div class="wrap">
-                    <div class="m-comments type01">
-                        <div class="m-comments-top">
-                            <a href="#" class="btn-filter active">최신순</a>
-                            <a href="#" class="btn-filter">오래된순</a>
-                        </div>
-
-                        <div class="m-comment">
-                            <div class="thumbnail" style="background-image:url('/images/example.png');"></div>
-
-                            <div class="content">
-                                <h3 class="title">서정동네일샵</h3>
-                                <p class="sub">서정동 · 2시간 전</p>
-                                <p class="body">동참할게요 동참할게요</p>
-
-                                <div class="utils">
-                                    <button class="btn-like">
-                                        <img src="/images/heart-active.png" alt="" style="width:14px;">
-                                        <!--<img src="/images/heart-inactive.png" alt="" style="width:14px;">-->
-                                        1
-                                    </button>
-                                    <button class="btn-text">답글쓰기</button>
-                                </div>
-
-                                <div class="m-input-withBtn type01">
-                                    <div class="m-input m-input-text type01">
-                                        <input type="text" placeholder="댓글을 입력해주세요.">
-                                    </div>
-
-                                    <button class="m-input-btn m-btn type02">저장</button>
-                                </div>
-
-                            </div>
-
-                            <button class="btn-more">
-                                <img src="/images/dots.png" alt="" style="width:3px;">
-                            </button>
-                        </div>
-
-                        <div class="m-comment">
-                            <div class="thumbnail" style="background-image:url('/images/example.png');"></div>
-
-                            <div class="content">
-                                <h3 class="title">서정동네일샵</h3>
-                                <p class="sub">서정동 · 2시간 전</p>
-                                <p class="body">동참할게요 동참할게요</p>
-
-                                <div class="utils">
-                                    <button class="btn-like">
-                                        <img src="/images/heart-active.png" alt="" style="width:14px;">
-                                        <!--<img src="/images/heart-inactive.png" alt="" style="width:14px;">-->
-                                        1
-                                    </button>
-                                    <button class="btn-text">답글쓰기</button>
-                                </div>
-
-                                <div class="m-input-withBtn type01">
-                                    <div class="m-input m-input-text type01">
-                                        <input type="text" placeholder="댓글을 입력해주세요.">
-                                    </div>
-
-                                    <button class="m-input-btn m-btn type02">저장</button>
-                                </div>
-
-                            </div>
-
-                            <button class="btn-more">
-                                <img src="/images/dots.png" alt="" style="width:3px;">
-                            </button>
-                        </div>
-                    </div>
+                    <comments :post_id="item.id" v-if="item.id"/>
                 </div>
             </div>
 
-            <div class="m-quicks type01">
-                <a href="#" class="m-quick">글쓰기</a>
-                <a href="#" class="m-quick m-btn-top">
-                    <img src="/images/Icon.png" alt="">
-                </a>
-            </div>
+            <quicks :create-url="`/posts/create?board=${item.board}`"/>
         </div>
 
         <!-- 하단 네비게이션바 -->
-        <div class="m-navigation type01">
-            <div class="wrap">
-                <div class="m-input-withBtn type01">
-                    <div class="m-input m-input-text type01">
-                        <input type="text" placeholder="댓글을 입력해주세요.">
-                    </div>
-
-                    <button class="m-input-btn m-btn type02">저장</button>
-                </div>
-            </div>
-        </div>
+        <!-- <comment-navigation @created="(data) => {comments.data.push(data)}" /> -->
     </div>
 </template>
 
@@ -274,6 +282,10 @@ export default {
             errors: {},
 
             activeScrapPop: false,
+
+            map: "",
+
+            tabIndex: 0,
         }
     },
     methods: {
@@ -281,8 +293,22 @@ export default {
 
         },
 
+        toggleLike(e){
+            e.preventDefault();
+            e.stopPropagation();
+
+            if(this.item.is_like){
+                this.item.is_like = 0;
+                this.item.like_count -= 1;
+            }else{
+                this.item.is_like = 1;
+                this.item.like_count += 1;
+            }
+
+            this.$axios.put("/likes/posts/" + this.item.id);
+        },
+
         share() {
-            Kakao.init('75aa32499180f4887b38e7607514e26f');
             Kakao.Link.sendDefault({
                 objectType: 'feed',
                 content: {
@@ -305,14 +331,48 @@ export default {
                     },
                 ],
             })
-        }
+        },
+
+        participate(){
+
+        },
+
+        initMap() {
+            let self = this;
+
+            setTimeout(function(){
+                const container = document.getElementById("map");
+
+                if(!self.map){
+                    const coords =  new kakao.maps.LatLng(self.item.y, self.item.x);
+
+                    const options = {
+                        center:coords,
+                        level: 5,
+                    };
+
+                    self.map = new kakao.maps.Map(container, options);
+
+                    // 결과값으로 받은 위치를 마커로 표시합니다
+                    new kakao.maps.Marker({
+                        map: self.map,
+                        position: coords
+                    });
+                }
+            }, 300);
+
+
+        },
+
     },
 
     mounted() {
+        kakao.maps.load(this.initMap);
+
         this.$axios.get("/posts/" + this.$route.params.id)
             .then(response => {
                 this.item = response.data.data;
-            })
+            });
     }
 }
 </script>

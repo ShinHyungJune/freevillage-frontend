@@ -37,6 +37,7 @@ export default {
     }
   },
   mounted() {
+      Kakao.init('75aa32499180f4887b38e7607514e26f');
 
   }
 }

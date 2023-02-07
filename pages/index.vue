@@ -259,7 +259,7 @@
                         데이터가 없습니다.
                     </div>
                     <div class="m-items type01">
-                        <nuxt-link :to="`/notices/${notice.id}`" class="m-item" v-for="notice in notices.data" :key="notice.id">
+                        <nuxt-link :to="`/posts/${notice.id}`" class="m-item" v-for="notice in notices.data" :key="notice.id">
                             <div class="m-ratioBox-wrap" v-if="notice.thumbnail">
                                 <div class="m-ratioBox">
                                     <img :src="notice.thumbnail" alt="">
@@ -290,7 +290,7 @@
                     </div>
                     <div class="m-items type02">
                         <div class="m-item-wrap">
-                            <nuxt-link :to="`/clips/${clip.id}`" class="m-item" v-for="clip in clips.data" :key="clip.id">
+                            <nuxt-link :to="`/posts/${clip.id}`" class="m-item" v-for="clip in clips.data" :key="clip.id">
                                 <div class="m-ratioBox-wrap" v-if="clip.thumbnail">
                                     <div class="m-ratioBox">
                                         <img :src="clip.thumbnail" alt="">
@@ -324,7 +324,7 @@
 
                     <div class="m-items type02">
                         <div class="m-item-wrap">
-                            <nuxt-link :to="`/photos/${photo.id}`" class="m-item" v-for="photo in photos.data" :key="photo.id">
+                            <nuxt-link :to="`/posts/${photo.id}`" class="m-item" v-for="photo in photos.data" :key="photo.id">
                                 <div class="m-ratioBox-wrap" v-if="photo.thumbnail">
                                     <div class="m-ratioBox">
                                         <img :src="photo.thumbnail" alt="">

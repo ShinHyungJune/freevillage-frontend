@@ -279,6 +279,9 @@ html {
 .area-register-success .wrap > .title {
     font-size:24px; font-weight:bold; word-break: keep-all;
 }
+.m-video.type01 {
+    padding-top:60%;
+}
 .m-visual.type01 {
     padding:47px 10px;
     background-color:#F7F7F7; text-align: center;
@@ -886,6 +889,9 @@ html {
 .mt-8 {
     margin-top:8px;
 }
+.mb-8 {
+    margin-bottom:8px;
+}
 .mt-4 {
     margin-top:4px;
 }
@@ -947,6 +953,9 @@ html {
 }
 .m-boards.type01 .m-board-content .title .point {
     font-size:22px; font-weight:bold;
+    color:#FF7C2E;
+}
+.m-boards.type01 .m-board-content .title .point.active {
     color:#FF7C2E;
 }
 .m-boards.type01 .m-board-content .body {
@@ -1203,9 +1212,9 @@ html {
     width:30px; height:30px; margin-right:10px;
     background-size:cover; background-position:center; border-radius:5px;
 }
-.m-comments.type01 .m-comment {
+.m-comments.type01 .m-comment-inner {
     display:flex; align-items: flex-start;
-    margin-bottom:30px;
+    padding-bottom:10px; padding-top:10px;
 }
 .m-comments.type01 .m-comment .content {
     flex:auto;
@@ -1242,6 +1251,17 @@ html {
 .m-comments.type01 .m-comment .m-input-withBtn.type01 .m-input-btn {
     padding:0 16px;
     height:auto; font-size:16px;
+}
+.m-comments.type01 .m-comment .m-comments {
+    padding:0 20px;
+    background-color:#f5f5f5;
+}
+.m-comments.type01 .m-comment .m-comments .m-comment-inner {
+    padding-top:0; padding-bottom:0;
+}
+.m-comments.type01 .m-comment .m-comments .m-comment {
+    padding-top:20px; padding-bottom:20px;
+    border-bottom:1px solid #e1e1e1;
 }
 .m-input-withBtn.type01 {
     display:flex;
