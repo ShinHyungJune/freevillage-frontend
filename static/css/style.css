@@ -143,6 +143,10 @@ html {
 .m-comment.type01 .point {
     font-size:20px; font-weight:bold;
 }
+.m-comment.type02 {
+    font-size:14px;
+    color:#777; word-break: keep-all;
+}
 .m-center.type01 {
     display:flex; align-items: center;
     height:calc(100vh - 180px);
@@ -187,6 +191,15 @@ html {
 }
 .m-pop.type01 .m-pop-inner .btn-close {
     position:absolute; top:20px; right:20px;
+}
+.m-map.type01 {
+    height:300px;
+}
+img {
+    max-width:100%;
+}
+.area-write img {
+    max-width:100%;
 }
 .area-news-show {
     padding-bottom:140px;
