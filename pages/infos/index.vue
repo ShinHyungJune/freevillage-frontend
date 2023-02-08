@@ -4,7 +4,7 @@
         <header-type01 />
 
         <!-- 내용 영역 -->
-        <div class="container">
+        <div class="container" @keyup="errors = {}">
             <div class="m-visual type01">
                 <p class="subtitle">마을 소개</p>
                 <h3 class="title">{{this.$store.state.district.district}} 소개</h3>
@@ -12,19 +12,19 @@
 
             <div class="m-tabs type01">
                 <div class="m-tab-wrap">
-                    <a href="#" class="m-tab active">
+                    <nuxt-link to="/infos" class="m-tab active">
                         <span class="text">{{this.$store.state.district.district}} 소개?</span>
-                    </a>
+                    </nuxt-link>
                 </div>
                 <div class="m-tab-wrap">
-                    <a href="/staffs" class="m-tab">
+                    <nuxt-link to="/staffs" class="m-tab">
                         <span class="text">임원진</span>
-                    </a>
+                    </nuxt-link>
                 </div>
                 <div class="m-tab-wrap">
-                    <a href="/contacts" class="m-tab">
+                    <nuxt-link to="/contacts" class="m-tab">
                         <span class="text">마을활동</span>
-                    </a>
+                    </nuxt-link>
                 </div>
             </div>
 

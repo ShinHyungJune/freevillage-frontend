@@ -17,13 +17,13 @@
 
                             <div class="m-btns type01">
                                 <div class="m-btn-wrap">
-                                    <a href="#" class="m-btn type01">{{ district.district }}소개</a>
+                                    <nuxt-link to="/infos" class="m-btn type01">{{ district.district }}소개</nuxt-link>
                                 </div>
                                 <div class="m-btn-wrap">
-                                    <a href="#" class="m-btn type01">임원진</a>
+                                    <nuxt-link to="/staffs" class="m-btn type01">임원진</nuxt-link>
                                 </div>
                                 <div class="m-btn-wrap">
-                                    <a href="#" class="m-btn type01">마을활동</a>
+                                    <nuxt-link to="/contacts" class="m-btn type01">마을활동</nuxt-link>
                                 </div>
                             </div>
                         </div>

@@ -66,22 +66,22 @@
 
                     <div class="menus">
                         <div class="wrap">
-                            <nuxt-link to="#" class="menu">
+                            <nuxt-link to="/infos/create" class="menu">
                                 <img src="/images/building.png" alt="" class="icon" style="width:14px;">
                                 <p class="text">내 마을 소개</p>
                             </nuxt-link>
-                            <a href="#" class="menu">
+                            <nuxt-link to="/staffs/create" class="menu">
                                 <img src="/images/users.png" alt="" class="icon" style="width:14px;">
                                 <p class="text">내 마을 임원진</p>
-                            </a>
-                            <a href="#" class="menu">
+                            </nuxt-link>
+                            <nuxt-link to="/contacts/create" class="menu">
                                 <img src="/images/chart.png" alt="" class="icon" style="width:14px;">
                                 <p class="text">내 마을 활동</p>
-                            </a>
-                            <a href="#" class="menu">
+                            </nuxt-link>
+                            <nuxt-link to="/notices/create" class="menu">
                                 <img src="/images/board.png" alt="" class="icon" style="width:14px;">
                                 <p class="text">내 마을 공지</p>
-                            </a>
+                            </nuxt-link>
                         </div>
                     </div>
                 </div>

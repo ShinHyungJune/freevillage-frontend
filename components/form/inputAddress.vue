@@ -27,21 +27,34 @@
 
 export default {
     props: {
-        defaultValue: {
+        address: {
             default(){
-                return {
-
-                }
+                return "";
+            },
+        },
+        address_detail: {
+            default(){
+                return "";
+            },
+        },
+        x: {
+            default(){
+                return "";
+            },
+        },
+        y: {
+            default(){
+                return "";
             },
         },
     },
     data(){
         return {
             form: {
-                address: "",
-                address_detail: "",
-                x: "",
-                y: "",
+                address: this.address,
+                address_detail: this.address_detail,
+                x: this.x,
+                y: this.y,
             }
         }
     },

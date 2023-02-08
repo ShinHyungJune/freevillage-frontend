@@ -38,7 +38,7 @@
                     <div class="m-input-wrap">
                         <h3 class="m-input-title">장소</h3>
 
-                        <input-address @change="(data) => {this.form = {...this.form, ...data}}" />
+                        <input-address v-if="show" @change="(data) => {this.form = {...this.form, ...data}}" :address="form.address" :address_detail="form.address_detail" :x="form.x" :y="form.y"/>
 
                         <div class="m-input-error" v-if="errors.address">{{errors.address[0]}}</div>
                         <div class="m-input-error" v-if="errors.address_detail">{{errors.address_detail[0]}}</div>
@@ -50,9 +50,9 @@
                 <section class="section">
                     <h3 class="section-title">단체 상세 정보</h3>
 
-                    <p class="m-comment type02" v-if="!form.info">* 하단 단체 상세 이미지를 눌러 이미지를 등록해주세요.</p>
+                    <p class="m-comment type02" v-if="!imgUrl">* 하단 단체 상세 이미지를 눌러 이미지를 등록해주세요.</p>
 
-                    <img :src="infoImgUrl" alt="" v-if="form.info">
+                    <img :src="imgUrl" alt="" v-if="imgUrl">
                 </section>
 
                 <div class="mt-40"></div>
@@ -67,7 +67,7 @@
                 </div>
 
                 <div class="nav-wrap">
-                    <input-img id="img2" title="단체 상세 이미지" @file="test" @changeFile="(data) => form.info = data" @change="(data) => { this.infoImgUrl = data.url}"/>
+                    <input-img id="img2" title="단체 상세 이미지" @changeFile="(data) => form.info = data" @change="(data) => { this.imgUrl = data.url}"/>
                 </div>
 
                 <div class="nav-wrap active">
@@ -115,13 +115,13 @@ export default {
             errors: {},
 
             activeLinkPop: false,
+
+            imgUrl: "",
+
+            show: false,
         }
     },
     methods: {
-        test(file){
-            console.log(file);
-        },
-
         move(e){
             this.$router.push(e.target.value)
         },
@@ -146,13 +146,29 @@ export default {
                 });
         },
 
-        imgUrl(file){
-            return URL.createObjectURL(file);
-        }
     },
 
     mounted() {
+        this.$axios.get(`/districts/${this.$store.state.district.id}/infos`)
+            .then(response => {
 
+                let item = response.data ? response.data.data : "";
+
+                if(item){
+
+                    this.$refs.content.innerHTML = item.content;
+
+                    this.imgUrl = item.img ? item.img.url : '';
+
+                    this.form = {
+                        ...this.form,
+                        ...item,
+                    };
+                }
+
+                this.show = true;
+
+            });
     }
 }
 </script>

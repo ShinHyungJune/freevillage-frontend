@@ -195,6 +195,35 @@ html {
 .m-map.type01 {
     height:300px;
 }
+.area-staff .item {
+    margin-top:20px;
+    padding:20px; border:1px solid #e1e1e1; border-radius:5px;
+}
+.area-staff .item-top {
+    display:flex; align-items: center; justify-content: space-between;
+    margin-bottom:10px;
+    padding-bottom:10px;
+    border-bottom:1px solid #e1e1e1;
+}
+.area-staff .img-wrap {
+    position:relative;
+}
+.area-staff .img-wrap .btn-call {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 5px;
+    background-color: #ddd;
+    box-shadow:0px 3px 6px rgba(0,0,0,0.16);
+}
+.area-staff .img-wrap {
+    position:relative;
+}
 img {
     max-width:100%;
 }
@@ -269,10 +298,17 @@ img {
     display:inline-block;
 }
 .area-region-activity .img-wrap .btn-call {
-    display:flex; justify-content: center; align-items: center;
-    width:30px; height:30px;
-    position:absolute; top:0; right:0;
-    border-radius:5px; background-color:#ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 5px;
+    background-color: #ddd;
+    box-shadow:0px 3px 6px rgba(0,0,0,0.16);
 }
 .area-about .m-title {
     margin:32px 0; margin-bottom:24px;
