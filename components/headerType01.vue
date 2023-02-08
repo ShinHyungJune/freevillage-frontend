@@ -45,7 +45,7 @@
                             <h3 class="title">홈</h3>
                         </nuxt-link>
 
-                        <nuxt-link to="/" class="link">
+                        <nuxt-link to="/posts" class="link">
                             <div class="img-wrap">
                                 <img src="/images/circleMen.png" alt="" class="filter-white" style="width:30px;">
                             </div>
@@ -53,13 +53,13 @@
                             <h3 class="title">내 마을</h3>
                         </nuxt-link>
 
-                        <a href="#" class="link">
+                        <nuxt-link to="/notices" class="link">
                             <div class="img-wrap">
                                 <img src="/images/notice.png" alt="" class="filter-white" style="width:30px;">
                             </div>
 
                             <h3 class="title">공지</h3>
-                        </a>
+                        </nuxt-link>
                     </div>
                 </div>
 
@@ -67,7 +67,7 @@
                     <div class="menus-wrap">
                         <div class="menus">
                             <div class="menu-wrap">
-                                <a href="" class="menu">
+                                <a href="/posts?board=notices" class="menu">
                                     <img src="/images/news01.png" alt="" class="">
 
                                     <h3 class="title">마을소식</h3>
@@ -75,7 +75,7 @@
                             </div>
 
                             <div class="menu-wrap">
-                                <a href="" class="menu">
+                                <a href="/posts?board=clips" class="menu">
                                     <img src="/images/news02.png" alt="" class="">
 
                                     <h3 class="title">마을영상</h3>
@@ -83,7 +83,7 @@
                             </div>
 
                             <div class="menu-wrap">
-                                <a href="" class="menu">
+                                <a href="/posts?board=photos" class="menu">
                                     <img src="/images/news03.png" alt="" class="">
 
                                     <h3 class="title">마을포토</h3>
@@ -91,7 +91,7 @@
                             </div>
 
                             <div class="menu-wrap">
-                                <a href="" class="menu">
+                                <a href="/posts?board=asks" class="menu">
                                     <img src="/images/news04.png" alt="" class="">
 
                                     <h3 class="title">마을질문</h3>
@@ -99,11 +99,11 @@
                             </div>
 
                             <div class="menu-wrap">
-                                <nuxt-link to="/meetings" class="menu">
+                                <a href="/posts?board=meetings" class="menu">
                                     <img src="/images/news05.png" alt="" class="">
 
                                     <h3 class="title">마을모임</h3>
-                                </nuxt-link>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -137,7 +137,7 @@
             <div class="wrap">
                 <div class="selects">
                     <button :class="`btn-select ${(district && district.id == 0) || !district ? 'point' : ''}`" @click="active = true;">
-                        {{ district ? district.district : "지역마을" }}
+                        {{ district.id == 0 ? "지역마을" : district.district }}
 
                         <img src="/images/chevron-down.png" alt="" class="deco">
                     </button>

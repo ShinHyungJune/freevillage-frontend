@@ -401,7 +401,7 @@ export default {
     },
 
     mounted() {
-        let districtId = this.district ? this.district.id : 0;
+        let districtId = this.district.id;
 
         this.$axios.get("/posts", {
             params: {
@@ -441,10 +441,12 @@ export default {
 
         this.getRankings(10);
 
-        this.$axios.get("/districts/" + this.district.id + "/register_rates")
-            .then(response => {
-                this.registerRates = response.data.registerRates;
-            })
+        if(this.district.id != 0)
+            this.$axios.get("/districts/" + this.district.id + "/register_rates")
+                .then(response => {
+                    this.registerRates = response.data.registerRates;
+                });
+
     }
 }
 </script>

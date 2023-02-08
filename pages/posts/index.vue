@@ -147,7 +147,7 @@ export default {
     data() {
         return {
             form: {
-                board: "",
+                board: this.$route.query.board ? this.$route.query.board : "",
                 page: 1,
                 district_id: this.$store.state.district.id,
             },
