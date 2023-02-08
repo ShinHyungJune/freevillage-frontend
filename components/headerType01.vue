@@ -139,19 +139,19 @@
                     <button :class="`btn-select ${(district && district.id == 0) || !district ? 'point' : ''}`" @click="active = true;">
                         {{ district.id == 0 ? "지역마을" : district.district }}
 
-                        <img src="/images/chevron-down.png" alt="" class="deco">
+                        <img src="/images/chevron-down.png" style="width:10px;" alt="" class="deco">
                     </button>
                 </div>
 
                 <div class="utils">
                     <button class="btn-util">
-                        <img src="/images/search.png" alt="">
+                        <img src="/images/search.png" style="width:18px;" alt="">
                     </button>
                     <button class="btn-util">
-                        <img src="/images/bell.png" alt="">
+                        <img src="/images/bell.png" style="width:17px;" alt="">
                     </button>
                     <button class="btn-util" @click="activeSidebar = true">
-                        <img src="/images/menu.png" alt="" style='width:17px;'>
+                        <img src="/images/menu.png" alt="" style='width:18px;'>
                     </button>
                 </div>
             </div>

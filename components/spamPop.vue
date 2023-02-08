@@ -1,7 +1,7 @@
 <template>
     <div class="m-pop type01" id="pop2">
         <div class="m-pop-inner">
-            <button class="btn-close m-script-pop" data-target="#pop2">
+            <button class="btn-close m-script-pop" @click="close">
                 <img src="/images/x.png" alt="" style="width:21px;">
             </button>
 

@@ -227,7 +227,7 @@ import KakaoHelper from '../../utils/KakaoHelper';
 
 export default {
     components: {InputThumbnail, InputImg, InputLink, InputCamera},
-    auth: true,
+    auth: false,
     data() {
         return {
             item: {
@@ -274,7 +274,13 @@ export default {
         },
 
         participate(){
+            this.$axios.post("/participants", {
+                post_id: this.item.id
+            }).then(response => {
+                alert(response.data.message);
 
+                this.item = response.data.data;
+            })
         },
 
         initMap() {
@@ -307,7 +313,7 @@ export default {
     },
 
     mounted() {
-        kakao.maps.load(this.initMap);
+        kakao.maps.load();
 
         this.$axios.get("/posts/" + this.$route.params.id)
             .then(response => {

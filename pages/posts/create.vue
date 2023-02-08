@@ -127,11 +127,11 @@
                 </div>
 
                 <div class="nav-wrap">
-                    <input-img id="camera" @change="(data) => {this.$refs.content.innerHTML += data.html}"/>
+                    <input-img id="img" @change="(data) => {this.$refs.content.innerHTML += data.html}"/>
                 </div>
 
-                <div class="nav-wrap">
-                    <input-thumbnail id="thumbnail" @change="(data) => {form.thumbnail = data.file}" />
+                <div class="nav-wrap" v-if="form.board !== 'clips'">
+                    <input-thumbnail id="thumbnail" @change="(data) => {form.thumbnail = data.file}" :img-url="item ? item.img.url : ''" />
                 </div>
             </div>
         </div>
@@ -162,6 +162,8 @@ export default {
 
                 // 마을 영상 관련
                 video_url:"",
+                video_thumbnail: "",
+                video_id: "",
 
                 // 마을 모임 관련
                 participant_type: "",
@@ -184,7 +186,13 @@ export default {
         store() {
             this.form.content = this.$refs.content ? this.$refs.content.innerHTML : "";
 
-            this.form.video_url = this.getYoutubeEmbedUrl(this.form.video_url);
+            if(this.form.video_url) {
+                let youtubeInformation = this.getYoutubeInformation(this.form.video_url);
+
+                this.form.video_url = youtubeInformation.embedUrl;
+                this.form.video_id = youtubeInformation.id;
+                this.form.video_thumbnail = youtubeInformation.thumbnail;
+            }
 
             let form = (new Form(this.form)).data();
 
@@ -218,15 +226,25 @@ export default {
             this.reset();
         },
 
-        getYoutubeEmbedUrl(url){
+        getYoutubeInformation(url){
+            let id = "";
+            let embedUrl = "";
+            let thumbnail = "";
+
             let match = url.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/);
 
-            let id = (match&&match[7].length==11)?match[7]:false;
+            id = (match&&match[7].length==11)?match[7]:false;
 
-            if(id)
-                return "https://www.youtube.com/embed/" + id;
+            if(id) {
+                embedUrl = "https://www.youtube.com/embed/" + id;
+                thumbnail = "https://img.youtube.com/vi/" + id + "/0.jpg";
+            }
 
-            return "";
+            return {
+                id: id,
+                embedUrl: embedUrl,
+                thumbnail: thumbnail
+            };
         },
 
         reset(){

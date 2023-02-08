@@ -231,7 +231,7 @@
                         <h3 class="title">소식</h3>
 
                         <nuxt-link to="/posts" class="btn-more">
-                            <img src="/images/arrowRight-gray.png" alt="">
+                            <img src="/images/arrowRight-gray.png" style="width:9px;" alt="">
                         </nuxt-link>
                     </div>
 
@@ -240,9 +240,9 @@
                     </div>
                     <div class="m-items type01">
                         <nuxt-link :to="`/posts/${notice.id}`" class="m-item" v-for="notice in notices.data" :key="notice.id">
-                            <div class="m-ratioBox-wrap" v-if="notice.thumbnail">
+                            <div class="m-ratioBox-wrap" v-if="notice.img">
                                 <div class="m-ratioBox">
-                                    <img :src="notice.thumbnail" alt="">
+                                    <img :src="notice.img.url" alt="">
                                 </div>
                             </div>
 
@@ -261,7 +261,7 @@
                         <h3 class="title">영상</h3>
 
                         <nuxt-link to="/posts" class="btn-more">
-                            <img src="/images/arrowRight-gray.png" alt="">
+                            <img src="/images/arrowRight-gray.png" style="width:9px;" alt="">
                         </nuxt-link>
                     </div>
 
@@ -271,9 +271,9 @@
                     <div class="m-items type02">
                         <div class="m-item-wrap">
                             <nuxt-link :to="`/posts/${clip.id}`" class="m-item" v-for="clip in clips.data" :key="clip.id">
-                                <div class="m-ratioBox-wrap" v-if="clip.thumbnail">
+                                <div class="m-ratioBox-wrap" v-if="clip.img">
                                     <div class="m-ratioBox">
-                                        <img :src="clip.thumbnail" alt="">
+                                        <img :src="clip.img.url" alt="">
                                     </div>
                                 </div>
 
@@ -294,7 +294,7 @@
                         <h3 class="title">포토</h3>
 
                         <nuxt-link to="/posts" class="btn-more">
-                            <img src="/images/arrowRight-gray.png" alt="">
+                            <img src="/images/arrowRight-gray.png" style="width:9px;" alt="">
                         </nuxt-link>
                     </div>
 
@@ -305,9 +305,9 @@
                     <div class="m-items type02">
                         <div class="m-item-wrap">
                             <nuxt-link :to="`/posts/${photo.id}`" class="m-item" v-for="photo in photos.data" :key="photo.id">
-                                <div class="m-ratioBox-wrap" v-if="photo.thumbnail">
+                                <div class="m-ratioBox-wrap" v-if="photo.img">
                                     <div class="m-ratioBox">
-                                        <img :src="photo.thumbnail" alt="">
+                                        <img :src="photo.img.url" alt="">
                                     </div>
                                 </div>
 

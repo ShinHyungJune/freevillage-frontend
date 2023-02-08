@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="nav-wrap">
-                    <input-thumbnail id="thumbnail" @change="(data) => {form.thumbnail = data.file}" />
+                    <input-thumbnail id="thumbnail" @change="(data) => {form.thumbnail = data.file}" :img-url="item ? item.img.url : ''" />
                 </div>
             </div>
         </div>

@@ -122,7 +122,7 @@
 
                 <div class="utils">
                     <button class="btn-util" @click="activeSidebar = true">
-                        <img src="/images/menu.png" alt="" style='width:17px;'>
+                        <img src="/images/menu.png" alt="" style='width:18px;'>
                     </button>
                 </div>
             </div>

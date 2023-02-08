@@ -2,8 +2,10 @@
     <label :for="id" class="nav">
         <input type="file" :id="id" accept="image/*" @change="changeFile" ref="file">
 
-        <div class="img-wrap">
-            <img src="/images/picturePlus.png" alt="" style="width:17px;">
+        <div :class="`img-wrap ${file || imgUrl ? 'active' : ''}`">
+            <img :src="fileImgUrl" alt="" v-if="file">
+            <img :src="imgUrl" alt="" v-else-if="imgUrl">
+            <img src="/images/picturePlus.png" alt="" style="width:17px;" v-else>
         </div>
 
         <h3 class="title">대표이미지</h3>
@@ -12,7 +14,7 @@
 <script>
 export default {
     props: {
-        defaultValue: {
+        imgUrl: {
             default(){
                 return "";
             }
@@ -27,7 +29,7 @@ export default {
     data(){
         return {
             file: "",
-            img : ""
+            img : "",
         }
     },
 
@@ -36,17 +38,17 @@ export default {
         changeFile(event) {
             // this.files = [];
 
-            let file = event.target.files[0];
+            this.file = event.target.files[0];
 
             let form = new FormData();
 
-            form.append("image", file);
+            form.append("image", this.file);
             form.append("district_id", this.$store.state.district ? this.$store.state.district.id : 0);
 
             this.$axios.post("/posts/images", form)
                 .then((response) => {
                     this.$emit("change", {
-                        file: file,
+                        file: this.file,
                         name: response.data.data.file_name,
                         url: response.data.data.original_url,
                         html : `<img src="${response.data.data.original_url}"/>`
@@ -71,5 +73,13 @@ export default {
         }
     },
 
+    computed: {
+        fileImgUrl(){
+            if(this.file)
+                return URL.createObjectURL(this.file);
+
+            return "";
+        }
+    }
 }
 </script>

@@ -70,7 +70,13 @@ export default {
     },
 
     mounted() {
+        let self = this;
+
         this.getItems();
+
+        setInterval(function(){
+            self.getItems();
+        }, 10000);
     }
 }
 </script>

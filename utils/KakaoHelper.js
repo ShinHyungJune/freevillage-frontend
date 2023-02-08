@@ -1,6 +1,8 @@
 class KakaoHelper {
     constructor(data) {
         this.kakao = data;
+
+        this.domain = process.env.NODE_ENV === "production" ? "http://jayuvillages.com" : "http://localhost:3000";
     }
 
     sharePost(item){
@@ -12,16 +14,16 @@ class KakaoHelper {
                 imageUrl:
                     item.img ? item.img.url : '',
                 link: {
-                    mobileWebUrl: `http://jayuvillages.com/posts/${item.id}`,
-                    webUrl: `http://jayuvillages.com/posts/${item.id}`,
+                    mobileWebUrl: `${this.domain}/posts/${item.id}`,
+                    webUrl: `${this.domain}/posts/${item.id}`,
                 },
             },
             buttons: [
                 {
                     title: '보러가기',
                     link: {
-                        mobileWebUrl: `http://jayuvillages.com/posts/${item.id}`,
-                        webUrl: `http://jayuvillages.com/posts/${item.id}`,
+                        mobileWebUrl: `${this.domain}/posts/${item.id}`,
+                        webUrl: `${this.domain}/posts/${item.id}`,
                     },
                 },
             ],
@@ -37,16 +39,16 @@ class KakaoHelper {
                 imageUrl:
                     item.img ? item.img.url : '',
                 link: {
-                    mobileWebUrl: `http://jayuvillages.com/scraps/${item.id}`,
-                    webUrl: `http://jayuvillages.com/scraps/${item.id}`,
+                    mobileWebUrl: `${this.domain}/scraps/${item.id}`,
+                    webUrl: `${this.domain}/scraps/${item.id}`,
                 },
             },
             buttons: [
                 {
                     title: '보러가기',
                     link: {
-                        mobileWebUrl: `http://jayuvillages.com/scraps/${item.id}`,
-                        webUrl: `http://jayuvillages.com/scraps/${item.id}`,
+                        mobileWebUrl: `${this.domain}/scraps/${item.id}`,
+                        webUrl: `${this.domain}/scraps/${item.id}`,
                     },
                 },
             ],

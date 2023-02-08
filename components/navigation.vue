@@ -5,7 +5,7 @@
             <div :class="`nav-wrap ${$route.path === '/' ? 'active' : ''}`">
                 <nuxt-link to="/" class="nav">
                     <div class="img-wrap">
-                        <img src="/images/home.png" alt="">
+                        <img src="/images/home.png" alt="" style="width:21px;">
                     </div>
 
                     <h3 class="title">홈</h3>
@@ -15,7 +15,7 @@
             <div :class="`nav-wrap ${$route.path === '/posts' ? 'active' : ''}`">
                 <nuxt-link to="/posts" class="nav">
                     <div class="img-wrap">
-                        <img src="/images/newspaper.png" alt="">
+                        <img src="/images/newspaper.png" alt="" style="width:19px;">
                     </div>
 
                     <h3 class="title">마을소식</h3>
@@ -25,7 +25,7 @@
             <div class="nav-wrap">
                 <a href="#" class="nav">
                     <div class="img-wrap">
-                        <img src="/images/location-marker.png" alt="">
+                        <img src="/images/location-marker.png" alt="" style="width:17px">
                     </div>
 
                     <h3 class="title">내 근처</h3>
@@ -35,7 +35,7 @@
             <div class="nav-wrap">
                 <a href="#" class="nav">
                     <div class="img-wrap">
-                        <img src="/images/chat-alt-2.png" alt="">
+                        <img src="/images/chat-alt-2.png" alt="" style="width:19px;">
                     </div>
 
                     <h3 class="title">채팅</h3>
@@ -45,7 +45,7 @@
             <div :class="`nav-wrap ${$route.path.includes('/mypage') ? 'active' : ''}`">
                 <nuxt-link to="/mypage" class="nav">
                     <div class="img-wrap">
-                        <img src="/images/user.png" alt="">
+                        <img src="/images/user.png" alt="" style="width:16px;">
                     </div>
 
                     <h3 class="title">내 정보</h3>

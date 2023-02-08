@@ -8,7 +8,7 @@
         </nuxt-link>
 
         <a href="#" class="m-quick m-btn-top" @click.prevent="scrollTop">
-            <img src="/images/Icon.png" alt="">
+            <img src="/images/Icon.png" alt="" style="width:18px;">
         </a>
     </div>
 
