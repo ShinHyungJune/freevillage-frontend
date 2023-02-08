@@ -28,7 +28,7 @@
                                         <h3 class="title">{{item.post.title}}</h3>
                                     </div>
                                     <div class="right" v-if="editMode">
-                                        <img src="/images/x.png" alt="" style="width: 14px;" @click="remove(item)">
+                                        <img src="/images/x.png" alt="" style="width: 14px;" @click.prevent="remove(item)">
                                     </div>
                                 </div>
 
