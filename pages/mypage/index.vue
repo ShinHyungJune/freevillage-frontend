@@ -45,11 +45,14 @@
                             <div class="active" :style="`width:${this.$auth.user.activity_index }%;`"></div>
 
                             <div class="comment">
-                                자유마을 가입 시점 30
+                                자유마을 가입 시점 35
                                 <img src="/images/polygon.png" alt="" class="deco">
                             </div>
 
-                            <span class="count">{{ this.$auth.user.activity_index }}</span>
+                            <span class="count">
+                                {{ this.$auth.user.activity_index }}
+                                <img :src="activityImg" alt="">
+                            </span>
                         </div>
                     </div>
 
@@ -214,8 +217,44 @@ export default {
         },
     },
 
+    computed: {
+        activityImg(){
+            let activityIndex = this.$auth.user.activity_index;
+
+            if(activityIndex <= 10)
+                return "/images/f_01.png";
+
+            if(activityIndex <= 20)
+                return "/images/f_02.png";
+
+            if(activityIndex <= 30)
+                return "/images/f_03.png";
+
+            if(activityIndex <= 40)
+                return "/images/f_04.png";
+
+            if(activityIndex <= 50)
+                return "/images/f_05.png";
+
+            if(activityIndex <= 60)
+                return "/images/f_06.png";
+
+            if(activityIndex <= 70)
+                return "/images/f_07.png";
+
+            if(activityIndex <= 80)
+                return "/images/f_08.png";
+
+            if(activityIndex <= 90)
+                return "/images/f_09.png";
+
+            return "/images/f_10.png";
+        }
+    },
+
     mounted() {
-    }
+    },
+
 }
 </script>
 

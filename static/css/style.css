@@ -224,8 +224,18 @@ html {
 .area-staff .img-wrap {
     position:relative;
 }
-img {
+
+.area-region-activity img {
     max-width:100%;
+}
+.deco-about {
+    max-width:100%;
+}
+.area-region-about img {
+    max-width:100%;
+}
+.area-region-about .m-title {
+    margin-bottom:10px;
 }
 .area-write img {
     max-width:100%;
@@ -1813,7 +1823,7 @@ label {
     font-weight:bold;
     color:#D50101;
 }
-.m-temp.type01 .gage .count:after {
+.m-temp.type01 .gage .count img {
     display:inline-block;
     content:"";
     width:20px; height:20px;

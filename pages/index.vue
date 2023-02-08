@@ -135,51 +135,60 @@
                         </div>
 
                         <div class="rankings">
-                            <div class="ranking-wrap">
+                            <div class="ranking-wrap" v-if="districtWeekRegisterCounts.length >= 2">
                                 <a href="#" class="ranking">
                                     <div class="img-wrap">
                                         <img src="/images/2st.png" alt="">
                                     </div>
 
                                     <div class="fragment">
-                                        <p class="subtitle">월곡2동</p>
+                                        <p class="subtitle">{{ districtWeekRegisterCounts[1].district }}</p>
                                         <h3 class="title">
                                             <span class="point">2</span>위
                                         </h3>
-                                        <p class="more">48 <span class="tri">▲</span></p>
+                                        <p class="more">{{ districtWeekRegisterCounts[1].now_week_count }}
+                                            <span class="tri" v-if="districtWeekRegisterCounts[1].up_down === 'down'">▼</span>
+                                            <span class="tri" v-else>▲</span>
+                                        </p>
                                     </div>
                                 </a>
                             </div>
-                            <div class="ranking-wrap first">
-                                <a href="#" class="ranking">
+                            <div class="ranking-wrap first" v-if="districtWeekRegisterCounts.length >= 1">
+                                <div class="ranking">
                                     <div class="img-wrap">
                                         <img src="/images/crown.png" alt="" class="deco">
                                         <img src="/images/1st.png" alt="" class="img">
                                     </div>
 
                                     <div class="fragment">
-                                        <p class="subtitle">장위동</p>
+                                        <p class="subtitle">{{ districtWeekRegisterCounts[0].district }}</p>
                                         <h3 class="title">
                                             <span class="point">1</span>위
                                         </h3>
-                                        <p class="more">53 <span class="tri">▼</span></p>
+                                        <p class="more">{{ districtWeekRegisterCounts[0].now_week_count }}
+                                            <span class="tri" v-if="districtWeekRegisterCounts[0].up_down === 'down'">▼</span>
+                                            <span class="tri" v-else>▲</span>
+                                        </p>
                                     </div>
-                                </a>
+                                </div>
                             </div>
-                            <div class="ranking-wrap">
-                                <a href="#" class="ranking">
+                            <div class="ranking-wrap" v-if="districtWeekRegisterCounts.length >= 3">
+                                <div class="ranking">
                                     <div class="img-wrap">
                                         <img src="/images/3st.png" alt="">
                                     </div>
 
                                     <div class="fragment">
-                                        <p class="subtitle">서정동</p>
+                                        <p class="subtitle">{{ districtWeekRegisterCounts[2].district }}</p>
                                         <h3 class="title">
                                             <span class="point">3</span>위
                                         </h3>
-                                        <p class="more">33 <span class="tri">▲</span></p>
+                                        <p class="more">{{ districtWeekRegisterCounts[2].now_week_count }}
+                                            <span class="tri" v-if="districtWeekRegisterCounts[2].up_down === 'down'">▼</span>
+                                            <span class="tri" v-else>▲</span>
+                                        </p>
                                     </div>
-                                </a>
+                                </div>
                             </div>
                         </div>
 
@@ -193,45 +202,16 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>4위</td>
-                                    <td>평택시 신장동</td>
-                                    <td class="more down">53 <span class="tri">▼</span></td>
-                                </tr>
-                                <tr>
-                                    <td>5위</td>
-                                    <td>평택시 신장동</td>
-                                    <td class="more up">48 <span class="tri">▲</span></td>
-                                </tr>
-                                <tr>
-                                    <td>6위</td>
-                                    <td>평택시 신장동</td>
-                                    <td class="more up">48 <span class="tri">▲</span></td>
-                                </tr>
-                                <tr>
-                                    <td>7위</td>
-                                    <td>평택시 신장동</td>
-                                    <td class="more up">48 <span class="tri">▲</span></td>
-                                </tr>
-                                <tr>
-                                    <td>8위</td>
-                                    <td>평택시 신장동</td>
-                                    <td class="more up">48 <span class="tri">▲</span></td>
-                                </tr>
-                                <tr>
-                                    <td>9위</td>
-                                    <td>평택시 신장동</td>
-                                    <td class="more up">48 <span class="tri">▲</span></td>
-                                </tr>
-                                <tr>
-                                    <td>10위</td>
-                                    <td>평택시 신장동</td>
-                                    <td class="more up">48 <span class="tri">▲</span></td>
+                                <tr v-for="(districtWeekRegisterCount, index) in districtWeekRegisterCounts" :key="index" v-if="index >= 3">
+                                    <td>{{index + 1}}위</td>
+                                    <td>{{ districtWeekRegisterCount.city}} {{districtWeekRegisterCount.district}}</td>
+                                    <td class="more down" v-if="districtWeekRegisterCount.up_down === 'down'">{{districtWeekRegisterCount.now_week_count}} <span class="tri">▼</span></td>
+                                    <td class="more up" v-else>{{districtWeekRegisterCount.now_week_count}} <span class="tri">▲</span></td>
                                 </tr>
                                 </tbody>
                             </table>
 
-                            <a href="#" class="m-btn type02">마을 랭킹 TOP 100 +</a>
+                            <a href="#" class="m-btn type02" @click.prevent="getRankings(100)">마을 랭킹 TOP 100 +</a>
                         </div>
                     </div>
                 </div>
@@ -394,13 +374,24 @@ export default {
                 population: 0,
                 count: 0,
                 rate: 0,
-            }
+            },
+
+            districtWeekRegisterCounts: [
+
+            ],
         }
     },
     methods: {
         search() {
             this.$store.commit("changeDistrict", this.form.district);
         },
+
+        getRankings(count){
+            this.$axios.get("/rankings/" + count)
+                .then(response => {
+                    this.districtWeekRegisterCounts = response.data.districtWeekRegisterCounts;
+                });
+        }
     },
 
     computed: {
@@ -448,10 +439,7 @@ export default {
             this.asks = response.data;
         });
 
-        this.$axios.get("/rankings/10")
-            .then(response => {
-                console.log(response.data);
-            });
+        this.getRankings(10);
 
         this.$axios.get("/districts/" + this.district.id + "/register_rates")
             .then(response => {
