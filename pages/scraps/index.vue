@@ -179,6 +179,8 @@ export default {
                         ...this.$auth.user,
                         scrap: response.data.data
                     });
+
+                    location.reload();
                 });
         }
     },
