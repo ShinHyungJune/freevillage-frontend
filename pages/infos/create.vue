@@ -95,7 +95,7 @@ export default {
 
             form: {
                 content: "",
-                district_id: this.$store.state.district ? this.$store.state.district.id : 0,
+                district_id: this.$auth.user.district.id,
                 thumbnail: "",
 
                 x: "",
@@ -149,7 +149,7 @@ export default {
     },
 
     mounted() {
-        this.$axios.get(`/districts/${this.$store.state.district.id}/infos`)
+        this.$axios.get(`/districts/${this.form.district_id}/infos`)
             .then(response => {
 
                 let item = response.data ? response.data.data : "";

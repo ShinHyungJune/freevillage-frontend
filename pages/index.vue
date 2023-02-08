@@ -202,7 +202,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="(districtWeekRegisterCount, index) in districtWeekRegisterCounts" :key="index" v-if="index >= 3">
+                                <tr v-for="(districtWeekRegisterCount, index) in districtWeekRegisterCounts" :key="index" v-if="index >= 3 && districtWeekRegisterCount">
                                     <td>{{index + 1}}위</td>
                                     <td>{{ districtWeekRegisterCount.city}} {{districtWeekRegisterCount.district}}</td>
                                     <td class="more down" v-if="districtWeekRegisterCount.up_down === 'down'">{{districtWeekRegisterCount.now_week_count}} <span class="tri">▼</span></td>

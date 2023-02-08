@@ -228,6 +228,19 @@ html {
 .area-region-activity img {
     max-width:100%;
 }
+.area-notices-index .top {
+    display:flex; align-items: center; justify-content: space-between;
+}
+.area-notices-index .m-input-text.type01 input {
+    font-size:14px;
+}
+.area-notices-index .m-input-select.type01 select {
+    padding:0 12px; padding-right:24px;
+    font-size:14px;
+}
+.area-notices-index .m-input-select.type01:after {
+    right:12px;
+}
 .deco-about {
     max-width:100%;
 }

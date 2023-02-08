@@ -1,5 +1,38 @@
 <template>
-    <div>
+    <!-- type02 -->
+    <div class="m-inputs type01" v-if="type === 'type02'">
+        <div class="m-input-wrap">
+            <div class="m-input-select type01">
+                <select name="" id="" v-model="stateData" @change="changeState">
+                    <option value="" disabled>시/도 선택</option>
+                    <option :value="state" v-for="(state, index) in states" :key="index">{{ state }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="m-input-wrap">
+            <div class="m-input-select type01">
+                <select name="" id="" v-model="cityData" @change="changeCity">
+                    <option value="" disabled>시/군/구 선택</option>
+                    <option :value="city" v-for="(city, index) in cities" :key="index">{{ city }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="m-input-wrap">
+            <div class="m-input-select type01">
+                <select name="" id="" v-model="districtIdData" @change="change">
+                    <option value="" disabled>읍/면/동 선택</option>
+                    <option :value="district.id" v-for="(district, index) in districts" :key="index">
+                        {{ district.district }}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- default -->
+    <div v-else>
         <div :class="inputClass">
             <select name="" id="" v-model="stateData" @change="changeState">
                 <option value="" disabled>시/도 선택</option>
@@ -27,6 +60,9 @@
 <script>
 export default {
     props: {
+        type: {
+            default: ""
+        },
         state: {
             default: ""
         },

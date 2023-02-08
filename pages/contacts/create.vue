@@ -97,7 +97,7 @@ export default {
             item: "",
 
             form: {
-                district_id: this.$store.state.district ? this.$store.state.district.id : 0,
+                district_id: this.$auth.user.district.id,
                 phone: "",
                 photo: "",
             },
@@ -150,7 +150,7 @@ export default {
     },
 
     mounted() {
-        this.$axios.get("/districts/" + this.$store.state.district.id + "/contacts")
+        this.$axios.get("/districts/" + this.form.district_id + "/contacts")
             .then(response => {
                 this.items = response.data;
             });
