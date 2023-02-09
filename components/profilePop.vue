@@ -15,7 +15,7 @@
             </div>
             <div class="m-input m-input-text type01">
                 <input type="text" placeholder="닉네임 입력" v-model="form.nickname">
-            </div>  
+            </div>
 
             <div class="mt-20"></div>
 
@@ -49,7 +49,8 @@ export default {
     methods: {
         async save() {
           let form = new FormData();
-          form.append("nickname",this.form.nickname);
+            form.append("_method","PUT");
+            form.append("nickname",this.form.nickname);
           form.append("profile_photo",this.form.profile_photo);
           try {
             const { data } = await this.$axios.post('/auth/profile', form);
@@ -60,7 +61,7 @@ export default {
             if (error.response && error.response.data)
               this.errors = error.response.data.errors;
           }
-          
+
         },
         changeData(data) {
           this.form.profile_photo = data;
