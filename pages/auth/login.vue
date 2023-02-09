@@ -83,6 +83,7 @@ export default {
                 .catch(e => {
                     if (e.response.data.errors)
                         this.errors = e.response.data.errors;
+
                 });
         },
         async loginTest(data) {
