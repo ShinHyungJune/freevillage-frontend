@@ -1,5 +1,8 @@
 <template>
     <div class="area-mypage">
+        <!-- 신고 팝업 -->
+        <profile-pop v-if="isProfilePopActive" @close="isProfilePopActive = false" />
+        
         <!-- 헤더영역 -->
         <div class="m-header type02">
             <div class="wrap">
@@ -32,7 +35,7 @@
 
                     <div class="mt-12"></div>
 
-                    <a href="#" class="m-btn type03 bg-lightGray black">프로필 수정</a>
+                    <a href="#" class="m-btn type03 bg-lightGray black" @click.prevent="isProfilePopActive = true">프로필 수정</a>
                 </div>
 
                 <div class="mt-20"></div>
@@ -202,14 +205,16 @@
 
 <script>
 import Form from "@/utils/Form";
-
+import ProfilePop from '../../components/profilePop.vue'
 export default {
-    components: {},
+    components: {
+        ProfilePop,
+    },
     auth: true,
     data() {
         return {
-
-        }
+            isProfilePopActive: false,
+        }   
     },
     methods: {
         store() {
