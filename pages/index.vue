@@ -123,7 +123,7 @@
 
                         <input-region input-class="m-input-select type01" @change="(data) => {form.district = data.district}" />
 
-                        <button class="m-btn type02 width-100" @click="search">검색하기</button>
+                        <button class="m-btn type02 width-100" v-touch:tap="search">검색하기</button>
                     </div>
                 </div>
             </section>
@@ -388,6 +388,9 @@ export default {
     },
     methods: {
         async search() {
+            if(this.form.district == "" || this.form.district ==  undefined) {
+                return;
+            }
             await this.$store.commit("changeDistrict", this.form.district);
             await this.updatePosts(this.district.id);
         },

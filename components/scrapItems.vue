@@ -103,8 +103,14 @@ export default {
                 params: this.form
             }).then(response => {
                 this.items = response.data;
+                this.extractImages(this.items.data);
             });
         },
+
+        extractImages(data) {
+            const images = data.map(el => el.post.img.url);
+            this.$emit('extracedImages', images);
+        }
     },
 
     mounted() {
