@@ -172,6 +172,10 @@ export default {
     },
 
     methods: {
+        scrollTop() {
+            window.scrollTo(0, 0);
+        },
+
         search() {
             if(this.form.district === "" || this.form.district == undefined) {
                 return;
@@ -179,6 +183,8 @@ export default {
             this.$store.commit("changeDistrict", this.form.district);
             this.$emit("updatePosts", this.district.id);
             this.active = false;
+
+            this.scrollTop();
         },
 
         toDistrict(){

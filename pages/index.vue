@@ -443,6 +443,21 @@ export default {
         }
     },
 
+    watch: {
+        district (newCount, oldCount) {
+            this.updatePosts(this.district.id);
+
+            this.getRankings(10);
+
+            if(this.district.id != 0)
+                this.$axios.get("/districts/" + this.district.id + "/register_rates")
+                    .then(response => {
+                        this.registerRates = response.data.registerRates;
+                    });
+        }
+
+    },
+
     async mounted() {
         await this.updatePosts(this.district.id);
         // let districtId = this.district.id;
@@ -491,6 +506,7 @@ export default {
                     this.registerRates = response.data.registerRates;
                 });
 
-    }
+    },
+
 }
 </script>

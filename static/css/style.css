@@ -561,7 +561,7 @@ html {
     border-radius:100%;
 }
 .area-index .section-values .box .value-inner .text {
-    margin:auto; color:#fff; font-weight:500;
+    margin:auto; color:#fff; font-size:14px; font-weight:500;
 }
 .area-index .section-values .box .title {
     margin-bottom:10px;
