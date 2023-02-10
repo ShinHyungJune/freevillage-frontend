@@ -173,6 +173,9 @@ export default {
 
     methods: {
         search() {
+            if(this.form.district === "" || this.form.district == undefined) {
+                return;
+            }
             this.$store.commit("changeDistrict", this.form.district);
             this.$emit("updatePosts", this.district.id);
             this.active = false;
