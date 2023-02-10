@@ -206,7 +206,7 @@
                 </div>
 
                 <div class="wrap">
-                    <comments :post_id="item.id" v-if="item.id"/>
+                    <comments :post_id="item.id" @calculateCommentCount="calculateCommentCount" v-if="item.id"/>
                 </div>
             </div>
 
@@ -266,7 +266,12 @@ export default {
 
             this.$axios.put("/likes/posts/" + this.item.id);
         },
-
+        calculateCommentCount(type) {
+            if(type == 'add') 
+                this.item.comment_count +=1;
+            if(type === 'remove')
+                this.item.comment_count -=1;
+        },
         share() {
             let kakaoHelper = new KakaoHelper(Kakao);
 

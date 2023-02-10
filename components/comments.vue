@@ -14,7 +14,7 @@
         </no-ssr>
 
         <!-- 하단 네비게이션바 -->
-        <comment-navigation :post_id="form.post_id" @created="(data) => {items.data = [data, ...items.data]}" />
+        <comment-navigation :post_id="form.post_id" @created="(obj) => this.updateComment(obj)" />
     </div>
 </template>
 
@@ -71,6 +71,17 @@ export default {
                 this.items = response.data;
             });
         },
+        updateComment(obj) {
+            if(obj.type === 'add') {
+                this.items.data = [obj.data, ...this.items.data];
+                this.$emit('calculateCommentCount', 'add')
+            }
+            if(obj.type === 'remove') {
+                this.items.data = [...this.items.data.filter(el => el !== obj.data)];
+                this.$emit('calculateCommentCount', 'remove')
+            }
+
+        }
     },
 
     mounted() {

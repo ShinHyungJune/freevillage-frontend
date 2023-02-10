@@ -44,7 +44,10 @@ export default {
         store() {
             this.$axios.post("/comments", this.form)
                 .then(response => {
-                    this.$emit("created", response.data.data);
+                    this.$emit("created", {
+                        data:response.data.data,
+                        type:'add'
+                    });
                     this.form.content = "";
                 });
         },
