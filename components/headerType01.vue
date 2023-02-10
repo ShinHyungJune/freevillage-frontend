@@ -174,7 +174,7 @@ export default {
     methods: {
         search() {
             this.$store.commit("changeDistrict", this.form.district);
-
+            this.$emit("updatePosts", this.district.id);
             this.active = false;
         },
 

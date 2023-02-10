@@ -124,7 +124,8 @@ export default {
         },
 
         removed(item){
-            this.items.data = this.items.data.filter(itemData => itemData.id != item.id);
+            this.getItems();
+            // this.items.data = this.items.data.filter(itemData => itemData.id != item.id);
         }
     },
 
