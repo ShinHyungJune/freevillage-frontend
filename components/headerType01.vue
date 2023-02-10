@@ -68,7 +68,7 @@
                         <div class="menus">
                             <div class="menu-wrap">
                                 <a href="/posts?board=notices" class="menu">
-                                    <img src="/images/news01.png" alt="" class="">
+                                    <img src="/images/news01.png" style="width:60px" alt="" class="">
 
                                     <h3 class="title">마을소식</h3>
                                 </a>
@@ -76,7 +76,7 @@
 
                             <div class="menu-wrap">
                                 <a href="/posts?board=clips" class="menu">
-                                    <img src="/images/news02.png" alt="" class="">
+                                    <img src="/images/news02.png" style="width:60px" alt="" class="">
 
                                     <h3 class="title">마을영상</h3>
                                 </a>
@@ -84,7 +84,7 @@
 
                             <div class="menu-wrap">
                                 <a href="/posts?board=photos" class="menu">
-                                    <img src="/images/news03.png" alt="" class="">
+                                    <img src="/images/news03.png" style="width:60px" alt="" class="">
 
                                     <h3 class="title">마을포토</h3>
                                 </a>
@@ -92,7 +92,7 @@
 
                             <div class="menu-wrap">
                                 <a href="/posts?board=asks" class="menu">
-                                    <img src="/images/news04.png" alt="" class="">
+                                    <img src="/images/news04.png" style="width:60px" alt="" class="">
 
                                     <h3 class="title">마을질문</h3>
                                 </a>
@@ -100,7 +100,7 @@
 
                             <div class="menu-wrap">
                                 <a href="/posts?board=meetings" class="menu">
-                                    <img src="/images/news05.png" alt="" class="">
+                                    <img src="/images/news05.png" style="width:60px" alt="" class="">
 
                                     <h3 class="title">마을모임</h3>
                                 </a>
@@ -182,6 +182,9 @@ export default {
         },
 
         toDistrict(){
+            if(!this.$auth.user)
+                return this.$router.push("/auth/login");
+
             this.$store.commit("changeDistrict", this.$auth.user.district);
 
             this.$router.push("/");

@@ -43,7 +43,7 @@
                 <div class="m-temp type01">
                     <h3 class="title">마을 사랑 온도</h3>
 
-                    <div class="gage-wrap">
+                    <div :class="`gage-wrap ${activityClass}`">
                         <div class="gage">
                             <div class="active" :style="`width:${this.$auth.user.activity_index }%;`"></div>
 
@@ -54,7 +54,6 @@
 
                             <span class="count">
                                 {{ this.$auth.user.activity_index }}
-                                <img :src="activityImg" alt="">
                             </span>
                         </div>
                     </div>
@@ -223,37 +222,37 @@ export default {
     },
 
     computed: {
-        activityImg(){
+        activityClass(){
             let activityIndex = this.$auth.user.activity_index;
 
             if(activityIndex <= 10)
-                return "/images/f_01.png";
+                return "level1";
 
             if(activityIndex <= 20)
-                return "/images/f_02.png";
+                return "level2";
 
             if(activityIndex <= 30)
-                return "/images/f_03.png";
+                return "level3";
 
             if(activityIndex <= 40)
-                return "/images/f_04.png";
+                return "level4";
 
             if(activityIndex <= 50)
-                return "/images/f_05.png";
+                return "level5";
 
             if(activityIndex <= 60)
-                return "/images/f_06.png";
+                return "level6";
 
             if(activityIndex <= 70)
-                return "/images/f_07.png";
+                return "level7";
 
             if(activityIndex <= 80)
-                return "/images/f_08.png";
+                return "level8";
 
             if(activityIndex <= 90)
-                return "/images/f_09.png";
+                return "level9";
 
-            return "/images/f_10.png";
+            return "level10";
         }
     },
 

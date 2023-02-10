@@ -175,6 +175,16 @@
                             <div class="editor-body" v-html="item.content"></div>
                         </div>
 
+                        <div class="m-board-btns mt-20" v-if="$auth.user && $auth.user.id == item.user.id">
+                            <div class="m-btns type01">
+                                <div class="m-btn-wrap">
+                                    <a href="#" class="m-btn type01 bg-revert-red" @click.prevent="remove">삭제하기</a>
+                                </div>
+                                <div class="m-btn-wrap">
+                                    <nuxt-link :to="`/posts/create?id=${item.id}`" href="#" class="m-btn type01 bg-primary">수정하기</nuxt-link>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -250,6 +260,13 @@ export default {
     methods: {
         store() {
 
+        },
+
+        remove(){
+            this.$axios.delete("/posts/" + this.item.id)
+                .then(response => {
+                    this.$router.back();
+                });
         },
 
         toggleLike(e){

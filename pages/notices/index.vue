@@ -67,7 +67,7 @@ import Notice from "../../components/notices/notice";
 import Quicks from "../../components/quicks";
 export default {
     components: {Quicks, Notice, Navigation, InputRegion},
-    auth: true,
+    auth: false,
     data() {
         return {
             form: {

@@ -1856,7 +1856,7 @@ label {
     font-weight:bold;
     color:#D50101;
 }
-.m-temp.type01 .gage .count img {
+.m-temp.type01 .gage .count:after {
     display:inline-block;
     content:"";
     width:20px; height:20px;

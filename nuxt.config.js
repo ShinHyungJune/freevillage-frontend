@@ -1,6 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 
-let baseUrl = process.env.NODE_ENV === "production" ? "http://api.jayuvillages.com" : "http://localhost:8000";
+let baseUrl = process.env.NODE_ENV === "production" ? "http://api.jayuvillages.com" : "http://localhost:80";
 
 export default {
     dev: process.env.NODE_ENV !== 'production',
