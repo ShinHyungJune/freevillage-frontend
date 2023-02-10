@@ -1,6 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 
-let baseUrl = process.env.NODE_ENV === "production" ? "http://api.jayuvillages.com" : "http://localhost";
+let baseUrl = process.env.NODE_ENV === "production" ? "http://api.jayuvillages.com" : "http://localhost:8000";
 
 export default {
     dev: process.env.NODE_ENV !== 'production',
@@ -40,6 +40,7 @@ export default {
         {src: '~/plugins/persistedState.js'},
         {src: '~/plugins/vue-infinite-loading.js'},
         {src: '~/plugins/axios.js'},
+        {src: '~/plugins/vue2-touch-events.js'},
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
