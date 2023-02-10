@@ -38,6 +38,8 @@
                         <br/><span class="point">안녕하다</span>고 <span class="point">생각하십니까?</span>
                     </div>
 
+                    <div class="mt-24"></div>
+
                     <div class="m-histories type01">
                         <div class="history">
                             <h3 class="title">좌파로 기울어진 운동장</h3>
@@ -51,6 +53,7 @@
                                     왜 그렇게 진단할 수 있을까요?</p>
                             </div>
                         </div>
+
 
                         <div class="history">
                             <h3 class="title">문재인정권 5년</h3>

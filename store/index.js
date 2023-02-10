@@ -3,7 +3,7 @@
 export const state = () => ({
     district: {
         id: 0,
-        district: "지역마을"
+        district: "자유마을"
     },
 });
 

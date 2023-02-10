@@ -69,6 +69,9 @@ export default {
         city: {
             default: ""
         },
+        district: {
+            default: ""
+        },
         district_id: {
             default: ""
         },
@@ -78,9 +81,9 @@ export default {
     },
     data() {
         return {
-            states: [],
-            cities: [],
-            districts: [],
+            states: this.state ? [this.state] : "",
+            cities: this.city ? [this.city] : "",
+            districts: this.district ? [this.district] : "",
             stateData: this.state,
             cityData: this.city,
             districtIdData: this.district_id
@@ -123,6 +126,8 @@ export default {
     },
 
     mounted() {
+        console.log(this.$auth.user);
+
         this.$axios.get("/states").then(response => {
             this.states = response.data;
         })

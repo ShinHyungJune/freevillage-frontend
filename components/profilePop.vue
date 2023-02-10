@@ -14,7 +14,7 @@
                 <profile-img  id="img" @change="(data) => this.changeData(data)"/>
             </div>
             <div class="m-input m-input-text type01">
-                <input type="text" placeholder="닉네임 입력" v-model="form.nickname">
+                <input type="text" placeholder="이름 입력" v-model="form.name">
             </div>
 
             <div class="mt-20"></div>
@@ -36,7 +36,7 @@ export default {
             item: "",
 
             form: {
-                nickname: "",
+                name: "",
                 profile_photo: "",
             },
 
@@ -50,13 +50,15 @@ export default {
         async save() {
           let form = new FormData();
             form.append("_method","PUT");
-            form.append("nickname",this.form.nickname);
+            form.append("name",this.form.name);
           form.append("profile_photo",this.form.profile_photo);
           try {
-            const { data } = await this.$axios.post('/auth/profile', form);
-            if(data.status == '200')
-              alert('성공적으로 처리되었습니다.');
-              this.close();
+            const { data } = await this.$axios.post('/auth/profile', form)
+            .then(response => {
+                alert(response.data.message);
+                this.$auth.setUser(response.data.data);
+                this.close();
+            });
           } catch (error) {
             if (error.response && error.response.data)
               this.errors = error.response.data.errors;
@@ -75,7 +77,7 @@ export default {
     },
 
     mounted() {
-      this.form.nickname = this.$auth.user.name;
+      this.form.name = this.$auth.user.name;
     }
 }
 </script>

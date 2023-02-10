@@ -2,7 +2,7 @@
     <div class="area-mypage">
         <!-- 신고 팝업 -->
         <profile-pop v-if="isProfilePopActive" @close="isProfilePopActive = false" />
-        
+
         <!-- 헤더영역 -->
         <div class="m-header type02">
             <div class="wrap">
@@ -16,9 +16,9 @@
                     <h3 class="title">내 정보</h3>
                 </div>
 
-                <button class="btn-util">
+                <nuxt-link to="/auth/edit" class="btn-util">
                     <img src="/images/setting.png" alt="" style="width:20px;">
-                </button>
+                </nuxt-link>
             </div>
         </div>
 
@@ -214,7 +214,7 @@ export default {
     data() {
         return {
             isProfilePopActive: false,
-        }   
+        }
     },
     methods: {
         store() {

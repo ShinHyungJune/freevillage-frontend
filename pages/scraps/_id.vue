@@ -1,6 +1,6 @@
 <template>
     <div class="area-wallets-index">
-        <header-type-guest />
+        <header-type01 />
 
         <!-- 내용 영역 -->
         <div class="container">

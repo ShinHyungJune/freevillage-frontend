@@ -143,7 +143,7 @@
 
 export default {
     components: {},
-    auth: true,
+    auth: false,
     data() {
         return {
             form: {

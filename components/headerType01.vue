@@ -37,21 +37,21 @@
                     </a>
 
                     <div class="links">
-                        <nuxt-link to="/" class="link">
+                        <a href="#" class="link" @click.prevent="toMain">
                             <div class="img-wrap">
                                 <img src="/images/home-big.png" alt="" class="filter-white" style="width:30px;">
                             </div>
 
                             <h3 class="title">홈</h3>
-                        </nuxt-link>
+                        </a>
 
-                        <nuxt-link to="/posts" class="link">
+                        <a href="#" class="link" @click.prevent="toDistrict">
                             <div class="img-wrap">
                                 <img src="/images/circleMen.png" alt="" class="filter-white" style="width:30px;">
                             </div>
 
                             <h3 class="title">내 마을</h3>
-                        </nuxt-link>
+                        </a>
 
                         <nuxt-link to="/notices" class="link">
                             <div class="img-wrap">
@@ -137,7 +137,7 @@
             <div class="wrap">
                 <div class="selects">
                     <button :class="`btn-select ${(district && district.id == 0) || !district ? 'point' : ''}`" @click="active = true;">
-                        {{ district.id == 0 ? "지역마을" : district.district }}
+                        {{ district.id == 0 ? "자유마을" : district.district }}
 
                         <img src="/images/chevron-down.png" style="width:10px;" alt="" class="deco">
                     </button>
@@ -177,6 +177,25 @@ export default {
 
             this.active = false;
         },
+
+        toDistrict(){
+            this.$store.commit("changeDistrict", this.$auth.user.district);
+
+            this.$router.push("/");
+
+            this.activeSidebar = false;
+        },
+
+        toMain(){
+            this.$store.commit("changeDistrict", {
+                id: 0,
+                district: "자유마을"
+            });
+
+            this.$router.push("/");
+
+            this.activeSidebar = false;
+        }
     },
 
     computed: {

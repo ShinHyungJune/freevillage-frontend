@@ -45,7 +45,7 @@
                             {{this.$store.state.district.district}} 소개
                         </div>
 
-                        <div id="map" class="m-map type01" v-if="item.x"></div>
+                        <div id="map" class="m-map type01" style="background-color:#e1e1e1;"></div>
 
                         <div class="mt-8"></div>
 
@@ -93,7 +93,7 @@ export default {
             setTimeout(function(){
                 const container = document.getElementById("map");
 
-                if(!self.map){
+                if(self.item && !self.map){
                     const coords =  new kakao.maps.LatLng(self.item.y, self.item.x);
 
                     const options = {
@@ -121,11 +121,9 @@ export default {
             .then(response => {
                 this.item = response.data.data;
 
-                console.log(this.item);
-
                 if(this.item.x && this.item.y)
                     kakao.maps.load(this.initMap);
-            })
+            });
     },
 }
 </script>

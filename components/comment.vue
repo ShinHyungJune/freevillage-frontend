@@ -51,7 +51,6 @@ export default {
 
         },
 
-        activeReplies: false,
     },
     components: {},
     data() {
@@ -62,6 +61,8 @@ export default {
                 content: "",
             },
             active: false,
+            activeReplies: false,
+
         }
     },
     methods: {

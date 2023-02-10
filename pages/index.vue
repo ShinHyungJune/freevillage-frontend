@@ -269,8 +269,8 @@
                         데이터가 없습니다.
                     </div>
                     <div class="m-items type02">
-                        <div class="m-item-wrap">
-                            <nuxt-link :to="`/posts/${clip.id}`" class="m-item" v-for="clip in clips.data" :key="clip.id">
+                        <div class="m-item-wrap" v-for="clip in clips.data" :key="clip.id">
+                            <nuxt-link :to="`/posts/${clip.id}`" class="m-item" >
                                 <div class="m-ratioBox-wrap" v-if="clip.img">
                                     <div class="m-ratioBox">
                                         <img :src="clip.img.url" alt="">
@@ -303,8 +303,8 @@
                     </div>
 
                     <div class="m-items type02">
-                        <div class="m-item-wrap">
-                            <nuxt-link :to="`/posts/${photo.id}`" class="m-item" v-for="photo in photos.data" :key="photo.id">
+                        <div class="m-item-wrap" v-for="photo in photos.data" :key="photo.id">
+                            <nuxt-link :to="`/posts/${photo.id}`" class="m-item">
                                 <div class="m-ratioBox-wrap" v-if="photo.img">
                                     <div class="m-ratioBox">
                                         <img :src="photo.img.url" alt="">
