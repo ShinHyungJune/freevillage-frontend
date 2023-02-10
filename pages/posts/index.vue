@@ -68,6 +68,7 @@
                                     <p class="category">{{ item.formatBoard }}</p>
                                 </div>
                                 <div class="right">
+                                    <div class="thumbnail" :style="`background-image:url('${item.user.img.url}')`" v-if="item.user.img"></div>
                                     <p class="writer">{{ item.user.name }}</p>
                                     <p class="date">{{ item.diff_at }}</p>
                                 </div>

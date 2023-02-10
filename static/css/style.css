@@ -733,15 +733,21 @@ html {
 .area-news .section-ranking .ranking:first-of-type .title {
     font-size:20px; color:#0BAF00;
 }
+.area-news .section-ranking .ranking:first-of-type .count .icon {
+    background-image:url("../images/heart-active.png");
+}
+.area-news .section-ranking .ranking:first-of-type .count .text {
+    color:#000;
+}
+/*
 .area-news .section-ranking .ranking .count.active .icon {
     background-image:url("../images/heart-active.png");
 }
 .area-news .section-ranking .ranking .count.active .text {
     color:#000;
 }
-.area-news .section-ranking .ranking:first-of-type .count .text {
-    color:#000;
-}
+ */
+
 .area-news .section-ranking .ranking .rank {
     flex:0 0 auto;
     width:32px;
@@ -1007,6 +1013,12 @@ html {
 .m-boards.type01 .m-board .m-board-top .right {
     display:flex; align-items: center;
 }
+.m-boards.type01 .m-board .m-board-top .right .thumbnail {
+    width:18px; height:18px;
+    margin-right:4px;
+    background-repeat:no-repeat; background-size:100%; background-position:center;
+    border:1px solid #e1e1e1;
+}
 .m-boards.type01 .m-board .m-board-top .right .writer {
     font-size:12px; font-weight:500; color:#777;
 }
@@ -1129,7 +1141,7 @@ html {
     margin-bottom:10px;
 }
 .m-boards.type02 .m-board-top .title {
-    font-size:20px; font-weight:500;
+    font-size:20px; font-weight:500; word-break: break-all;
 }
 .m-boards.type02 .m-board-bottom {
     display:flex; justify-content: space-between; align-items: center; flex-wrap:wrap;
@@ -1167,6 +1179,7 @@ html {
     width:18px; height:17px;
     margin-right:4px;
     background-size:cover; background-position:center;
+    border:1px solid #e1e1e1;
 }
 .m-board-show.type01 .m-board-top {
     margin-bottom:16px;
@@ -1464,7 +1477,7 @@ html {
 .m-navigation.type01 .nav-wrap.active .img-wrap {
     filter: brightness(0) saturate(100%) invert(46%) sepia(80%) saturate(1947%) hue-rotate(80deg) brightness(93%) contrast(109%);
 }
-.m-navigation.type01 .nav-wrap.active .img-wrap > .title {
+.m-navigation.type01 .nav-wrap.active .nav > .title {
     filter: brightness(0) saturate(100%) invert(46%) sepia(80%) saturate(1947%) hue-rotate(80deg) brightness(93%) contrast(109%);
 }
 .m-navigation.type01 .nav .title {
@@ -1719,6 +1732,7 @@ label {
     appearance: none;
     font-weight:500;
     outline:none;
+    background-color:#fff;
 }
 .m-input-select.type03:after {
     content:""; width:10px; height:6px; position:absolute; right:0px; top:50%;
@@ -1777,6 +1791,7 @@ label {
 }
 .area-mypage .box-info .info .m-thumbnail {
     margin-right:16px;
+    border:1px solid #e1e1e1;
 }
 .area-mypage .box-info .info .title {
 

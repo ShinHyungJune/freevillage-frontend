@@ -13,16 +13,16 @@
             </div>
 
             <div :class="`nav-wrap ${$route.path === '/posts' ? 'active' : ''}`">
-                <nuxt-link to="/posts" class="nav">
+                <a href="/posts" class="nav">
                     <div class="img-wrap">
                         <img src="/images/newspaper.png" alt="" style="width:19px;">
                     </div>
 
                     <h3 class="title">마을소식</h3>
-                </nuxt-link>
+                </a>
             </div>
 
-            <div class="nav-wrap">
+<!--            <div class="nav-wrap">
                 <a href="#" class="nav">
                     <div class="img-wrap">
                         <img src="/images/location-marker.png" alt="" style="width:17px">
@@ -40,7 +40,7 @@
 
                     <h3 class="title">채팅</h3>
                 </a>
-            </div>
+            </div>-->
 
             <div :class="`nav-wrap ${$route.path.includes('/mypage') ? 'active' : ''}`">
                 <nuxt-link to="/mypage" class="nav">

@@ -13,7 +13,7 @@
             </nuxt-link>
         </div>
 
-        <a href="#" class="btn-more" @click.prevent="loadMore" v-if="items.links.next">
+        <a href="#" class="btn-more" @click.prevent="loadMore" v-if="items.links.next && form.take !== 100">
             인기상승 더보기 +
         </a>
     </div>
@@ -27,7 +27,8 @@ export default {
         return {
             form: {
                 board: "",
-                page: 1,
+                take: 3,
+                page:1,
                 district_id: this.$store.state.district.id,
             },
 
@@ -38,26 +39,15 @@ export default {
                     last_page: 1,
                 },
                 links: {}
-            }
+            },
         }
     },
 
     methods: {
-        loadMore(state) {
-            if(this.items.meta.current_page <= this.items.meta.last_page){
-                this.form.page += 1;
+        loadMore() {
+            this.form.take = 100;
 
-                this.$axios.get("/favorites", {
-                    params: this.form
-                }).then(response => {
-                    this.items = {
-                        ...response.data,
-                        data: [...this.items.data, ...response.data.data]
-                    };
-
-                    state.loaded();
-                });
-            }
+            this.getItems();
         },
 
         getItems(){

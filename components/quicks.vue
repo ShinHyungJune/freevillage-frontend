@@ -1,6 +1,6 @@
 <template>
     <div class="m-quicks type01">
-        <nuxt-link :to="createUrl" class="m-quick">글쓰기</nuxt-link>
+        <nuxt-link :to="createUrl" class="m-quick" v-if="$store.state && $store.state.district.id != 0">글쓰기</nuxt-link>
 
         <nuxt-link to="/auth/register" class="m-quick" v-if="!$auth.user">
             가입

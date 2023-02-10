@@ -15,7 +15,7 @@
                         {{item.like_count}}
                     </button>
                     <button class="btn-text" @click="active = !active" v-if="!item.is_reply">답글쓰기</button>
-                    <button class="btn-text" style="margin-left:10px;" @click="activeReplies = !activeReplies" v-if="!item.is_reply && item.comments.length > 0">답글보기</button>
+                    <button class="btn-text" style="margin-left:10px;" @click="activeReplies = !activeReplies" v-if="!item.is_reply && item.comments.length > 0">답글보기 {{item.comments.length}}</button>
                 </div>
 
                 <form action="" @submit.prevent="store" v-if="active">

@@ -35,7 +35,7 @@
                     <div class="img-wrap" v-for="item in items.data" :key="item.id">
                         <img :src="item.img.url" alt="" class="img" v-if="item.img">
 
-                        <a :href="item.phone" class="btn-call">
+                        <a :href="`tel:${item.phone}`" class="btn-call">
                             <img src="/images/call.png" alt="" style="width:17px;">
                         </a>
                     </div>

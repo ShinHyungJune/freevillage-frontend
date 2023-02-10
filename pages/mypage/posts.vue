@@ -123,7 +123,7 @@ export default {
                 });
         },
 
-        removed(item){
+        removed(){
             this.getItems();
             // this.items.data = this.items.data.filter(itemData => itemData.id != item.id);
         }

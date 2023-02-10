@@ -105,7 +105,7 @@ export default {
             editMode: false,
 
             items: {
-                data: [],
+                data: this.$auth.user.scrap ? [this.$auth.user.scrap] : [],
                 meta: {
                     current_page: 1,
                     last_page: 1,

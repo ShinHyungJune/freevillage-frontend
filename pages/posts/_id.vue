@@ -27,9 +27,9 @@
                     <button class="btn-util">
                         <img src="/images/bell.png" alt="" style="width:18px;">
                     </button>
-                    <button class="btn-util">
+<!--                    <button class="btn-util">
                         <img src="/images/dots.png" alt="" style="width:3px;">
-                    </button>
+                    </button>-->
                 </div>
             </div>
         </div>
@@ -267,7 +267,7 @@ export default {
             this.$axios.put("/likes/posts/" + this.item.id);
         },
         calculateCommentCount(type) {
-            if(type == 'add') 
+            if(type == 'add')
                 this.item.comment_count +=1;
             if(type === 'remove')
                 this.item.comment_count -=1;

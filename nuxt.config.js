@@ -7,7 +7,7 @@ export default {
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
         titleTemplate: '%s - jayuvillage',
-        title: 'jayuvillage',
+        title: '자유마을',
         htmlAttrs: {
             lang: 'en'
         },
@@ -18,7 +18,12 @@ export default {
             {name: 'format-detection', content: 'telephone=no'}
         ],
         link: [
-            {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
+            {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
+            {rel: 'apple-touch-icon', type: 'image/x-icon', href: '/images/apple-touch-icon.png'},
+            {rel: 'icon', type: 'image/x-icon', href: '/images/android-chrome-192x192.png'},
+            {rel: 'icon', type: 'image/x-icon', href: '/images/android-chrome-512x512.png'},
+            {rel: 'icon', type: 'image/x-icon', href: '/images/favicon-16x16.png'},
+            {rel: 'icon', type: 'image/x-icon', href: '/images/favicon-32x32.png'},
         ],
         script: [
             {src:'//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js'},
