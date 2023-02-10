@@ -35,7 +35,7 @@ export default {
 
         createPost(){
             if(!this.$auth.user)
-                return this.$router.push("/login");
+                return this.$router.push("/auth/login");
 
             if(this.$store.state && this.$store.state.district.id == 0)
                 return alert("게시할 마을을 선택하세요.");
