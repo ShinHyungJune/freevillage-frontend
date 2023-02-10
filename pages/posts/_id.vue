@@ -292,6 +292,10 @@ export default {
         share() {
             let kakaoHelper = new KakaoHelper(Kakao);
 
+            this.$axios.post("/shares", {
+                post_id: this.item.id
+            });
+
             kakaoHelper.sharePost(this.item);
         },
 

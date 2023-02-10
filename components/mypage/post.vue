@@ -13,7 +13,7 @@
                         </h3>
                     </div>
 
-                    <div class="right">
+                    <div class="right" v-if="item.user.id == $auth.user.id">
                         <img src="/images/dots.png" alt="" style="width:3px;" @click.prevent.stop="active = true" v-if="!active">
                         <img src="/images/x.png" alt="" style="width:12px;" @click.prevent.stop="active = false" v-else>
                     </div>

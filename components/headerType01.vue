@@ -187,7 +187,7 @@ export default {
 
             this.$store.commit("changeDistrict", this.$auth.user.district);
 
-            this.$router.push("/");
+            location.href="/";
 
             this.activeSidebar = false;
         },
@@ -198,7 +198,7 @@ export default {
                 district: "자유마을"
             });
 
-            this.$router.push("/");
+            location.href="/";
 
             this.activeSidebar = false;
         }

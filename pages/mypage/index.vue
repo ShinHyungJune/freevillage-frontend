@@ -96,14 +96,14 @@
 
                     <div class="menus">
                         <div class="wrap">
-                            <a href="#" class="menu">
+                            <nuxt-link to="/mypage/likePosts" class="menu">
                                 <img src="/images/heart-active.png" alt="" class="icon" style="width:14px;">
                                 <p class="text">좋아요 게시물</p>
-                            </a>
-                            <a href="#" class="menu">
+                            </nuxt-link>
+                            <nuxt-link to="/mypage/sharePosts" class="menu">
                                 <img src="/images/shareLink.png" alt="" class="icon" style="width:14px;">
                                 <p class="text">공유한 게시물</p>
-                            </a>
+                            </nuxt-link>
                             <nuxt-link to="/scraps" class="menu">
                                 <img src="/images/wallet.png" alt="" class="icon" style="width:14px;">
                                 <p class="text">나의 지갑</p>

@@ -696,6 +696,9 @@ html {
     margin-top:40px; padding:50px 0;
     background-color:#F5F5F5;
 }
+.area-index .section-video .m-ratioBox-wrap {
+    padding-top:57% !important;
+}
 .area-index .section-photo {
     padding:50px 0;
 }
@@ -856,8 +859,11 @@ html {
     margin-top:8px; font-weight:500; white-space: nowrap; overflow:hidden; text-overflow:ellipsis;
 }
 .m-items.type02 .m-ratioBox-wrap {
-    padding-top:57%;
+    padding-top:100%;
     border-radius:5px; overflow:hidden;
+}
+.m-items.type02 .m-ratioBox {
+    background-size:cover; background-position:center; background-repeat:no-repeat;
 }
 
 .m-ratioBox-wrap {width:100%; padding-top:100%; position:relative; overflow:hidden;}

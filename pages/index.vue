@@ -204,7 +204,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                
+
                                 <tr v-for="(districtWeekRegisterCount, index) in districtWeekRegisterCounts" :key="index">
                                     <template v-if="index >= 3 && districtWeekRegisterCount">
                                     <td>{{index + 1}}위</td>
@@ -246,9 +246,7 @@
                     <div class="m-items type01">
                         <nuxt-link :to="`/posts/${notice.id}`" class="m-item" v-for="notice in notices.data" :key="notice.id">
                             <div class="m-ratioBox-wrap" v-if="notice.img">
-                                <div class="m-ratioBox">
-                                    <img :src="notice.img.url" alt="">
-                                </div>
+                                <div class="m-ratioBox" :style="`background-image:url('${notice.img.url}');`"></div>
                             </div>
 
                             <div class="content">
@@ -311,9 +309,7 @@
                         <div class="m-item-wrap" v-for="photo in photos.data" :key="photo.id">
                             <nuxt-link :to="`/posts/${photo.id}`" class="m-item">
                                 <div class="m-ratioBox-wrap" v-if="photo.img">
-                                    <div class="m-ratioBox">
-                                        <img :src="photo.img.url" alt="">
-                                    </div>
+                                    <div class="m-ratioBox" :style="`background-image:url('${photo.img.url}');`"></div>
                                 </div>
 
                                 <div class="content">
@@ -437,7 +433,7 @@ export default {
                 }
             }).then(response => {
                 this.asks = response.data;
-            });            
+            });
         }
     },
 
@@ -450,7 +446,7 @@ export default {
     async mounted() {
         await this.updatePosts(this.district.id);
         // let districtId = this.district.id;
-        
+
         // this.$axios.get("/posts", {
         //     params: {
         //         board: "notices",
