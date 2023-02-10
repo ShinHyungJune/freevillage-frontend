@@ -86,7 +86,27 @@ export default {
             districts: this.district ? [this.district] : "",
             stateData: this.state,
             cityData: this.city,
-            districtIdData: this.district_id
+            districtIdData: this.district_id,
+
+            orders: {
+                "서울" : 1,
+                "경기" : 2,
+                "인천" : 3,
+                "부산" : 4,
+                "대구" : 5,
+                "광주" : 6,
+                "대전" : 7,
+                "울산" : 8,
+                "세종" : 9,
+                "강원" : 10,
+                "충북" : 11,
+                "충남" : 12,
+                "전북" : 13,
+                "전남" : 14,
+                "경북" : 15,
+                "경남" : 16,
+                "제주" : 17,
+            }
         }
     },
 
@@ -129,7 +149,9 @@ export default {
         console.log(this.$auth.user);
 
         this.$axios.get("/states").then(response => {
-            this.states = response.data;
+            this.states = response.data.sort((a,b) => {
+                return this.orders[a] - this.orders[b];
+            });
         })
     }
 }
