@@ -1,6 +1,8 @@
 <template>
     <div class="area-index">
-        <header-type01/>
+        <header-type01
+            @updatePosts="updatePosts"
+        />
 
         <!-- 내용 영역 -->
         <div class="container">
@@ -202,11 +204,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="(districtWeekRegisterCount, index) in districtWeekRegisterCounts" :key="index" v-if="index >= 3 && districtWeekRegisterCount">
+                                
+                                <tr v-for="(districtWeekRegisterCount, index) in districtWeekRegisterCounts" :key="index">
+                                    <template v-if="index >= 3 && districtWeekRegisterCount">
                                     <td>{{index + 1}}위</td>
                                     <td>{{ districtWeekRegisterCount.city}} {{districtWeekRegisterCount.district}}</td>
                                     <td class="more down" v-if="districtWeekRegisterCount.up_down === 'down'">{{districtWeekRegisterCount.now_week_count}} <span class="tri">▼</span></td>
                                     <td class="more up" v-else>{{districtWeekRegisterCount.now_week_count}} <span class="tri">▲</span></td>
+                                    </template>
                                 </tr>
                                 </tbody>
                             </table>
@@ -382,8 +387,9 @@ export default {
         }
     },
     methods: {
-        search() {
-            this.$store.commit("changeDistrict", this.form.district);
+        async search() {
+            await this.$store.commit("changeDistrict", this.form.district);
+            await this.updatePosts(this.district.id);
         },
 
         getRankings(count){
@@ -391,6 +397,44 @@ export default {
                 .then(response => {
                     this.districtWeekRegisterCounts = response.data.districtWeekRegisterCounts;
                 });
+        },
+
+        async updatePosts(districtId) {
+            this.$axios.get("/posts", {
+                params: {
+                    board: "notices",
+                    district_id: districtId
+                }
+            }).then(response => {
+                this.notices = response.data;
+            });
+
+            this.$axios.get("/posts", {
+                params: {
+                    board: "clips",
+                    district_id: districtId,
+                }
+            }).then(response => {
+                this.clips = response.data;
+            });
+
+            this.$axios.get("/posts", {
+                params: {
+                    board: "photos",
+                    district_id: districtId,
+                }
+            }).then(response => {
+                this.photos = response.data;
+            });
+
+            this.$axios.get("/posts", {
+                params: {
+                    board: "asks",
+                    district_id: districtId,
+                }
+            }).then(response => {
+                this.asks = response.data;
+            });            
         }
     },
 
@@ -400,44 +444,45 @@ export default {
         }
     },
 
-    mounted() {
-        let districtId = this.district.id;
+    async mounted() {
+        await this.updatePosts(this.district.id);
+        // let districtId = this.district.id;
+        
+        // this.$axios.get("/posts", {
+        //     params: {
+        //         board: "notices",
+        //         district_id: districtId
+        //     }
+        // }).then(response => {
+        //     this.notices = response.data;
+        // });
 
-        this.$axios.get("/posts", {
-            params: {
-                board: "notices",
-                district_id: districtId
-            }
-        }).then(response => {
-            this.notices = response.data;
-        });
+        // this.$axios.get("/posts", {
+        //     params: {
+        //         board: "clips",
+        //         district_id: districtId,
+        //     }
+        // }).then(response => {
+        //     this.clips = response.data;
+        // });
 
-        this.$axios.get("/posts", {
-            params: {
-                board: "clips",
-                district_id: districtId,
-            }
-        }).then(response => {
-            this.clips = response.data;
-        });
+        // this.$axios.get("/posts", {
+        //     params: {
+        //         board: "photos",
+        //         district_id: districtId,
+        //     }
+        // }).then(response => {
+        //     this.photos = response.data;
+        // });
 
-        this.$axios.get("/posts", {
-            params: {
-                board: "photos",
-                district_id: districtId,
-            }
-        }).then(response => {
-            this.photos = response.data;
-        });
-
-        this.$axios.get("/posts", {
-            params: {
-                board: "asks",
-                district_id: districtId,
-            }
-        }).then(response => {
-            this.asks = response.data;
-        });
+        // this.$axios.get("/posts", {
+        //     params: {
+        //         board: "asks",
+        //         district_id: districtId,
+        //     }
+        // }).then(response => {
+        //     this.asks = response.data;
+        // });
 
         this.getRankings(10);
 
