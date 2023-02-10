@@ -2,7 +2,8 @@ class KakaoHelper {
     constructor(data) {
         this.kakao = data;
 
-        this.domain = process.env.NODE_ENV === "production" ? "http://jayuvillages.com" : "http://localhost:3000";
+        // this.domain = process.env.NODE_ENV === "production" ? "http://jayuvillages.com" : "http://localhost:3000";
+        this.domain = "http://jayuvillages.com";
     }
 
     sharePost(item){
