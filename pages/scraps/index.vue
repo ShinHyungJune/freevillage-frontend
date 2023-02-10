@@ -52,15 +52,15 @@
 
                 <div class="mt-12"></div>
 
-                <scrap-items :scrap_id="form.scrap_id" board="notices" @removed="removed" @reorder="reorder" :edit-mode="editMode" />
+                <scrap-items :scrap_id="form.scrap_id" board="notices" @removed="removed" @reorder="reorder" @extracedImages="collectImages" :edit-mode="editMode" />
 
-                <scrap-items :scrap_id="form.scrap_id" board="clips" @removed="removed" @reorder="reorder" :edit-mode="editMode" />
+                <scrap-items :scrap_id="form.scrap_id" board="clips" @removed="removed" @reorder="reorder" @extracedImages="collectImages" :edit-mode="editMode" />
 
-                <scrap-items :scrap_id="form.scrap_id" board="photos" @removed="removed" @reorder="reorder" :edit-mode="editMode" />
+                <scrap-items :scrap_id="form.scrap_id" board="photos" @removed="removed" @reorder="reorder" @extracedImages="collectImages" :edit-mode="editMode" />
 
-                <scrap-items :scrap_id="form.scrap_id" board="asks" @removed="removed" @reorder="reorder" :edit-mode="editMode" />
+                <scrap-items :scrap_id="form.scrap_id" board="asks" @removed="removed" @reorder="reorder" @extracedImages="collectImages" :edit-mode="editMode" />
 
-                <scrap-items :scrap_id="form.scrap_id" board="meetings" @removed="removed" @reorder="reorder" :edit-mode="editMode" />
+                <scrap-items :scrap_id="form.scrap_id" board="meetings" @removed="removed" @reorder="reorder" @extracedImages="collectImages" :edit-mode="editMode" />
 
             </div>
 
@@ -111,7 +111,8 @@ export default {
                     last_page: 1,
                 },
                 links: {}
-            }
+            },
+            images:[]
         }
     },
     methods: {
@@ -137,7 +138,14 @@ export default {
 
             let kakaoHelper = new KakaoHelper(Kakao);
 
-            kakaoHelper.shareScrap(this.$auth.user.scrap);
+            let item = {
+                ...this.$auth.user.scrap,
+                img: {
+                    url: this.images.find(image => typeof image !== 'undefined')
+                }
+            }
+
+            kakaoHelper.shareScrap(item);
         },
 
         removed(){
@@ -182,6 +190,12 @@ export default {
 
                     location.reload();
                 });
+        },
+        collectImages(arr) {
+            this.images = [
+                ...this.images,
+                ...arr
+            ]
         }
     },
 
@@ -191,6 +205,8 @@ export default {
         }).then(response => {
             this.items = response.data;
         });
+
+        console.log(this.$auth.user,'scrap index mounted')
     }
 }
 </script>
