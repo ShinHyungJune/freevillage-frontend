@@ -56,7 +56,11 @@ html {
     position: relative; top:-2px;
 }
 .m-header.type01 .btn-select.point {
-    color:#0BAF00;
+    /* color:#0BAF00; */
+    background-image: linear-gradient(to bottom, blue, skyblue);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 .m-header.type01 .selects .options {
     display:none;
