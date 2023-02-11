@@ -7,7 +7,7 @@
         <!-- 내용 영역 -->
         <div class="container">
             <!-- 지역이 본부 x & 로그인 -->
-            <div class="fragment" v-if="$auth.user && (district && district.id != 0)">
+            <div class="fragment" v-if="district && district.id != 0">
                 <section class="section-banner">
                     <div class="wrap">
                         <div class="content">

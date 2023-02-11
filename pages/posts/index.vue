@@ -218,6 +218,19 @@ export default {
             this.$axios.put("/likes/posts/" + item.id);
         },
     },
+    computed: {
+        district(){
+            return this.$store.state.district;
+        }
+    },
+
+    watch: {
+        district (newData, oldData) {
+            this.form.district_id = newData.id;
+
+            this.getItems();
+        }
+    },
 
     mounted() {
         this.getItems();

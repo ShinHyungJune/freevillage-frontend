@@ -59,6 +59,20 @@ export default {
         },
     },
 
+    computed: {
+        district(){
+            return this.$store.state.district;
+        }
+    },
+
+    watch: {
+        district (newData, oldData) {
+            this.form.district_id = newData.id;
+
+            this.getItems();
+        }
+    },
+
     mounted() {
         let self = this;
 
