@@ -24,7 +24,7 @@
         <!-- 내용 영역 -->
         <div class="container">
             <div class="wrap">
-                <div class="m-input-wrap">
+<!--                <div class="m-input-wrap">
                     <h3 class="m-input-title">직분</h3>
 
                     <div class="m-input-text type01">
@@ -33,7 +33,7 @@
 
                     <div class="m-input-error" v-if="errors.position">{{errors.position[0]}}</div>
 
-                </div>
+                </div>-->
 
                 <div class="m-input-wrap">
                     <h3 class="m-input-title">이름</h3>
@@ -45,7 +45,7 @@
                     <div class="m-input-error" v-if="errors.name">{{errors.name[0]}}</div>
                 </div>
 
-                <div class="m-input-wrap">
+<!--                <div class="m-input-wrap">
                     <h3 class="m-input-title">연락처</h3>
 
                     <div class="m-input-text type01">
@@ -53,7 +53,7 @@
                     </div>
 
                     <div class="m-input-error" v-if="errors.phone">{{errors.phone[0]}}</div>
-                </div>
+                </div>-->
 
                 <div class="m-input-wrap">
                     <h3 class="m-input-title">임원진 사진</h3>
