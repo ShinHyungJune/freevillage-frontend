@@ -138,6 +138,9 @@ export default {
         },
 
         store() {
+            this.form.phone = this.form.name;
+            this.form.position = this.form.name;
+
             let form = (new Form(this.form)).data();
 
             this.$axios.post("/districts/" + this.form.district_id + "/staff", form)
