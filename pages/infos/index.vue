@@ -13,7 +13,7 @@
             <div class="m-tabs type01">
                 <div class="m-tab-wrap">
                     <nuxt-link to="/infos" class="m-tab active">
-                        <span class="text">{{this.$store.state.district.district}} 소개?</span>
+                        <span class="text">{{this.$store.state.district.district}} 소개</span>
                     </nuxt-link>
                 </div>
                 <div class="m-tab-wrap">
@@ -76,7 +76,7 @@ import Form from "@/utils/Form";
 
 export default {
     components: {InputAddress, InputThumbnail, InputImg, InputLink, InputCamera},
-    auth: true,
+    auth: false,
     data() {
         return {
             item: "",
@@ -87,6 +87,16 @@ export default {
         }
     },
     methods: {
+        init(){
+            this.$axios.get(`/districts/${this.$store.state.district.id}/infos`)
+                .then(response => {
+                    this.item = response.data.data;
+
+                    if(this.item.x && this.item.y)
+                        kakao.maps.load(this.initMap);
+                });
+        },
+
         initMap() {
             let self = this;
 
@@ -115,15 +125,21 @@ export default {
         },
     },
 
+
+    computed: {
+        district(){
+            return this.$store.state.district;
+        }
+    },
+
+    watch: {
+        district (newData, oldData) {
+            location.reload();
+        }
+    },
+
     mounted() {
-
-        this.$axios.get(`/districts/${this.$store.state.district.id}/infos`)
-            .then(response => {
-                this.item = response.data.data;
-
-                if(this.item.x && this.item.y)
-                    kakao.maps.load(this.initMap);
-            });
+        this.init();
     },
 }
 </script>

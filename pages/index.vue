@@ -460,43 +460,7 @@ export default {
 
     async mounted() {
         await this.updatePosts(this.district.id);
-        // let districtId = this.district.id;
 
-        // this.$axios.get("/posts", {
-        //     params: {
-        //         board: "notices",
-        //         district_id: districtId
-        //     }
-        // }).then(response => {
-        //     this.notices = response.data;
-        // });
-
-        // this.$axios.get("/posts", {
-        //     params: {
-        //         board: "clips",
-        //         district_id: districtId,
-        //     }
-        // }).then(response => {
-        //     this.clips = response.data;
-        // });
-
-        // this.$axios.get("/posts", {
-        //     params: {
-        //         board: "photos",
-        //         district_id: districtId,
-        //     }
-        // }).then(response => {
-        //     this.photos = response.data;
-        // });
-
-        // this.$axios.get("/posts", {
-        //     params: {
-        //         board: "asks",
-        //         district_id: districtId,
-        //     }
-        // }).then(response => {
-        //     this.asks = response.data;
-        // });
 
         this.getRankings(10);
 

@@ -13,7 +13,7 @@
             <div class="m-tabs type01">
                 <div class="m-tab-wrap">
                     <nuxt-link to="/infos" class="m-tab">
-                        <span class="text">{{this.$store.state.district.district}} 소개?</span>
+                        <span class="text">{{this.$store.state.district.district}} 소개</span>
                     </nuxt-link>
                 </div>
                 <div class="m-tab-wrap">
@@ -64,7 +64,7 @@ import Form from "@/utils/Form";
 
 export default {
     components: {InputAddress, InputThumbnail, InputImg, InputLink, InputCamera},
-    auth: true,
+    auth: false,
     data() {
         return {
             items: {
@@ -76,14 +76,28 @@ export default {
         }
     },
     methods: {
+        init(){
+            this.$axios.get(`/districts/${this.$store.state.district.id}/contacts`)
+                .then(response => {
+                    this.items = response.data;
+                })
+        }
+    },
+
+    computed: {
+        district(){
+            return this.$store.state.district;
+        }
+    },
+
+    watch: {
+        district (newData, oldData) {
+            location.reload();
+        }
     },
 
     mounted() {
-
-        this.$axios.get(`/districts/${this.$store.state.district.id}/contacts`)
-            .then(response => {
-                this.items = response.data;
-            })
+        this.init();
     },
 }
 </script>

@@ -147,7 +147,7 @@
                     <button class="btn-util">
                         <img src="/images/search.png" style="width:18px;" alt="">
                     </button>
-                    <button class="btn-util">
+                    <button class="btn-util" @click="$router.push('/notices')">
                         <img src="/images/bell.png" style="width:17px;" alt="">
                     </button>
                     <button class="btn-util" @click="activeSidebar = true">
