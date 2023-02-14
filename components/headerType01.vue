@@ -62,8 +62,10 @@
                         </nuxt-link>
                     </div>
                 </div>
+                
 
-                <div class="content">
+                <!-- TODO 230214 주석처리 -->
+                <!-- <div class="content">
                     <div class="menus-wrap">
                         <div class="menus">
                             <div class="menu-wrap">
@@ -107,7 +109,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
 
                 <div class="bottom">
@@ -136,7 +138,12 @@
         <div class="m-header type01">
             <div class="wrap">
                 <div class="selects">
-                    <button :class="`btn-select ${(district && district.id == 0) || !district ? 'point' : ''}`" @click="active = true;">
+                    <!-- <button :class="`btn-select ${(district && district.id == 0) || !district ? 'point' : ''}`" @click="active = true;">
+                        {{ district.id == 0 ? "자유마을" : district.district }}
+
+                        <img src="/images/chevron-down.png" style="width:10px;" alt="" class="deco">
+                    </button> -->
+                    <button class="btn-select point" @click="active = true;">
                         {{ district.id == 0 ? "자유마을" : district.district }}
 
                         <img src="/images/chevron-down.png" style="width:10px;" alt="" class="deco">
