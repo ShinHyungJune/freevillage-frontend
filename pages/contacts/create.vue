@@ -25,7 +25,7 @@
         <div class="container" @keyup="errors = {}">
             <div class="wrap">
                 <div class="custom" v-if="isEditMode">
-                    <h3></h3>
+                    <button class="btn-text black " @click="reset()">취소</button>
                     <button class="btn-text primary " @click="updateItem()">저장</button>
                 </div>
                 <div class="m-input-wrap">
@@ -49,14 +49,14 @@
                 <p class="m-comment type02" v-if="!form.info">* 하단 의원 사진 버튼을 눌러 이미지를 등록해주세요.</p>
 
                 <draggable
-                    class="items" v-model="items.data" @input="reorder" v-if="items.data.length >0"
+                    class="items" v-model="items" @input="reorder" v-if="items.length >0"
                 > 
-                    <div class="item" v-for="item in items.data" :key="item.id">
+                    <div class="item" v-for="item in items" :key="item.id">
                         <div class="item-top">
                             <h3 class="title">{{item.phone}}</h3>
                             <div>
-                                <button class="btn-remove " @click="setForm(item)">수정</button> &nbsp;
-                                <button class="btn-remove red" @click="remove(item)">삭제</button>
+                                <button class="btn-remove " @click.stop="setForm(item)">수정</button> &nbsp;
+                                <button class="btn-remove red" @click.stop="remove(item)">삭제</button>
                             </div>
                             
                         </div>
@@ -134,9 +134,7 @@ export default {
     auth: true,
     data() {
         return {
-            items: {
-                data: []
-            },
+            items: [],
 
             item: "",
 
@@ -161,50 +159,38 @@ export default {
             this.$router.push(e.target.value)
         },
 
-        //TODO 여기서 즉각 api call 해서 바로 순서 저장 가능해야함
-        //TODO 각 항목 수정 저장 가능하게 고쳐야함 
         async reorder(items){
-            console.log({items},'reorder')
             const payload = items.map((item,index) => ({
                 ...item,
                 order: index
             }))
-            console.log({payload},'reorderPayload')
             try {
-                const {data} = await this.$axios.post(`/districts/${this.form.district_id}/reorder`, {
+                await this.$axios.post(`/districts/${this.form.district_id}/reorder`, {
                         items: payload
                 })
-                console.log(data, 'reorderResponse')
             } catch (error) {
                 if (error.response && error.response.data)
                     this.errors = error.response.data.errors;                
             }
-            
-
-            this.$emit("reorder", items.map((item, index) => {
-                item.order = index;
-            
-                return item;
-            }));
         },
+
         setForm(item) {
             this.form = Object.assign({},{
                 ...item,
-                // photo: item.img
             })
             this.isEditMode = true;
-            console.log(this.form, 'after setForm')
         }, 
-        async updateItem() {
 
+        async updateItem() {
             try {
                 let form = (new Form(this.form).data());
                 const {data} = await this.$axios.post(`/districts/${this.form.district_id}/updates/${this.form.id}`, form);
-                const idx = this.items.data.findIndex(item => item.id === form.id);
+                const targetIdx = await this.items.findIndex(item => item.id === this.form.id);
                 console.log({data},'updateItemResponse')
-                console.log({idx},idx)
-                // this.items.data[idx] = this.
-                
+                console.log({targetIdx},targetIdx)
+                if(data.result) {
+                    this.items.splice(targetIdx,1,this.form);
+                }
             } catch (error) {
                 if (error.response && error.response.data)
                     this.errors = error.response.data.errors;
@@ -214,11 +200,11 @@ export default {
         },
 
         store() {
-            this.form.order = this.items.data.length;
+            this.form.order = this.items.length;
             let form = (new Form(this.form)).data();
             this.$axios.post("/districts/" + this.form.district_id + "/contacts", form)
                 .then((response) => {
-                    this.items.data.push(response.data.data);
+                    this.items.push(response.data.data);
 
                     this.reset();
                 })
@@ -228,11 +214,10 @@ export default {
                 });
         },
         
-
         remove(item){
             this.$axios.delete("/districts/" + this.form.district_id + "/contacts/" + item.id)
                 .then(response => {
-                    this.items.data = this.items.data.filter(itemData => itemData.id != item.id);
+                    this.items = this.items.filter(itemData => itemData.id != item.id);
                 });
         },
 
@@ -246,13 +231,15 @@ export default {
             }
 
             this.imgUrl = "";
+            this.isEditMode = false;
         }
     },
 
     mounted() {
         this.$axios.get("/districts/" + this.form.district_id + "/contacts")
             .then(response => {
-                this.items = response.data;
+                console.log(response.data.data,'mounted')
+                this.items = [...response.data.data];
             });
     }
 }
