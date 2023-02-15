@@ -24,6 +24,10 @@
         <!-- 내용 영역 -->
         <div class="container" @keyup="errors = {}">
             <div class="wrap">
+                <div class="custom" v-if="isEditMode">
+                    <h3></h3>
+                    <button class="btn-text primary " @click="updateItem()">저장</button>
+                </div>
                 <div class="m-input-wrap">
                     <h3 class="m-input-title">연락처</h3>
 
@@ -44,7 +48,38 @@
 
                 <p class="m-comment type02" v-if="!form.info">* 하단 의원 사진 버튼을 눌러 이미지를 등록해주세요.</p>
 
-                <div class="items">
+                <draggable
+                    class="items" v-model="items.data" @input="reorder" v-if="items.data.length >0"
+                > 
+                    <div class="item" v-for="item in items.data" :key="item.id">
+                        <div class="item-top">
+                            <h3 class="title">{{item.phone}}</h3>
+                            <div>
+                                <button class="btn-remove " @click="setForm(item)">수정</button> &nbsp;
+                                <button class="btn-remove red" @click="remove(item)">삭제</button>
+                            </div>
+                            
+                        </div>
+
+                        <div class="img-wrap" v-if="item.img">
+                            <a :href="`tel:${item.phone}`" class="btn-call" v-if="item.phone">
+                                <img src="/images/call.png" alt="" style="width:17px;">
+                            </a>
+                            <div class="m-board-btns mt-20">
+                                <div class="m-btns type01">
+                                    <div class="m-btn-wrap">
+                                        <a :href="`tel:${item.phone}`" class="m-btn type01 bg-revert-primary">연락하기</a>
+                                    </div>
+                                    <div class="m-btn-wrap">
+                                        <a :href="`sms:${item.phone}`" class="m-btn type01 bg-primary">문자하기</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <img :src="item.img.url" alt="" v-if="item.img">
+                        </div>
+                    </div>
+                </draggable>
+                <!-- <div class="items">
                     <div class="item" v-for="item in items.data" :key="item.id">
                         <div class="item-top">
                             <h3 class="title">{{item.name}}</h3>
@@ -56,12 +91,20 @@
                             <a :href="`tel:${item.phone}`" class="btn-call" v-if="item.phone">
                                 <img src="/images/call.png" alt="" style="width:17px;">
                             </a>
-
+                            <div class="m-board-btns mt-20">
+                                <div class="m-btns type01">
+                                    <div class="m-btn-wrap">
+                                        <a :href="`tel:${item.phone}`" class="m-btn type01 bg-revert-primary">연락하기</a>
+                                    </div>
+                                    <div class="m-btn-wrap">
+                                        <a :href="`sms:${item.phone}`" class="m-btn type01 bg-primary">문자하기</a>
+                                    </div>
+                                </div>
+                            </div>
                             <img :src="item.img.url" alt="" v-if="item.img">
                         </div>
-
                     </div>
-                </div>
+                </div> -->
                 <div class="mt-40"></div>
             </div>
         </div>
@@ -78,6 +121,7 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable';
 import InputCamera from '../../components/form/posts/inputCamera';
 import InputLink from "../../components/form/posts/inputLink";
 import InputImg from "../../components/form/posts/inputImg";
@@ -86,7 +130,7 @@ import InputAddress from "../../components/form/inputAddress";
 import Form from "@/utils/Form";
 
 export default {
-    components: {InputAddress, InputThumbnail, InputImg, InputLink, InputCamera},
+    components: {draggable,InputAddress, InputThumbnail, InputImg, InputLink, InputCamera},
     auth: true,
     data() {
         return {
@@ -100,6 +144,7 @@ export default {
                 district_id: this.$auth.user.district.id,
                 phone: "",
                 photo: "",
+                order: "",
             },
 
             imgUrl: "",
@@ -107,6 +152,8 @@ export default {
             errors: {},
 
             activeLinkPop: false,
+
+            isEditMode: false,
         }
     },
     methods: {
@@ -114,9 +161,61 @@ export default {
             this.$router.push(e.target.value)
         },
 
-        store() {
-            let form = (new Form(this.form)).data();
+        //TODO 여기서 즉각 api call 해서 바로 순서 저장 가능해야함
+        //TODO 각 항목 수정 저장 가능하게 고쳐야함 
+        async reorder(items){
+            console.log({items},'reorder')
+            const payload = items.map((item,index) => ({
+                ...item,
+                order: index
+            }))
+            console.log({payload},'reorderPayload')
+            try {
+                const {data} = await this.$axios.post(`/districts/${this.form.district_id}/reorder`, {
+                        items: payload
+                })
+                console.log(data, 'reorderResponse')
+            } catch (error) {
+                if (error.response && error.response.data)
+                    this.errors = error.response.data.errors;                
+            }
+            
 
+            this.$emit("reorder", items.map((item, index) => {
+                item.order = index;
+            
+                return item;
+            }));
+        },
+        setForm(item) {
+            this.form = Object.assign({},{
+                ...item,
+                // photo: item.img
+            })
+            this.isEditMode = true;
+            console.log(this.form, 'after setForm')
+        }, 
+        async updateItem() {
+
+            try {
+                let form = (new Form(this.form).data());
+                const {data} = await this.$axios.post(`/districts/${this.form.district_id}/updates/${this.form.id}`, form);
+                const idx = this.items.data.findIndex(item => item.id === form.id);
+                console.log({data},'updateItemResponse')
+                console.log({idx},idx)
+                // this.items.data[idx] = this.
+                
+            } catch (error) {
+                if (error.response && error.response.data)
+                    this.errors = error.response.data.errors;
+            }
+            this.reset();
+            this.isEditMode = false;
+        },
+
+        store() {
+            this.form.order = this.items.data.length;
+            let form = (new Form(this.form)).data();
             this.$axios.post("/districts/" + this.form.district_id + "/contacts", form)
                 .then((response) => {
                     this.items.data.push(response.data.data);
@@ -128,6 +227,7 @@ export default {
                         this.errors = error.response.data.errors;
                 });
         },
+        
 
         remove(item){
             this.$axios.delete("/districts/" + this.form.district_id + "/contacts/" + item.id)
@@ -159,5 +259,8 @@ export default {
 </script>
 
 <style scoped>
-
+    .custom {
+       display:flex; align-items: center; justify-content: space-between;
+       margin-top: 1rem;
+    }
 </style>
