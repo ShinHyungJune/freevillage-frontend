@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="m-input-wrap">
-                    <h3 class="m-input-title">의원 사진</h3>
+                    <h3 class="m-input-₩">의원 사진</h3>
 
                     <img :src="imgUrl" alt="" v-if="imgUrl">
 
@@ -65,6 +65,8 @@
                             <a :href="`tel:${item.phone}`" class="btn-call" v-if="item.phone">
                                 <img src="/images/call.png" alt="" style="width:17px;">
                             </a>
+                            
+                            <img :src="item.img.url" alt="" v-if="item.img">
                             <div class="m-board-btns mt-20">
                                 <div class="m-btns type01">
                                     <div class="m-btn-wrap">
@@ -75,7 +77,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <img :src="item.img.url" alt="" v-if="item.img">
                         </div>
                     </div>
                 </draggable>
