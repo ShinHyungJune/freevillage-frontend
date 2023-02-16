@@ -250,7 +250,8 @@
                             </div>
 
                             <div class="content">
-                                <p class="subtitle">{{ notice.district.city }} {{notice.district.district}}</p>
+                                <p class="subtitle" v-if="notice.district">{{ notice.district.city }} {{notice.district.district}}</p>
+                                <p class="subtitle" v-else>전체</p>
                                 <h3 class="title">{{notice.title}}</h3>
                             </div>
                         </nuxt-link>
