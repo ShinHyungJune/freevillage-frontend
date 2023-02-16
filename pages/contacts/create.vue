@@ -68,12 +68,20 @@
                             
                             <img :src="item.img.url" alt="" v-if="item.img">
                             <div class="m-board-btns mt-20">
-                                <div class="m-btns type01">
+                                <div class="m-btns type01" v-if="item.phone">
                                     <div class="m-btn-wrap">
                                         <a :href="`tel:${item.phone}`" class="m-btn type01 bg-revert-primary">연락하기</a>
                                     </div>
                                     <div class="m-btn-wrap">
                                         <a :href="`sms:${item.phone}`" class="m-btn type01 bg-primary">문자하기</a>
+                                    </div>
+                                </div>
+                                <div class="m-btns type01" v-else>
+                                    <div class="m-btn-wrap">
+                                        <a href=# class="m-btn type01 bg-lightGray">연락하기</a>
+                                    </div>
+                                    <div class="m-btn-wrap">
+                                        <a href=# class="m-btn type01 bg-lightGray">문자하기</a>
                                     </div>
                                 </div>
                             </div>
