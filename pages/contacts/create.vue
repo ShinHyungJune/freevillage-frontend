@@ -179,6 +179,7 @@ export default {
             this.form = Object.assign({},{
                 ...item,
             })
+            this.imgUrl = item.img.url;
             this.isEditMode = true;
         }, 
 
