@@ -62,9 +62,9 @@
                         </div>
 
                         <div class="img-wrap" v-if="item.img">
-                            <a :href="`tel:${item.phone}`" class="btn-call" v-if="item.phone">
+                            <!-- <a :href="`tel:${item.phone}`" class="btn-call" v-if="item.phone">
                                 <img src="/images/call.png" alt="" style="width:17px;">
-                            </a>
+                            </a> -->
                             
                             <img :src="item.img.url" alt="" v-if="item.img">
                             <div class="m-board-btns mt-20">
