@@ -4,19 +4,20 @@
         <Reminder 
             v-if="activeReminder"
             :title="'삭제 하시겠습니까?'"
-            :excecute="'삭제'"
-            :cancel="'취소'"
+            :excecute="excecuteName"
+            :cancel="cancelName"
             :item="item"
-            @excecute="remove(item)"
+            @excecute="remove"
             @cancel="closeReminder"
         />
         <!-- 헤더영역 -->
         <div class="m-header type02">
             <div class="wrap">
                 <div class="left">
-                    <a href="#" class="btn-text" @click.prevent="$router.back()">종료</a>
+                    <button class="btn-text black " @click="reset()" v-if="isEditMode">취소</button>
+                    <a href="#" class="btn-text" @click.prevent="$router.back()" v-else>종료</a>
                 </div>
-                <div class="center">
+                <div class="center" v-if="!isEditMode">
                     <div class="m-input-select type01">
                         <select name="" id="" @change="move">
                             <option value="/infos/create">내 마을 소개</option>
@@ -26,7 +27,8 @@
                     </div>
                 </div>
                 <div class="right">
-                    <a href="#" class="btn-text primary" @click.prevent="store">추가</a>
+                    <button class="btn-text primary " @click="updateItem()" v-if="isEditMode">저장</button>
+                    <a href="#" class="btn-text primary" @click.prevent="store" v-else>추가</a>
                 </div>
             </div>
         </div>
@@ -34,10 +36,10 @@
         <!-- 내용 영역 -->
         <div class="container" @keyup="errors = {}">
             <div class="wrap">
-                <div class="edit-btns" v-if="isEditMode">
+                <!-- <div class="edit-btns" v-if="isEditMode">
                     <button class="btn-text black " @click="reset()">취소</button>
                     <button class="btn-text primary " @click="updateItem()">저장</button>
-                </div>
+                </div> -->
                 <div class="m-input-wrap">
                     <h3 class="m-input-title">연락처</h3>
 
@@ -49,7 +51,12 @@
                 </div>
 
                 <div class="m-input-wrap">
-                    <h3 class="m-input-₩">의원 사진</h3>
+                    <div class="item-top mt-20">
+                        <h3 class="title">의원 사진</h3>
+                        <div>
+                            <button class="btn-remove red" v-if="imgUrl" @click.stop="openReminder(undefined,'삭제','취소')">삭제</button>
+                        </div>
+                    </div>
 
                     <img :src="imgUrl" alt="" v-if="imgUrl">
 
@@ -66,7 +73,7 @@
                             <h3 class="title">{{item.name}}</h3>
                             <div>
                                 <button class="btn-remove " @click.stop="setForm(item)">수정</button> &nbsp;
-                                <button class="btn-remove red" @click="openReminder(item)">삭제</button>
+                                <button class="btn-remove red" @click="openReminder(item,'삭제','취소')">삭제</button>
                             </div>
                             
                         </div>
@@ -174,6 +181,10 @@ export default {
 
             isEditMode: false,
             
+            excecuteName: '',
+
+            cancelName: '',
+
             activeReminder: false,
         }
     },
@@ -203,6 +214,7 @@ export default {
             })
             this.imgUrl = item.img.url;
             this.isEditMode = true;
+            window.scrollTo(0,0);
         }, 
 
         async updateItem() {
@@ -238,18 +250,28 @@ export default {
         },
         
         remove(item){
-            this.$axios.delete("/districts/" + this.form.district_id + "/contacts/" + item.id)
-                .then(response => {
-                    this.items = this.items.filter(itemData => itemData.id != item.id);
-                });
+
+            if(Object.keys(item).length !== 0) {
+                this.$axios.delete("/districts/" + this.form.district_id + "/contacts/" + item.id)
+                    .then(response => {
+                        this.items = this.items.filter(itemData => itemData.id != item.id);
+                    });
+            }else {
+                this.imgUrl = "";
+            }
+
             this.closeReminder();
         },
-        openReminder(item) {
+        openReminder(item = {}, excecuteName, cancelName) {
             this.activeReminder = true;
             this.item = item;
+            this.excecuteName = excecuteName;
+            this.cancelName = cancelName;
         },
         closeReminder() {
             this.activeReminder = false;
+            this.excecuteName = "";
+            this.cancelName = "";
             this.item = {};
         },
         reset(){
