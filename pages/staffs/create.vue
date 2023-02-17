@@ -4,19 +4,20 @@
         <Reminder 
             v-if="activeReminder"
             :title="'삭제 하시겠습니까?'"
-            :excecute="'삭제'"
-            :cancel="'취소'"
+            :excecute="excecuteName"
+            :cancel="cancelName"
             :item="item"
-            @excecute="remove(item)"
+            @excecute="remove"
             @cancel="closeReminder"
         />
         <!-- 헤더영역 -->
         <div class="m-header type02" @keyup="errors = {}">
             <div class="wrap">
                 <div class="left">
-                    <a href="#" class="btn-text" @click.prevent="$router.back()">종료</a>
+                    <button class="btn-text black " @click="reset()" v-if="isEditMode">취소</button>
+                    <a href="#" class="btn-text" @click.prevent="$router.back()" v-else>종료</a>
                 </div>
-                <div class="center">
+                <div class="center" v-if="!isEditMode">
                     <div class="m-input-select type01">
                         <select name="" id="" @change="move">
                             <option value="/infos/create">내 마을 소개</option>
@@ -26,7 +27,8 @@
                     </div>
                 </div>
                 <div class="right">
-                    <a href="#" class="btn-text primary" @click.prevent="store">추가</a>
+                    <button class="btn-text primary " @click="updateItem()" v-if="isEditMode">저장</button>
+                    <a href="#" class="btn-text primary" @click.prevent="store" v-else>추가</a>
                 </div>
             </div>
         </div>
@@ -34,10 +36,10 @@
         <!-- 내용 영역 -->
         <div class="container">
             <div class="wrap">
-                <div class="edit-btns" v-if="isEditMode">
+                <!-- <div class="edit-btns" v-if="isEditMode">
                     <button class="btn-text black " @click="reset()">취소</button>
                     <button class="btn-text primary " @click="updateItem()">저장</button>
-                </div>
+                </div> -->
                 <div class="m-input-wrap">
                     <h3 class="m-input-title">직분</h3>
                     <div class="m-input-text type01">
@@ -54,7 +56,12 @@
                         <input type="text" placeholder="연락처" v-model="form.phone">
                     </div>
                     <div class="m-input-error" v-if="errors.phone">{{errors.phone[0]}}</div>
-                    <h3 class="m-input-title">임원진 사진</h3>
+                    <div class="item-top mt-20">
+                        <h3 class="title">임원진 사진</h3>
+                        <div>
+                            <button class="btn-remove red" v-if="imgUrl" @click.stop="openReminder(undefined,'삭제','취소')">삭제</button>
+                        </div>
+                    </div>
 
                     <img :src="imgUrl" alt="" v-if="imgUrl">
 
@@ -65,14 +72,42 @@
                 </div> -->
 
                 <p class="m-comment type02" v-if="!form.info">* 하단 임원진 사진 버튼을 눌러 이미지를 등록해주세요.</p>
+                <ul class="rep" v-if="rep">
+                    <li class="item">
+                        <div class="item-top">
+                            <h3 class="title custom-title">{{rep.position}}</h3>
+                            <div>
+                                <button class="btn-remove " @click.stop="setForm(rep)">수정</button> &nbsp;
+                                <button class="btn-remove red" @click="openReminder(rep,'삭제','취소')">삭제</button>
+                            </div>
+                        </div>
 
+
+                        <div class="img-wrap" >
+                            <img :src="rep.img.url" alt="임원이미지" v-if="rep.img">
+                            <img src="/images/default_profile.jpeg" alt="대체이미지" v-else>
+                            <div class="m-board-btns mt-20">
+                                <div class="m-btns type01" >
+                                    <div class="m-btn-wrap">
+                                        <button type="button" class="m-btn type01 bg-primary height-full">
+                                            {{rep.name}}<br/>
+                                            {{rep.phone}}
+                                        </button>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
                 <ul class="items custom-ul">
-                    <li class="item" v-for="item in items" :key="item.id">
+                    
+                    <li class="item" v-for="item in restItems" :key="item.id">
                         <div class="item-top">
                             <h3 class="title custom-title">{{item.position}}</h3>
                             <div>
                                 <button class="btn-remove " @click.stop="setForm(item)">수정</button> &nbsp;
-                                <button class="btn-remove red" @click="openReminder(item)">삭제</button>
+                                <button class="btn-remove red" @click="openReminder(item,'삭제','취소')">삭제</button>
                             </div>
                         </div>
 
@@ -122,6 +157,14 @@ import Reminder from "../../components/reminder.vue"
 export default {
     components: {InputAddress, InputThumbnail, InputImg, InputLink, InputCamera, Reminder},
     auth: true,
+    computed: {
+        rep() {
+            return this.items.find(item => item.position === '대표');
+        },
+        restItems() {
+            return this.items.filter(item => item.position !== '대표');
+        }
+    },
     data() {
         return {
             items: [],
@@ -144,6 +187,10 @@ export default {
 
             isEditMode: false,
 
+            excecuteName: '',
+
+            cancelName: '',
+
             activeReminder: false,
         }
     },
@@ -158,6 +205,7 @@ export default {
             })
             this.imgUrl = item.img.url;
             this.isEditMode = true;
+            window.scrollTo(0,0);
         }, 
 
         async updateItem() {
@@ -194,18 +242,27 @@ export default {
         },
 
         remove(item){
-            this.$axios.delete("/districts/" + this.form.district_id + "/staff/" + item.id)
-                .then(response => {
-                    this.items = this.items.filter(itemData => itemData.id != item.id);
-                });
+            if(Object.keys(item).length !== 0) {
+                this.$axios.delete("/districts/" + this.form.district_id + "/staff/" + item.id)
+                    .then(response => {
+                        this.items = this.items.filter(itemData => itemData.id != item.id);
+                    });
+            }else {
+                this.imgUrl = "";
+            }
+            
             this.closeReminder();
         },
-        openReminder(item) {
+        openReminder(item = {}, excecuteName, cancelName) {
             this.activeReminder = true;
             this.item = item;
+            this.excecuteName = excecuteName;
+            this.cancelName = cancelName;
         },
         closeReminder() {
             this.activeReminder = false;
+            this.excecuteName = "";
+            this.cancelName = "";
             this.item = {};
         },
         reset(){
@@ -253,5 +310,13 @@ export default {
     }
     .height-full {
         height:100%;
+    }
+    .rep {
+        text-align: center;
+    }
+    .rep li {
+        display: inline-block;
+        text-align: left;
+        width: 48%;
     }
 </style>
