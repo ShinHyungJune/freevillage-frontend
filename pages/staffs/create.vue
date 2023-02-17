@@ -77,8 +77,9 @@
                         </div>
 
 
-                        <div class="img-wrap" v-if="item.img">
-                            <img :src="item.img.url" alt="" v-if="item.img">
+                        <div class="img-wrap" >
+                            <img :src="item.img.url" alt="임원이미지" v-if="item.img">
+                            <img src="/images/default_profile.jpeg" alt="대체이미지" v-else>
                             <div class="m-board-btns mt-20">
                                 <div class="m-btns type01" >
                                     <div class="m-btn-wrap">
