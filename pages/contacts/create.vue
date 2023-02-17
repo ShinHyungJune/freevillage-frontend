@@ -1,5 +1,15 @@
 <template>
     <div class="area-write area-staff">
+        <!-- 삭제 리마인더 -->   
+        <Reminder 
+            v-if="activeReminder"
+            :title="'삭제 하시겠습니까?'"
+            :excecute="'삭제'"
+            :cancel="'취소'"
+            :item="item"
+            @excecute="remove(item)"
+            @cancel="closeReminder"
+        />
         <!-- 헤더영역 -->
         <div class="m-header type02">
             <div class="wrap">
@@ -24,7 +34,7 @@
         <!-- 내용 영역 -->
         <div class="container" @keyup="errors = {}">
             <div class="wrap">
-                <div class="custom" v-if="isEditMode">
+                <div class="edit-btns" v-if="isEditMode">
                     <button class="btn-text black " @click="reset()">취소</button>
                     <button class="btn-text primary " @click="updateItem()">저장</button>
                 </div>
@@ -53,10 +63,10 @@
                 > 
                     <div class="item" v-for="item in items" :key="item.id">
                         <div class="item-top">
-                            <h3 class="title">{{item.phone}}</h3>
+                            <h3 class="title">{{item.name}}</h3>
                             <div>
                                 <button class="btn-remove " @click.stop="setForm(item)">수정</button> &nbsp;
-                                <button class="btn-remove red" @click.stop="remove(item)">삭제</button>
+                                <button class="btn-remove red" @click="openReminder(item)">삭제</button>
                             </div>
                             
                         </div>
@@ -137,15 +147,16 @@ import InputImg from "../../components/form/posts/inputImg";
 import InputThumbnail from "../../components/form/posts/inputThumbnail";
 import InputAddress from "../../components/form/inputAddress";
 import Form from "@/utils/Form";
+import Reminder from "../../components/reminder.vue"
 
 export default {
-    components: {draggable,InputAddress, InputThumbnail, InputImg, InputLink, InputCamera},
+    components: {draggable,InputAddress, InputThumbnail, InputImg, InputLink, InputCamera, Reminder},
     auth: true,
     data() {
         return {
             items: [],
 
-            item: "",
+            item: {},
 
             form: {
                 district_id: this.$auth.user.district.id,
@@ -161,6 +172,8 @@ export default {
             activeLinkPop: false,
 
             isEditMode: false,
+            
+            activeReminder: false,
         }
     },
     methods: {
@@ -196,8 +209,6 @@ export default {
                 let form = (new Form(this.form).data());
                 const {data} = await this.$axios.post(`/districts/${this.form.district_id}/updates/${this.form.id}`, form);
                 const targetIdx = await this.items.findIndex(item => item.id === this.form.id);
-                console.log({data},'updateItemResponse')
-                console.log({targetIdx},targetIdx)
                 if(data.result) {
                     this.items.splice(targetIdx,1,this.form);
                 }
@@ -229,8 +240,16 @@ export default {
                 .then(response => {
                     this.items = this.items.filter(itemData => itemData.id != item.id);
                 });
+            this.closeReminder();
         },
-
+        openReminder(item) {
+            this.activeReminder = true;
+            this.item = item;
+        },
+        closeReminder() {
+            this.activeReminder = false;
+            this.item = {};
+        },
         reset(){
             this.form = {
                 ...this.form,
@@ -248,7 +267,6 @@ export default {
     mounted() {
         this.$axios.get("/districts/" + this.form.district_id + "/contacts")
             .then(response => {
-                console.log(response.data.data,'mounted')
                 this.items = [...response.data.data];
             });
     }
@@ -256,7 +274,7 @@ export default {
 </script>
 
 <style scoped>
-    .custom {
+    .edit-btns {
        display:flex; align-items: center; justify-content: space-between;
        margin-top: 1rem;
     }
