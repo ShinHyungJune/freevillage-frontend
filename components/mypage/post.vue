@@ -7,7 +7,8 @@
             <div class="m-board-fragment">
                 <div class="m-board-top">
                     <div class="left">
-                        <p class="subtitle">{{ item.district.district }}</p>
+                        <p class="subtitle" v-if="item.district">{{ item.district.district }}</p>
+                        <p class="subtitle" v-else>전체</p>
                         <h3 class="title">
                             {{ item.title }}
                         </h3>
