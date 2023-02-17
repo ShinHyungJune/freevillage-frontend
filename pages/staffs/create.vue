@@ -166,6 +166,7 @@ export default {
                 const targetIdx = await this.items.findIndex(item => item.id === this.form.id);
                 if(data.result) {
                     this.items.splice(targetIdx,1,this.form);
+                    this.items[targetIdx].img.url = this.imgUrl;
                 }
             } catch (error) {
                 if (error.response && error.response.data)
