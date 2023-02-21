@@ -13,7 +13,7 @@ export default {
         },
         meta: [
             {charset: 'utf-8'},
-            {name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0'},
+            {name: 'viewport', content: 'width=device-width, initial-scale=1'},
             {hid: 'description', name: 'description', content: ''},
             {name: 'format-detection', content: 'telephone=no'},
             {property: 'og:image', content: 'http://api.jayuvillages.com/static/jayuvillage.png'},
@@ -21,6 +21,7 @@ export default {
             {property: 'og:description', content:'대한민국세력은 하나로 함께'},
         ],
         link: [
+            {rel: 'stylesheet', href: '//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css'},
             {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
             {rel: 'apple-touch-icon', type: 'image/x-icon', href: '/images/apple-touch-icon.png'},
             {rel: 'icon', type: 'image/x-icon', href: '/images/android-chrome-192x192.png'},
