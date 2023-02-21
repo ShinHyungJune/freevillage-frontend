@@ -6,7 +6,7 @@
                 <a href="#" :class="`btn-filter ${form.align === 'asc' ? 'active' : ''}`" @click.prevent="() => {form.align = 'asc'; getItems();}">오래된순</a>
             </div>
 
-            <comment v-for="item in items.data" :key="item.id" :item="item" :post_id="form.post_id" />
+            <comment v-for="item in items.data" :key="item.id" :item="item" :post_id="form.post_id" @removed="removed"/>
         </div>
 
         <no-ssr>
@@ -81,6 +81,12 @@ export default {
                 this.$emit('calculateCommentCount', 'remove')
             }
 
+        },
+
+        removed(item){
+            this.items.data = this.items.data.filter(itemData => itemData.id != item.id);
+
+            this.$emit("removed");
         }
     },
 

@@ -72,9 +72,9 @@
                                     <div class="box">
                                         <h3 class="title">자유마을가입률</h3>
 
-                                        <div class="value">
+                                        <div :class="`value level${registerRateLevel.level}`">
                                             <div class="value-inner">
-                                                <p class="text">{{ registerRates.rate.toLocaleString() }}%</p>
+                                                <p class="text">{{registerRateLevel.label}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -246,7 +246,7 @@
                     <div class="m-items type01">
                         <nuxt-link :to="`/posts/${notice.id}`" class="m-item" v-for="notice in notices.data" :key="notice.id">
                             <div class="m-ratioBox-wrap" v-if="notice.img">
-                                <div class="m-ratioBox" :style="`background-image:url('${notice.img.url}');`"></div>
+                                <div class="m-ratioBox" :style="`background-image:url('${notice.img.preview_url}');`"></div>
                             </div>
 
                             <div class="content">
@@ -277,7 +277,7 @@
                             <nuxt-link :to="`/posts/${clip.id}`" class="m-item" >
                                 <div class="m-ratioBox-wrap" v-if="clip.img">
                                     <div class="m-ratioBox">
-                                        <img :src="clip.img.url" alt="">
+                                        <img :src="clip.img.preview_url" alt="">
                                     </div>
                                 </div>
 
@@ -310,7 +310,7 @@
                         <div class="m-item-wrap" v-for="photo in photos.data" :key="photo.id">
                             <nuxt-link :to="`/posts/${photo.id}`" class="m-item">
                                 <div class="m-ratioBox-wrap" v-if="photo.img">
-                                    <div class="m-ratioBox" :style="`background-image:url('${photo.img.url}');`"></div>
+                                    <div class="m-ratioBox" :style="`background-image:url('${photo.img.preview_url}');`"></div>
                                 </div>
 
                                 <div class="content">
@@ -441,6 +441,43 @@ export default {
     computed: {
         district(){
             return this.$store.state.district;
+        },
+
+        registerRateLevel(){
+            if(this.registerRates.rate <= 1)
+                return {
+                    level:1,
+                    label: "낮음"
+                };
+
+            if(this.registerRates.rate <= 3)
+                return {
+                    level:2,
+                    label: "보통"
+                };
+
+            if(this.registerRates.rate <= 5)
+                return {
+                    level:3,
+                    label: "조금 높음"
+                };
+
+            if(this.registerRates.rate <= 10)
+                return {
+                    level:4,
+                    label: "높음"
+                };
+
+            if(this.registerRates.rate <= 20)
+                return {
+                    level:5,
+                    label: "매우 높음"
+                };
+
+           return {
+                level:6,
+                label: "아주 높음"
+            };
         }
     },
 

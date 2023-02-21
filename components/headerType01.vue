@@ -1,25 +1,5 @@
 <template>
     <div>
-        <!-- 나의 마을 찾기 팝업 -->
-        <div class="m-pop type01" id="pop1" v-if="active">
-            <div class="m-pop-inner">
-                <button class="btn-close m-script-pop" data-target="#pop1" @click="active = false">
-                    <img src="/images/x.png" alt="" style="width:21px;">
-                </button>
-
-                <div class="m-pop-title">
-                    <p class="subtitle">소속된 마을을 찾을 수 있어요.</p>
-                    나의 <span class="point">마을 찾기</span>
-                </div>
-
-                <input-region @change="(data) => {form.district = data.district}"  />
-
-                <div class="mt-20"></div>
-
-                <button type="button" class="m-btn type03 width-100" @click="search">검색하기</button>
-            </div>
-        </div>
-
         <!-- 사이드바 -->
         <div class="m-sidebar type01" v-if="activeSidebar">
             <div class="m-sidebar-inner">
@@ -62,7 +42,7 @@
                         </nuxt-link>
                     </div>
                 </div>
-                
+
 
                 <!-- TODO 230214 주석처리 -->
                 <!-- <div class="content">
@@ -143,10 +123,17 @@
 
                         <img src="/images/chevron-down.png" style="width:10px;" alt="" class="deco">
                     </button> -->
-                    <button class="btn-select point" @click="active = true;">
+                    <button class="btn-select point" @click="active = !active">
                         {{ district.id == 0 ? "자유마을" : district.district }}
 
                         <img src="/images/chevron-down.png" style="width:10px;" alt="" class="deco">
+
+                        <div class="box-links" v-if="active">
+                            <a href="#" class="link active" @click.prevent="toMain">자유마을 홈</a>
+                            <a href="#" class="link" @click.prevent="toDistrict($auth.user.district)" v-if="$auth.user">내 동네</a>
+                            <a href="#" class="link" v-for="myDistrict in $auth.user.my_districts" :key="myDistrict.id" @click.prevent="toDistrict(myDistrict.district)" v-if="$auth.user">{{myDistrict.district.district}}</a>
+                            <nuxt-link to="/myDistricts" class="link">동네 설정하기</nuxt-link>
+                        </div>
                     </button>
                 </div>
 
@@ -194,11 +181,11 @@ export default {
             this.scrollTop();
         },
 
-        toDistrict(){
+        toDistrict(district){
             if(!this.$auth.user)
                 return this.$router.push("/auth/login");
 
-            this.$store.commit("changeDistrict", this.$auth.user.district);
+            this.$store.commit("changeDistrict", district);
 
             location.href="/";
 
@@ -214,7 +201,8 @@ export default {
             location.href="/";
 
             this.activeSidebar = false;
-        }
+        },
+
     },
 
     computed: {

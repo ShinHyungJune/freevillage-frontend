@@ -282,7 +282,7 @@ export default {
                     this.form = {
                         ...this.form,
                         ...this.item,
-                        district_id: this.item.district.id,
+                        district_id: this.item.district ? this.item.district.id : 0,
                         thumbnail: "",
                     }
 

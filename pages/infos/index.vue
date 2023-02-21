@@ -32,25 +32,29 @@
 
             <section class="section-content">
                 <div class="wrap">
-                    <div class="fragment">
-                        <div class="m-title type01 align-left">
-                            {{this.$store.state.district.district}}은
+                    <div class="fragment-wrap" v-if="item">
+                        <div class="fragment">
+                            <div class="m-title type01 align-left">
+                                {{this.$store.state.district.district}}은
+                            </div>
+
+                            <div class="m-editor-body type01" v-html="item.content" v-if="item"></div>
                         </div>
 
-                        <div class="m-editor-body type01" v-html="item.content" v-if="item"></div>
-                    </div>
+                        <div class="fragment mt-40">
+                            <div class="m-title type01 align-left">
+                                {{this.$store.state.district.district}} 소개
+                            </div>
 
-                    <div class="fragment mt-40">
-                        <div class="m-title type01 align-left">
-                            {{this.$store.state.district.district}} 소개
+                            <div id="map" class="m-map type01" style="background-color:#e1e1e1;"></div>
+
+                            <div class="mt-8"></div>
+
+                            <img :src="item.img.url" alt="" v-if="item && item.img">
                         </div>
-
-                        <div id="map" class="m-map type01" style="background-color:#e1e1e1;"></div>
-
-                        <div class="mt-8"></div>
-
-                        <img :src="item.img.url" alt="" v-if="item && item.img">
                     </div>
+                    <div class="m-empty type01" v-else>준비중입니다.</div>
+
 
 
                     <img src="/images/about-bg.png" alt="" class="deco-about">

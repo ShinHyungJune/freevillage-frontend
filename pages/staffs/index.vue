@@ -32,6 +32,8 @@
 
             <section class="section-content">
                 <div class="wrap">
+                    <div class="m-empty type01" v-if="items.data.length === 0">준비중입니다.</div>
+
                     <div class="img-wrap" v-for="item in items.data" :key="item.id">
                         <img :src="item.img.url" alt="" class="img" v-if="item.img">
 
@@ -39,7 +41,6 @@
                             <img src="/images/call.png" alt="" style="width:17px;">
                         </a>-->
                     </div>
-
 
                     <img src="/images/about-bg.png" alt="" class="deco-about">
                 </div>

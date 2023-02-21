@@ -47,6 +47,24 @@ html {
 .m-header.type01 .selects {
     position:relative;
 }
+.m-header.type01 .box-links {
+    min-width:172px;
+    padding:25px 20px;
+    position:absolute; top:calc(100% + 20px); left:0;
+    border-radius:5px;
+    background-color:#fff; box-shadow:0px 3px 6px rgba(0,0,0,0.16);
+}
+.m-header.type01 .box-links .link {
+    display:block; width:100%;
+    margin-top:20px;
+    white-space: nowrap; font-weight:500; color:#aaa; text-align: left;
+}
+.m-header.type01 .box-links .link:first-of-type {
+    margin-top:0;
+}
+.m-header.type01 .box-links .link.active {
+    color:#000;
+}
 .m-header.type01 .btn-select {
     display:flex; align-items: center;
     font-size:22px; font-weight:bold; font-family: GmarketSans;
@@ -529,14 +547,14 @@ html {
     background-color:#fff; border-radius:5px; box-shadow:0px 3px 6px rgba(0,0,0,0.16);
 }
 
-.area-index .section-values .box-wrap:nth-child(2) .box .value {
+.area-index .section-values .box-wrap:nth-child(2) .box .value:after {
     background-color:#B6E7B3;
 }
 .area-index .section-values .box-wrap:nth-child(2) .box .value-inner {
     background-color:#0BAF00;
 }
 
-.area-index .section-values .box-wrap:nth-child(3) .box .value {
+.area-index .section-values .box-wrap:nth-child(3) .box .value:after {
     background-color:#FDDBB3;
 }
 .area-index .section-values .box-wrap:nth-child(3) .box .value-inner {
@@ -549,13 +567,20 @@ html {
     width:90px; height:90px;
     padding:13px;
     margin:0 auto;
-    background-color:#bbb;
+    position:relative;
     border-radius:100%;
+}
+.area-index .section-values .box .value:after {
+    width:100%; height:100%; content:"";
+    position:absolute; top:0; left:0;
+    border-radius:100%;
+    background-color:#bbb;
 }
 .area-index .section-values .box .value-inner {
     content:"";
     display:flex; align-content: center; justify-content: center;
     width:100%; height:100%;
+    position:relative; z-index:1;
     background-color:#777;
     border-radius:100%;
 }
@@ -566,6 +591,46 @@ html {
     margin-bottom:10px;
     font-size:12px;
 }
+.area-index .section-values .box .value.level1:after {
+    background-color:#691DB5 !important;
+    opacity:0.3;
+}
+.area-index .section-values .box .value.level1 .value-inner {
+    background-color:#691DB5;
+}
+
+.area-index .section-values .box .value.level2:after {
+    background-color:#0A8803 !important;
+    opacity:0.3;
+}
+.area-index .section-values .box .value.level2 .value-inner {
+    background-color:#0A8803;
+}
+
+.area-index .section-values .box .value.level3:after {
+    background-color:#FFE607 !important;
+    opacity:0.3;
+}
+.area-index .section-values .box .value.level3 .value-inner {
+    background-color:#FFE607;
+}
+
+.area-index .section-values .box .value.level4:after {
+    background-color:#FF630C !important;
+    opacity:0.3;
+}
+.area-index .section-values .box .value.level4 .value-inner {
+    background-color:#FF630C;
+}
+
+.area-index .section-values .box .value.level5:after {
+    background-color:#D30000 !important;
+    opacity:0.3;
+}
+.area-index .section-values .box .value.level5 .value-inner {
+    background-color:#D30000;
+}
+
 
 .area-index .section-banner {
     margin-bottom:10px;
@@ -1320,6 +1385,10 @@ html {
 .m-comments.type01 .m-comment .content {
     flex:auto;
 }
+.m-comments.type01 .m-comment .btn-more {
+    display:flex; align-items: flex-start; justify-content: flex-end;
+    width:40px; height:40px;
+}
 .m-comments.type01 .m-comment .title {
     margin-bottom:2px;
     font-weight:bold;
@@ -1679,6 +1748,31 @@ label {
     background-color:#0BAF00; color:#fff;
 }
 
+.m-input-checkboxes.type02 {
+    display:flex; flex-wrap:wrap;
+    margin:-4px;
+}
+.m-input-checkboxes.type02 .m-input-checkbox-wrap {
+    width:50%; padding:4px;
+}
+.m-input-checkboxes.type02 .m-input-checkbox {
+    display:flex; align-items: center; justify-content: space-between;
+    height:56px; padding:0 24px;
+    font-size:18px; font-weight:500;
+    background-color:#0BAF00; color:#fff; border-radius:5px; border:1px solid transparent;
+}
+.m-input-checkboxes.type02 .m-input-checkbox i {
+    font-size:20px;
+    color:#fff;
+}
+.m-input-checkboxes.type02 .m-input-checkbox.create {
+    display:flex; align-items: center; justify-content: center;
+    background-color:#fff; border-color:#DDDDDD;
+}
+.m-input-checkboxes.type02 .m-input-checkbox.create i {
+    font-size:24px;
+    color:black;
+}
 .m-input-select.type01  {
     cursor:pointer;
     border-radius:0; /* 아이폰 사파리 보더 없애기 */
@@ -1983,3 +2077,15 @@ label {
 .m-temp.type01 .level10 .gage .count:after {
     background-image:url("../images/f_10.png");
 }
+
+.area-myDistricts .container .title {
+    margin-bottom:4px;
+    font-size:22px; text-align: center; font-weight:bold
+}
+.area-myDistricts .container .body {
+    margin-bottom:24px;
+    color:#777777; text-align: center;
+}
+
+
+

@@ -1,5 +1,8 @@
 <template>
     <div class="m-comment">
+        <!-- 신고 팝업 -->
+        <spam-pop :target_id="item.id" target_model="comments" v-if="activeSpamPop" @close="activeSpamPop = false" />
+
         <div class="m-comment-inner">
             <div class="thumbnail" :style="`background-image:url(${item.user.img.url})`" v-if="item.user.img"></div>
 
@@ -29,9 +32,18 @@
                 </form>
             </div>
 
-            <button class="btn-more">
+            <button class="btn-more" @click="activeBtns = !activeBtns">
                 <img src="/images/dots.png" alt="" style="width:3px;">
             </button>
+        </div>
+
+        <div class="m-btns type01" v-if="activeBtns">
+            <div class="m-btn-wrap">
+                <a href="#" class="m-btn type01 bg-revert-red" @click.prevent="remove">삭제하기</a>
+            </div>
+            <div class="m-btn-wrap">
+                <a href="#" class="m-btn type01 bg-primary" @click.prevent="activeSpamPop = true">신고하기</a>
+            </div>
         </div>
 
         <div class="m-comments" v-if="item.comments.length > 0 && activeReplies">
@@ -41,6 +53,7 @@
 </template>
 
 <script>
+import SpamPop from "./spamPop";
 export default {
     props: {
         item: {
@@ -52,7 +65,7 @@ export default {
         },
 
     },
-    components: {},
+    components: {SpamPop},
     data() {
         return {
             form: {
@@ -62,7 +75,8 @@ export default {
             },
             active: false,
             activeReplies: false,
-
+            activeSpamPop: false,
+            activeBtns: false,
         }
     },
     methods: {
@@ -91,6 +105,13 @@ export default {
                     this.item.comments.push(response.data.data);
                 });
         },
+
+        remove(){
+            this.$axios.delete("/comments/" + this.item.id)
+                .then(response => {
+                    this.$emit("removed", this.item);
+                });
+        }
     },
 
     mounted() {

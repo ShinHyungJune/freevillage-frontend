@@ -216,7 +216,7 @@
                 </div>
 
                 <div class="wrap">
-                    <comments :post_id="item.id" @calculateCommentCount="calculateCommentCount" v-if="item.id"/>
+                    <comments :post_id="item.id" @calculateCommentCount="calculateCommentCount" v-if="item.id" @removed="item.comment_count -= 1"/>
                 </div>
             </div>
 
