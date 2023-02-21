@@ -9,7 +9,8 @@
             <div class="content">
                 <h3 class="title">{{ item.user.name }}</h3>
                 <p class="sub">{{ item.user.district.district }} · {{ item.diff_at }}</p>
-                <p class="body">{{ item.content }}</p>
+                <p class="body removed" v-if="item.deleted_at">글이 삭제되었습니다.</p>
+                <p class="body" v-else>{{ item.content }}</p>
 
                 <div class="utils">
                     <button class="btn-like" @click="toggleLike">
@@ -17,7 +18,7 @@
                         <img src="/images/heart-inactive.png" alt="" style="width:14px;" v-else>
                         {{item.like_count}}
                     </button>
-                    <button class="btn-text" @click="active = !active" v-if="!item.is_reply">답글쓰기</button>
+                    <button class="btn-text" @click="active = !active" v-if="!item.is_reply && !item.deleted_at">답글쓰기</button>
                     <button class="btn-text" style="margin-left:10px;" @click="activeReplies = !activeReplies" v-if="!item.is_reply && item.comments.length > 0">답글보기 {{item.comments.length}}</button>
                 </div>
 
@@ -33,7 +34,7 @@
             </div>
 
             <button class="btn-more" @click="activeBtns = !activeBtns">
-                <img src="/images/dots.png" alt="" style="width:3px;">
+                <img src="/images/dots.png" alt="" style="width:3px;" v-if="!item.deleted_at">
             </button>
         </div>
 
@@ -47,7 +48,7 @@
         </div>
 
         <div class="m-comments" v-if="item.comments.length > 0 && activeReplies">
-            <comment v-for="reply in item.comments" :key="reply.id" :item="reply"></comment>
+            <comment v-for="reply in item.comments" :key="reply.id" :item="reply" @removed="replyRemoved" />
         </div>
     </div>
 </template>
@@ -109,8 +110,21 @@ export default {
         remove(){
             this.$axios.delete("/comments/" + this.item.id)
                 .then(response => {
+                    this.item.deleted_at = true;
+
                     this.$emit("removed", this.item);
+
+                    this.activeBtns = false;
                 });
+        },
+
+        replyRemoved(reply){
+            this.item.comments = this.item.comments.map(comment => {
+                if(comment.id == reply.id)
+                    return reply;
+
+                return comment;
+            })
         }
     },
 

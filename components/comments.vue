@@ -84,9 +84,13 @@ export default {
         },
 
         removed(item){
-            this.items.data = this.items.data.filter(itemData => itemData.id != item.id);
+            console.log(item);
+            this.items.data = this.items.data.map(itemData => {
+                if(itemData.id == item.id)
+                    return item;
 
-            this.$emit("removed");
+                return itemData;
+            });
         }
     },
 

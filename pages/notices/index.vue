@@ -75,7 +75,7 @@ export default {
                 started_at: "",
                 finished_at: "",
                 orderBy: "created_at",
-                district_id: "",
+                district_id: this.$store.state.district ? this.$store.state.district.id : "",
             },
 
             items: {

@@ -111,6 +111,8 @@ export default {
         remove(item){
             this.$axios.delete("/myDistricts/" + item.id)
                 .then(response => {
+                    this.$auth.fetchUser();
+
                     this.items.data = this.items.data.filter(itemData => itemData.id != item.id);
                 });
         },

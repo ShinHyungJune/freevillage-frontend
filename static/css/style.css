@@ -1401,6 +1401,9 @@ html {
     margin-bottom:10px;
     font-size:18px;
 }
+.m-comments.type01 .m-comment .body.removed {
+    color:#aaa;
+}
 .m-comments.type01 .m-comment .btn-like {
     margin-right:30px;
     font-size:14px; color:#777777;

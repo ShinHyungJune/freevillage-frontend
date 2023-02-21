@@ -129,9 +129,9 @@
                         <img src="/images/chevron-down.png" style="width:10px;" alt="" class="deco">
 
                         <div class="box-links" v-if="active">
-                            <a href="#" class="link active" @click.prevent="toMain">자유마을 홈</a>
-                            <a href="#" class="link" @click.prevent="toDistrict($auth.user.district)" v-if="$auth.user">내 동네</a>
-                            <a href="#" class="link" v-for="myDistrict in $auth.user.my_districts" :key="myDistrict.id" @click.prevent="toDistrict(myDistrict.district)" v-if="$auth.user">{{myDistrict.district.district}}</a>
+                            <a href="#" :class="`link ${district.id == 0 ? 'active' : ''}`" @click.prevent="toMain">자유마을 홈</a>
+                            <a href="#" :class="`link ${$auth.user.district.id == district.id ? 'active' : ''}`" @click.prevent="toDistrict($auth.user.district)" v-if="$auth.user">내 동네</a>
+                            <a href="#" :class="`link ${district.id == myDistrict.district.id ? 'active' : ''}`" v-for="myDistrict in $auth.user.my_districts" :key="myDistrict.district.id" @click.prevent="toDistrict(myDistrict.district)" v-if="$auth.user">{{myDistrict.district.district}}</a>
                             <nuxt-link to="/myDistricts" class="link">동네 설정하기</nuxt-link>
                         </div>
                     </button>
