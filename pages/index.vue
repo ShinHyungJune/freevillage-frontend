@@ -150,6 +150,7 @@
                                         </h3>
                                         <p class="more">{{ districtWeekRegisterCounts[1].now_week_count }}
                                             <span class="tri" v-if="districtWeekRegisterCounts[1].up_down === 'down'">▼</span>
+                                            <span class="tri" v-else-if="districtWeekRegisterCounts[1].now_week_count === '0'">−</span>
                                             <span class="tri" v-else>▲</span>
                                         </p>
                                     </div>
@@ -169,6 +170,7 @@
                                         </h3>
                                         <p class="more">{{ districtWeekRegisterCounts[0].now_week_count }}
                                             <span class="tri" v-if="districtWeekRegisterCounts[0].up_down === 'down'">▼</span>
+                                            <span class="tri" v-else-if="districtWeekRegisterCounts[0].now_week_count === '0'">−</span>
                                             <span class="tri" v-else>▲</span>
                                         </p>
                                     </div>
@@ -187,6 +189,7 @@
                                         </h3>
                                         <p class="more">{{ districtWeekRegisterCounts[2].now_week_count }}
                                             <span class="tri" v-if="districtWeekRegisterCounts[2].up_down === 'down'">▼</span>
+                                            <span class="tri" v-else-if="districtWeekRegisterCounts[2].now_week_count === '0'">−</span>
                                             <span class="tri" v-else>▲</span>
                                         </p>
                                     </div>
@@ -210,12 +213,12 @@
                                     <td>{{index + 1}}위</td>
                                     <td>{{ districtWeekRegisterCount.city}} {{districtWeekRegisterCount.district}}</td>
                                     <td class="more down" v-if="districtWeekRegisterCount.up_down === 'down'">{{districtWeekRegisterCount.now_week_count}} <span class="tri">▼</span></td>
+                                    <td class="more" v-else-if="districtWeekRegisterCount.now_week_count === '0'">{{districtWeekRegisterCount.now_week_count}} <span class="tri">−</span></td>
                                     <td class="more up" v-else>{{districtWeekRegisterCount.now_week_count}} <span class="tri">▲</span></td>
                                     </template>
                                 </tr>
                                 </tbody>
                             </table>
-
                             <a href="#" class="m-btn type02" @click.prevent="getRankings(100)">마을 랭킹 TOP 100 +</a>
                         </div>
                     </div>
