@@ -70,7 +70,7 @@
 
                                 <div class="box-wrap">
                                     <div class="box">
-                                        <h3 class="title">자유마을가입률</h3>
+                                        <h3 class="title">마을 온도</h3>
 
                                         <div :class="`value level${registerRateLevel.level}`">
                                             <div class="value-inner">
@@ -99,13 +99,13 @@
 
                             <div class="m-btns type01">
                                 <div class="m-btn-wrap">
-                                    <nuxt-link to="/contents/greeting" class="m-btn type01">총재 인사말</nuxt-link>
+                                    <nuxt-link to="/contents/about" href="#" class="m-btn type01">자유마을이란</nuxt-link>
                                 </div>
                                 <div class="m-btn-wrap">
                                     <nuxt-link to="/contents/declares" class="m-btn type01">10대 강령</nuxt-link>
                                 </div>
                                 <div class="m-btn-wrap">
-                                    <nuxt-link to="/contents/about" href="#" class="m-btn type01">자유마을이란</nuxt-link>
+                                    <nuxt-link to="/contents/greeting" class="m-btn type01">총재 인사말</nuxt-link>
                                 </div>
                             </div>
                         </div>
