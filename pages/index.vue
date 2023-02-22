@@ -70,7 +70,7 @@
 
                                 <div class="box-wrap">
                                     <div class="box">
-                                        <h3 class="title">자유마을가입률</h3>
+                                        <h3 class="title">마을 온도</h3>
 
                                         <div :class="`value level${registerRateLevel.level}`">
                                             <div class="value-inner">
@@ -99,13 +99,13 @@
 
                             <div class="m-btns type01">
                                 <div class="m-btn-wrap">
-                                    <nuxt-link to="/contents/greeting" class="m-btn type01">총재 인사말</nuxt-link>
+                                    <nuxt-link to="/contents/about" href="#" class="m-btn type01">자유마을이란</nuxt-link>
                                 </div>
                                 <div class="m-btn-wrap">
                                     <nuxt-link to="/contents/declares" class="m-btn type01">10대 강령</nuxt-link>
                                 </div>
                                 <div class="m-btn-wrap">
-                                    <nuxt-link to="/contents/about" href="#" class="m-btn type01">자유마을이란</nuxt-link>
+                                    <nuxt-link to="/contents/greeting" class="m-btn type01">총재 인사말</nuxt-link>
                                 </div>
                             </div>
                         </div>
@@ -150,6 +150,7 @@
                                         </h3>
                                         <p class="more">{{ districtWeekRegisterCounts[1].now_week_count }}
                                             <span class="tri" v-if="districtWeekRegisterCounts[1].up_down === 'down'">▼</span>
+                                            <span class="tri" v-else-if="districtWeekRegisterCounts[1].now_week_count === '0'">−</span>
                                             <span class="tri" v-else>▲</span>
                                         </p>
                                     </div>
@@ -169,6 +170,7 @@
                                         </h3>
                                         <p class="more">{{ districtWeekRegisterCounts[0].now_week_count }}
                                             <span class="tri" v-if="districtWeekRegisterCounts[0].up_down === 'down'">▼</span>
+                                            <span class="tri" v-else-if="districtWeekRegisterCounts[0].now_week_count === '0'">−</span>
                                             <span class="tri" v-else>▲</span>
                                         </p>
                                     </div>
@@ -187,6 +189,7 @@
                                         </h3>
                                         <p class="more">{{ districtWeekRegisterCounts[2].now_week_count }}
                                             <span class="tri" v-if="districtWeekRegisterCounts[2].up_down === 'down'">▼</span>
+                                            <span class="tri" v-else-if="districtWeekRegisterCounts[2].now_week_count === '0'">−</span>
                                             <span class="tri" v-else>▲</span>
                                         </p>
                                     </div>
@@ -210,12 +213,12 @@
                                     <td>{{index + 1}}위</td>
                                     <td>{{ districtWeekRegisterCount.city}} {{districtWeekRegisterCount.district}}</td>
                                     <td class="more down" v-if="districtWeekRegisterCount.up_down === 'down'">{{districtWeekRegisterCount.now_week_count}} <span class="tri">▼</span></td>
+                                    <td class="more" v-else-if="districtWeekRegisterCount.now_week_count === '0'">{{districtWeekRegisterCount.now_week_count}} <span class="tri">−</span></td>
                                     <td class="more up" v-else>{{districtWeekRegisterCount.now_week_count}} <span class="tri">▲</span></td>
                                     </template>
                                 </tr>
                                 </tbody>
                             </table>
-
                             <a href="#" class="m-btn type02" @click.prevent="getRankings(100)">마을 랭킹 TOP 100 +</a>
                         </div>
                     </div>
