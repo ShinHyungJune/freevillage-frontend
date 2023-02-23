@@ -41,19 +41,20 @@ export default {
         changeFile(event) {
             // this.files = [];
 
-            let file = event.target.files[0];
+            this.file = event.target.files[0];
 
             let form = new FormData();
 
-            form.append("image", file);
+            form.append("image", this.file);
             form.append("district_id", this.$store.state.district ? this.$store.state.district.id : 0);
 
             this.$axios.post("/posts/images", form)
                 .then((response) => {
                     // 파일 객체는 object안에 넣어서 emit할 시 인식으로 못해서 별도로 emit해줘야함
-                    this.$emit("changeFile", file);
+                    this.$emit("changeFile", this.file);
 
                     this.$emit("change", {
+                        file: this.file,
                         name: response.data.data.file_name,
                         url: response.data.data.original_url,
                         html : `<img src="${response.data.data.original_url}"/>`

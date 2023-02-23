@@ -108,6 +108,7 @@
 
                 <div contenteditable="true" placeholder="글을 입력해주세요" class="m-editor type01" ref="content"></div>
 
+
                 <div class="m-input-error" v-if="errors.content">{{errors.content[0]}}</div>
 
 
@@ -118,7 +119,24 @@
         <!-- 하단 네비게이션바 -->
         <div class="m-navigation type01">
             <div class="navs">
-                <div class="nav-wrap" v-if="">
+                <div class="nav-wrap">
+                    <input-camera id="camera" @change="getImgInfo"/>
+                </div>
+
+                <div class="nav-wrap active">
+                    <input-link id="link" @change="(data) => {this.$refs.content.innerHTML += data.html}"/>
+                </div>
+
+                <div class="nav-wrap">
+                    <input-img id="img" @change="getImgInfo"/>
+                </div>
+
+                <div class="nav-wrap" v-if="form.board !== 'clips'">
+                    <input-thumbnail id="thumbnail" @change="getThumbnailInfo" :img-url="item ? item.img.url : ''" />
+                </div>
+            </div>
+            <!-- <div class="navs">
+                <div class="nav-wrap">
                     <input-camera id="camera" @change="(data) => {this.$refs.content.innerHTML += data.html}"/>
                 </div>
 
@@ -133,7 +151,7 @@
                 <div class="nav-wrap" v-if="form.board !== 'clips'">
                     <input-thumbnail id="thumbnail" @change="(data) => {form.thumbnail = data.file}" :img-url="item ? item.img.url : ''" />
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -145,12 +163,15 @@ import InputImg from "../../components/form/posts/inputImg";
 import InputThumbnail from "../../components/form/posts/inputThumbnail";
 import InputAddress from "../../components/form/inputAddress";
 import Form from "@/utils/Form";
-
 export default {
     components: {InputAddress, InputThumbnail, InputImg, InputLink, InputCamera},
     auth: true,
     data() {
         return {
+            imgs: {
+                repImg: {},
+                contentImgs: [],
+            },
             item: "",
 
             form: {
@@ -184,6 +205,12 @@ export default {
     },
     methods: {
         store() {
+            const editor = document.querySelector('.m-editor');
+            const firstPic = editor.querySelectorAll(":scope > img")[0];
+            if(!this.form.thumbnail && firstPic) { //대표이미지가 없을 경우: 에디터 내에 사진이 있을 경우 첫번째 사진정보를 this.form.thumbnail에 추가
+                const firstPicFileInfo = this.imgs.contentImgs.find(img => img.url === firstPic.src).file;
+                this.form.thumbnail = firstPicFileInfo;
+            }
             this.form.content = this.$refs.content ? this.$refs.content.innerHTML : "";
 
             if(this.form.video_url) {
@@ -245,6 +272,22 @@ export default {
                 embedUrl: embedUrl,
                 thumbnail: thumbnail
             };
+        },
+        setContentImg(data) {
+            this.$refs.content.innerHTML += data.html
+        },
+        setThumbnail(data) {
+            this.form.thumbnail = data.file
+        },
+        getImgInfo(data) {
+            this.setContentImg(data);
+            this.imgs.contentImgs.push(data);
+        },
+        getThumbnailInfo(data) {
+            this.setThumbnail(data);
+            this.imgs.repImg = {
+                ...data,
+            }
         },
 
         reset(){
