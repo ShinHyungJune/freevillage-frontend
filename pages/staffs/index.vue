@@ -30,20 +30,55 @@
 
             <div class="mt-32"></div>
 
-            <section class="section-content">
+            <section class="area-staff">
+                <div class="m-empty type01" v-if="items.length === 0">준비중입니다.</div>
+
                 <div class="wrap">
-                    <div class="m-empty type01" v-if="items.data.length === 0">준비중입니다.</div>
-
-                    <div class="img-wrap" v-for="item in items.data" :key="item.id">
-                        <img :src="item.img.url" alt="" class="img" v-if="item.img">
-
-<!--                        <a :href="`tel:${item.phone}`" class="btn-call">
-                            <img src="/images/call.png" alt="" style="width:17px;">
-                        </a>-->
-                    </div>
-
-                    <img src="/images/about-bg.png" alt="" class="deco-about">
+                    <ul class="rep" v-if="rep">
+                        <li class="item">
+                            <div class="item-top">
+                                <h3 class="title custom-title">{{rep.position}}</h3>
+                            </div>
+                            <div class="img-wrap" >
+                                <img :src="rep.img.url" alt="임원이미지" v-if="rep.img">
+                                <img src="/images/default_profile.jpeg" alt="대체이미지" v-else>
+                                <div class="m-board-btns mt-20">
+                                    <div class="m-btns type01" >
+                                        <div class="m-btn-wrap">
+                                            <button type="button" class="m-btn type01 bg-primary height-full">
+                                                {{rep.name}}<br/>
+                                                {{rep.phone}}
+                                            </button>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="items custom-ul">
+                        <li class="item" v-for="item in restItems" :key="item.id">
+                            <div class="item-top">
+                                <h3 class="title">{{item.position}}</h3>
+                            </div>
+                            <div class="img-wrap" >
+                                <img :src="item.img.url" alt="임원이미지" v-if="item.img">
+                                <img src="/images/default_profile.jpeg" alt="대체이미지" v-else>
+                                <div class="m-board-btns mt-20">
+                                    <div class="m-btns type01" >
+                                        <div class="m-btn-wrap">
+                                            <button type="button" class="m-btn type01 bg-primary height-full">
+                                                {{item.name}}<br/>
+                                                {{item.phone}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
+                <img src="/images/about-bg.png" alt="" class="deco-about">
             </section>
 
             <quicks />
@@ -68,43 +103,63 @@ export default {
     auth: false,
     data() {
         return {
-            items: {
-                data: []
-            },
+            items: [],
 
             errors: {},
 
         }
     },
-    methods: {
-        init(){
-            this.$axios.get(`/districts/${this.$store.state.district.id}/staff`)
-                .then(response => {
-                    this.items = response.data;
-                })
-        }
-    },
 
     computed: {
-        district(){
-            return this.$store.state.district;
+        rep() {
+            return this.items.find(item => item.position === '대표');
+        },
+        restItems() {
+            return this.items.filter(item => item.position !== '대표');
         }
     },
 
-    watch: {
-        district (newData, oldData) {
-            location.reload();
-        }
-    },
+    // watch: {
+    //     district (newData, oldData) {
+    //         location.reload();
+    //     }
+    // },
 
     mounted() {
-
-        this.init();
+            this.$axios.get(`/districts/${this.$store.state.district.id}/staff`)
+                .then(response => {
+                    this.items = [...response.data.data];
+                })
 
     },
 }
 </script>
 
 <style scoped>
-
+    .custom-ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0;
+        
+    }
+    .custom-ul li {
+        /* list-style: none; */
+        text-align: center;
+        width: 48%;
+    }
+    .custom-title {
+        font-weight: 700;
+    }
+    .height-full {
+        height:100%;
+    }
+    .rep {
+        text-align: center;
+    }
+    .rep li {
+        display: inline-block;
+        text-align: left;
+        width: 48%;
+    }
 </style>
