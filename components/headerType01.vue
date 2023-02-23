@@ -130,7 +130,7 @@
 
                         <div class="box-links" v-if="active">
                             <a href="#" :class="`link ${district.id == 0 ? 'active' : ''}`" @click.prevent="toMain">자유마을 홈</a>
-                            <a href="#" :class="`link ${$auth.user.district.id == district.id ? 'active' : ''}`" @click.prevent="toDistrict($auth.user.district)" v-if="$auth.user">내 동네</a>
+                            <a href="#" :class="`link ${$auth.user.district.id == district.id ? 'active' : ''}`" @click.prevent="toDistrict($auth.user.district)" v-if="$auth.user">{{$auth.user.district.district}}</a>
                             <template  v-if="$auth.user">
                                 <a href="#" :class="`link ${district.id == myDistrict.district.id ? 'active' : ''}`" v-for="myDistrict in $auth.user.my_districts" :key="myDistrict.district.id" @click.prevent="toDistrict(myDistrict.district)">{{myDistrict.district.district}}</a>
                             </template>
@@ -215,7 +215,7 @@ export default {
     },
 
     mounted() {
-
+        console.log('mounted',this.$auth.user.district)
     }
 }
 </script>
