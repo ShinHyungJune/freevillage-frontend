@@ -85,7 +85,7 @@
 
                     <div class="comment">
                         회원가입이 어려우신 경우
-                        <br/><a href="tel:15228686" class="point">콜센터 ☎1522-8686</a>로 문의해주세요.
+                        <br/><a href="tel:15447166" class="point">콜센터 ☎1544-7166</a>로 문의해주세요.
                     </div>
                     <div class="mt-24"></div>
 

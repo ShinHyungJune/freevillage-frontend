@@ -932,7 +932,7 @@ html {
 
 .m-ratioBox-wrap {width:100%; padding-top:100%; position:relative; overflow:hidden;}
 .m-ratioBox-wrap .m-ratioBox {position:absolute; top:0; left:0; right:0; bottom:0;}
-.m-ratioBox-wrap .m-ratioBox:after {content:""; width:120px; height:120px; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:url("../images/logo-replace.png") no-repeat; background-size:100%;}
+/* .m-ratioBox-wrap .m-ratioBox:after {content:""; width:120px; height:120px; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:url("../images/logo-replace.png") no-repeat; background-size:100%;} */
 .m-ratioBox-wrap img {width:100%; position:absolute; left:50%; top:50%; transform:translateY(-50%) translateX(-50%); z-index:1;}
 .m-ratioBox-wrap iframe {width:100%; height:100%; position:absolute; left:50%; top:50%; transform:translateY(-50%) translateX(-50%); z-index:1;}
 
