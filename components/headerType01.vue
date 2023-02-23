@@ -25,7 +25,7 @@
                             <h3 class="title">홈</h3>
                         </a>
 
-                        <a href="#" class="link" @click.prevent="toDistrict">
+                        <a href="#" class="link" @click.prevent="toDistrict($auth.user.district)">
                             <div class="img-wrap">
                                 <img src="/images/circleMen.png" alt="" class="filter-white" style="width:30px;">
                             </div>
@@ -131,7 +131,9 @@
                         <div class="box-links" v-if="active">
                             <a href="#" :class="`link ${district.id == 0 ? 'active' : ''}`" @click.prevent="toMain">자유마을 홈</a>
                             <a href="#" :class="`link ${$auth.user.district.id == district.id ? 'active' : ''}`" @click.prevent="toDistrict($auth.user.district)" v-if="$auth.user">내 동네</a>
-                            <a href="#" :class="`link ${district.id == myDistrict.district.id ? 'active' : ''}`" v-for="myDistrict in $auth.user.my_districts" :key="myDistrict.district.id" @click.prevent="toDistrict(myDistrict.district)" v-if="$auth.user">{{myDistrict.district.district}}</a>
+                            <template  v-if="$auth.user">
+                                <a href="#" :class="`link ${district.id == myDistrict.district.id ? 'active' : ''}`" v-for="myDistrict in $auth.user.my_districts" :key="myDistrict.district.id" @click.prevent="toDistrict(myDistrict.district)">{{myDistrict.district.district}}</a>
+                            </template>
                             <nuxt-link to="/myDistricts" class="link">동네 설정하기</nuxt-link>
                         </div>
                     </button>
@@ -190,6 +192,7 @@ export default {
             location.href="/";
 
             this.activeSidebar = false;
+
         },
 
         toMain(){
