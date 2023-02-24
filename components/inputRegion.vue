@@ -158,12 +158,18 @@ export default {
     methods: {
         toggleState() {
             this.stateActive = !this.stateActive;
+            this.cityActive = false;
+            this.districtActive = false;
         },
         toggleCity() {
             this.cityActive = !this.cityActive;
+            this.stateActive = false;
+            this.districtActive = false;
         },
         toggleDistrict() {
             this.districtActive = !this.districtActive;
+            this.stateActive = false;
+            this.cityActive = false;
         },
         changeState(stateData) {
             if(stateData && typeof stateData == 'string') {
@@ -220,53 +226,3 @@ export default {
     }
 }
 </script>
-<style>
-    .select-wrap {
-        position: relative;
-        float: left;
-        width: 100%;
-    }
-
-    .select-wrap .selectFirst {
-        text-align: left;
-        width: 100%;
-        padding: 11px 20px;
-        background-color: #fff;
-        border-radius: 5px;
-        border: 1px solid #e1e1e1;
-        font-weight: 500;
-        margin-bottom: 10px;
-        
-    }
-    .select-wrap .selectFirst:after {
-    content: "";
-    width: 10px;
-    height: 6px;
-    position: absolute;
-    right: 20px;
-    top: 25px;
-    transform: translateY(-50%);
-    background: url(/images/chevron-down.png);
-    background-size: 10px auto;
-    }
-    
-
-    .selectOption {
-        overflow-x:hidden;
-        top: 43px;
-        width: 100%;
-        max-height:300px; 
-        position: absolute; 
-        z-index: 500; 
-        border-radius: 0;
-        background-color: white;
-        text-align: left;
-        border-left: 1px solid #e1e1e1;
-        border-right: 1px solid #e1e1e1;
-    }
-
-    .selectOption ul > li {
-        padding: 11px 20px;
-        border-bottom: 1px solid #eee;
-    }
-</style>
