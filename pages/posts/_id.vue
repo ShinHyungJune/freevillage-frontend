@@ -150,6 +150,9 @@
                             <div class="m-tabs-contents">
                                 <div :class="`m-tabs-content ${tabIndex === 0 ? 'active' : ''}`">
                                     <div class="editor-body" v-html="item.content"></div>
+                                    <div>
+                                        장소: {{item.address}} {{item.address_detail}}
+                                    </div>
                                 </div>
 
                                 <div :class="`m-tabs-content ${tabIndex === 1 ? 'active' : ''}`">
