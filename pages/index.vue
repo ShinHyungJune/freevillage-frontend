@@ -201,7 +201,7 @@
                             <table class="m-table type01">
                                 <thead>
                                 <tr>
-                                    <th>순위</th>
+                                    <th style="width: 100px">순위</th>
                                     <th>마을구분</th>
                                     <th class="align-center">신규가입자</th>
                                 </tr>
@@ -227,8 +227,8 @@
 
             <section class="section-ad">
                 <div class="wrap">
-                    <a href="#" target="_blank" class="link">
-                        <img src="/images/ad.png" alt="">
+                    <a href="https://www.youtube.com/watch?v=xg9WYwc2Sjk&list=PLK9fwy1zEaYeeyPFY3Rz_1DqBwLZ9qGgV&index=1" target="_blank" class="link">
+                        <img src="/images/banner1.jpeg" alt="">
                     </a>
                 </div>
             </section>
@@ -328,7 +328,7 @@
             </section>
 
             <section class="section-ad2">
-                <a href="#" target="_blank" class="link">
+                <a href="https://m.khmon.com/sign/6936" target="_blank" class="link">
                     <img src="/images/ad2.png" alt="">
                 </a>
             </section>

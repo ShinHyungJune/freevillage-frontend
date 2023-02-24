@@ -218,7 +218,7 @@ export default {
     methods: {
         async store() {
             if(this.form.board === 'meetings' && this.parasole) {
-                const res = await fetch('/images/meetings-parasole.jpeg')
+                const res = await fetch('/images/meetings-parasole.jpg')
                 const data = await res.blob();
                 const file = new File([data], 'parasole',{ type: 'image/jpeg'});
                 this.form.thumbnail = file;
