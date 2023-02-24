@@ -13,10 +13,12 @@
                         </h3>
                     </div>
 
+                  
+                  <!-- 이미지 안보이도록 하기로 함
                     <div class="right" v-if="isManager">
                         <img src="/images/dots.png" alt="" style="width:3px;" @click.prevent.stop="active = true" v-if="!active">
                         <img src="/images/x.png" alt="" style="width:12px;" @click.prevent.stop="active = false" v-else>
-                    </div>
+                    </div> --> 
                 </div>
 
                 <div class="m-board-bottom">
