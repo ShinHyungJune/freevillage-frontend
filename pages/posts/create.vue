@@ -93,6 +93,14 @@
 
                         <div class="m-input-error" v-if="errors.price">{{errors.price[0]}}</div>
                     </div>
+                    <div class="m-input-wrap">
+                        <h3 class="m-input-title">파라솔 설치</h3>
+
+                        <div class="m-input-checkbox type01">
+                            <input type="checkbox" id="parasole" v-model="parasole">
+                            <label for="parasole">파라솔 설치할 경우 체크</label>
+                        </div>
+                    </div>
 
                     <div class="m-input-wrap">
                         <h3 class="m-input-title">장소</h3>
@@ -197,14 +205,20 @@ export default {
                 address: "",
                 address_detail: "",
             },
-
+            parasole:false,
             errors: {},
 
             activeLinkPop: false,
         }
     },
     methods: {
-        store() {
+        async store() {
+            if(this.form.board === 'meetings' && this.parasole) {
+                const res = await fetch('/images/meetings-parasole.jpeg')
+                const data = await res.blob();
+                const file = new File([data], 'parasole',{ type: 'image/jpeg'});
+                this.form.thumbnail = file;
+            }
             const editor = document.querySelector('.m-editor');
             const firstPic = editor.querySelectorAll(":scope > img")[0];
             if(!this.form.thumbnail && firstPic) { //대표이미지가 없을 경우: 에디터 내에 사진이 있을 경우 첫번째 사진정보를 this.form.thumbnail에 추가
@@ -330,8 +344,13 @@ export default {
                     }
 
                     this.$refs.content.innerHTML = this.item.content;
+                    
+                    if(this.item.img.name == 'parasole') {
+                        this.parasole = true;
+                    }
                 });
         }
+
     }
 }
 </script>
