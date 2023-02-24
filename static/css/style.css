@@ -691,6 +691,9 @@ html {
 .area-index .section-ranking {
     margin-top:40px;
 }
+.area-index .section-ranking td:nth-child(1) {
+    white-space: nowrap;
+}
 .area-index .section-ranking td:nth-child(2) {
     max-width:calc(100vw - 208px);
     white-space: nowrap;

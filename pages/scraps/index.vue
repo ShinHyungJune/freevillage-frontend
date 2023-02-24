@@ -65,23 +65,6 @@ export default {
         }
     },
     methods: {
-        /*loadMore(state) {
-            if(this.items.meta.current_page <= this.items.meta.last_page){
-                this.form.page += 1;
-
-                this.$axios.get("/posts", {
-                    params: this.form
-                }).then(response => {
-                    this.items = {
-                        ...response.data,
-                        data: [...this.items.data, ...response.data.data]
-                    };
-
-                    state.loaded();
-                });
-            }
-        },*/
-
         removed(){
 
         },
@@ -90,16 +73,6 @@ export default {
             this.$axios.post("/scrapItems/reorder", {
                 items: items
             })
-        },
-
-        getItems(){
-            this.form.page = 1;
-
-            this.$axios.get("/scraps", {
-                params: this.form
-            }).then(response => {
-                this.items = response.data;
-            });
         },
 
         store(){
@@ -114,7 +87,6 @@ export default {
         },
 
         changeMain(){
-
             this.$axios.patch("/scraps/updateUserMainScrap/" + this.form.scrap_id)
                 .then(response => {
                     this.$auth.setUser({
@@ -125,6 +97,7 @@ export default {
                     location.reload();
                 });
         },
+
         collectImages(arr) {
             this.images = [
                 ...this.images,
@@ -134,13 +107,7 @@ export default {
     },
 
     mounted() {
-        this.$axios.get("/scraps", {
-            params: this.form
-        }).then(response => {
-            this.items = response.data;
-        });
 
-        console.log(this.$auth.user,'scrap index mounted')
     }
 }
 </script>

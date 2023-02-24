@@ -33,7 +33,7 @@
 
     <!-- default -->
     <div v-else>
-        <Dropdown 
+        <Dropdown
             :menuTitle="'시/도 선택'"
             :activate="stateActive"
             :items="states"
@@ -41,7 +41,7 @@
             @toggle="toggleState"
             @change="changeState"
         />
-        <Dropdown 
+        <Dropdown
             :menuTitle="'시/군/구 선택'"
             :activate="cityActive"
             :items="cities"
