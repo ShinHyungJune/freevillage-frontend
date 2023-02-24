@@ -353,5 +353,7 @@ export default {
 </script>
 
 <style scoped>
-
+    .m-board-content .title {
+        padding-bottom:30px;
+    }
 </style>
