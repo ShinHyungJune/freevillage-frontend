@@ -84,7 +84,6 @@ export default {
         },
 
         removed(item){
-            console.log(item);
             this.items.data = this.items.data.map(itemData => {
                 if(itemData.id == item.id)
                     return item;

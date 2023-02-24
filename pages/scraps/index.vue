@@ -7,10 +7,15 @@
                     <button class="btn-util" @click="$router.back()">
                         <img src="/images/back.png" alt="" style="width:10px;">
                     </button>
+
+                    <h3 class="title">
+                        내 공유함
+                        <span class="body">최대 3개의 글을 공유할 수 있습니다.</span>
+                    </h3>
                 </div>
 
                 <div class="center">
-                    <h3 class="title">내 지갑</h3>
+
                 </div>
 
                 <div class="right"></div>
@@ -19,76 +24,20 @@
 
         <!-- 내용 영역 -->
         <div class="container">
-            <div class="mt-32"></div>
-
             <div class="wrap">
-                <div class="top">
-                    <div class="m-thumbnail type02" :style="`background-image:url('${this.$auth.user.img.url}')`" v-if="this.$auth.user.img"></div>
-                    <h3 class="title">{{ this.$auth.user.name }}</h3>
-                </div>
-
-                <div class="mt-20"></div>
-
-                <div class="m-input-wrap">
-                    <h3 class="m-input-title type02">전체 {{ items.data.length }}</h3>
-
-                    <div class="m-input-select type01">
-                        <select name="" id="" @change="changeMain" v-model="form.scrap_id">
-                            <option value="" disabled>지갑을 선택해주세요.</option>
-                            <option :value="item.id" v-for="item in items.data" :key="item.id">{{item.title}}</option>
-                        </select>
-                    </div>
-
-                    <div class="mt-12"></div>
-
-                    <div class="m-input-withBtn type01">
-                        <div class="m-input m-input-text type03">
-                            <input type="text" placeholder="새로운 지갑 만들기" v-model="form.title">
-                        </div>
-
-                        <button class="m-input-btn m-btn type03 bg-primary" @click="store">추가</button>
-                    </div>
-                </div>
-
-                <div class="mt-12"></div>
-
-                <scrap-items :scrap_id="form.scrap_id" board="notices" @removed="removed" @reorder="reorder" @extracedImages="collectImages" :edit-mode="editMode" />
-
-                <scrap-items :scrap_id="form.scrap_id" board="clips" @removed="removed" @reorder="reorder" @extracedImages="collectImages" :edit-mode="editMode" />
-
-                <scrap-items :scrap_id="form.scrap_id" board="photos" @removed="removed" @reorder="reorder" @extracedImages="collectImages" :edit-mode="editMode" />
-
-                <scrap-items :scrap_id="form.scrap_id" board="asks" @removed="removed" @reorder="reorder" @extracedImages="collectImages" :edit-mode="editMode" />
-
-                <scrap-items :scrap_id="form.scrap_id" board="meetings" @removed="removed" @reorder="reorder" @extracedImages="collectImages" :edit-mode="editMode" />
-
+                <scrap-items :scrap_id="form.scrap_id"
+                             @removed="removed"
+                             @reorder="reorder"
+                             @extracedImages="collectImages"
+                             :edit-mode="editMode"
+                />
             </div>
 
-        </div>
-
-        <!-- 하단 네비게이션바 -->
-        <div class="m-navigation type01">
-            <div class="wrap">
-                <div class="m-btns type01" v-if="!editMode">
-                    <div class="m-btn-wrap">
-                        <a href="#" class="m-btn type03 bg-revert-primary" @click.prevent="share">공유하기</a>
-                    </div>
-                    <div class="m-btn-wrap">
-                        <a href="#" class="m-btn type03" @click.prevent="editMode = true">편집하기</a>
-                    </div>
-                </div>
-                <div class="m-btns type01" v-else>
-                    <div class="m-btn-wrap">
-                        <a href="#" class="m-btn type03" @click.prevent="editMode = false">편집종료</a>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </template>
 
 <script>
-import KakaoHelper from "@/utils/KakaoHelper";
 
 export default {
     components: {},
@@ -132,21 +81,6 @@ export default {
                 });
             }
         },*/
-        share() {
-            if(!this.$auth.user.scrap)
-                return alert("공유할 지갑을 선택해주세요.");
-
-            let kakaoHelper = new KakaoHelper(Kakao);
-
-            let item = {
-                ...this.$auth.user.scrap,
-                img: {
-                    url: this.images.find(image => typeof image !== 'undefined')
-                }
-            }
-
-            kakaoHelper.shareScrap(item);
-        },
 
         removed(){
 

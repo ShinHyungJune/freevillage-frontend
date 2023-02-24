@@ -146,8 +146,6 @@ export default {
     },
 
     mounted() {
-        console.log(this.$auth.user);
-
         this.$axios.get("/states").then(response => {
             this.states = response.data.sort((a,b) => {
                 return this.orders[a] - this.orders[b];

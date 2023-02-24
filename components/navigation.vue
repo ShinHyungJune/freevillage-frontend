@@ -21,16 +21,16 @@
                     <h3 class="title">마을소식</h3>
                 </a>
             </div>
-
-<!--            <div class="nav-wrap">
-                <a href="#" class="nav">
+            <div class="nav-wrap">
+                <nuxt-link to="/scraps" class="nav">
                     <div class="img-wrap">
-                        <img src="/images/location-marker.png" alt="" style="width:17px">
+                        <img src="/images/cart.png" alt="" style="width:30px">
                     </div>
 
-                    <h3 class="title">내 근처</h3>
-                </a>
+                    <h3 class="title">내 공유함</h3>
+                </nuxt-link>
             </div>
+<!--
 
             <div class="nav-wrap">
                 <a href="#" class="nav">

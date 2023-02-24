@@ -30,6 +30,20 @@ export default {
       script: [
       ]
   },
+    watch: {
+        $route(to, from) {
+            window.scrollTo(0,0);
+
+            if(this.$auth.user)
+                this.$axios.get("/users/hasNewNotice")
+                    .then(response => {
+                       this.$auth.setUser({
+                           ...this.$auth.user,
+                           has_new_notice: response.data.data
+                       });
+                    });
+        },
+    },
   methods: {
     async logout() {
       await this.$auth.logout();

@@ -151,6 +151,7 @@ export default {
                 board: this.$route.query.board ? this.$route.query.board : "",
                 page: 1,
                 district_id: this.$store.state.district.id,
+                word: this.$route.query.word ? this.$route.query.word: "",
             },
 
             items: {

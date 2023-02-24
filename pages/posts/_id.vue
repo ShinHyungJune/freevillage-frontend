@@ -2,7 +2,20 @@
     <div class="area-news-show">
 
         <!-- 지갑 팝업 -->
-        <scrap-pop :post_id="item.id" v-if="activeScrapPop" @created="() => {this.item.scrap_item_count += 1;}" @close="activeScrapPop = false" />
+        <div class="m-pop type01" v-if="activeScrapPop">
+            <div class="m-pop-inner">
+                <button class="btn-close" @click="activeScrapPop = false">
+                    <img src="/images/x.png" alt="" style="width:21px;">
+                </button>
+
+                <div class="m-pop-title" style="margin-bottom:10px;">내 공유함에 추가되었습니다.</div>
+                <div class="m-pop-body" style="font-size:14px;">내 정보 > 내 공유함에서 확인하실 수 있습니다.</div>
+
+                <div class="mt-20">
+                    <nuxt-link to="/scraps" class="m-btn type03 width-100">내 공유함 바로가기</nuxt-link>
+                </div>
+            </div>
+        </div>
 
         <!-- 신고 팝업 -->
         <spam-pop :target_id="item.id" target_model="posts" v-if="activeSpamPop" @close="activeSpamPop = false" />
@@ -160,7 +173,7 @@
                             <div class="mt-16"></div>
 
                             <a href="#" class="m-btn type03 state03" v-if="!item.can_participate">행사종료</a>
-                            <a href="#" class="m-btn type03 state02" v-else-if="item.is_participate">참여중</a>
+                            <a href="#" class="m-btn type03 state02" v-else-if="item.is_participate" @click="unparticipate">참여취소</a>
                             <a href="#" class="m-btn type03" v-else @click.prevent="participate">참여하기</a>
                         </div>
 
@@ -202,9 +215,9 @@
                                 댓글 {{ item.comment_count }}
                             </button>
 
-                            <button class="btn-util" @click="activeScrapPop = true">
-                                <img src="/images/wallet.png" alt="" style="width:13px;">
-                                지갑 {{item.scrap_item_count}}
+                            <button class="btn-util" @click="storeScrap">
+                                <img src="/images/cart.png" alt="" style="width:24px;">
+                                글 담기
                             </button>
 
                             <button class="btn-util" @click="share">
@@ -244,7 +257,9 @@ export default {
                 user: {}
             },
 
-            form: {},
+            form: {
+                post_id: this.$route.params.id
+            },
 
             errors: {},
 
@@ -258,8 +273,11 @@ export default {
         }
     },
     methods: {
-        store() {
-
+        storeScrap() {
+            this.$axios.post(`/scrapItems`, this.form)
+                .then(response => {
+                    this.activeScrapPop = true;
+                });
         },
 
         remove(){
@@ -305,6 +323,16 @@ export default {
             }).then(response => {
                 alert(response.data.message);
 
+                this.item = response.data.data;
+            })
+        },
+
+        unparticipate(){
+            this.$axios.delete("/participants", {
+                params: {
+                    post_id: this.item.id
+                }
+            }).then(response => {
                 this.item = response.data.data;
             })
         },

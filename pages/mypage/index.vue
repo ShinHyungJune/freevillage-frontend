@@ -16,7 +16,7 @@
                     <h3 class="title">내 정보</h3>
                 </div>
 
-                <nuxt-link to="/auth/edit" class="btn-util">
+                <nuxt-link to="/contents/settings" class="btn-util">
                     <img src="/images/setting.png" alt="" style="width:20px;">
                 </nuxt-link>
             </div>
@@ -35,7 +35,14 @@
 
                     <div class="mt-12"></div>
 
-                    <a href="#" class="m-btn type03 bg-lightGray black" @click.prevent="isProfilePopActive = true">프로필 수정</a>
+                    <div class="m-btns type01">
+                        <div class="m-btn-wrap">
+                            <a href="#" class="m-btn type03 bg-lightGray black" style="background-color:#EEE !important;" @click.prevent="isProfilePopActive = true">프로필 수정</a>
+                        </div>
+                        <div class="m-btn-wrap">
+                            <nuxt-link to="/auth/edit" class="m-btn type03 bg-lightGray black" style="background-color:#DDDDDD !important;">내 정보 수정</nuxt-link>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mt-20"></div>

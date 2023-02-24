@@ -141,10 +141,23 @@
 
                 <div class="utils">
                     <button class="btn-util">
-                        <img src="/images/search.png" style="width:18px;" alt="">
+                        <img src="/images/search.png" style="width:18px;" alt="" @click="activeSearch = !activeSearch">
+
+                        <form @submit.prevent="search" v-if="activeSearch">
+                            <div class="m-input-text-wrap">
+                                <div class="m-input-text type01">
+                                    <input type="text" placeholder="검색어를 입력해주세요." v-model="form.word">
+
+                                    <i class="xi-search m-input-text-deco" @click="search"></i>
+                                </div>
+                            </div>
+                        </form>
+
                     </button>
                     <button class="btn-util" @click="$router.push('/notices')">
                         <img src="/images/bell.png" style="width:17px;" alt="">
+
+                        <span class="alert" v-if="$auth.user && $auth.user.has_new_notice"></span>
                     </button>
                     <button class="btn-util" @click="activeSidebar = true">
                         <img src="/images/menu.png" alt="" style='width:18px;'>
@@ -161,9 +174,11 @@ export default {
         return {
             active: false,
             activeSidebar: false,
+            activeSearch: false,
             form: {
-                district: ""
-            }
+                district: "",
+                word: "",
+            },
         }
     },
 
@@ -173,14 +188,7 @@ export default {
         },
 
         search() {
-            if(this.form.district === "" || this.form.district == undefined) {
-                return;
-            }
-            this.$store.commit("changeDistrict", this.form.district);
-            this.$emit("updatePosts", this.district.id);
-            this.active = false;
-
-            this.scrollTop();
+            window.location.href = "/posts?word=" + this.form.word;
         },
 
         toDistrict(district){
@@ -192,7 +200,6 @@ export default {
             location.href="/";
 
             this.activeSidebar = false;
-
         },
 
         toMain(){
@@ -215,7 +222,6 @@ export default {
     },
 
     mounted() {
-        console.log('mounted',this.$auth.user.district)
     }
 }
 </script>
