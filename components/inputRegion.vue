@@ -237,15 +237,14 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-    /* .select-wrap {
+<style>
+    .select-wrap {
         position: relative;
-        
+        float: left;
+        width: 100%;
     }
 
-    .selectFirst {
-        float: left;
+    .select-wrap .selectFirst {
         text-align: left;
         width: 100%;
         padding: 11px 20px;
@@ -253,9 +252,10 @@ export default {
         border-radius: 5px;
         border: 1px solid #e1e1e1;
         font-weight: 500;
+        margin-bottom: 10px;
         
     }
-    .selectFirst:after {
+    .select-wrap .selectFirst:after {
     content: "";
     width: 10px;
     height: 6px;
@@ -263,7 +263,7 @@ export default {
     right: 20px;
     top: 25px;
     transform: translateY(-50%);
-    background: url(/images/chevron-down.png) no-repeat;
+    background: url(/images/chevron-down.png);
     background-size: 10px auto;
     }
     
@@ -285,5 +285,5 @@ export default {
     .selectOption ul > li {
         padding: 11px 20px;
         border-bottom: 1px solid #eee;
-    } */
+    }
 </style>

@@ -103,6 +103,10 @@
                             <a href="https://wkoreaf.org/" target="_blank" class="link">교민청</a>
                         </div>
                     </div>
+                    <div class="utils">
+                        <nuxt-link to="/auth/login" class="util primary">후원하기</nuxt-link>
+                    </div>
+
 
                     <div class="utils">
                         <nuxt-link to="/auth/login" class="util primary" v-if="!this.$auth.user">로그인</nuxt-link>
