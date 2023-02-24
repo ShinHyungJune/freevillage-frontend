@@ -33,7 +33,59 @@
 
     <!-- default -->
     <div v-else>
-        <div :class="inputClass">
+        <Dropdown 
+            :menuTitle="'시/도 선택'"
+            :activate="stateActive"
+            :items="states"
+            @toggle="toggleState"
+            @change="changeState"
+        />
+        <Dropdown 
+            :menuTitle="'시/군/구 선택'"
+            :activate="cityActive"
+            :items="cities"
+            @toggle="toggleCity"
+            @change="changeCity"
+        />
+        <DropdownDistrict
+            :menuTitle="'읍/면/동 선택'"
+            :activate="districtActive"
+            :items="districts"
+            @toggle="toggleDistrict"
+            @change="change"
+        />
+
+        <!-- <div class="select-wrap" >
+            <div class="selectFirst" @click="toggleState">시/도 선택</div>
+            <div class="selectOption" v-if="stateActive" @click="toggleState">
+                <ul>
+                    <li v-for="(state,index) in states" :key="index" @click="changeState(state)">
+                        {{state}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="select-wrap" >
+            <div class="selectFirst" @click="toggleCity">시/군/구 선택</div>
+            <div class="selectOption" v-if="cityActive" @click="toggleCity">
+                <ul>
+                    <li v-for="(city,index) in cities" :key="index" @click="changeCity(city)">
+                        {{city}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="select-wrap" >
+            <div class="selectFirst" @click="toggleDistrict">읍/면/동 선택</div>
+            <div class="selectOption" v-if="districtActive" @click="toggleDistrict">
+                <ul>
+                    <li v-for="(district,index) in districts" :key="index" @click="changeDistrict(district)">
+                        {{city}}
+                    </li>
+                </ul>
+            </div>
+        </div> -->
+        <!-- <div :class="inputClass">
             <select name="" id="" v-model="stateData" @change="changeState">
                 <option value="" disabled>시/도 선택</option>
                 <option :value="state" v-for="(state, index) in states" :key="index">{{ state }}</option>
@@ -54,11 +106,17 @@
                     {{ district.district }}
                 </option>
             </select>
-        </div>
+        </div> -->
     </div>
 </template>
 <script>
+import Dropdown from './dropdown.vue'
+import DropdownDistrict from './dropdownDistrict.vue'
 export default {
+    components: {
+        Dropdown,
+        DropdownDistrict
+    },
     props: {
         type: {
             default: ""
@@ -81,9 +139,12 @@ export default {
     },
     data() {
         return {
-            states: this.state ? [this.state] : "",
-            cities: this.city ? [this.city] : "",
-            districts: this.district ? [this.district] : "",
+            stateActive: false,
+            cityActive: false,
+            districtActive: false,
+            states: this.state ? [this.state] : [],
+            cities: this.city ? [this.city] : [],
+            districts: this.district ? [this.district] : [],
             stateData: this.state,
             cityData: this.city,
             districtIdData: this.district_id,
@@ -111,8 +172,21 @@ export default {
     },
 
     methods: {
-        changeState() {
-            this.$axios.get("/cities?state=" + this.stateData)
+        toggleState() {
+            this.stateActive = !this.stateActive;
+        },
+        toggleCity() {
+            this.cityActive = !this.cityActive;
+        },
+        toggleDistrict() {
+            this.districtActive = !this.districtActive;
+        },
+        changeState(stateData) {
+            if(stateData && typeof stateData == 'string') {
+                this.stateData = stateData;
+            }
+            // const data = stateData ? stateData : this.stateData
+            this.$axios.get(`/cities?state=${this.stateData}`)
                 .then(response => {
                     this.cities = response.data;
 
@@ -124,7 +198,10 @@ export default {
                 });
         },
 
-        changeCity() {
+        changeCity(cityData) {
+            if(cityData && typeof cityData == 'string') {
+                this.cityData = cityData;
+            }
             this.$axios.get(`/districts?state=${this.stateData}&city=${this.cityData}`)
                 .then(response => {
                     this.districts = response.data;
@@ -135,7 +212,11 @@ export default {
                 });
         },
 
-        change(){
+        change(districtData){
+            console.log(districtData,'change')
+            if(districtData && typeof districtData == 'number') {
+                this.districtIdData = districtData;
+            }
             this.$emit("change", {
                 state: this.stateData,
                 city: this.cityData,
@@ -156,3 +237,53 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    /* .select-wrap {
+        position: relative;
+        
+    }
+
+    .selectFirst {
+        float: left;
+        text-align: left;
+        width: 100%;
+        padding: 11px 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        border: 1px solid #e1e1e1;
+        font-weight: 500;
+        
+    }
+    .selectFirst:after {
+    content: "";
+    width: 10px;
+    height: 6px;
+    position: absolute;
+    right: 20px;
+    top: 25px;
+    transform: translateY(-50%);
+    background: url(/images/chevron-down.png) no-repeat;
+    background-size: 10px auto;
+    }
+    
+
+    .selectOption {
+        overflow-x:hidden;
+        top: 43px;
+        width: 100%;
+        height:150px; 
+        position: absolute; 
+        z-index: 500; 
+        border-radius: 0;
+        background-color: white;
+        text-align: left;
+        border-left: 1px solid #e1e1e1;
+        border-right: 1px solid #e1e1e1;
+    }
+
+    .selectOption ul > li {
+        padding: 11px 20px;
+        border-bottom: 1px solid #eee;
+    } */
+</style>
