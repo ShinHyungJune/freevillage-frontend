@@ -219,7 +219,6 @@ export default {
     },
 
     mounted() {
-        console.log('mounted',this.$auth.user.district)
     }
 }
 </script>

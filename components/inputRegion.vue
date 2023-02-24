@@ -37,6 +37,7 @@
             :menuTitle="'시/도 선택'"
             :activate="stateActive"
             :items="states"
+            :selected="stateSelected"
             @toggle="toggleState"
             @change="changeState"
         />
@@ -44,47 +45,19 @@
             :menuTitle="'시/군/구 선택'"
             :activate="cityActive"
             :items="cities"
+            :selected="citySelected"
             @toggle="toggleCity"
             @change="changeCity"
         />
-        <DropdownDistrict
+        <Dropdown
             :menuTitle="'읍/면/동 선택'"
             :activate="districtActive"
             :items="districts"
+            :selected="districtSelected"
             @toggle="toggleDistrict"
             @change="change"
         />
 
-        <!-- <div class="select-wrap" >
-            <div class="selectFirst" @click="toggleState">시/도 선택</div>
-            <div class="selectOption" v-if="stateActive" @click="toggleState">
-                <ul>
-                    <li v-for="(state,index) in states" :key="index" @click="changeState(state)">
-                        {{state}}
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="select-wrap" >
-            <div class="selectFirst" @click="toggleCity">시/군/구 선택</div>
-            <div class="selectOption" v-if="cityActive" @click="toggleCity">
-                <ul>
-                    <li v-for="(city,index) in cities" :key="index" @click="changeCity(city)">
-                        {{city}}
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="select-wrap" >
-            <div class="selectFirst" @click="toggleDistrict">읍/면/동 선택</div>
-            <div class="selectOption" v-if="districtActive" @click="toggleDistrict">
-                <ul>
-                    <li v-for="(district,index) in districts" :key="index" @click="changeDistrict(district)">
-                        {{city}}
-                    </li>
-                </ul>
-            </div>
-        </div> -->
         <!-- <div :class="inputClass">
             <select name="" id="" v-model="stateData" @change="changeState">
                 <option value="" disabled>시/도 선택</option>
@@ -135,6 +108,17 @@ export default {
         },
         inputClass: {
             default: "m-input-select type02"
+        }
+    },
+    computed: {
+        stateSelected() {
+            return !!this.stateData;
+        },
+        citySelected() {
+            return !!this.cityData;
+        },
+        districtSelected() {
+            return !!this.districtIdData;
         }
     },
     data() {
@@ -190,6 +174,8 @@ export default {
                 .then(response => {
                     this.cities = response.data;
 
+                    this.cityData = '';
+
                     this.districts = [];
 
                     this.districtIdData = "";
@@ -213,7 +199,6 @@ export default {
         },
 
         change(districtData){
-            console.log(districtData,'change')
             if(districtData && typeof districtData == 'number') {
                 this.districtIdData = districtData;
             }
@@ -227,8 +212,6 @@ export default {
     },
 
     mounted() {
-        console.log(this.$auth.user);
-
         this.$axios.get("/states").then(response => {
             this.states = response.data.sort((a,b) => {
                 return this.orders[a] - this.orders[b];
@@ -272,7 +255,7 @@ export default {
         overflow-x:hidden;
         top: 43px;
         width: 100%;
-        height:150px; 
+        max-height:300px; 
         position: absolute; 
         z-index: 500; 
         border-radius: 0;
