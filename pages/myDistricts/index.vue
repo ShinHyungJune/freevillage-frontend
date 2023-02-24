@@ -33,17 +33,21 @@
                 <p class="body">다른 지역 1개 추가 가능합니다.</p>
 
                 <div class="m-input-checkboxes type02">
-                    <div class="m-input-checkbox-wrap" v-if="items.data.length === 0">
+                    <!-- <div class="m-input-checkbox-wrap" v-if="items.data.length === 0">
                         <div class="m-input-checkbox create" @click="active = true;">
                             <i class="xi-plus"></i>
                         </div>
-                    </div>
-
-                    <div class="m-input-checkbox-wrap" v-for="item in items.data" :key="item.id">
+                    </div> -->
+                    <div class="m-input-checkbox-wrap" v-for="(item,index) in items.data" :key="item.id">
                         <div class="m-input-checkbox">
                             {{ item.district.district }}
 
-                            <i class="xi-close" @click="remove(item)"></i>
+                            <i class="xi-close" v-if="index > 0" @click="remove(item)"></i>
+                        </div>
+                    </div>
+                    <div class="m-input-checkbox-wrap" v-if="items.data.length === 1">
+                        <div class="m-input-checkbox create" @click="active = true;">
+                            <i class="xi-plus"></i>
                         </div>
                     </div>
                 </div>
@@ -105,6 +109,10 @@ export default {
                 params: this.form
             }).then(response => {
                 this.items = response.data;
+                this.items.data = [
+                    {district:this.$auth.user.district},
+                    ...this.items.data,
+                ]
             });
         },
 
@@ -120,7 +128,7 @@ export default {
         store(){
             this.$axios.post("/myDistricts", this.form)
                 .then(response => {
-                    this.items.data = [response.data.data, ...this.items.data];
+                    this.items.data = [...this.items.data,response.data.data];
 
                     this.$auth.fetchUser();
 
