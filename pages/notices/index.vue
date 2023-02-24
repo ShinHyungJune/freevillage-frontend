@@ -21,7 +21,7 @@
 
                 <div class="mt-12"></div>
 
-                <input-region :type="type02" @change="(data) => {form.district_id = data.district_id; form.district_id ? getItems() : ''}"/>
+                <input-region :type="'type02'" @change="(data) => {form.district_id = data.district_id; form.district_id ? getItems() : ''}"/>
 
                 <p class="m-input-error" v-if="errors.district_id" v-text="errors.district_id[0]"></p>
 
