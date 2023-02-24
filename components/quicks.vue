@@ -62,7 +62,7 @@ export default {
 
 
 .blbs.orange {
-  background: rgba(255, 121, 63, 1);
+  background: #F88600;
   box-shadow: 0 0 0 0 rgba(255, 121, 63, 1);
   animation: pulse-orange 2s infinite;
 }
@@ -84,10 +84,5 @@ export default {
   }
 }
 
-.blbs.yellow {
-  background: rgba(255, 177, 66, 1);
-  box-shadow: 0 0 0 0 rgba(255, 177, 66, 1);
-  animation: pulse-yellow 2s infinite;
-}
 </style>
 

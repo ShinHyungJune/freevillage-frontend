@@ -104,10 +104,8 @@
                         </div>
                     </div>
                     <div class="utils">
-                        <nuxt-link to="/auth/login" class="util primary">후원하기</nuxt-link>
+                        <a href="https://www.ihappynanum.com/Nanum/api/CBX2XAPYAF" class="util primary" target="_blank">후원하기</a>
                     </div>
-
-
                     <div class="utils">
                         <nuxt-link to="/auth/login" class="util primary" v-if="!this.$auth.user">로그인</nuxt-link>
                         <nuxt-link to="/auth/logout" class="util primary" v-else>로그아웃</nuxt-link>
@@ -223,3 +221,14 @@ export default {
     }
 }
 </script>
+<style scoped>
+
+.bottom > .utils:nth-child(2) {
+    background-color: #fff !important;
+    padding-bottom: 5px;
+}
+
+.bottom > .utils:nth-child(3) {
+    padding-bottom: 40px;
+}
+</style>
