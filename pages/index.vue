@@ -387,12 +387,13 @@ export default {
         }
     },
     methods: {
-        async search() {
+        search() {
             if(this.form.district == "" || this.form.district ==  undefined) {
                 return;
             }
-            await this.$store.commit("changeDistrict", this.form.district);
-            await this.updatePosts(this.district.id);
+            this.$store.commit("changeDistrict", this.form.district);
+            this.updatePosts(this.district.id);
+            window.scrollTo(0,0);
         },
 
         getRankings(count){
