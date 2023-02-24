@@ -33,7 +33,32 @@
 
     <!-- default -->
     <div v-else>
-        <div :class="inputClass">
+        <Dropdown 
+            :menuTitle="'시/도 선택'"
+            :activate="stateActive"
+            :items="states"
+            :selected="stateSelected"
+            @toggle="toggleState"
+            @change="changeState"
+        />
+        <Dropdown 
+            :menuTitle="'시/군/구 선택'"
+            :activate="cityActive"
+            :items="cities"
+            :selected="citySelected"
+            @toggle="toggleCity"
+            @change="changeCity"
+        />
+        <Dropdown
+            :menuTitle="'읍/면/동 선택'"
+            :activate="districtActive"
+            :items="districts"
+            :selected="districtSelected"
+            @toggle="toggleDistrict"
+            @change="change"
+        />
+
+        <!-- <div :class="inputClass">
             <select name="" id="" v-model="stateData" @change="changeState">
                 <option value="" disabled>시/도 선택</option>
                 <option :value="state" v-for="(state, index) in states" :key="index">{{ state }}</option>
@@ -54,11 +79,17 @@
                     {{ district.district }}
                 </option>
             </select>
-        </div>
+        </div> -->
     </div>
 </template>
 <script>
+import Dropdown from './dropdown.vue'
+import DropdownDistrict from './dropdownDistrict.vue'
 export default {
+    components: {
+        Dropdown,
+        DropdownDistrict
+    },
     props: {
         type: {
             default: ""
@@ -79,11 +110,25 @@ export default {
             default: "m-input-select type02"
         }
     },
+    computed: {
+        stateSelected() {
+            return !!this.stateData;
+        },
+        citySelected() {
+            return !!this.cityData;
+        },
+        districtSelected() {
+            return !!this.districtIdData;
+        }
+    },
     data() {
         return {
-            states: this.state ? [this.state] : "",
-            cities: this.city ? [this.city] : "",
-            districts: this.district ? [this.district] : "",
+            stateActive: false,
+            cityActive: false,
+            districtActive: false,
+            states: this.state ? [this.state] : [],
+            cities: this.city ? [this.city] : [],
+            districts: this.district ? [this.district] : [],
             stateData: this.state,
             cityData: this.city,
             districtIdData: this.district_id,
@@ -111,10 +156,31 @@ export default {
     },
 
     methods: {
-        changeState() {
-            this.$axios.get("/cities?state=" + this.stateData)
+        toggleState() {
+            this.stateActive = !this.stateActive;
+            this.cityActive = false;
+            this.districtActive = false;
+        },
+        toggleCity() {
+            this.cityActive = !this.cityActive;
+            this.stateActive = false;
+            this.districtActive = false;
+        },
+        toggleDistrict() {
+            this.districtActive = !this.districtActive;
+            this.stateActive = false;
+            this.cityActive = false;
+        },
+        changeState(stateData) {
+            if(stateData && typeof stateData == 'string') {
+                this.stateData = stateData;
+            }
+            // const data = stateData ? stateData : this.stateData
+            this.$axios.get(`/cities?state=${this.stateData}`)
                 .then(response => {
                     this.cities = response.data;
+
+                    this.cityData = '';
 
                     this.districts = [];
 
@@ -124,7 +190,10 @@ export default {
                 });
         },
 
-        changeCity() {
+        changeCity(cityData) {
+            if(cityData && typeof cityData == 'string') {
+                this.cityData = cityData;
+            }
             this.$axios.get(`/districts?state=${this.stateData}&city=${this.cityData}`)
                 .then(response => {
                     this.districts = response.data;
@@ -135,7 +204,10 @@ export default {
                 });
         },
 
-        change(){
+        change(districtData){
+            if(districtData && typeof districtData == 'number') {
+                this.districtIdData = districtData;
+            }
             this.$emit("change", {
                 state: this.stateData,
                 city: this.cityData,

@@ -1,7 +1,6 @@
 <template>
     <div class="m-quicks type01">
-        <a href="#" class="m-quick" @click.prevent="createPost">글쓰기</a>
-
+        <a href="#" class="m-quick blbs orange" @click.prevent="createPost">글쓰기</a>
         <nuxt-link to="/auth/register" class="m-quick" v-if="!$auth.user">
             가입
             <br/>하기
@@ -49,3 +48,41 @@ export default {
     }
 }
 </script>
+<style scoped>
+
+.blbs {
+  background: black;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+  height: 20px;
+  width: 20px;
+  transform: scale(1);
+  animation: pulse-black 2s infinite;
+}
+
+
+.blbs.orange {
+  background: #F88600;
+  box-shadow: 0 0 0 0 rgba(255, 121, 63, 1);
+  animation: pulse-orange 2s infinite;
+}
+
+@keyframes pulse-orange {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 121, 63, 0.7);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(255, 121, 63, 0);
+  }
+  
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 121, 63, 0);
+  }
+}
+
+</style>
+
