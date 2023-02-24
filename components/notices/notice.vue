@@ -1,9 +1,10 @@
 <template>
     <nuxt-link :to="`/notices/${item.id}`" class="m-board">
         <div class="m-board-fragments">
+            <!-- 썸네일 노출 안함
             <div class="m-board-fragment m-board-thumbnail" v-if="item.img">
                 <div class="m-thumbnail type02" :style="`background-image:url('${item.img.url}')`"></div>
-            </div>
+            </div> -->
             <div class="m-board-fragment">
                 <div class="m-board-top">
                     <div class="left">
@@ -13,12 +14,11 @@
                         </h3>
                     </div>
 
-                  
-                  <!-- 이미지 안보이도록 하기로 함
+                
                     <div class="right" v-if="isManager">
                         <img src="/images/dots.png" alt="" style="width:3px;" @click.prevent.stop="active = true" v-if="!active">
                         <img src="/images/x.png" alt="" style="width:12px;" @click.prevent.stop="active = false" v-else>
-                    </div> --> 
+                    </div> 
                 </div>
 
                 <div class="m-board-bottom">
