@@ -35,10 +35,8 @@
 
                 <div class="wrap">
                     <ul class="rep" v-if="rep">
+                        <h3 class="custom-title">{{rep.position}}</h3>
                         <li class="item">
-                            <div class="item-top">
-                                <h3 class="title custom-title">{{rep.position}}</h3>
-                            </div>
                             <div class="img-wrap" >
                                 <img :src="rep.img.url" alt="임원이미지" v-if="rep.img">
                                 <img src="/images/default_profile.jpeg" alt="대체이미지" v-else>
@@ -147,9 +145,17 @@ export default {
         /* list-style: none; */
         text-align: center;
         width: 48%;
+        background: #fafafa;
     }
     .custom-title {
         font-weight: 700;
+        margin: 0 auto;
+        font-size: 25px;
+    }
+
+    .title {
+        margin: 0 auto;
+        font-size: 25px;
     }
     .height-full {
         height:100%;
@@ -161,5 +167,19 @@ export default {
         display: inline-block;
         text-align: left;
         width: 48%;
+        background: #fafafa;
+        border-radius: 3%;
+    }
+
+    .m-btns .type01 {
+        width: 100%;
+        padding: 10px 0px;
+        font-weight: normal;
+        font-size: 18px;
+    }
+
+    .img-wrap > img {
+        border-radius: 20px;
+        width: 110px;
     }
 </style>
