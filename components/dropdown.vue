@@ -122,7 +122,7 @@ export default {
         width: 100%;
         max-height:300px; 
         position: absolute; 
-        z-index: 500; 
+        z-index: 8; 
         border-radius: 0;
         background-color: white;
         text-align: left;
