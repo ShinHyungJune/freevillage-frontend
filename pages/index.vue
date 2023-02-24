@@ -516,3 +516,8 @@ export default {
 
 }
 </script>
+<style scoped>
+    .fragment .subtitle {
+        font-size: 1.2em !important;
+    }
+</style>
