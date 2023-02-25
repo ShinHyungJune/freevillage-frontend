@@ -57,7 +57,7 @@
                 <div class="wrap">
                     <h3 class="section-title">이번주 인기상승</h3>
 
-                    <favorites 
+                    <favorites
                         :activeState="activeState"
                         :activeCount="activeCount"
                     />
@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="right">
                                     <div class="thumbnail" :style="`background-image:url('${item.user.img.url}')`" v-if="item.user.img"></div>
-                                    <p class="writer">{{ item.user.name }}</p>
+                                    <p class="writer">{{ item.user.nickname }}</p>
                                     <p class="date">{{ item.diff_at }}</p>
                                 </div>
                             </div>

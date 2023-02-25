@@ -14,7 +14,7 @@
                 <profile-img  id="img" @change="(data) => this.changeData(data)"/>
             </div>
             <div class="m-input m-input-text type01">
-                <input type="text" placeholder="이름 입력" v-model="form.name">
+                <input type="text" placeholder="이름 입력" v-model="form.nickname">
             </div>
 
             <div class="mt-20"></div>
@@ -36,7 +36,7 @@ export default {
             item: "",
 
             form: {
-                name: "",
+                nickname: "",
                 profile_photo: "",
             },
 
@@ -50,7 +50,7 @@ export default {
         async save() {
           let form = new FormData();
             form.append("_method","PUT");
-            form.append("name",this.form.name);
+            form.append("nickname",this.form.nickname);
           form.append("profile_photo",this.form.profile_photo);
           try {
             const { data } = await this.$axios.post('/auth/profile', form)
@@ -77,7 +77,7 @@ export default {
     },
 
     mounted() {
-      this.form.name = this.$auth.user.name;
+      this.form.nickname = this.$auth.user.nickname;
     }
 }
 </script>

@@ -112,7 +112,7 @@ export default {
             }).then(response => {
                 this.items = response.data;
                 this.extractImages(this.items.data);
-                console.log(this.$auth.user.name)
+                console.log(this.$auth.user.nickname)
             });
         },
 
@@ -126,7 +126,7 @@ export default {
 
             let items = this.items.data.filter(item => this.form.selected_ids.includes(item.id));
 
-            kakaoHelper.shareScrapItems(items, this.$auth.user.name);
+            kakaoHelper.shareScrapItems(items, this.$auth.user.nickname);
         },
     },
 

@@ -18,7 +18,7 @@
             <div class="m-center type01">
                 <div class="wrap">
                     <h3 class="title">
-                        {{ $auth.user.name }} 님,
+                        {{ $auth.user.nickname }} 님,
                         <br/>회원가입해주셔서 감사합니다.
                     </h3>
 

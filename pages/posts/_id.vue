@@ -68,7 +68,7 @@
                             <div class="left">
                                 <div class="writer">
                                     <div class="thumbnail" :style="`background-image:url('${item.user.img.url}')`" v-if="item.user.img"></div>
-                                    {{ item.user.name }}
+                                    {{ item.user.nickname }}
                                 </div>
                                 <p class="date">{{ item.created_at }}</p>
                             </div>

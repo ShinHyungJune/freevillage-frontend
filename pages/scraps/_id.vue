@@ -9,7 +9,7 @@
             <div class="wrap">
                 <div class="top">
                     <div class="m-thumbnail type02" :style="`background-image:url('${item.user.img.url}')`" v-if="item.user.img"></div>
-                    <h3 class="title">{{ item.user.name }}</h3>
+                    <h3 class="title">{{ item.user.nickname }}</h3>
                 </div>
 
                 <div class="mt-20"></div>

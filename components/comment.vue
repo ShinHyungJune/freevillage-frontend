@@ -7,7 +7,7 @@
             <div class="thumbnail" :style="`background-image:url(${item.user.img.url})`" v-if="item.user.img"></div>
 
             <div class="content">
-                <h3 class="title">{{ item.user.name }}</h3>
+                <h3 class="title">{{ item.user.nickname }}</h3>
                 <p class="sub">{{ item.user.district.district }} · {{ item.diff_at }}</p>
                 <p class="body removed" v-if="item.deleted_at">글이 삭제되었습니다.</p>
                 <p class="body" v-else>{{ item.content }}</p>

@@ -13,7 +13,7 @@
                         <img src="/images/arrowRight.png" alt="" class="filter-white" style="width:10px;">
                     </nuxt-link>
                     <a href="#" class="btn-login" v-else>
-                        안녕하세요, {{ $auth.user.name }}님!
+                        안녕하세요, {{ $auth.user.nickname }}님!
                     </a>
 
                     <div class="links">

@@ -30,7 +30,7 @@
                 <div class="box-info">
                     <div class="info">
                         <div class="m-thumbnail type02" :style="`background-image:url('${this.$auth.user.img.url}')`" v-if="this.$auth.user.img"></div>
-                        <h3 class="title">{{ this.$auth.user.name }}</h3>
+                        <h3 class="title">{{ this.$auth.user.nickname }}</h3>
                     </div>
 
                     <div class="mt-12"></div>
