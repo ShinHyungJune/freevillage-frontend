@@ -1,7 +1,5 @@
 <template>
   <div class="select-wrap" >
-    <!-- myDistrict 값이 없는 경우 -->
-    <div v-if="!myDistrict" class="">
     <div class="selectFirst" v-show="!selected" @click="$emit('toggle')">{{menuTitle}}</div>
     <div class="selectFirst" v-show="selected" @click="$emit('toggle')">{{selectedItem}}</div>
     <div class="selectOption" @click="$emit('toggle')">
@@ -11,13 +9,6 @@
           </li>
       </ul>
     </div>
-    </div>
-    <!-- myDistrict 값이 있는 경우 -->
-    <div v-else class="">
-    <div class="selectFirst" @click="$emit('toggle')">{{ myDistrict }}</div>
-    </div>
-
-
   </div>
 </template>
 
@@ -28,17 +19,6 @@
  */
 export default {
   props: {
-    /** 
-      district이 있는 경우
-     */
-    myDistrict: {
-      type: String,
-      default: "",
-    },
-    districtId: {
-      type: String,
-      default: "",
-    },
     /**
      * 드랍다운 활성화 플래그
      */
@@ -95,7 +75,6 @@ export default {
      * 드랍다운 선택 시 리스너 콜백
      */
     select(item) {
-      //this.selectedItem = this.myDistrict ? this.myDistrict : item.value;
       this.selectedItem = item.value;
       if(item.id) {
         this.$emit('change',item.id);
