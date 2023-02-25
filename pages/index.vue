@@ -216,7 +216,8 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <a href="#" class="m-btn type02" @click.prevent="getRankings(100)">마을 랭킹 TOP 100 +</a>
+                            <nuxt-link to="/rank" class="m-btn type02">마을 랭킹 TOP 100 +</nuxt-link>
+                            
                         </div>
                     </div>
                 </div>
