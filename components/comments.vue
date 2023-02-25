@@ -1,5 +1,7 @@
 <template>
     <div>
+        <!-- 하단 네비게이션바 -->
+        <comment-navigation :post_id="form.post_id" @created="(obj) => this.updateComment(obj)" />
         <div class="m-comments type01">
             <div class="m-comments-top">
                 <a href="#" :class="`btn-filter ${form.align === 'desc' ? 'active' : ''}`" @click.prevent="() => {form.align = 'desc'; getItems();}">최신순</a>
@@ -13,8 +15,6 @@
             <infinite-loading @infinite="loadMore" v-if="items.links.next" />
         </no-ssr>
 
-        <!-- 하단 네비게이션바 -->
-        <comment-navigation :post_id="form.post_id" @created="(obj) => this.updateComment(obj)" />
     </div>
 </template>
 

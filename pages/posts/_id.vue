@@ -241,6 +241,7 @@
 
         <!-- 하단 네비게이션바 -->
         <!-- <comment-navigation @created="(data) => {comments.data.push(data)}" /> -->
+            <navigation />
     </div>
 </template>
 

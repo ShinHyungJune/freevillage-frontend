@@ -1,7 +1,7 @@
 <template>
-    <div class="m-navigation type01">
+    <div class="m-navigation" style="margin-bottom: 17px;">
         <form action="" @submit.prevent="store">
-            <div class="wrap">
+            <div class="">
                 <div class="m-input-withBtn type01">
                     <div class="m-input m-input-text type01">
                         <input type="text" placeholder="댓글을 입력해주세요." v-model="form.content">
