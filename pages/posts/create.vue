@@ -29,7 +29,7 @@
             <div class="wrap">
                 <div class="mt-20"></div>
 
-                <p class="comment align-center" v-if="form.board === 'meetings'">※ 모임글은 관리자의 승인 후 노출됩니다.</p>
+               <!--<p class="comment align-center" v-if="form.board === 'meetings'">※ 모임글은 관리자의 승인 후 노출됩니다.</p> --> 
 
                 <div class="m-input-text type02">
                     <input type="text" placeholder="제목" v-model="form.title" />
