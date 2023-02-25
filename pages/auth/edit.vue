@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div class="area-register"@keydown="() => errors = ''">
+        <div class="area-register"@keydown="() => form.errors = ''">
             <!-- 내용 영역 -->
             <div class="container">
                 <div class="wrap">
@@ -23,10 +23,10 @@
                         <h3 class="m-input-title type01">이름</h3>
 
                         <div class="m-input-text type01">
-                            <input type="text" placeholder="이름 입력" v-model="form.nickname">
+                            <input type="text" placeholder="이름 입력" v-model="form.name">
                         </div>
 
-                        <p class="m-input-error" v-if="errors.nickname" v-text="errors.nickname[0]"></p>
+                        <p class="m-input-error" v-if="errors.name" v-text="errors.name[0]"></p>
                     </div>
 
                     <div class="mt-16"></div>
@@ -117,7 +117,7 @@ export default {
         return {
             step: 1,
             form: {
-                nickname: this.$auth.user.nickname,
+                name: this.$auth.user.name,
                 birth: this.$auth.user.birth,
                 phone: this.$auth.user.phone,
                 gender: this.$auth.user.gender,

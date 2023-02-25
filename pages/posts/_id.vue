@@ -24,7 +24,7 @@
         <div class="m-header type01">
             <div class="wrap">
                 <div class="utils">
-                    <button class="btn-util" @click="$router.back();">
+                    <button class="btn-util" @click="back">
                         <img src="/images/back.png" alt="" style="width:10px;">
                     </button>
 
@@ -367,6 +367,12 @@ export default {
 
         },
 
+        back(){
+            if(document.referrer)
+                return this.$router.back();
+
+            return this.$router.push("/");
+        },
     },
 
     mounted() {
