@@ -81,7 +81,7 @@ class KakaoHelper {
         })
     }
 
-    shareScrapItems(items){
+    shareScrapItems(items, nickname){
         if(items.length === 0)
             return alert("최소 1개 이상의 게시글을 선택해주세요.");
 
@@ -106,7 +106,7 @@ class KakaoHelper {
 
         this.kakao.Link.sendDefault({
             objectType: 'list',
-            headerTitle: "자유마을 소식",
+            headerTitle: `${nickname}님 자유마을 소식`,
             headerLink: {
                 mobileWebUrl: this.domain,
                 webUrl: this.domain,

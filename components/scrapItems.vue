@@ -126,7 +126,7 @@ export default {
 
             let items = this.items.data.filter(item => this.form.selected_ids.includes(item.id));
 
-            kakaoHelper.shareScrapItems(items);
+            kakaoHelper.shareScrapItems(items, this.$auth.user.nickname);
         },
     },
 
