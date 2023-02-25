@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div class="area-register"@keydown="() => form.errors = ''">
+        <div class="area-register" @keydown="() => form.errors = ''">
             <!-- 내용 영역 -->
             <div class="container">
                 <div class="wrap">
@@ -45,9 +45,8 @@
 
                     <div class="m-input-wrap">
                         <h3 class="m-input-title type01">내 지역 선택</h3>
-
+                        <p>현재 지역 변경 불가 (변경될 수 있도록 개편될 예정)</p>
                         <input-region :city="$auth.user.district.city" :state="$auth.user.district.state" :district_id="$auth.user.district.id" :district="$auth.user.district" @change="(data) => {form.district_id = data.district_id}"/>
-
                         <p class="m-input-error" v-if="errors.district_id" v-text="errors.district_id[0]"></p>
                     </div>
 
