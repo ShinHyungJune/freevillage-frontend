@@ -37,7 +37,7 @@
 
                 <div class="mt-12"></div>
 
-                <div class="m-values type01">
+                <!-- <div class="m-values type01">
                     <div class="m-value">
                         <h3 class="title">총 게시글 수</h3>
                         <p class="count">{{ items.meta.totalPostCount }}</p>
@@ -52,7 +52,7 @@
                         <h3 class="title">받은 좋아요 수</h3>
                         <p class="count">{{ items.meta.totalLikeCount }}</p>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="m-boards type02">
                     <post v-for="item in items.data" :key="item.id" :item="item" @removed="removed"/>
