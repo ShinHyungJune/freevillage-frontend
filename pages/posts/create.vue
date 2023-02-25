@@ -49,6 +49,14 @@
 
                 <div class="m-input-wrap" v-if="form.board === 'meetings'">
                     <div class="m-input-wrap">
+                        <h3 class="m-input-title">파라솔 설치</h3>
+
+                        <div class="m-input-checkbox type01">
+                            <input type="checkbox" id="parasole" v-model="parasole">
+                            <label for="parasole">파라솔 설치 위치 안내일 경우 체크</label>
+                        </div>
+                    </div>
+                    <div class="m-input-wrap">
                         <h3 class="m-input-title">참여</h3>
 
                         <div class="m-input-text type01">
@@ -96,14 +104,6 @@
                         </div>
 
                         <div class="m-input-error" v-if="errors.price">{{errors.price[0]}}</div>
-                    </div>
-                    <div class="m-input-wrap">
-                        <h3 class="m-input-title">파라솔 설치</h3>
-
-                        <div class="m-input-checkbox type01">
-                            <input type="checkbox" id="parasole" v-model="parasole">
-                            <label for="parasole">파라솔 설치할 경우 체크</label>
-                        </div>
                     </div>
 
                     <div class="m-input-wrap">
