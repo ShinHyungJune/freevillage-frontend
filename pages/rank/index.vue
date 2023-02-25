@@ -11,7 +11,7 @@
                   <div class="content">
                       <div class="m-title type01">
                           <p class="sub">순위 현황 한 눈에 보기</p>
-                          마을별 가입 <span class="point">TOP 10</span>
+                          마을별 가입 <span class="point">TOP 100</span>
                       </div>
                       <div class="rankings">
                           <div class="ranking-wrap" v-if="districtWeekRegisterCounts.length >= 2">
