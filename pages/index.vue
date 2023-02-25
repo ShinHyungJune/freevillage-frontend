@@ -104,9 +104,6 @@
                                 <div class="m-btn-wrap">
                                     <nuxt-link to="/contents/declares" class="m-btn type01">10대 강령</nuxt-link>
                                 </div>
-                                <div class="m-btn-wrap">
-                                    <nuxt-link to="/contents/greeting" class="m-btn type01">총재 인사말</nuxt-link>
-                                </div>
                             </div>
                         </div>
                     </div>

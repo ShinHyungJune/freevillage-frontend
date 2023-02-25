@@ -21,11 +21,6 @@
                         <span class="text">10대 강령</span>
                     </nuxt-link>
                 </div>
-                <div class="m-tab-wrap">
-                    <nuxt-link to="/contents/greeting" class="m-tab">
-                        <span class="text">총재 인사말</span>
-                    </nuxt-link>
-                </div>
             </div>
 
             <div class="mt-32"></div>
