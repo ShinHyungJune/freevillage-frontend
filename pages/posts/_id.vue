@@ -175,7 +175,7 @@
 
                             <div class="mt-16"></div>
 
-                            <a href="#" class="m-btn type03 state03" v-if="!item.can_participate">행사종료</a>
+                            <a href="#" class="m-btn type03 state03" v-if="!item.can_participate">{{item.meetingState}}</a>
                             <a href="#" class="m-btn type03 state02" v-else-if="item.is_participate" @click="unparticipate">참여취소</a>
                             <a href="#" class="m-btn type03" v-else @click.prevent="participate">참여하기</a>
                         </div>
