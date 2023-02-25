@@ -249,6 +249,9 @@
                             <div class="m-ratioBox-wrap" v-if="notice.img">
                                 <div class="m-ratioBox" :style="`background-image:url('${notice.img.preview_url}');`"></div>
                             </div>
+                            <div class="m-ratioBox-wrap" v-else>
+                                <div class="m-ratioBox" :style="`background-image:url('/images/notice_thumbnail.jpg');`"></div>
+                            </div>
 
                             <div class="content">
                                 <p class="subtitle" v-if="notice.district">{{ notice.district.city }} {{notice.district.district}}</p>
