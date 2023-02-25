@@ -13,7 +13,6 @@
                           <p class="sub">순위 현황 한 눈에 보기</p>
                           마을별 가입 <span class="point">TOP 10</span>
                       </div>
-
                       <div class="rankings">
                           <div class="ranking-wrap" v-if="districtWeekRegisterCounts.length >= 2">
                               <a href="#" class="ranking">
@@ -259,27 +258,11 @@ export default {
           };
       }
   },
-
-  watch: {
-      district (newCount, oldCount) {
-          this.updatePosts(this.district.id);
-
-          this.getRankings(10);
-
-          if(this.district.id != 0)
-              this.$axios.get("/districts/" + this.district.id + "/register_rates")
-                  .then(response => {
-                      this.registerRates = response.data.registerRates;
-                  });
-      }
-
-  },
-
   async mounted() {
       await this.updatePosts(this.district.id);
 
 
-      this.getRankings(10);
+      this.getRankings(100);
 
       if(this.district.id != 0)
           this.$axios.get("/districts/" + this.district.id + "/register_rates")

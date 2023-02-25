@@ -12,22 +12,33 @@
                 </p>
             </nuxt-link>
         </div>
-
-        <a href="#" class="btn-more" @click.prevent="loadMore" v-if="items.links.next && form.take !== 100">
+                
+        <nuxt-link v-if="activeState" to="/fav" class="btn-more">
             인기상승 더보기 +
-        </a>
+        </nuxt-link>
+        <nuxt-link v-else to="/posts" class="btn-more">
+            뒤로가기
+        </nuxt-link>
+
     </div>
 </template>
 <script>
 export default {
     props: {
-
+        activeState: {
+            type: Boolean,
+            default: false,
+        },
+        activeCount: {
+            type: Number,
+            default: 3
+        }
     },
     data() {
         return {
             form: {
                 board: "",
-                take: 3,
+                take: this.activeCount,
                 page:1,
                 district_id: this.$store.state.district.id,
             },
@@ -44,11 +55,11 @@ export default {
     },
 
     methods: {
-        loadMore() {
+        /* loadMore() {
             this.form.take = 100;
 
             this.getItems();
-        },
+        }, */
 
         getItems(){
             this.$axios.get(`/favorites`, {
@@ -56,6 +67,11 @@ export default {
             }).then(response => {
                 this.items = response.data;
             });
+
+            console.log(this.activeCount)
+
+           
+
         },
     },
 

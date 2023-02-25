@@ -118,7 +118,7 @@ export default {
 
     .selectOption {
         overflow-x:hidden;
-        top: 43px;
+        top: 45px;
         width: 100%;
         max-height:300px; 
         position: absolute; 

@@ -57,7 +57,10 @@
                 <div class="wrap">
                     <h3 class="section-title">이번주 인기상승</h3>
 
-                    <favorites />
+                    <favorites 
+                        :activeState="activeState"
+                        :activeCount="activeCount"
+                    />
 
                     <div class="mt-12"></div>
 
@@ -147,6 +150,8 @@ export default {
     auth: false,
     data() {
         return {
+            activeState : true,
+            activeCount : 3,
             form: {
                 board: this.$route.query.board ? this.$route.query.board : "",
                 page: 1,
