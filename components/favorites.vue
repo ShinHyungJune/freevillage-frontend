@@ -1,6 +1,6 @@
 <template>
     <div class="rankings-wrap">
-        <div class="m-empty type01" v-if="items.data.length === 0">데이터가 없습니다.</div>
+        <div class="m-empty type01" v-if="items.data.length === 0">좋아요 클릭하여 인기상승하세요 ^^</div>
 
         <div class="rankings">
             <nuxt-link :to="`/posts/${item.id}`" class="ranking" v-for="(item, index) in items.data" :key="item.id">
