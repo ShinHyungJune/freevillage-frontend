@@ -157,7 +157,7 @@
                             </a>
                             <nuxt-link to="/scraps" class="menu">
                                 <img src="/images/wallet.png" alt="" class="icon" style="width:14px;">
-                                <p class="text">나의 지갑</p>
+                                <p class="text">내 공유함</p>
                             </nuxt-link>
                         </div>
                     </div>
