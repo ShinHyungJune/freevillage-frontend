@@ -12,7 +12,7 @@
                 </p>
             </nuxt-link>
         </div>
-                
+
         <nuxt-link v-if="activeState" to="/fav" class="btn-more">
             인기상승 더보기 +
         </nuxt-link>
@@ -68,9 +68,7 @@ export default {
                 this.items = response.data;
             });
 
-            console.log(this.activeCount)
 
-           
 
         },
     },

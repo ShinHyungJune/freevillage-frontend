@@ -34,7 +34,7 @@ export default {
         $route(to, from) {
             window.scrollTo(0,0);
 
-            if(this.$auth.user)
+            if(this.$auth.user && this.$auth.user.id)
                 this.$axios.get("/users/hasNewNotice")
                     .then(response => {
                        this.$auth.setUser({

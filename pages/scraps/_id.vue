@@ -52,7 +52,6 @@ export default {
     mounted() {
         this.$axios.get("/scraps/" + this.$route.params.id)
             .then(response => {
-                console.log(response.data.data);
                 this.item = response.data.data;
             });
     }

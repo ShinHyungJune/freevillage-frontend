@@ -94,7 +94,6 @@ export default {
         },
 
         remove(item){
-            console.log(item);
             this.$axios.delete("/scrapItems/" + item.id)
                 .then(response => {
                     this.items.data = this.items.data.filter(itemData => item.id != itemData.id)
@@ -112,7 +111,6 @@ export default {
             }).then(response => {
                 this.items = response.data;
                 this.extractImages(this.items.data);
-                console.log(this.$auth.user.nickname)
             });
         },
 
