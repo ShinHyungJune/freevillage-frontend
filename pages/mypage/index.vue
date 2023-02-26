@@ -132,10 +132,10 @@
                                 <img src="/images/comment-black.png" alt="" class="icon" style="width:14px;">
                                 <p class="text">내가 쓴 댓글</p>
                             </nuxt-link>
-                            <a href="#" class="menu">
+                            <nuxt-link to="/mypage/participants" class="menu">
                                 <img src="/images/comment-black.png" alt="" class="icon" style="width:14px;">
                                 <p class="text">내 행사 관리</p>
-                            </a>
+                            </nuxt-link>
                         </div>
                     </div>
                 </div>
@@ -176,14 +176,14 @@
                                 <img src="/images/comment-black.png" alt="" class="icon" style="width:14px;">
                                 <p class="text">내가 쓴 댓글</p>
                             </nuxt-link>
-                            <a href="#" class="menu">
+                            <nuxt-link to="/mypage/participants" class="menu">
                                 <img src="/images/comment-black.png" alt="" class="icon" style="width:14px;">
                                 <p class="text">내 행사 관리</p>
-                            </a>
+                            </nuxt-link>
                         </div>
                     </div>
                 </div>
-                <!-- 
+                <!--
                 <div class="menus-wrap">
                     <h3 class="title">나의 마을설정</h3>
 

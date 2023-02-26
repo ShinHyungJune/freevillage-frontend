@@ -39,7 +39,7 @@
         </div>
 
         <div class="m-btns type01" v-if="activeBtns">
-            <div class="m-btn-wrap">
+            <div class="m-btn-wrap" v-if="$auth.user && $auth.user.id == item.user.id">
                 <a href="#" class="m-btn type01 bg-revert-red" @click.prevent="remove">삭제하기</a>
             </div>
             <div class="m-btn-wrap">
