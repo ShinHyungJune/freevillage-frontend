@@ -46,7 +46,7 @@
                     <div class="m-input-wrap">
                         <h3 class="m-input-title type01">내 지역 선택</h3>
 
-                        <input-region :city="$auth.user.district.city" :state="$auth.user.district.state" :district_id="$auth.user.district.id" :district="$auth.user.district" @change="(data) => {form.district_id = data.district_id}"/>
+                        <input-region :type="'type02'" :city="$auth.user.district.city" :state="$auth.user.district.state" :district_id="$auth.user.district.id" :district="$auth.user.district" @change="(data) => {form.district_id = data.district_id}"/>
 
                         <p class="m-input-error" v-if="errors.district_id" v-text="errors.district_id[0]"></p>
                     </div>
