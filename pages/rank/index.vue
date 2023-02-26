@@ -52,8 +52,8 @@
                                           <span class="point">1</span>위
                                       </h3>
                                       <p class="more">{{ districtWeekRegisterCounts[0].now_week_count }}
-                                          <span class="tri" v-if="districtWeekRegisterCounts[0].up_down === 'down'">▼</span>
-                                          <span class="tri" v-else-if="districtWeekRegisterCounts[0].now_week_count == 0">−</span>
+                                          <span class="tri" v-if="districtWeekRegisterCounts[0].now_week_count == 0">−</span>
+                                          <span class="tri" v-else-if="districtWeekRegisterCounts[0].up_down === 'down'">▼</span>
                                           <span class="tri" v-else>▲</span>
                                       </p>
                                   </div>
@@ -74,8 +74,8 @@
                                           <span class="point">3</span>위
                                       </h3>
                                       <p class="more">{{ districtWeekRegisterCounts[2].now_week_count }}
-                                          <span class="tri" v-if="districtWeekRegisterCounts[2].up_down === 'down'">▼</span>
-                                          <span class="tri" v-else-if="districtWeekRegisterCounts[2].now_week_count == 0">−</span>
+                                          <span class="tri" v-if="districtWeekRegisterCounts[2].now_week_count == 0">−</span>
+                                          <span class="tri" v-else-if="districtWeekRegisterCounts[2].up_down === 'down'">▼</span>
                                           <span class="tri" v-else>▲</span>
                                       </p>
                                   </div>
