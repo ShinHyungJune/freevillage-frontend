@@ -84,11 +84,9 @@
 </template>
 <script>
 import Dropdown from './dropdown.vue'
-import DropdownDistrict from './dropdownDistrict.vue'
 export default {
     components: {
         Dropdown,
-        DropdownDistrict
     },
     props: {
         type: {
