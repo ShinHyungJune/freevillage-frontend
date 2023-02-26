@@ -522,5 +522,7 @@ export default {
 </script>
 
 <style scoped>
-
+    .fake {
+        color: #999;
+    }
 </style>
