@@ -1,6 +1,7 @@
 <template>
     <div class="m-navigation" style="margin-bottom: 17px;">
-        <form action="" @submit.prevent="store">
+        <div v-if="this.$auth.user">
+            <form action="" @submit.prevent="store">
             <div class="">
                 <div class="m-input-withBtn type01">
                     <div class="m-input m-input-text type01">
@@ -11,6 +12,14 @@
                 </div>
             </div>
         </form>
+        </div>
+        <div v-else>
+            <div class="m-input-withBtn type01">
+                    <div class="m-input m-input-text type01">
+                        댓글을 달려면 로그인하세요. <nuxt-link style="color:#0BAF00" to="/auth/login">로그인하기</nuxt-link>
+                    </div>
+                </div>
+        </div>
     </div>
 </template>
 <script>
