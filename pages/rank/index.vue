@@ -270,6 +270,14 @@ export default {
           };
       }
   },
+
+    watch: {
+        district(to, from) {
+            window.scrollTo(0,0);
+
+            this.$router.push("/");
+        },
+    },
   async mounted() {
       await this.updatePosts(this.district.id);
 
