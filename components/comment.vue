@@ -34,7 +34,7 @@
             </div>
 
             <button class="btn-more" @click="activeBtns = !activeBtns">
-                <img src="/images/dots.png" alt="" style="width:3px;" v-if="!item.deleted_at">
+                <img src="/images/dots.png" alt="" style="width:3px;" v-if="$auth.user && !item.deleted_at">
             </button>
         </div>
 

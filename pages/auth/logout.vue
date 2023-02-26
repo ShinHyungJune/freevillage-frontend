@@ -6,7 +6,7 @@
 
 export default {
     name: "login",
-    auth: true,
+    auth: false,
     data() {
         return {
 
@@ -22,8 +22,10 @@ export default {
             id: 0,
             district: "자유마을"
         });
-        
+
         this.$auth.logout();
+
+        this.router.push("/auth/login");
     }
 }
 </script>
