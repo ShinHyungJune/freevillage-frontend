@@ -6,7 +6,7 @@
 
 export default {
     name: "login",
-    auth: false,
+    auth: true,
     data() {
         return {
 
@@ -24,8 +24,6 @@ export default {
         });
 
         this.$auth.logout();
-
-        this.router.push("/auth/login");
     }
 }
 </script>
