@@ -220,7 +220,21 @@ export default {
             this.states = response.data.sort((a,b) => {
                 return this.orders[a] - this.orders[b];
             });
-        })
+        });
+
+        if(this.state){
+            this.$axios.get(`/cities?state=${this.state}`)
+                .then(response => {
+                    this.cities = response.data;
+                });
+        }
+
+        if(this.city){
+            this.$axios.get(`/districts?state=${this.state}&city=${this.city}`)
+                .then(response => {
+                    this.districts = response.data;
+                });
+        }
     }
 }
 </script>
