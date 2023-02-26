@@ -46,7 +46,12 @@ export default {
     },
   methods: {
     async logout() {
-      await this.$auth.logout();
+        this.$auth.setUser(null);
+        this.$store.commit("changeDistrict", {
+            id: 0,
+            district: "자유마을"
+        });
+        await this.$auth.logout();
     },
   },
   mounted() {

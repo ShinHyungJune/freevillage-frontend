@@ -42,6 +42,9 @@ export default {
     },
     methods: {
         store() {
+            if(!this.$auth.user)
+                return this.$router.push("/auth/login");
+
             this.$axios.post("/comments", this.form)
                 .then(response => {
                     this.$emit("created", {
