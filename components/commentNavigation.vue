@@ -16,7 +16,7 @@
         <div v-else>
             <div class="m-input-withBtn type01">
                     <div class="m-input m-input-text type01">
-                        댓글을 달려면 로그인하세요. <nuxt-link style="color:#0BAF00" to="/auth/login">로그인하기</nuxt-link>
+                        댓글을 달려면 로그인하세요. <nuxt-link class="btn-green" to="/auth/login">로그인하기</nuxt-link>
                     </div>
                 </div>
         </div>
@@ -71,3 +71,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+    .btn-green {
+        color: #0BAF00;
+    }
+</style>
