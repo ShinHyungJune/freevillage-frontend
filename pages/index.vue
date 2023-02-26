@@ -147,7 +147,7 @@
                                         </h3>
                                         <p class="more">{{ districtWeekRegisterCounts[1].now_week_count }}
                                             <span class="tri" v-if="districtWeekRegisterCounts[1].up_down === 'down'">▼</span>
-                                            <span class="tri" v-else-if="districtWeekRegisterCounts[1].now_week_count === '0'">−</span>
+                                            <span class="tri" v-else-if="districtWeekRegisterCounts[1].now_week_count == 0">−</span>
                                             <span class="tri" v-else>▲</span>
                                         </p>
                                     </div>
@@ -217,7 +217,7 @@
                                 </tbody>
                             </table>
                             <nuxt-link to="/rank" class="m-btn type02">마을 랭킹 TOP 100 +</nuxt-link>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -252,7 +252,7 @@
                             <div class="m-ratioBox-wrap" v-else>
                                 <div class="m-ratioBox" :style="`background-image:url('/images/notice_thumbnail.jpg');`"></div>
                             </div>
-                            
+
 
                             <div class="content">
                                 <p class="subtitle" v-if="notice.district">{{ notice.district.city }} {{notice.district.district}}</p>

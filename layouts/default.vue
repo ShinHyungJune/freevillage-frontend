@@ -42,11 +42,13 @@ export default {
                            has_new_notice: response.data.data
                        });
                     });
+
+            if(this.$auth.user && !this.$auth.user.id)
+                this.$auth.setUser(null);
         },
     },
   methods: {
     async logout() {
-        this.$auth.setUser(null);
         this.$store.commit("changeDistrict", {
             id: 0,
             district: "자유마을"
