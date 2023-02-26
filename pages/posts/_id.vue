@@ -223,7 +223,7 @@
                                 글 담기
                             </button>
 
-                            <button class="btn-util" @click="share">
+                            <button class="btn-util" id="kakao">
                                 <img src="/images/share.png" alt="" style="width:11px;">
                                 공유
                             </button>
@@ -311,15 +311,6 @@ export default {
             if(type === 'remove')
                 this.item.comment_count -=1;
         },
-        share() {
-            let kakaoHelper = new KakaoHelper(Kakao);
-
-            this.$axios.post("/shares", {
-                post_id: this.item.id
-            });
-
-            kakaoHelper.sharePost(this.item);
-        },
 
         participate(){
             this.$axios.post("/participants", {
@@ -379,9 +370,13 @@ export default {
     mounted() {
         kakao.maps.load();
 
+        let kakaoHelper = new KakaoHelper(Kakao);
+
         this.$axios.get("/posts/" + this.$route.params.id)
             .then(response => {
                 this.item = response.data.data;
+
+                kakaoHelper.initSharePost(this.item);
             });
     }
 }

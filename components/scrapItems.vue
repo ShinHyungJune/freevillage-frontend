@@ -49,7 +49,7 @@
             <div class="wrap">
                 <div class="m-btns type01" v-if="!editMode">
                     <div class="m-btn-wrap">
-                        <a href="#" class="m-btn type03 bg-revert-primary" @click.prevent="share">공유하기</a>
+                        <a href="#" class="m-btn type03 bg-revert-primary" @click.prevent="share" id="kakaoShare">공유하기</a>
                     </div>
                 </div>
             </div>

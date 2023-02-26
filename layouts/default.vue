@@ -46,6 +46,10 @@ export default {
             if(this.$auth.user && !this.$auth.user.id)
                 this.$auth.setUser(null);
         },
+
+        district(to, from) {
+            window.scrollTo(0,0);
+        },
     },
   methods: {
     async logout() {
@@ -56,6 +60,12 @@ export default {
         await this.$auth.logout();
     },
   },
+
+    computed: {
+        district(){
+            return this.$store.state.district;
+        }
+    },
   mounted() {
       Kakao.init('75aa32499180f4887b38e7607514e26f');
   }

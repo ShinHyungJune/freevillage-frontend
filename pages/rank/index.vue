@@ -15,7 +15,10 @@
                       </div>
                       <div class="rankings">
                           <div class="ranking-wrap" v-if="districtWeekRegisterCounts.length >= 2">
-                              <a href="#" class="ranking">
+                              <a href="#" class="ranking"  @click="$store.commit('changeDistrict',  {
+                                id: districtWeekRegisterCounts[1].district_id,
+                                district: districtWeekRegisterCounts[1].district
+                                })">
                                   <div class="img-wrap">
                                       <img src="/images/2st.png" alt="">
                                   </div>
@@ -26,15 +29,18 @@
                                           <span class="point">2</span>위
                                       </h3>
                                       <p class="more">{{ districtWeekRegisterCounts[1].now_week_count }}
-                                          <span class="tri" v-if="districtWeekRegisterCounts[1].up_down === 'down'">▼</span>
-                                          <span class="tri" v-else-if="districtWeekRegisterCounts[1].now_week_count === '0'">−</span>
+                                          <span class="tri" v-if="districtWeekRegisterCounts[1].now_week_count == 0">−</span>
+                                          <span class="tri" v-else-if="districtWeekRegisterCounts[1].up_down === 'down'">▼</span>
                                           <span class="tri" v-else>▲</span>
                                       </p>
                                   </div>
                               </a>
                           </div>
                           <div class="ranking-wrap first" v-if="districtWeekRegisterCounts.length >= 1">
-                              <div class="ranking">
+                              <div class="ranking"  @click="$store.commit('changeDistrict',  {
+                                id: districtWeekRegisterCounts[0].district_id,
+                                district: districtWeekRegisterCounts[0].district
+                                })">
                                   <div class="img-wrap">
                                       <img src="/images/crown.png" alt="" class="deco">
                                       <img src="/images/1st.png" alt="" class="img">
@@ -47,14 +53,17 @@
                                       </h3>
                                       <p class="more">{{ districtWeekRegisterCounts[0].now_week_count }}
                                           <span class="tri" v-if="districtWeekRegisterCounts[0].up_down === 'down'">▼</span>
-                                          <span class="tri" v-else-if="districtWeekRegisterCounts[0].now_week_count === '0'">−</span>
+                                          <span class="tri" v-else-if="districtWeekRegisterCounts[0].now_week_count == 0">−</span>
                                           <span class="tri" v-else>▲</span>
                                       </p>
                                   </div>
                               </div>
                           </div>
                           <div class="ranking-wrap" v-if="districtWeekRegisterCounts.length >= 3">
-                              <div class="ranking">
+                              <div class="ranking"  @click="$store.commit('changeDistrict',  {
+                                id: districtWeekRegisterCounts[2].district_id,
+                                district: districtWeekRegisterCounts[2].district
+                                })">
                                   <div class="img-wrap">
                                       <img src="/images/3st.png" alt="">
                                   </div>
@@ -66,7 +75,7 @@
                                       </h3>
                                       <p class="more">{{ districtWeekRegisterCounts[2].now_week_count }}
                                           <span class="tri" v-if="districtWeekRegisterCounts[2].up_down === 'down'">▼</span>
-                                          <span class="tri" v-else-if="districtWeekRegisterCounts[2].now_week_count === '0'">−</span>
+                                          <span class="tri" v-else-if="districtWeekRegisterCounts[2].now_week_count == 0">−</span>
                                           <span class="tri" v-else>▲</span>
                                       </p>
                                   </div>
@@ -85,18 +94,21 @@
                               </thead>
                               <tbody>
 
-                              <tr v-for="(districtWeekRegisterCount, index) in districtWeekRegisterCounts" :key="index">
+                              <tr v-for="(districtWeekRegisterCount, index) in districtWeekRegisterCounts" :key="index"  @click="$store.commit('changeDistrict',  {
+                                id: districtWeekRegisterCount.district_id,
+                                district: districtWeekRegisterCount.district
+                                })">
                                   <template v-if="index >= 3 && districtWeekRegisterCount">
                                   <td>{{index + 1}}위</td>
                                   <td>{{ districtWeekRegisterCount.city}} {{districtWeekRegisterCount.district}}</td>
                                   <td class="more down" v-if="districtWeekRegisterCount.up_down === 'down'">{{districtWeekRegisterCount.now_week_count}} <span class="tri">▼</span></td>
-                                  <td class="more" v-else-if="districtWeekRegisterCount.now_week_count === '0'">{{districtWeekRegisterCount.now_week_count}} <span class="tri">−</span></td>
+                                  <td class="more" v-else-if="districtWeekRegisterCount.now_week_count == 0">{{districtWeekRegisterCount.now_week_count}} <span class="tri">−</span></td>
                                   <td class="more up" v-else>{{districtWeekRegisterCount.now_week_count}} <span class="tri">▲</span></td>
                                   </template>
                               </tr>
                               </tbody>
                           </table>
-                         
+
                       </div>
                   </div>
               </div>
