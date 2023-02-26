@@ -225,7 +225,7 @@
 
             <section class="section-ad">
                 <div class="wrap">
-                    <a href="https://www.youtube.com/watch?v=xg9WYwc2Sjk&list=PLK9fwy1zEaYeeyPFY3Rz_1DqBwLZ9qGgV&index=1" target="_blank" class="link">
+                    <a href="https://www.youtube.com/@yktv0191" target="_blank" class="link">
                         <img src="/images/banner1.jpeg" alt="">
                     </a>
                 </div>
