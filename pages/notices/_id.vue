@@ -17,9 +17,9 @@
                     <!--<button class="btn-util">
                         <img src="/images/search.png" alt="" style="width:18px;">
                     </button>-->
-                    <button class="btn-util">
+                    <nuxt-link to="/notices" class="btn-util">
                         <img src="/images/bell.png" alt="" style="width:18px;">
-                    </button>
+                    </nuxt-link>
                     <button class="btn-util">
                         <img src="/images/dots.png" alt="" style="width:3px;">
                     </button>
