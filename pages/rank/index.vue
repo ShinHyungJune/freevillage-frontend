@@ -101,8 +101,8 @@
                                   <template v-if="index >= 3 && districtWeekRegisterCount">
                                   <td>{{index + 1}}위</td>
                                   <td>{{ districtWeekRegisterCount.city}} {{districtWeekRegisterCount.district}}</td>
-                                  <td class="more down" v-if="districtWeekRegisterCount.up_down === 'down'">{{districtWeekRegisterCount.now_week_count}} <span class="tri">▼</span></td>
-                                  <td class="more" v-else-if="districtWeekRegisterCount.now_week_count == 0">{{districtWeekRegisterCount.now_week_count}} <span class="tri">−</span></td>
+                                      <td class="more" v-if="districtWeekRegisterCount.now_week_count == 0">{{districtWeekRegisterCount.now_week_count}} <span class="tri">−</span></td>
+                                  <td class="more down" v-else-if="districtWeekRegisterCount.up_down === 'down'">{{districtWeekRegisterCount.now_week_count}} <span class="tri">▼</span></td>
                                   <td class="more up" v-else>{{districtWeekRegisterCount.now_week_count}} <span class="tri">▲</span></td>
                                   </template>
                               </tr>
