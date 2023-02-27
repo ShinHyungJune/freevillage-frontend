@@ -128,7 +128,7 @@
                         </div>
 
                         <no-ssr>
-                            <infinite-loading @infinite="loadMore" v-if="items.links.next" />
+                            <infinite-loading @infinite="loadMore" v-if="items.links.next && !loading" />
                         </no-ssr>
                     </div>
 
@@ -152,6 +152,7 @@ export default {
         return {
             activeState : true,
             activeCount : 3,
+            loading: false,
             form: {
                 board: this.$route.query.board ? this.$route.query.board : "",
                 page: 1,
@@ -174,6 +175,8 @@ export default {
             if(this.items.meta.current_page <= this.items.meta.last_page){
                 this.form.page += 1;
 
+                this.loading = true;
+
                 this.$axios.get("/posts", {
                     params: this.form
                 }).then(response => {
@@ -181,6 +184,7 @@ export default {
                         ...response.data,
                         data: [...this.items.data, ...response.data.data]
                     };
+                    this.loading = false;
 
                     state.loaded();
                 });
@@ -190,11 +194,14 @@ export default {
         getItems(){
             this.form.page = 1;
 
+            this.loading = true;
+
             this.$axios.get("/posts", {
                 params: this.form
             }).then(response => {
                 this.items = response.data;
 
+                this.loading = false;
             });
         },
 

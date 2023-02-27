@@ -29,7 +29,7 @@
             <div class="wrap">
                 <div class="mt-20"></div>
 
-               <!--<p class="comment align-center" v-if="form.board === 'meetings'">※ 모임글은 관리자의 승인 후 노출됩니다.</p> --> 
+               <!--<p class="comment align-center" v-if="form.board === 'meetings'">※ 모임글은 관리자의 승인 후 노출됩니다.</p> -->
 
                 <div class="m-input-text type02">
                     <input type="text" placeholder="제목" v-model="form.title" />
@@ -226,8 +226,11 @@ export default {
             const editor = document.querySelector('.m-editor');
             const firstPic = editor.querySelectorAll(":scope > img")[0];
             if(!this.form.thumbnail && firstPic) { //대표이미지가 없을 경우: 에디터 내에 사진이 있을 경우 첫번째 사진정보를 this.form.thumbnail에 추가
-                const firstPicFileInfo = this.imgs.contentImgs.find(img => img.url === firstPic.src).file;
-                this.form.thumbnail = firstPicFileInfo;
+                console.log(this.imgs.contentImgs);
+                const firstPicFileInfo = this.imgs.contentImgs.find(img => img.url === firstPic.src) ? this.imgs.contentImgs.find(img => img.url === firstPic.src).file : null;
+
+                if(firstPicFileInfo)
+                    this.form.thumbnail = firstPicFileInfo;
             }
             this.form.content = this.$refs.content ? this.$refs.content.innerHTML : "";
 
@@ -348,7 +351,7 @@ export default {
                     }
 
                     this.$refs.content.innerHTML = this.item.content;
-                    
+
                     if(this.item.img.name == 'parasole') {
                         this.parasole = true;
                     }
