@@ -84,8 +84,8 @@
 
 
                         <div class="img-wrap" >
-                            <img :src="rep.img.url" alt="임원이미지" v-if="rep.img">
-                            <img src="/images/default_profile.jpeg" alt="대체이미지" v-else>
+                            <img :src="rep.img.url" alt="임원이미지" v-show="rep.img.url">
+                            <img src="/images/default_profile.jpeg" alt="대체이미지" v-show="!rep.img.url">
                             <div class="m-board-btns mt-20">
                                 <div class="m-btns type01" >
                                     <div class="m-btn-wrap">
@@ -113,8 +113,8 @@
 
 
                         <div class="img-wrap" >
-                            <img :src="item.img.url" alt="임원이미지" v-if="item.img">
-                            <img src="/images/default_profile.jpeg" alt="대체이미지" v-else>
+                            <img :src="item.img.url" alt="임원이미지" v-show="item.img.url">
+                            <img src="/images/default_profile.jpeg" alt="대체이미지" v-show="!item.img.url">
                             <div class="m-board-btns mt-20">
                                 <div class="m-btns type01" >
                                     <div class="m-btn-wrap">
@@ -177,6 +177,10 @@ export default {
                 name: "",
                 position: "",
                 photo: "",
+                img: {
+                    name:"",
+                    url:""
+                }
             },
 
             imgUrl: "",
@@ -231,7 +235,14 @@ export default {
 
             this.$axios.post("/districts/" + this.form.district_id + "/staff", form)
                 .then((response) => {
-                    this.items.push(response.data.data);
+                    let {data} = response.data;
+                    if(data.img === "") {
+                        data.img = {
+                            name:'',
+                            url:'',
+                        }
+                    }
+                    this.items.push(data);
 
                     this.reset();
                 })
@@ -249,6 +260,8 @@ export default {
                     });
             }else {
                 this.imgUrl = "";
+                const targetIdx = this.items.findIndex(itemData => itemData.id === this.form.id)
+                this.items[targetIdx].img = "";
             }
             
             this.closeReminder();
