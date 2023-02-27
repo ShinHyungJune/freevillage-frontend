@@ -3,7 +3,7 @@ class KakaoHelper {
         this.kakao = data;
 
         // this.domain = process.env.NODE_ENV === "production" ? "http://jayuvillages.com" : "http://localhost:3000";
-        this.domain = "http://jayuvillages.com";
+        this.domain = "https://jayuvillage.com";
     }
 
     initSharePost(item, container= "#kakao"){

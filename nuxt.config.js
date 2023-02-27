@@ -1,6 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 
-let baseUrl = process.env.NODE_ENV === "production" ? "http://api.jayuvillages.com" : "http://localhost:80";
+let baseUrl = process.env.NODE_ENV === "production" ? "https://api.jayuvillage.com" : "http://localhost:8000";
 
 export default {
     dev: process.env.NODE_ENV !== 'production',
@@ -16,7 +16,7 @@ export default {
             {name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1'},
             {hid: 'description', name: 'description', content: ''},
             {name: 'format-detection', content: 'telephone=no'},
-            {property: 'og:image', content: 'http://api.jayuvillages.com/static/jayuvillage.png'},
+            {property: 'og:image', content: 'https://api.jayuvillage.com/static/jayuvillage.png'},
             {property: 'og:title', content:'자유마을 - 3506개의 희망'},
             {property: 'og:description', content:'대한민국세력은 하나로 함께'},
         ],
