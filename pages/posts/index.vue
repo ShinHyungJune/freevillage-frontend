@@ -154,7 +154,7 @@ export default {
             activeCount : 3,
             form: {
                 board: this.$route.query.board ? this.$route.query.board : "",
-                page: 1,
+                page: 0,
                 district_id: this.$store.state.district.id,
                 word: this.$route.query.word ? this.$route.query.word: "",
             },
