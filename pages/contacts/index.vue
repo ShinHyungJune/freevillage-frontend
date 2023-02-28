@@ -92,11 +92,11 @@ export default {
         }
     },
 
-    watch: {
+    /*watch: {
         district (newData, oldData) {
             location.reload();
         }
-    },
+    },*/
 
     mounted() {
         this.init();

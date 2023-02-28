@@ -127,10 +127,9 @@
                             </div>
                         </div>
 
-                        <no-ssr>
-                            <infinite-loading @infinite="loadMore" v-if="items.links.next" />
-                        </no-ssr>
                     </div>
+
+                    <scroll-loading @load="loadMore" v-if="items.links.next" />
 
                     <div class="mt-40"></div>
                 </div>

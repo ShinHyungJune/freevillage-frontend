@@ -33,6 +33,7 @@ export default {
             {src:'//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js'},
             {src:'//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=75aa32499180f4887b38e7607514e26f&libraries=services'},
             {src: '//developers.kakao.com/sdk/js/kakao.min.js'},
+            {src: '//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'},
         ]
     },
 

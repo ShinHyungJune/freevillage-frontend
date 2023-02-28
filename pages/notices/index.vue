@@ -47,9 +47,7 @@
                     <nuxt-link to="/notices/create" class="m-quick">글쓰기</nuxt-link>
                 </div>
 
-                <no-ssr>
-                    <infinite-loading @infinite="loadMore" v-if="items.links.next" />
-                </no-ssr>
+                <scroll-loading @load="loadMore" v-if="items.links.next" />
             </div>
         </div>
 

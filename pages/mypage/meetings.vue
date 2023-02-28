@@ -59,9 +59,7 @@
                 </div>
             </div>
 
-            <no-ssr>
-                <infinite-loading @infinite="loadMore" v-if="items.links.next" />
-            </no-ssr>
+            <scroll-loading @load="loadMore" v-if="items.links.next" />
         </div>
 
         <!-- 하단 네비게이션바 -->

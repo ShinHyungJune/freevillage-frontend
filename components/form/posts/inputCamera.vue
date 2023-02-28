@@ -17,6 +17,11 @@ export default {
                   return "";
               }
         },
+        maxWidth: {
+            default: () => {
+                return 700;
+            },
+        },
         id: {
             default() {
                 return "camera";
@@ -34,12 +39,36 @@ export default {
 
     methods: {
         changeFile(event) {
-            // this.files = [];
-
             let file = event.target.files[0];
+            let self = this;
+            let reader = new FileReader();
+            let image = new Image();
 
+            reader.readAsDataURL(file);
+
+            reader.onload = function (readerEvent) {
+                image.onload = function () {
+                    let result = self.resize(image);
+
+                    self.uploadImage(new File([result], file.name));
+
+                    return result;
+                };
+
+                image.src = readerEvent.target.result;
+            };
+        },
+
+        remove(index){
+            this.files = this.files.filter((img, indexData) => indexData != index);
+
+            this.$emit("change", this.files.map(file => file.file));
+        },
+
+        uploadImage(file){
             let form = new FormData();
 
+            console.log(file);
             form.append("image", file);
             form.append("district_id", this.$store.state.district ? this.$store.state.district.id : 0);
 
@@ -54,20 +83,37 @@ export default {
 
                     this.$refs.file.value = null;
                 });
-            /*Array.from(event.target.files).map(file => {
-                this.files.push({
-                    file: file,
-                    img: URL.createObjectURL(file)
-                })
-            })
-
-            this.$emit("change", this.files.map(file => file.file));*/
         },
 
-        remove(index){
-            this.files = this.files.filter((img, indexData) => indexData != index);
+        resize(image){
+            let width = image.width;
+            let height = image.height;
+            let canvas = document.createElement("canvas");
 
-            this.$emit("change", this.files.map(file => file.file));
+            height *= this.maxWidth / width;
+            width = this.maxWidth;
+
+
+            canvas.width = width;
+            canvas.height = height;
+            canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+
+            const dataUrl = canvas.toDataURL('image/png');
+
+            return this.dataURLtoBlob(dataUrl);
+        },
+
+        dataURLtoBlob(dataURI){
+            const bytes =
+                dataURI.split(',')[0].indexOf('base64') >= 0
+                    ? atob(dataURI.split(',')[1])
+                    : unescape(dataURI.split(',')[1]);
+            const mime = dataURI.split(',')[0].split(':')[1].split(';')[0];
+            const max = bytes.length;
+            const ia = new Uint8Array(max);
+            for (let i = 0; i < max; i++) ia[i] = bytes.charCodeAt(i);
+
+            return new Blob([ia], { type: mime });
         }
     },
 

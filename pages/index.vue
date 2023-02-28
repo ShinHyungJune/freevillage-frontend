@@ -248,7 +248,7 @@
                     <div class="m-title type02">
                         <h3 class="title">소식</h3>
 
-                        <nuxt-link to="/posts" class="btn-more">
+                        <nuxt-link to="/posts?board=notices" class="btn-more">
                             <img src="/images/arrowRight-gray.png" style="width:9px;" alt="">
                         </nuxt-link>
                     </div>
@@ -281,7 +281,7 @@
                     <div class="m-title type02">
                         <h3 class="title">영상</h3>
 
-                        <nuxt-link to="/posts" class="btn-more">
+                        <nuxt-link to="/posts?board=clips" class="btn-more">
                             <img src="/images/arrowRight-gray.png" style="width:9px;" alt="">
                         </nuxt-link>
                     </div>
@@ -314,7 +314,7 @@
                     <div class="m-title type02">
                         <h3 class="title">포토</h3>
 
-                        <nuxt-link to="/posts" class="btn-more">
+                        <nuxt-link to="/posts?board=photos" class="btn-more">
                             <img src="/images/arrowRight-gray.png" style="width:9px;" alt="">
                         </nuxt-link>
                     </div>

@@ -136,11 +136,11 @@ export default {
         }
     },
 
-    watch: {
+   /* watch: {
         district (newData, oldData) {
-            location.reload();
+            return this.$router.push("/");
         }
-    },
+    },*/
 
     mounted() {
         this.init();
