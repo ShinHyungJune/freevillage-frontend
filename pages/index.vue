@@ -237,8 +237,8 @@
 
             <section class="section-ad">
                 <div class="wrap">
-                    <a href="https://www.youtube.com/@yktv0191" target="_blank" class="link">
-                        <img src="/images/banner1.jpeg" alt="">
+                    <a href="https://ghmon.com" target="_blank" class="link">
+                        <img src="/images/banner4.jpg" alt="">
                     </a>
                 </div>
             </section>
