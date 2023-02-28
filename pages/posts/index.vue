@@ -68,7 +68,7 @@
                         <div :class="`m-board ${item.formatBoard}`" v-for="item in items.data" :key="item.id" @click="move(item)">
                             <div class="m-board-top">
                                 <div class="left">
-                                    <p class="category">{{ item.formatBoard }}</p>
+                                    <span class="category">{{ item.formatBoard }}</span><span> {{  item.district.district }}</span>
                                 </div>
                                 <div class="right">
                                     <div class="thumbnail" :style="`background-image:url('${item.user.img.url}')`" v-if="item.user.img"></div>
@@ -245,5 +245,7 @@ export default {
 </script>
 
 <style scoped>
-
+    .left > span:nth-child(2) {
+        margin-left: 5px;
+    }
 </style>
