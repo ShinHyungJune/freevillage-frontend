@@ -35,7 +35,7 @@
                 <div class="mt-40"></div>
 
                 <section class="section-values">
-                    <img src="/images/base-town.png" alt="" class="base">
+                    <img src="https://dotmzh1fysixs.cloudfront.net/1018/base-town.png" alt="" class="base">
                     <div class="wrap">
                         <div class="content">
                             <div class="m-title type01">
@@ -140,7 +140,7 @@
                                     district: districtWeekRegisterCounts[1].district
                                 })">
                                     <div class="img-wrap">
-                                        <img src="/images/2st.png" alt="">
+                                        <img src="https://dotmzh1fysixs.cloudfront.net/1017/2st.png" width="100%" alt="">
                                     </div>
 
                                     <div class="fragment">
@@ -162,8 +162,8 @@
                                     district: districtWeekRegisterCounts[0].district
                                 })">
                                     <div class="img-wrap">
-                                        <img src="/images/crown.png" alt="" class="deco">
-                                        <img src="/images/1st.png" alt="" class="img">
+                                        <img src="https://dotmzh1fysixs.cloudfront.net/1016/crown.png" width="20px" alt="" class="deco">
+                                        <img src="https://dotmzh1fysixs.cloudfront.net/1015/1st.png" width="100px" alt="" class="img">
                                     </div>
 
                                     <div class="fragment">
@@ -185,7 +185,7 @@
                                     district: districtWeekRegisterCounts[2].district
                                 })">
                                     <div class="img-wrap">
-                                        <img src="/images/3st.png" alt="">
+                                        <img src="https://dotmzh1fysixs.cloudfront.net/1014/3st.png" width="100%" alt="">
                                     </div>
 
                                     <div class="fragment">
@@ -238,7 +238,7 @@
             <section class="section-ad">
                 <div class="wrap">
                     <a href="https://ghmon.com" target="_blank" class="link">
-                        <img src="/images/banner4.jpg" alt="">
+                        <img src="https://dotmzh1fysixs.cloudfront.net/1009/banner4.jpg" alt="">
                     </a>
                 </div>
             </section>
@@ -249,7 +249,7 @@
                         <h3 class="title">소식</h3>
 
                         <nuxt-link to="/posts?board=notices" class="btn-more">
-                            <img src="/images/arrowRight-gray.png" style="width:9px;" alt="">
+                            <img src="https://dotmzh1fysixs.cloudfront.net/1013/arrowRight-gray.png" style="width:9px;" alt="">
                         </nuxt-link>
                     </div>
 
@@ -262,7 +262,7 @@
                                 <div class="m-ratioBox" :style="`background-image:url('${notice.img.preview_url}');`"></div>
                             </div>
                             <div class="m-ratioBox-wrap" v-else>
-                                <div class="m-ratioBox" :style="`background-image:url('/images/notice_thumbnail.jpg');`"></div>
+                                <div class="m-ratioBox" :style="`background-image:url('https://dotmzh1fysixs.cloudfront.net/1010/notice_thumbnail.jpg');`"></div>
                             </div>
 
 
@@ -343,7 +343,7 @@
 
             <section class="section-ad2">
                 <a href="https://m.khmon.com/sign/6936" target="_blank" class="link">
-                    <img src="/images/ad2.png" alt="">
+                    <img src="https://dotmzh1fysixs.cloudfront.net/1012/ad2.png" alt="">
                 </a>
             </section>
 

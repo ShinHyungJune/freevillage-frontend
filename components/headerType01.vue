@@ -143,7 +143,7 @@
 
                 <div class="utils">
                     <button class="btn-util">
-                        <img src="/images/search.png" style="width:18px;" alt="" @click="activeSearch = !activeSearch">
+                        <img src="https://dotmzh1fysixs.cloudfront.net/1033/search.png" style="width:18px;" alt="" @click="activeSearch = !activeSearch">
 
                         <form @submit.prevent="search" v-if="activeSearch">
                             <div class="m-input-text-wrap">
@@ -157,12 +157,12 @@
 
                     </button>
                     <button class="btn-util" @click="$router.push('/notices')">
-                        <img src="/images/bell.png" style="width:17px;" alt="">
+                        <img src="https://dotmzh1fysixs.cloudfront.net/1032/bell.png" style="width:17px;" alt="">
 
                         <span class="alert" v-if="$auth.user && $auth.user.has_new_notice"></span>
                     </button>
                     <button class="btn-util" @click="activeSidebar = true">
-                        <img src="/images/menu.png" alt="" style='width:18px;'>
+                        <img src="https://dotmzh1fysixs.cloudfront.net/1031/menu.png" alt="" style='width:18px;'>
                     </button>
                 </div>
             </div>

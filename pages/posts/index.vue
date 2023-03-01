@@ -12,7 +12,7 @@
                     <div class="menus">
                         <div class="menu-wrap">
                             <a href="" class="menu" @click.prevent="() => {form.board = 'notices'; getItems();}">
-                                <img src="/images/news01.png" style="width:60px" alt="" class="">
+                                <img src="https://dotmzh1fysixs.cloudfront.net/1038/news01.png" style="width:60px" alt="" class="">
 
                                 <h3 class="title">마을소식</h3>
                             </a>
@@ -20,7 +20,7 @@
 
                         <div class="menu-wrap">
                             <a href="" class="menu" @click.prevent="() => {form.board = 'clips'; getItems();}">
-                                <img src="/images/news02.png" style="width:60px" alt="" class="">
+                                <img src="https://dotmzh1fysixs.cloudfront.net/1037/news02.png" style="width:60px" alt="" class="">
 
                                 <h3 class="title">마을영상</h3>
                             </a>
@@ -28,7 +28,7 @@
 
                         <div class="menu-wrap">
                             <a href="" class="menu" @click.prevent="() => {form.board = 'photos'; getItems();}">
-                                <img src="/images/news03.png" style="width:60px" alt="" class="">
+                                <img src="https://dotmzh1fysixs.cloudfront.net/1036/news03.png" style="width:60px" alt="" class="">
 
                                 <h3 class="title">마을포토</h3>
                             </a>
@@ -36,7 +36,7 @@
 
                         <div class="menu-wrap">
                             <a href="" class="menu" @click.prevent="() => {form.board = 'asks'; getItems();}">
-                                <img src="/images/news04.png" style="width:60px" alt="" class="">
+                                <img src="https://dotmzh1fysixs.cloudfront.net/1035/news04.png" style="width:60px" alt="" class="">
 
                                 <h3 class="title">마을질문</h3>
                             </a>
@@ -44,7 +44,7 @@
 
                         <div class="menu-wrap">
                             <a href="" class="menu" @click.prevent="() => {form.board = 'meetings'; getItems();}">
-                                <img src="/images/news05.png" style="width:60px" alt="" class="">
+                                <img src="https://dotmzh1fysixs.cloudfront.net/1034/news05.png" style="width:60px" alt="" class="">
 
                                 <h3 class="title">마을모임</h3>
                             </a>
