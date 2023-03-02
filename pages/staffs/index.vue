@@ -38,8 +38,9 @@
                         <h3 class="custom-title">{{rep.position}}</h3>
                         <li class="item">
                             <div class="img-wrap" >
+                               <!-- 잠시 숨기기 
                                 <img :src="rep.img.url" alt="임원이미지" v-if="rep.img">
-                                <img src="/images/default_profile.jpeg" alt="대체이미지" v-else>
+                                <img src="/images/default_profile.jpeg" alt="대체이미지" v-else> -->
                                 <div class="m-board-btns mt-20">
                                     <div class="m-btns type01" >
                                         <div class="m-btn-wrap">
