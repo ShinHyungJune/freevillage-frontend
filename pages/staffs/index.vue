@@ -44,8 +44,8 @@
                                     <div class="m-btns type01" >
                                         <div class="m-btn-wrap">
                                             <button type="button" class="m-btn type01 bg-primary height-full">
-                                                {{rep.name}}<br/>
-                                                {{rep.phone}}
+                                                {{nameReplace(rep.name)}}<br/>
+                                                {{phoneReplace(rep.phone)}}
                                             </button>
                                         </div>
                                         
@@ -66,8 +66,8 @@
                                     <div class="m-btns type01" >
                                         <div class="m-btn-wrap">
                                             <button type="button" class="m-btn type01 bg-primary height-full">
-                                                {{item.name}}<br/>
-                                                {{item.phone}}
+                                                {{nameReplace(item.name)}}<br/>
+                                                {{phoneReplace(item.phone)}}
                                             </button>
                                         </div>
                                     </div>
@@ -122,6 +122,20 @@ export default {
     //         location.reload();
     //     }
     // },
+    methods: {
+        phoneReplace(phone) {
+            if(phone) {
+                let num =  phone.replaceAll("[\\s\\-()]", "");
+                return num.slice(0,7).padEnd(11,"*");
+             }else {
+                return;
+             }
+
+        },
+        nameReplace(name) {
+            return name.slice(0,-1) + '*';
+        }
+    },
 
     mounted() {
             this.$axios.get(`/districts/${this.$store.state.district.id}/staff`)
