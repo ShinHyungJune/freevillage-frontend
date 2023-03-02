@@ -251,7 +251,7 @@ import InputLink from "../../components/form/posts/inputLink";
 import InputImg from "../../components/form/posts/inputImg";
 import InputThumbnail from "../../components/form/posts/inputThumbnail";
 import KakaoHelper from '../../utils/KakaoHelper';
-
+import { mapActions } from 'vuex';
 export default {
     components: {InputThumbnail, InputImg, InputLink, InputCamera},
     auth: false,
@@ -277,6 +277,7 @@ export default {
         }
     },
     methods: {
+        ...mapActions(['CLEAR_POST_STATE']),
         storeScrap() {
             this.$axios.post(`/scrapItems`, this.form)
                 .then(response => {
@@ -378,6 +379,10 @@ export default {
 
                 kakaoHelper.initSharePost(this.item);
             });
+    },
+    beforeDestroy() {
+        if(this.$route.name !== 'posts')
+            this.CLEAR_POST_STATE();
     }
 }
 </script>

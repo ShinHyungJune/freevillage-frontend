@@ -65,7 +65,7 @@
                     <div class="mt-12"></div>
 
                     <div class="m-boards type01">
-                        <div :class="`m-board ${item.formatBoard}`" v-for="item in items.data" :key="item.id" @click="move(item)">
+                        <div :class="`m-board ${item.formatBoard}`" v-for="item in postItems" :key="item.id" @click="move(item)">
                             <div class="m-board-top">
                                 <div class="left">
                                     <span class="category">{{ item.formatBoard }}</span><span> {{  item.district.district }}</span>
@@ -129,7 +129,7 @@
 
                     </div>
 
-                    <scroll-loading @load="loadMore" v-if="items.links.next" />
+                    <scroll-loading @load="loadMore" v-if="postLinks.next" />
 
                     <div class="mt-40"></div>
                 </div>
@@ -143,10 +143,28 @@
 </template>
 
 <script>
-
+import { mapGetters,mapActions } from 'vuex';
 export default {
     components: {},
     auth: false,
+
+    computed: {
+        district(){
+            return this.$store.state.district;
+        },
+        postItems() {
+            return this.$store.getters.getPostItems;
+        },
+        postLinks() {
+            return this.$store.getters.getPostLinks;
+        },
+        postMeta() {
+            return this.$store.getters.getPostMeta;
+        },
+        y() {
+            return this.$store.getters.getPostCurrentY;
+        }
+    },
     data() {
         return {
             activeState : true,
@@ -158,28 +176,39 @@ export default {
                 word: this.$route.query.word ? this.$route.query.word: "",
             },
 
-            items: {
-                data: [],
-                meta: {
-                    current_page: 1,
-                    last_page: 1,
-                },
-                links: {}
-            }
+            windowTop: 0,
+
+            // items: {
+            //     data: [],
+            //     meta: {
+            //         current_page: 1,
+            //         last_page: 1,
+            //     },
+            //     links: {}
+            // }
         }
     },
     methods: {
+        ...mapActions(['FETCH_POST_ITEMS','FETCH_POST_LINKS','FETCH_POST_META','FETCH_POST_Y','CLEAR_POST_STATE']),
         loadMore(state) {
-            if(this.items.meta.current_page <= this.items.meta.last_page){
-                this.form.page += 1;
+            if(this.postMeta.current_page <= this.postMeta.last_page){
+                this.form.page = this.postMeta.current_page + 1;
 
                 this.$axios.get("/posts", {
                     params: this.form
                 }).then(response => {
-                    this.items = {
-                        ...response.data,
-                        data: [...this.items.data, ...response.data.data]
-                    };
+                    const data = response.data;
+                    // let newData = 
+                    this.FETCH_POST_ITEMS([
+                        ...this.postItems,
+                        ...data.data
+                    ]);
+                    this.FETCH_POST_LINKS(data.links);
+                    this.FETCH_POST_META(data.meta);
+                    // this.items = {
+                    //     ...response.data,
+                    //     data: [...this.items.data, ...response.data.data]
+                    // };
 
                     state.loaded();
                 });
@@ -192,7 +221,11 @@ export default {
             this.$axios.get("/posts", {
                 params: this.form
             }).then(response => {
-                this.items = response.data;
+                // this.items = response.data;
+                const data = response.data;
+                this.FETCH_POST_ITEMS(data.data);
+                this.FETCH_POST_LINKS(data.links);
+                this.FETCH_POST_META(data.meta);
 
             });
         },
@@ -213,21 +246,27 @@ export default {
                 item.like_count += 1;
             }
 
-            this.items.data = this.items.data.map(itemData => {
+            this.FETCH_POST_ITEMS(this.postItems.map(itemData => {
                 if(itemData.id == item.id)
                     return item;
-
                 return itemData;
-            });
+            }));
+            // this.items.data = this.items.data.map(itemData => {
+            //     if(itemData.id == item.id)
+            //         return item;
+
+            //     return itemData;
+            // });
 
             this.$axios.put("/likes/posts/" + item.id);
         },
-    },
-    computed: {
-        district(){
-            return this.$store.state.district;
+
+        onScroll(e) {
+            this.windowTop = window.top.scrollY /* or: e.target.documentElement.scrollTop */
         }
+
     },
+
 
     watch: {
         district (newData, oldData) {
@@ -237,8 +276,21 @@ export default {
         }
     },
 
-    mounted() {
-        this.getItems();
+    async mounted() {
+        if(this.postItems.length === 0) {
+            await this.getItems();
+        }else {
+            window.scrollTo(0,this.y)
+        }
+        window.addEventListener('scroll', this.onScroll)
+            
+    },
+    beforeDestroy() {
+        window.removeEventListener('scroll', this.onScroll)
+        this.FETCH_POST_Y(this.windowTop);
+        if(this.$route.name !== 'posts-id') {
+            this.CLEAR_POST_STATE();
+        }
     }
 }
 </script>
