@@ -46,7 +46,6 @@ export default {
         {src: '~/plugins/vue-infinite-loading.js'},
         {src: '~/plugins/axios.js'},
         {src: '~/plugins/vue2-touch-events.js'},
-        {src: '~/plugins/vue-gtag.js'},
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
