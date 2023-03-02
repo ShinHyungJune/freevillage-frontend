@@ -61,8 +61,10 @@
                                 <h3 class="title">{{item.position}}</h3>
                             </div>
                             <div class="img-wrap" >
+                                <!-- 잠시 숨기기 
                                 <img :src="item.img.url" alt="임원이미지" v-if="item.img">
                                 <img src="/images/default_profile.jpeg" alt="대체이미지" v-else>
+                                -->
                                 <div class="m-board-btns mt-20">
                                     <div class="m-btns type01" >
                                         <div class="m-btn-wrap">
