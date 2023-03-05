@@ -78,7 +78,7 @@ import KakaoHelper from '../../utils/KakaoHelper';
 
 export default {
     components: {InputThumbnail, InputImg, InputLink, InputCamera},
-    auth: true,
+    auth: false,
     data() {
         return {
             item: {
