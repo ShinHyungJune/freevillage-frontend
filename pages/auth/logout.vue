@@ -18,6 +18,8 @@ export default {
     mounted() {
         this.$auth.logout();
 
+        this.$auth.setUser(null);
+
         this.$store.commit("changeDistrict", {
             id: 0,
             district: "자유마을"
