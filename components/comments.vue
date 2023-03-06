@@ -69,6 +69,7 @@ export default {
                 params: this.form
             }).then(response => {
                 this.items = response.data;
+                this.items.data = this.items.data.filter(item => !item.deleted_at)
             });
         },
         updateComment(obj) {
@@ -84,12 +85,13 @@ export default {
         },
 
         removed(item){
-            this.items.data = this.items.data.map(itemData => {
-                if(itemData.id == item.id)
-                    return item;
+            // this.items.data = this.items.data.map(itemData => {
+            //     if(itemData.id == item.id)
+            //         return item;
 
-                return itemData;
-            });
+            //     return itemData;
+            // });
+            this.items.data = this.items.data.filter(item => !item.deleted_at)
         }
     },
 

@@ -35,7 +35,7 @@
 
                         <div class="m-input-wrap">
                             <div class="m-input-text type01">
-                                <input type="password" placeholder="비밀번호 (초기비밀번호 : 생년월일)" v-model="form.password">
+                                <input type="password" placeholder="비밀번호 (초기비밀번호 : 생년월일 6자리)" v-model="form.password">
                             </div>
 
                             <p class="m-input-error" v-if="errors.password">{{ errors.password[0] }}</p>
