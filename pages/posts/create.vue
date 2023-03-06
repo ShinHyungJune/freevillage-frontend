@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="right">
-                    <a href="#" class="btn-text primary" @click.prevent="store">등록</a>
+                    <a href="#" class="btn-text primary" @click.prevent="debounceStore">등록</a>
                 </div>
             </div>
         </div>
@@ -175,6 +175,8 @@ import InputImg from "../../components/form/posts/inputImg";
 import InputThumbnail from "../../components/form/posts/inputThumbnail";
 import InputAddress from "../../components/form/inputAddress";
 import Form from "@/utils/Form";
+import {debounce} from "@/utils/debounce";
+
 export default {
     components: {InputAddress, InputThumbnail, InputImg, InputLink, InputCamera},
     auth: true,
@@ -279,9 +281,8 @@ export default {
             let embedUrl = "";
             let thumbnail = "";
 
-            let match = url.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/);
-
-            id = (match&&match[7].length==11)?match[7]:false;
+            let match = url.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(shorts\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/);
+            id = (match&&match[match.length-1].length==11)?match[match.length-1]:false;
 
             if(id) {
                 embedUrl = "https://www.youtube.com/embed/" + id;
@@ -358,7 +359,16 @@ export default {
                 });
         }
 
-    }
+    },
+    created () {
+        /**
+         * SEE : https://dmitripavlutin.com/vue-debounce-throttle/
+         * 3.A word of aution...
+         */
+        this.debounceStore = debounce(() => {
+            this.store()
+        },500);
+    },
 }
 </script>
 

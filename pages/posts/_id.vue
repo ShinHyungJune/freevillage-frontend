@@ -184,7 +184,7 @@
                         <div v-else>
                             <div class="m-ratioBox-wrap m-video type01 mb-8" v-if="item.video_url">
                                 <div class="m-ratioBox">
-                                    <iframe :src="item.video_url"></iframe>
+                                    <iframe :src="item.video_url" allowfullscreen></iframe>
                                 </div>
                             </div>
 
