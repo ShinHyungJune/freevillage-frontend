@@ -6,6 +6,23 @@
 
       <!-- 내용 영역 -->
       <div class="container">
+            <div class="m-tabs type01">
+                <div class="m-tab-wrap">
+                    <nuxt-link to="/" class="m-tab active">
+                        <span class="text">주별</span>
+                    </nuxt-link>
+                </div>
+                <div class="m-tab-wrap">
+                    <nuxt-link to="/" class="m-tab">
+                        <span class="text">월별</span>
+                    </nuxt-link>
+                </div>
+                <div class="m-tab-wrap">
+                    <nuxt-link to="/" class="m-tab">
+                        <span class="text">전체</span>
+                    </nuxt-link>
+                </div>
+            </div>
           <section class="section-ranking">
               <div class="wrap">
                   <div class="content">
@@ -183,7 +200,7 @@ export default {
       },
 
       getRankings(count){
-          this.$axios.get("/rankings/" + count)
+          this.$axios.get("/monthly-rankings/" + count)
               .then(response => {
                   this.districtWeekRegisterCounts = response.data.districtWeekRegisterCounts;
               });
