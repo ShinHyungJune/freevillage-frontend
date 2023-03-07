@@ -33,7 +33,6 @@
                 </section>
 
                 <div class="mt-40"></div>
-
                 <section class="section-values">
                     <img src="https://dotmzh1fysixs.cloudfront.net/1018/base-town.png" alt="" class="base">
                     <div class="wrap">
@@ -119,10 +118,24 @@
                         </div>
 
                         <input-region input-class="m-input-select type01" @change="(data) => {form.district = data.district}" />
-
                         <button class="m-btn type02 width-100" v-touch:tap="search">검색하기</button>
-                    </div>
+                        <div style="margin-top: 30px;">
+                            <span style="color: red">*</span>행정동을 모르실 경우 찾기 버튼을 눌르세요.  <button style="color: #0f38bd;" v-touch:tap="search">찾기</button>
+                        </div>
+                    </div>   
                 </div>
+
+                <Finder 
+            v-if="activeReminder"
+            :title="'행정동 검색하기'"
+            :excecute="'검색'"
+            :cancel="'닫기'"
+            :item="item"
+            @excecute="remove"
+            @cancel="closeReminder"
+        />
+               
+
             </section>
 
             <section class="section-ranking">
