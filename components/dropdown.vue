@@ -38,6 +38,13 @@ export default {
       default: []
     },
     /**
+     * 미리 지정된 값
+     */
+    value: {
+      type: String,
+      default:""
+    },
+    /**
      * 선택된 아이템
      */
     selected: {
@@ -60,6 +67,17 @@ export default {
           }
       })
       return items;
+    }
+  },
+  watch: {
+    value(data) {
+      const payload = this.computedItems.find(item => item.value === data);
+      if(payload) {
+        this.select(payload)
+      }else {
+        this.selecteItem = "";
+      }
+        
     }
   },
   data() {

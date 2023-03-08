@@ -366,9 +366,19 @@
                     <div class="m-input-wrap">
                         <h3 class="m-input-title type01">내 지역 선택</h3>
 
-                        <input-region @change="(data) => {form.district_id = data.district_id}"/>
+                        <!-- <input-region @change="(data) => {form.district_id = data.district_id}"/> -->
+                        <input-region
+                            :districtContainer="container"
+                            :initiationCalled="activeFinder"
+                            @change="changeDistrict" 
+                        />
 
                         <p class="m-input-error" v-if="errors.district_id" v-text="errors.district_id[0]"></p>
+
+                        <div class="mt-8">
+                            <span style="color: red">*</span>행정동을 모르실 경우 찾기 버튼을 누르세요.  <button style="color: #0f38bd;" v-touch:tap="active">찾기</button>
+
+                        </div>
                     </div>
 
                     <div class="mt-16"></div>
@@ -425,11 +435,28 @@
                     </div>
 
                     <div class="mt-24"></div>
-
-                    <button type="submit" class="m-btn type02 width-100" @click="register">회원가입</button>
+                    
+                    <div class="m-btns type01">
+                        <div class="m-btn-wrap">
+                            <button type="submit" class="m-btn type02 width-100" @click="helpRegister">가입 도와주기</button>
+                        </div>
+                        <div class="m-btn-wrap">
+                            <button type="submit" class="m-btn type02 width-100" @click="register">직접 가입하기</button>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
+
+        <Finder 
+            v-if="activeFinder"
+            :title="'주소로 행정동 찾기'"
+            :excecute="'변환하기'"
+            :cancel="'검색하기'"
+            @cancel="closeFinder"
+            @setContainer="setContainer"
+        />
     </div>
 
 </template>
@@ -442,6 +469,8 @@ export default {
     auth: 'guest',
     data() {
         return {
+            activeFinder:false,
+            container:{},            
             step: 1,
             form: {
                 nickname: "",
@@ -460,6 +489,18 @@ export default {
         }
     },
     methods: {
+        active() {
+            this.activeFinder = true;
+        },
+        closeFinder() {
+            this.activeFinder = false;
+        },
+        setContainer(container) {
+            this.container = container;
+        },
+        changeDistrict(data) {
+            this.form.district = data.district
+        },
         register() {
             if(!this.form.is_agree_privacy)
                 return alert("필수약관에 동의해주세요.");
@@ -482,6 +523,20 @@ export default {
                 .catch((error) => {
                     if (error.response && error.response.data)
                         this.errors = error.response.data.errors;
+                });
+        },
+        helpRegister() {
+            if(!this.form.is_agree_privacy)
+                return alert("필수약관에 동의해주세요.");
+
+            this.$axios.post("/auth/register", this.form)
+                .then((response) => {
+                    alert('가입신천이 완료되었습니다.')
+                    this.$router.push("/");
+                })
+                .catch(e => {
+                    if(e.response && e.response.data)
+                        this.errors = e.response.data.errors;
                 });
         },
 

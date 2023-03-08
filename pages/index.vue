@@ -117,11 +117,29 @@
                             나의 <span class="point">마을 찾기</span>
                         </div>
 
-                        <input-region input-class="m-input-select type01" @change="(data) => {form.district = data.district}" />
+                        <input-region
+                            input-class="m-input-select type01" 
+                            :districtContainer="container" 
+                            :initiationCalled="activeFinder"
+                            @change="changeDistrict" 
+                        />
                         <button class="m-btn type02 width-100" v-touch:tap="search">검색하기</button>
-
-                    </div>
+                        <div style="margin-top: 30px;">
+                            <span style="color: red">*</span>행정동을 모르실 경우 찾기 버튼을 누르세요.  <button style="color: #0f38bd;" v-touch:tap="active">찾기</button>
+                        </div>
+                    </div>   
                 </div>
+
+                <Finder 
+                    v-if="activeFinder"
+                    :title="'주소로 행정동 찾기'"
+                    :excecute="'변환하기'"
+                    :cancel="'검색하기'"
+                    @cancel="closeFinder"
+                    @setContainer="setContainer"
+                />
+               
+
             </section>
 
             <section class="section-ranking">
@@ -372,6 +390,8 @@ export default {
     auth: false,
     data() {
         return {
+            activeFinder:false,
+            container:{},
             form: {
                 district_id: "",
                 district: "",
@@ -414,6 +434,15 @@ export default {
         }
     },
     methods: {
+        active() {
+            this.activeFinder = true;
+        },
+        closeFinder() {
+            this.activeFinder = false;
+        },
+        setContainer(container) {
+            this.container = container;
+        },
         search() {
             if(this.form.district == "" || this.form.district ==  undefined) {
                 return;
@@ -421,6 +450,10 @@ export default {
             this.$store.commit("changeDistrict", this.form.district);
             this.updatePosts(this.district.id);
             window.scrollTo(0,0);
+            this.container = {};
+        },
+        changeDistrict(data) {
+            this.form.district = data.district
         },
 
         getRankings(count){
@@ -537,6 +570,10 @@ export default {
                     .then(response => {
                         this.registerRates = response.data.registerRates;
                     });
+        },
+        "form.district"() {
+            if(this.container.district) 
+                this.search()
         }
 
     },

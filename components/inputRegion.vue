@@ -37,6 +37,7 @@
             :menuTitle="'시/도 선택'"
             :activate="stateActive"
             :items="states"
+            :value="propState"
             :selected="stateSelected"
             @toggle="toggleState"
             @change="changeState"
@@ -45,6 +46,7 @@
             :menuTitle="'시/군/구 선택'"
             :activate="cityActive"
             :items="cities"
+            :value="propCity"
             :selected="citySelected"
             @toggle="toggleCity"
             @change="changeCity"
@@ -53,6 +55,7 @@
             :menuTitle="'읍/면/동 선택'"
             :activate="districtActive"
             :items="districts"
+            :value="propDistrict"
             :selected="districtSelected"
             @toggle="toggleDistrict"
             @change="change"
@@ -89,6 +92,14 @@ export default {
         Dropdown,
     },
     props: {
+        districtContainer: {
+            type: Object,
+            default: () => {}
+        },
+        initiationCalled: {
+            type: Boolean,
+            default: false
+        },
         type: {
             default: ""
         },
@@ -119,8 +130,32 @@ export default {
             return !!this.districtIdData;
         }
     },
+    watch: {
+        districtContainer: {
+            deep: true,
+            handler(newVal) {
+                if(Object.keys(newVal).length !== 0) {
+                    this.containerFlag = true;
+                    this.propState = this.districtContainer.state;
+                }
+
+            }
+        },
+        initiationCalled(newData) {
+            if(newData) {
+                this.propState = '';
+                this.propCity = '';
+                this.propDistrict = '';
+            }
+
+        }
+    },
     data() {
         return {
+            containerFlag: false,
+            propState:"",
+            propCity: "",
+            propDistrict: "",
             stateActive: false,
             cityActive: false,
             districtActive: false,
@@ -185,6 +220,9 @@ export default {
                     this.districtIdData = "";
 
                     this.change();
+
+                    if(this.containerFlag)
+                        this.propCity = this.districtContainer.city;
                 });
         },
 
@@ -199,6 +237,9 @@ export default {
                     this.districtIdData = "";
 
                     this.change();
+
+                    if(this.containerFlag)
+                        this.propDistrict = this.districtContainer.district;
                 });
         },
 
