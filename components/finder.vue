@@ -98,7 +98,7 @@ export default {
     async trans() {
         if(this.keyword == '')
           return;
-        this.$axios.get("https://business.juso.go.kr/addrlink/addrLinkApi.do", {
+        this.$axios.get("https://api.juso.go.kr/addrlink/addrLinkApi.do", {
             params: {
                 confmKey: 'U01TX0FVVEgyMDIxMTIxNjE0MTM1OTExMjAzNzk=',
                 resultType: 'json',
