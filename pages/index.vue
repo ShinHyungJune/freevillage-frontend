@@ -118,19 +118,19 @@
                         </div>
 
                         <input-region
-                            input-class="m-input-select type01" 
-                            :districtContainer="container" 
+                            input-class="m-input-select type01"
+                            :districtContainer="container"
                             :initiationCalled="activeFinder"
-                            @change="changeDistrict" 
+                            @change="changeDistrict"
                         />
                         <button class="m-btn type02 width-100" v-touch:tap="search">검색하기</button>
                         <div style="margin-top: 30px;">
                             <span style="color: red">*</span>행정동을 모르실 경우 찾기 버튼을 누르세요.  <button style="color: #0f38bd;" v-touch:tap="active">찾기</button>
                         </div>
-                    </div>   
+                    </div>
                 </div>
 
-                <Finder 
+                <Finder
                     v-if="activeFinder"
                     :title="'주소로 행정동 찾기'"
                     :excecute="'변환하기'"
@@ -138,7 +138,7 @@
                     @cancel="closeFinder"
                     @setContainer="setContainer"
                 />
-               
+
 
             </section>
 
@@ -152,14 +152,17 @@
                         </div>
 
                         <div class="m-tabs type04">
+
                             <div class="m-tab-wrap">
-                                <button :class="`m-tab ${form.rankingUrl === 'total-rankings' ? 'active' : ''}`" @click="() => {form.rankingUrl='total-rankings'; getRankings(10)}">전체</button>
+                                <button :class="`m-tab ${form.rankingUrl === 'rankings' ? 'active' : ''}`" @click="() => {form.rankingUrl='rankings'; getRankings(10)}">주간</button>
                             </div>
+
                             <div class="m-tab-wrap">
                                 <button :class="`m-tab ${form.rankingUrl === 'monthly-rankings' ? 'active' : ''}`" @click="() => {form.rankingUrl='monthly-rankings'; getRankings(10)}">월별</button>
                             </div>
+
                             <div class="m-tab-wrap">
-                                <button :class="`m-tab ${form.rankingUrl === 'rankings' ? 'active' : ''}`" @click="() => {form.rankingUrl='rankings'; getRankings(10)}">주간</button>
+                                <button :class="`m-tab ${form.rankingUrl === 'total-rankings' ? 'active' : ''}`" @click="() => {form.rankingUrl='total-rankings'; getRankings(10)}">전체</button>
                             </div>
                         </div>
 
@@ -395,7 +398,7 @@ export default {
             form: {
                 district_id: "",
                 district: "",
-                rankingUrl: "total-rankings",
+                rankingUrl: "rankings",
             },
 
             notices: {
@@ -572,7 +575,7 @@ export default {
                     });
         },
         "form.district"() {
-            if(this.container.district) 
+            if(this.container.district)
                 this.search()
         }
 
