@@ -38,8 +38,18 @@ export default {
                 return "";
             }
         }
+        
     },
     components: {},
+    watch: {
+        'form.content'(newValue, oldValue) {
+            if(newValue.length > 300) {
+                alert('댓글은 300자 이상 작성할 수 없습니다.')
+                this.form.content = oldValue;
+            }
+
+        }
+    },
     data() {
         return {
             form: {
