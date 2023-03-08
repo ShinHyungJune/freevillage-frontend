@@ -232,7 +232,7 @@
                 </div>
 
                 <div class="wrap">
-                    <comments :post_id="item.id" @calculateCommentCount="calculateCommentCount" v-if="item.id"/>
+                    <comments :post_id="item.id" @calculateCommentCount="calculateCommentCount" @removed="commentRemoved" v-if="item.id"/>
                 </div>
             </div>
 
@@ -331,6 +331,10 @@ export default {
             }).then(response => {
                 this.item = response.data.data;
             })
+        },
+
+        commentRemoved(){
+            this.item.comment_count -= 1;
         },
 
         initMap() {

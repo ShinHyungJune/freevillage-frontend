@@ -91,6 +91,8 @@ export default {
 
             //     return itemData;
             // });
+            this.$emit("removed", item);
+
             this.items.data = this.items.data.filter(item => !item.deleted_at)
         }
     },

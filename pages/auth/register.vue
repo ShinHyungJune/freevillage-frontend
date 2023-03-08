@@ -370,7 +370,7 @@
                         <input-region
                             :districtContainer="container"
                             :initiationCalled="activeFinder"
-                            @change="changeDistrict" 
+                            @change="changeDistrict"
                         />
 
                         <p class="m-input-error" v-if="errors.district_id" v-text="errors.district_id[0]"></p>
@@ -435,7 +435,7 @@
                     </div>
 
                     <div class="mt-24"></div>
-                    
+
                     <div class="m-btns type01">
                         <div class="m-btn-wrap">
                             <button type="submit" class="m-btn type02 width-100" @click="helpRegister">가입 도와주기</button>
@@ -444,12 +444,12 @@
                             <button type="submit" class="m-btn type02 width-100" @click="register">직접 가입하기</button>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
 
-        <Finder 
+        <Finder
             v-if="activeFinder"
             :title="'주소로 행정동 찾기'"
             :excecute="'변환하기'"
@@ -470,7 +470,7 @@ export default {
     data() {
         return {
             activeFinder:false,
-            container:{},            
+            container:{},
             step: 1,
             form: {
                 nickname: "",
@@ -505,25 +505,28 @@ export default {
             if(!this.form.is_agree_privacy)
                 return alert("필수약관에 동의해주세요.");
 
-            /*return this.$axios.post("/auth/check-nickname", this.form).then((response) => {
-                console.log(response);
-            });
-*/
-            this.$axios.post("/auth/register", this.form)
-                .then((response) => {
-                    this.login({
-                        phone: this.form.phone,
-                        password: this.form.birth,
-                    }, () => {
-                        this.$router.push("/auth/success");
+            this.$axios.post("/auth/check-nickname", this.form).then((response) => {
+                if(!response.data.result)
+                    return alert("금지된 이름입니다.");
 
-                        this.$store.commit("changeDistrict",this.$auth.user.district);
+                this.$axios.post("/auth/register", this.form)
+                    .then((response) => {
+                        this.login({
+                            phone: this.form.phone,
+                            password: this.form.birth,
+                        }, () => {
+                            this.$router.push("/auth/success");
+
+                            this.$store.commit("changeDistrict",this.$auth.user.district);
+                        });
+                    })
+                    .catch((error) => {
+                        if (error.response && error.response.data)
+                            this.errors = error.response.data.errors;
                     });
-                })
-                .catch((error) => {
-                    if (error.response && error.response.data)
-                        this.errors = error.response.data.errors;
-                });
+            });
+
+
         },
         helpRegister() {
             if(!this.form.is_agree_privacy)

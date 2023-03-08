@@ -48,6 +48,16 @@ export default {
 
     methods: {
         async save() {
+            let result = true;
+
+            await this.$axios.post("/auth/check-nickname", this.form).then((response) => {
+                if(!response.data.result)
+                    result = false;
+            });
+
+            if(!result)
+                return alert("금지된 닉네임입니다.");
+
           let form = new FormData();
             form.append("_method","PUT");
             form.append("nickname",this.form.nickname);
