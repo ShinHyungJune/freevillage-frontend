@@ -151,7 +151,7 @@
                             <p style="padding: 10px;">마을 랭킹은 매주 월요일 00시부터<br />일요일 23시59분 마을 가입 수를<br />기반으로 집계되며, 매주 리셋됩니다. </p>
                         </div>
 
-                        <div class="m-tabs type04">
+                        <div class="m-tabs type03">
 
                             <div class="m-tab-wrap">
                                 <button :class="`m-tab ${form.rankingUrl === 'rankings' ? 'active' : ''}`" @click="() => {form.rankingUrl='rankings'; getRankings(10)}">주간</button>
