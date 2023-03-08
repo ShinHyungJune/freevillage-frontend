@@ -119,13 +119,9 @@
 
                         <input-region input-class="m-input-select type01" @change="(data) => {form.district = data.district}" />
                         <button class="m-btn type02 width-100" v-touch:tap="search">검색하기</button>
-    
-                    </div>   
+
+                    </div>
                 </div>
-
-     
-               
-
             </section>
 
             <section class="section-ranking">
@@ -137,33 +133,45 @@
                             <p style="padding: 10px;">마을 랭킹은 매주 월요일 00시부터<br />일요일 23시59분 마을 가입 수를<br />기반으로 집계되며, 매주 리셋됩니다. </p>
                         </div>
 
+                        <div class="m-tabs type04">
+                            <div class="m-tab-wrap">
+                                <button :class="`m-tab ${form.rankingUrl === 'total-rankings' ? 'active' : ''}`" @click="() => {form.rankingUrl='total-rankings'; getRankings(10)}">전체</button>
+                            </div>
+                            <div class="m-tab-wrap">
+                                <button :class="`m-tab ${form.rankingUrl === 'monthly-rankings' ? 'active' : ''}`" @click="() => {form.rankingUrl='monthly-rankings'; getRankings(10)}">월별</button>
+                            </div>
+                            <div class="m-tab-wrap">
+                                <button :class="`m-tab ${form.rankingUrl === 'rankings' ? 'active' : ''}`" @click="() => {form.rankingUrl='rankings'; getRankings(10)}">주간</button>
+                            </div>
+                        </div>
+
                         <div class="rankings">
-                            <div class="ranking-wrap" v-if="districtWeekRegisterCounts.length >= 2">
+                            <div class="ranking-wrap" v-if="districtRegisterCounts.length >= 2">
                                 <a href="#" class="ranking" @click.prevent="$store.commit('changeDistrict',  {
-                                    id: districtWeekRegisterCounts[1].district_id,
-                                    district: districtWeekRegisterCounts[1].district
+                                    id: districtRegisterCounts[1].district_id,
+                                    district: districtRegisterCounts[1].district
                                 })">
                                     <div class="img-wrap">
                                         <img src="https://dotmzh1fysixs.cloudfront.net/1017/2st.png" width="100%" alt="">
                                     </div>
 
                                     <div class="fragment">
-                                        <p class="subtitle">{{ districtWeekRegisterCounts[1].district }}</p>
+                                        <p class="subtitle">{{ districtRegisterCounts[1].district }}</p>
                                         <h3 class="title">
                                             <span class="point">2</span>위
                                         </h3>
-                                        <p class="more">{{ districtWeekRegisterCounts[1].now_week_count }}
-                                            <span class="tri" v-if="districtWeekRegisterCounts[1].now_week_count == 0">−</span>
-                                            <span class="tri" v-else-if="districtWeekRegisterCounts[1].up_down === 'down'">▼</span>
+                                        <p class="more">{{ rankingCount(districtRegisterCounts[1]) }}
+                                            <span class="tri" v-if="rankingCount(districtRegisterCounts[1]) == 0">−</span>
+                                            <span class="tri" v-else-if="districtRegisterCounts[1].up_down === 'down'">▼</span>
                                             <span class="tri" v-else>▲</span>
                                         </p>
                                     </div>
                                 </a>
                             </div>
-                            <div class="ranking-wrap first" v-if="districtWeekRegisterCounts.length >= 1">
+                            <div class="ranking-wrap first" v-if="districtRegisterCounts.length >= 1">
                                 <div class="ranking" @click="$store.commit('changeDistrict',  {
-                                    id: districtWeekRegisterCounts[0].district_id,
-                                    district: districtWeekRegisterCounts[0].district
+                                    id: districtRegisterCounts[0].district_id,
+                                    district: districtRegisterCounts[0].district
                                 })">
                                     <div class="img-wrap">
                                         <img src="https://dotmzh1fysixs.cloudfront.net/1016/crown.png" width="20px" alt="" class="deco">
@@ -171,35 +179,35 @@
                                     </div>
 
                                     <div class="fragment">
-                                        <p class="subtitle">{{ districtWeekRegisterCounts[0].district }}</p>
+                                        <p class="subtitle">{{ districtRegisterCounts[0].district }}</p>
                                         <h3 class="title">
                                             <span class="point">1</span>위
                                         </h3>
-                                        <p class="more">{{ districtWeekRegisterCounts[0].now_week_count }}
-                                            <span class="tri" v-if="districtWeekRegisterCounts[0].now_week_count == 0">−</span>
-                                            <span class="tri" v-else-if="districtWeekRegisterCounts[0].up_down === 'down'">▼</span>
+                                        <p class="more">{{ rankingCount(districtRegisterCounts[0]) }}
+                                            <span class="tri" v-if="rankingCount(districtRegisterCounts[0]) == 0">−</span>
+                                            <span class="tri" v-else-if="districtRegisterCounts[0].up_down === 'down'">▼</span>
                                             <span class="tri" v-else>▲</span>
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="ranking-wrap" v-if="districtWeekRegisterCounts.length >= 3">
+                            <div class="ranking-wrap" v-if="districtRegisterCounts.length >= 3">
                                 <div class="ranking"  @click="$store.commit('changeDistrict',  {
-                                    id: districtWeekRegisterCounts[2].district_id,
-                                    district: districtWeekRegisterCounts[2].district
+                                    id: districtRegisterCounts[2].district_id,
+                                    district: districtRegisterCounts[2].district
                                 })">
                                     <div class="img-wrap">
                                         <img src="https://dotmzh1fysixs.cloudfront.net/1014/3st.png" width="100%" alt="">
                                     </div>
 
                                     <div class="fragment">
-                                        <p class="subtitle">{{ districtWeekRegisterCounts[2].district }}</p>
+                                        <p class="subtitle">{{ districtRegisterCounts[2].district }}</p>
                                         <h3 class="title">
                                             <span class="point">3</span>위
                                         </h3>
-                                        <p class="more">{{ districtWeekRegisterCounts[2].now_week_count }}
-                                            <span class="tri" v-if="districtWeekRegisterCounts[2].now_week_count == 0">−</span>
-                                            <span class="tri" v-else-if="districtWeekRegisterCounts[2].up_down === 'down'">▼</span>
+                                        <p class="more">{{ rankingCount(districtRegisterCounts[2]) }}
+                                            <span class="tri" v-if="rankingCount(districtRegisterCounts[2]) == 0">−</span>
+                                            <span class="tri" v-else-if="districtRegisterCounts[2].up_down === 'down'">▼</span>
                                             <span class="tri" v-else>▲</span>
                                         </p>
                                     </div>
@@ -218,16 +226,16 @@
                                 </thead>
                                 <tbody>
 
-                                <tr v-for="(districtWeekRegisterCount, index) in districtWeekRegisterCounts" :key="index" @click="$store.commit('changeDistrict',  {
-                                id: districtWeekRegisterCount.district_id,
-                                district: districtWeekRegisterCount.district
+                                <tr v-for="(districtRegisterCount, index) in districtRegisterCounts" :key="index" @click="$store.commit('changeDistrict',  {
+                                id: districtRegisterCount.district_id,
+                                district: districtRegisterCount.district
                                 })">
-                                    <template v-if="index >= 3 && districtWeekRegisterCount">
+                                    <template v-if="index >= 3 && districtRegisterCount">
                                     <td>{{index + 1}}위</td>
-                                    <td>{{ districtWeekRegisterCount.city}} {{districtWeekRegisterCount.district}}</td>
-                                        <td class="more" v-if="districtWeekRegisterCount.now_week_count == 0">{{districtWeekRegisterCount.now_week_count}} <span class="tri">−</span></td>
-                                    <td class="more down" v-else-if="districtWeekRegisterCount.up_down === 'down'">{{districtWeekRegisterCount.now_week_count}} <span class="tri">▼</span></td>
-                                    <td class="more up" v-else>{{districtWeekRegisterCount.now_week_count}} <span class="tri">▲</span></td>
+                                    <td>{{ districtRegisterCount.city}} {{districtRegisterCount.district}}</td>
+                                        <td class="more" v-if="rankingCount(districtRegisterCount) == 0">{{rankingCount(districtRegisterCount)}} <span class="tri">−</span></td>
+                                    <td class="more down" v-else-if="districtRegisterCount.up_down === 'down'">{{rankingCount(districtRegisterCount)}} <span class="tri">▼</span></td>
+                                    <td class="more up" v-else>{{rankingCount(districtRegisterCount)}} <span class="tri">▲</span></td>
                                     </template>
                                 </tr>
                                 </tbody>
@@ -366,7 +374,8 @@ export default {
         return {
             form: {
                 district_id: "",
-                district: ""
+                district: "",
+                rankingUrl: "total-rankings",
             },
 
             notices: {
@@ -399,7 +408,7 @@ export default {
                 rate: 0,
             },
 
-            districtWeekRegisterCounts: [
+            districtRegisterCounts: [
 
             ],
         }
@@ -415,10 +424,24 @@ export default {
         },
 
         getRankings(count){
-            this.$axios.get("/rankings/" + count)
+            this.$axios.get(this.form.rankingUrl + "/" + count)
                 .then(response => {
-                    this.districtWeekRegisterCounts = response.data.districtWeekRegisterCounts;
+                    console.log(response.data.districtRegisterCounts);
+                    this.districtRegisterCounts = response.data.districtRegisterCounts;
                 });
+        },
+
+        rankingCount(ranking){
+            if(this.form.rankingUrl === 'rankings')
+                return ranking.now_week_count;
+
+            if(this.form.rankingUrl === 'monthly-rankings')
+                return ranking.now_month_count;
+
+            if(this.form.rankingUrl === 'total-rankings')
+                return ranking.count;
+
+            return "-";
         },
 
         async updatePosts(districtId) {

@@ -464,6 +464,10 @@ export default {
             if(!this.form.is_agree_privacy)
                 return alert("필수약관에 동의해주세요.");
 
+            /*return this.$axios.post("/auth/check-nickname", this.form).then((response) => {
+                console.log(response);
+            });
+*/
             this.$axios.post("/auth/register", this.form)
                 .then((response) => {
                     this.login({
