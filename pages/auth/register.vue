@@ -448,14 +448,7 @@
             </div>
         </div>
 
-        <Finder
-            v-if="activeFinder"
-            :title="'주소로 행정동 찾기'"
-            :excecute="'변환하기'"
-            :cancel="'검색하기'"
-            @cancel="closeFinder"
-            @setContainer="setContainer"
-        />
+       
     </div>
 
 </template>
@@ -504,7 +497,7 @@ export default {
             if(!this.form.is_agree_privacy)
                 return alert("필수약관에 동의해주세요.");
 
-                    /*return this.$axios.post("/auth/check-nickname", this.form).then((response) => {
+                /*return this.$axios.post("/auth/check-nickname", this.form).then((response) => {
                 console.log(response);
                 });
                 */
