@@ -377,7 +377,6 @@
 
                         <div class="mt-8">
                             <span style="color: red">*</span>행정동을 모르실 경우 찾기 버튼을 누르세요.  <button style="color: #0f38bd;" v-touch:tap="active">찾기</button>
-
                         </div>
                     </div>
 
@@ -505,26 +504,25 @@ export default {
             if(!this.form.is_agree_privacy)
                 return alert("필수약관에 동의해주세요.");
 
-            this.$axios.post("/auth/check-nickname", this.form).then((response) => {
-                if(!response.data.result)
-                    return alert("금지된 이름입니다.");
-
+                    /*return this.$axios.post("/auth/check-nickname", this.form).then((response) => {
+                console.log(response);
+                });
+                */
                 this.$axios.post("/auth/register", this.form)
-                    .then((response) => {
-                        this.login({
-                            phone: this.form.phone,
-                            password: this.form.birth,
-                        }, () => {
-                            this.$router.push("/auth/success");
+                .then((response) => {
+                    this.login({
+                        phone: this.form.phone,
+                        password: this.form.birth,
+                    }, () => {
+                        this.$router.push("/auth/success");
 
-                            this.$store.commit("changeDistrict",this.$auth.user.district);
-                        });
-                    })
-                    .catch((error) => {
-                        if (error.response && error.response.data)
-                            this.errors = error.response.data.errors;
+                        this.$store.commit("changeDistrict",this.$auth.user.district);
                     });
-            });
+                })
+                .catch((error) => {
+                    if (error.response && error.response.data)
+                        this.errors = error.response.data.errors;
+                });
 
 
         },
