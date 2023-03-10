@@ -375,10 +375,9 @@
 
                         <p class="m-input-error" v-if="errors.district_id" v-text="errors.district_id[0]"></p>
 
-                        <div class="mt-8">
+                      <!-- <div class="mt-8">
                             <span style="color: red">*</span>행정동을 모르실 경우 찾기 버튼을 누르세요.  <button style="color: #0f38bd;" v-touch:tap="active">찾기</button>
-
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="mt-16"></div>
@@ -449,14 +448,7 @@
             </div>
         </div>
 
-        <Finder
-            v-if="activeFinder"
-            :title="'주소로 행정동 찾기'"
-            :excecute="'변환하기'"
-            :cancel="'검색하기'"
-            @cancel="closeFinder"
-            @setContainer="setContainer"
-        />
+       
     </div>
 
 </template>
@@ -511,12 +503,12 @@ export default {
             //         return alert("금지된 이름입니다.");
 
                 this.$axios.post("/auth/register", this.form)
-                    .then((response) => {
-                        this.login({
-                            phone: this.form.phone,
-                            password: this.form.birth,
-                        }, () => {
-                            this.$router.push("/auth/success");
+                .then((response) => {
+                    this.login({
+                        phone: this.form.phone,
+                        password: this.form.birth,
+                    }, () => {
+                        this.$router.push("/auth/success");
 
                             this.$store.commit("changeDistrict",this.$auth.user.district);
                         });
