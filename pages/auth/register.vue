@@ -491,16 +491,17 @@ export default {
             this.container = container;
         },
         changeDistrict(data) {
-            this.form.district = data.district
+            // this.form.district = data.district
+            this.form.district_id = data.district_id
         },
         register() {
             if(!this.form.is_agree_privacy)
                 return alert("필수약관에 동의해주세요.");
 
-                /*return this.$axios.post("/auth/check-nickname", this.form).then((response) => {
-                console.log(response);
-                });
-                */
+            // this.$axios.post("/auth/check-nickname", this.form).then((response) => {
+            //     if(!response.data.result)
+            //         return alert("금지된 이름입니다.");
+
                 this.$axios.post("/auth/register", this.form)
                 .then((response) => {
                     this.login({
@@ -509,13 +510,14 @@ export default {
                     }, () => {
                         this.$router.push("/auth/success");
 
-                        this.$store.commit("changeDistrict",this.$auth.user.district);
+                            this.$store.commit("changeDistrict",this.$auth.user.district);
+                        });
+                    })
+                    .catch((error) => {
+                        if (error.response && error.response.data)
+                            this.errors = error.response.data.errors;
                     });
-                })
-                .catch((error) => {
-                    if (error.response && error.response.data)
-                        this.errors = error.response.data.errors;
-                });
+            // });
 
 
         },
