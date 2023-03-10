@@ -135,7 +135,7 @@
                     :title="'주소로 행정동 찾기'"
                     :excecute="'변환하기'"
                     :cancel="'검색하기'"
-                    @cancel="closeFinder"
+                    @cancel="closeModal"
                     @setContainer="setContainer"
                 />
 
@@ -384,15 +384,35 @@
         </div>
 
         <navigation />
+        <modal
+            v-if="activateNoticePop"
+            @cancel="closeNoticePopup"
+        >
+            <div class="mt-8">
+                <imageSlider
+                    :contents="noticePopupContents"
+                    :propTimer=5000
+                />
+                <!-- <div class="mt-8"></div>
+                <div class="m-input-checkbox type01">
+                    <input type="checkbox" :value="notOpenChecked" :id="'notOpen'" v-model="notOpenChecked">
+                    <label :for="'notOpen'">오늘 하루 열지 않음</label>
+                </div> -->
+            </div>
+        </modal>
     </div>
 </template>
 
 <script>
+import * as Cookies from "js-cookie";
 export default {
     name: 'IndexPage',
     auth: false,
     data() {
         return {
+            notOpenChecked:false,
+            activateNoticePop: false,
+            noticePopupContents:[],
             activeFinder:false,
             container:{},
             form: {
@@ -437,11 +457,32 @@ export default {
         }
     },
     methods: {
+        async getNoticeContents() {
+            try {
+                const {data} = await this.$axios.get('/banners/popups')
+                console.log({data});
+                if(data.banners.length) {
+                    this.noticePopupContents = data.banners;
+                    this.activateNoticePop = true;
+                }
+            } catch (error) {
+                
+            }
+            
+        },
         active() {
             this.activeFinder = true;
         },
-        closeFinder() {
+        closeModal() {
             this.activeFinder = false;
+            
+        },
+        closeNoticePopup() {
+            // if(this.notOpenChecked) {
+            //     Cookies.set("popToday","close",{expires: 1, secure: false})
+            // }
+            Cookies.set("popToday","close",{expires: 1, secure: false})
+            this.activateNoticePop = false;
         },
         setContainer(container) {
             this.container = container;
@@ -516,7 +557,8 @@ export default {
             }).then(response => {
                 this.asks = response.data;
             });
-        }
+        },
+
     },
 
     computed: {
@@ -583,6 +625,10 @@ export default {
 
     async mounted() {
         await this.updatePosts(this.district.id);
+        console.log(Cookies.get('popToday'),3333);
+        if(Cookies.get('popToday') !== 'close') {
+            await this.getNoticeContents();
+        }
 
 
         this.getRankings(10);
