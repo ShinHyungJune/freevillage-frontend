@@ -148,7 +148,7 @@
                         <div class="m-title type01">
                             <p class="sub">순위 현황 한 눈에 보기</p>
                             마을별 가입 <span class="point">TOP 10</span>
-                            <p style="padding: 10px;">마을 랭킹은 매주 월요일 00시부터<br />일요일 23시59분 마을 가입 수를<br />기반으로 집계되며, 매주 리셋됩니다. </p>
+                            <p style="padding: 10px;">마을 랭킹은 매주 토요일 00시부터<br />일요일 23시59분 마을 가입 수를<br />기반으로 집계되며, 매주 리셋됩니다. </p>
                         </div>
 
                         <div class="m-tabs type03">
@@ -389,25 +389,32 @@
             @cancel="closeNoticePopup"
         >
             <div class="mt-8">
-                <imageSlider
-                    :contents="noticePopupContents"
-                    :propTimer=5000
-                />
-                <!-- <div class="mt-8"></div>
-                <div class="m-input-checkbox type01">
-                    <input type="checkbox" :value="notOpenChecked" :id="'notOpen'" v-model="notOpenChecked">
-                    <label :for="'notOpen'">오늘 하루 열지 않음</label>
-                </div> -->
+                <vueper-slides autoplay fixed-height="350px">
+                    <vueper-slide
+                        v-for="(content, i) in noticePopupContents"
+                        :key="i"
+                        :image="content.image.url"
+                    >
+                    </vueper-slide>
+                </vueper-slides>
+
             </div>
+            
         </modal>
+
     </div>
 </template>
 
 <script>
 import * as Cookies from "js-cookie";
+import {VueperSlides, VueperSlide } from 'vueperslides'
+import 'vueperslides/dist/vueperslides.css';
 export default {
     name: 'IndexPage',
     auth: false,
+    components: {
+        VueperSlides,VueperSlide
+    },
     data() {
         return {
             notOpenChecked:false,
@@ -625,11 +632,10 @@ export default {
 
     async mounted() {
         await this.updatePosts(this.district.id);
-        console.log(Cookies.get('popToday'),3333);
+        // console.log(Cookies.get('popToday'),3333);
         if(Cookies.get('popToday') !== 'close') {
             await this.getNoticeContents();
         }
-
 
         this.getRankings(10);
 

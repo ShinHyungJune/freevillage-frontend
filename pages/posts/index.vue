@@ -55,7 +55,7 @@
 
             <section class="section-ranking">
                 <div class="wrap">
-                    <h3 class="section-title">이번주 인기상승</h3>
+                    <h3 class="section-title">실시간 인기상승</h3>
 
                     <favorites
                         :activeState="activeState"
