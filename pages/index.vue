@@ -389,25 +389,32 @@
             @cancel="closeNoticePopup"
         >
             <div class="mt-8">
-                <imageSlider
-                    :contents="noticePopupContents"
-                    :propTimer=5000
-                />
-                <!-- <div class="mt-8"></div>
-                <div class="m-input-checkbox type01">
-                    <input type="checkbox" :value="notOpenChecked" :id="'notOpen'" v-model="notOpenChecked">
-                    <label :for="'notOpen'">오늘 하루 열지 않음</label>
-                </div> -->
+                <vueper-slides autoplay fixed-height="350px">
+                    <vueper-slide
+                        v-for="(content, i) in noticePopupContents"
+                        :key="i"
+                        :image="content.image.url"
+                    >
+                    </vueper-slide>
+                </vueper-slides>
+
             </div>
+            
         </modal>
+
     </div>
 </template>
 
 <script>
 import * as Cookies from "js-cookie";
+import {VueperSlides, VueperSlide } from 'vueperslides'
+import 'vueperslides/dist/vueperslides.css';
 export default {
     name: 'IndexPage',
     auth: false,
+    components: {
+        VueperSlides,VueperSlide
+    },
     data() {
         return {
             notOpenChecked:false,
@@ -608,7 +615,7 @@ export default {
         district (newCount, oldCount) {
             this.updatePosts(this.district.id);
 
-            this.getRankings(10);
+            // this.getRankings(10);
 
             if(this.district.id != 0)
                 this.$axios.get("/districts/" + this.district.id + "/register_rates")
@@ -625,13 +632,12 @@ export default {
 
     async mounted() {
         await this.updatePosts(this.district.id);
-        console.log(Cookies.get('popToday'),3333);
+        // console.log(Cookies.get('popToday'),3333);
         if(Cookies.get('popToday') !== 'close') {
             await this.getNoticeContents();
         }
 
-
-        this.getRankings(10);
+        // this.getRankings(10);
 
         if(this.district.id != 0)
             this.$axios.get("/districts/" + this.district.id + "/register_rates")
