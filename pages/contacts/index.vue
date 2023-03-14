@@ -32,16 +32,98 @@
 
             <section class="section-content">
                 <div class="wrap">
-                    <div class="m-empty type01" v-if="items.data.length === 0">준비중입니다.</div>
+                    <div class="m-empty type01" v-if="!item">준비중입니다.</div>
 
-                    <div class="img-wrap" v-for="item in items.data" :key="item.id">
-                        <img :src="item.img.url" alt="" class="img" v-if="item.img">
+                    <section class="section-content" v-if="item">
+                        <div class="wrap">
+                            <div class="img-wrap">
+                                <img src="/images/people.png" alt="">
+                            </div>
 
-                        <a :href="`tel:${item.phone}`" class="btn-call">
-                            <img src="/images/call.png" alt="" style="width:17px;">
-                        </a>
-                    </div>
+                            <div class="box-name">
+                                <p class="name">{{ item.korean_name }}</p>
+<!--                                <p class="sub"><span class="point">KANG GIYUN</span> 1960-06-04</p>-->
+                            </div>
 
+                            <div class="fragment">
+                                <h3 class="title">국회의원 소개</h3>
+
+                                <div class="infos">
+                                    <div class="info">
+                                        <h3 class="info-title">· 홈페이지</h3>
+                                        <p class="info-body">
+                                            <a :href="homepage" target="_blank">{{item.congress_homepage}}</a>
+                                        </p>
+                                    </div>
+
+                                    <div class="info">
+                                        <h3 class="info-title">· 사무실 주소</h3>
+                                        <p class="info-body">{{item.congress_office}}</p>
+                                    </div>
+
+                                    <div class="info">
+                                        <h3 class="info-title">· 이메일</h3>
+                                        <p class="info-body">{{ item.congress_email }}</p>
+                                    </div>
+
+                                    <div class="info">
+                                        <h3 class="info-title">· 연락처</h3>
+                                        <p class="info-body">{{ item.congress_phone }}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="fragment" v-if="item.histories">
+                                <h3 class="title">주요 약력</h3>
+
+                                <div class="histories" v-text="item.histories"></div>
+                            </div>
+
+                            <div class="fragment fragment-board">
+                                <h3 class="title">대표발의 의안 (퍼블만 잡혀있음)</h3>
+
+                                <div class="boards">
+                                    <a href="#" class="board">
+                                        <h3 class="title">사회보장급여의 이용제공 및 수정사항 진행 및 수정사항 진행</h3>
+                                        <p class="sub">2023-02-03</p>
+                                    </a>
+
+                                    <a href="#" class="board">
+                                        <h3 class="title">사회보장급여의 이용제공 및 수정사항 진행</h3>
+                                        <p class="sub">2023-02-03</p>
+                                    </a>
+
+                                    <a href="#" class="board">
+                                        <h3 class="title">사회보장급여의 이용제공 및 수정사항 진행</h3>
+                                        <p class="sub">2023-02-03</p>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="fragment fragment-board">
+                                <h3 class="title">발언 영상 (퍼블만 잡혀있음)</h3>
+
+                                <div class="boards">
+                                    <a href="#" class="board">
+                                        <h3 class="title">사회보장급여의 이용제공 및 수정사항 진행</h3>
+                                        <p class="sub">2023-02-03</p>
+                                    </a>
+
+                                    <a href="#" class="board">
+                                        <h3 class="title">사회보장급여의 이용제공 및 수정사항 진행</h3>
+                                        <p class="sub">2023-02-03</p>
+                                    </a>
+
+                                    <a href="#" class="board">
+                                        <h3 class="title">사회보장급여의 이용제공 및 수정사항 진행</h3>
+                                        <p class="sub">2023-02-03</p>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="mt-40"></div>
+                        </div>
+                    </section>
 
                     <img src="/images/about-bg.png" alt="" class="deco-about">
                 </div>
@@ -69,9 +151,7 @@ export default {
     auth: false,
     data() {
         return {
-            items: {
-                data: []
-            },
+            item: null,
 
             errors: {},
 
@@ -81,7 +161,7 @@ export default {
         init(){
             this.$axios.get(`/districts/${this.$store.state.district.id}/contacts`)
                 .then(response => {
-                    this.items = response.data;
+                    this.item = response.data.data;
                 })
         }
     },
@@ -89,6 +169,11 @@ export default {
     computed: {
         district(){
             return this.$store.state.district;
+        },
+
+        homepage(){
+            if(this.item && this.item.congress_homepage)
+                return this.item.congress_homepage.includes("http") ? this.item.congress_homepage : "http://" + this.item.congress_homepage;
         }
     },
 

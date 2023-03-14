@@ -295,7 +295,35 @@ html {
 .area-region-about .m-title {
     margin-bottom:10px;
 }
+.area-region-about .infos {
+    display:flex;
+    margin-top:4px;
+    padding:10px 16px;
+    background-color:#EEEEEE; border-radius:5px;
+}
+.area-region-about .infos.no-flex {
+    display:block;
+}
+.area-region-about .infos.no-flex .info {
+    margin-top:4px;
+}
+.area-region-about .infos.no-flex .info:first-of-type {
+    margin-top:0;
+}
+.area-region-about .info {
+    display:flex;
+    flex:0 0 auto;
+    margin-right:12px;
+}
+.area-region-about .info-title {
+    white-space: nowrap;
+    color:#777777;
+}
+.area-region-about .info-body {
+    word-break: keep-all;
+}
 .area-write img {
+    display:block; margin:0 auto;
     max-width:100%;
 }
 .area-write .comment {
@@ -359,28 +387,86 @@ html {
     position:absolute; bottom:0; left:0; z-index:0;
 }
 .area-region-activity .img-wrap {
-    padding-bottom:30px; margin-bottom:30px;
+    margin-bottom:30px;
     position:relative; text-align: center;
+}
+.area-region-activity .img-wrap img {
+    max-width:100%;
+}
+.area-region-activity .box-name {
+    margin-bottom:20px;
+}
+.area-region-activity .box-name .name {
+    font-size:30px; font-weight:bold; color:#810606;
+}
+.area-region-activity .box-name .sub {
+    font-size:18px;
+}
+.area-region-activity .box-name .sub .point {
+    font-size:18px; color:#D97D11;
+}
+.area-region-activity .fragment:first-of-type {
+    margin-top:0;
+}
+.area-region-activity .fragment {
+    margin-top:30px;
+}
+.area-region-activity .fragment > .title {
+    margin-bottom:10px;
+    font-size:24px; font-weight:500; color:#810606;
+}
+.area-region-activity .info:first-of-type {
+    border-top:1px solid #e1e1e1;
+}
+.area-region-activity .info {
+    display:flex; align-items: center;
+    padding:8px;
     border-bottom:1px solid #e1e1e1;
 }
-.area-region-activity .img-wrap:last-of-type {
-    padding-bottom:0; margin-bottom:0; border-bottom:none;
+.area-region-activity .info-title {
+    flex:0 0 auto;
+    width:120px;
+    font-size:18px;
+    color:#810606;
 }
-.area-region-activity .img-wrap .img {
-    display:inline-block;
+.area-region-activity .info-body {
+    font-size:18px; white-space: nowrap; overflow:hidden; text-overflow:ellipsis;
 }
-.area-region-activity .img-wrap .btn-call {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border-radius: 5px;
-    background-color: #ddd;
-    box-shadow:0px 3px 6px rgba(0,0,0,0.16);
+.area-region-activity .histories {
+    max-height:200px;
+    padding:16px 12px;
+    border:1px solid #e1e1e1; overflow-y:auto;
+    white-space: pre-line; line-height:24px;
+}
+.area-region-activity .history:first-of-type {
+    margin-top:0;
+}
+.area-region-activity .history {
+    margin-top:4px; padding-left:16px;
+    position:relative;
+}
+.area-region-activity .history:before {
+    content:""; width:4px; height:4px;
+    position:absolute; left:0; top:10px;
+    background-color:black;
+}
+.area-region-activity .fragment-board > .title {
+    color:#000;
+}
+.area-region-activity .boards {
+    border-top:1px solid black;
+}
+.area-region-activity .board {
+    display:block;
+    padding:8px;
+    border-bottom:1px solid #e1e1e1;
+}
+.area-region-activity .board .title {
+    font-size:18px; font-weight:500;
+    white-space: nowrap; text-overflow:ellipsis; overflow:hidden;
+}
+.area-region-activity .board .sub {
+    font-size:15px; color:#777;
 }
 .area-about .m-title {
     margin:32px 0; margin-bottom:24px;

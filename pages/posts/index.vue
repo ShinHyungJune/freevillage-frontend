@@ -198,7 +198,7 @@ export default {
                     params: this.form
                 }).then(response => {
                     const data = response.data;
-                    // let newData = 
+                    // let newData =
                     this.FETCH_POST_ITEMS([
                         ...this.postItems,
                         ...data.data
@@ -226,7 +226,6 @@ export default {
                 this.FETCH_POST_ITEMS(data.data);
                 this.FETCH_POST_LINKS(data.links);
                 this.FETCH_POST_META(data.meta);
-
             });
         },
 
@@ -283,7 +282,7 @@ export default {
             window.scrollTo(0,this.y)
         }
         window.addEventListener('scroll', this.onScroll)
-            
+
     },
     beforeDestroy() {
         window.removeEventListener('scroll', this.onScroll)

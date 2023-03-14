@@ -208,7 +208,7 @@
                     <div class="wrap">
                         <div class="utils">
                             <button class="btn-util" @click="toggleLike">
-                                <img src="/images/heart-active.png" alt="" style="width:14px;" v-if="item.is_like">
+                                <img src="/images/heart-active.png" alt="" style="width:14px;" v-if="item.is_like == 1">
                                 <img src="/images/heart-inactive.png" alt="" style="width:14px;" v-else>
                                 좋아요 {{ item.like_count }}
                             </button>
@@ -295,6 +295,9 @@ export default {
         toggleLike(e){
             e.preventDefault();
             e.stopPropagation();
+
+            if(!this.$auth.user)
+                return alert("로그인 후 이용 부탁드립니다.");
 
             if(this.item.is_like){
                 this.item.is_like = 0;

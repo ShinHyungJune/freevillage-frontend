@@ -466,16 +466,16 @@ export default {
                     this.activateNoticePop = true;
                 }
             } catch (error) {
-                
+
             }
-            
+
         },
         active() {
             this.activeFinder = true;
         },
         closeModal() {
             this.activeFinder = false;
-            
+
         },
         closeNoticePopup() {
             // if(this.notOpenChecked) {

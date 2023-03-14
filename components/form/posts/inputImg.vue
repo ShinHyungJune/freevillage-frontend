@@ -73,7 +73,6 @@ export default {
         uploadImage(file){
             let form = new FormData();
 
-            console.log(file);
             form.append("image", file);
             form.append("district_id", this.$store.state.district ? this.$store.state.district.id : 0);
 
@@ -85,6 +84,8 @@ export default {
                         url: response.data.data.original_url,
                         html : `<img src="${response.data.data.original_url}"/>`
                     });
+
+                    this.$emit("changeFile", file);
 
                     this.$refs.file.value = null;
                 });
