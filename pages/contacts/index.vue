@@ -37,12 +37,12 @@
                     <section class="section-content" v-if="item">
                         <div class="wrap">
                             <div class="img-wrap">
-                                <img src="/images/people.png" alt="">
+                                <img :src="item.img.url" alt="">
                             </div>
 
                             <div class="box-name">
-                                <p class="name">{{ item.korean_name }}</p>
-<!--                                <p class="sub"><span class="point">KANG GIYUN</span> 1960-06-04</p>-->
+                                <p class="name">{{ item.korean_name }} ({{item.NAME_HAN}}) </p>
+                               <!-- <p class="sub"><span class="point">KANG GIYUN</span> 1960-06-04</p> -->
                             </div>
 
                             <div class="fragment">
@@ -73,30 +73,22 @@
                                 </div>
                             </div>
 
-                            <div class="fragment" v-if="item.histories">
+                            <div class="fragment" v-if="item.HAK">
                                 <h3 class="title">주요 약력</h3>
 
-                                <div class="histories" v-text="item.histories"></div>
+                                <div class="histories" v-text="item.HAK"></div>
                             </div>
 
                             <div class="fragment fragment-board">
-                                <h3 class="title">대표발의 의안 (퍼블만 잡혀있음)</h3>
+                                <h3 class="title">대표발의 의안</h3>
 
                                 <div class="boards">
-                                    <a href="#" class="board">
-                                        <h3 class="title">사회보장급여의 이용제공 및 수정사항 진행 및 수정사항 진행</h3>
-                                        <p class="sub">2023-02-03</p>
-                                    </a>
-
-                                    <a href="#" class="board">
-                                        <h3 class="title">사회보장급여의 이용제공 및 수정사항 진행</h3>
-                                        <p class="sub">2023-02-03</p>
-                                    </a>
-
-                                    <a href="#" class="board">
-                                        <h3 class="title">사회보장급여의 이용제공 및 수정사항 진행</h3>
-                                        <p class="sub">2023-02-03</p>
-                                    </a>
+                                    <template v-for="item in proposals">
+                                        <a :href="item.DETAIL_LINK" class="board" :key="item.BILL_ID">
+                                            <h3 class="title">{{item.BILL_NAME}}</h3>
+                                            <p class="sub">{{item.PROPOSE_DT}}</p>
+                                        </a>
+                                    </template>
                                 </div>
                             </div>
 
@@ -152,18 +144,67 @@ export default {
     data() {
         return {
             item: null,
+            temp: null,
+            proposals:[],
 
             errors: {},
 
         }
     },
     methods: {
-        init(){
-            this.$axios.get(`/districts/${this.$store.state.district.id}/contacts`)
-                .then(response => {
-                    this.item = response.data.data;
+        async init(){
+            try {
+                const response = await this.$axios.get(`/districts/${this.$store.state.district.id}/contacts`)
+                if(response) {
+                    this.temp = response.data.data;
+                    await this.nprlapfmaufmqytet();
+                    await this.nzmimeepazxkubdpn();
+                }
+                    
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        async nprlapfmaufmqytet() {
+            try {
+                const {data} = await this.$axios.get(`https://open.assembly.go.kr/portal/openapi/nprlapfmaufmqytet`, {
+                    params: {
+                        DAESU: '21',
+                        NAME: this.temp.korean_name,
+                        type: 'json',
+                        key: 'e2e2ddc84af3448a85e4205a03b1bf3a'
+                    }
                 })
-        }
+
+                if(data) {
+                    console.log(data.nprlapfmaufmqytet[1].row[0])
+                    this.item = {
+                        ...this.temp,
+                        ...data.nprlapfmaufmqytet[1].row[0],
+                    }
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        async nzmimeepazxkubdpn() {
+            try {
+                const {data} = await this.$axios.get(`https://open.assembly.go.kr/portal/openapi/nzmimeepazxkubdpn`, {
+                    params: {
+                        age: '21',
+                        proposer: this.temp.korean_name,
+                        type: 'json',
+                        key: 'e2e2ddc84af3448a85e4205a03b1bf3a'
+                    }
+                })
+                if(data) {
+                    console.log(data.nzmimeepazxkubdpn[1].row)
+                    this.proposals = data.nzmimeepazxkubdpn[1].row.slice(0,3)
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        },
     },
 
     computed: {
