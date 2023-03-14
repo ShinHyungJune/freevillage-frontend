@@ -8,7 +8,7 @@
                 <h3 class="title">{{ item.title }}</h3>
                 <p :class="`count ${item.is_like ? 'active' : ''}`">
                     <span class="icon"></span>
-                    <span class="text">{{ item.like_count }}</span>
+                    <span class="text">{{ item.ranking_like_count }}</span>
                 </p>
             </nuxt-link>
         </div>
