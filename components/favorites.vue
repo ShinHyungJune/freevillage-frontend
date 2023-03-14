@@ -1,9 +1,9 @@
 <template>
-    <div class="rankings-wrap">
+    <div class="rankings-wrap" ref="favorites">
         <div class="m-empty type01" v-if="items.data.length === 0">데이터가 없습니다.</div>
 
         <div class="rankings">
-            <nuxt-link :to="`/posts/${item.id}`" class="ranking" v-for="(item, index) in items.data" :key="item.id">
+            <nuxt-link :to="`/posts/${item.id}`" class="ranking" :class="{focused: index === currentIndex}"  v-for="(item, index) in items.data" :key="item.id">
                 <span class="rank">{{index + 1}}</span>
                 <h3 class="title">{{ item.title }}</h3>
                 <p :class="`count ${item.is_like ? 'active' : ''}`">
@@ -51,6 +51,9 @@ export default {
                 },
                 links: {}
             },
+
+            currentIndex:0,
+            interval: null,
         }
     },
 
@@ -95,6 +98,12 @@ export default {
         setInterval(function(){
             self.getItems();
         }, 10000);
+        this.interval = setInterval(() => {
+            this.currentIndex = (this.currentIndex +1 ) % this.items.data.length;
+        },4000)
+    },
+    beforeDestroy() {
+        clearInterval(this.interval);
     }
 }
 </script>
