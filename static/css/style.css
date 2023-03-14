@@ -923,16 +923,16 @@ html {
     display:flex; align-items: center;
     margin-bottom:10px;
 }
-.area-news .section-ranking .ranking:first-of-type .rank {
+.area-news .section-ranking .ranking.focused .rank {
     font-size:22px; color:#0BAF00;
 }
-.area-news .section-ranking .ranking:first-of-type .title {
+.area-news .section-ranking .ranking.focused .title {
     font-size:20px; color:#0BAF00;
 }
-.area-news .section-ranking .ranking:first-of-type .count .icon {
+.area-news .section-ranking .ranking.focused .count .icon {
     background-image:url("../images/heart-active.png");
 }
-.area-news .section-ranking .ranking:first-of-type .count .text {
+.area-news .section-ranking .ranking.focused .count .text {
     color:#000;
 }
 /*
