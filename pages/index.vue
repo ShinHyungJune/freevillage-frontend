@@ -148,7 +148,7 @@
                         <div class="m-title type01">
                             <p class="sub">순위 현황 한 눈에 보기</p>
                             마을별 가입 <span class="point">TOP 10</span>
-                            <p style="padding: 10px;">마을 랭킹은 매주 토요일 00시부터<br />일요일 23시59분 마을 가입 수를<br />기반으로 집계되며, 매주 리셋됩니다. </p>
+                            <p style="padding: 10px;">마을 랭킹은 매주 일요일 00시부터<br />토요일 23시59분 마을 가입 수를<br />기반으로 집계되며, 매주 리셋됩니다. </p>
                         </div>
 
                         <div class="m-tabs type03">
