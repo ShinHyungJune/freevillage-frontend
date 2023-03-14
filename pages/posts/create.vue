@@ -10,10 +10,10 @@
                     <div class="m-input-select type01">
                         <select name="" id="" v-model="form.board" @change="changeBoard">
                             <option value="" disabled>카테고리 선택</option>
-                            <option value="notices">마을소식</option>
-                            <option value="clips">마을영상</option>
+                            <option value="clips">마을소식</option>
+                            <!-- <option value="clips">마을영상</option>
                             <option value="photos">마을포토</option>
-                            <option value="asks">마을질문</option>
+                            <option value="asks">마을질문</option> -->
                             <option value="meetings">마을모임</option>
                         </select>
                     </div>
@@ -37,7 +37,7 @@
 
                 <div class="m-input-error" v-if="errors.title">{{errors.title[0]}}</div>
 
-                <div class="m-input-wrap" v-if="form.board === 'clips'">
+                <!-- <div class="m-input-wrap" v-if="form.board === 'clips'">
                     <h3 class="m-input-title">유튜브 영상 Embed</h3>
 
                     <div class="m-input-text type01">
@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="m-input-error" v-if="errors.video_url">{{errors.video_url[0]}}</div>
-                </div>
+                </div> -->
 
                 <div class="m-input-wrap" v-if="form.board === 'meetings'">
                     <div class="m-input-wrap">
@@ -135,6 +135,10 @@
                     <input-camera id="camera" @change="getImgInfo"/>
                 </div>
 
+                <div class="nav-wrap">
+                    <input-youtube  @change="getYoutubeThumbnail"/>
+                </div>
+
                 <div class="nav-wrap active">
                     <input-link id="link" @change="(data) => {this.$refs.content.innerHTML += data.html}"/>
                 </div>
@@ -143,7 +147,7 @@
                     <input-img id="img" @change="getImgInfo"/>
                 </div>
 
-                <div class="nav-wrap" v-if="form.board !== 'clips'">
+                <div class="nav-wrap">
                     <input-thumbnail id="thumbnail" @change="getThumbnailInfo" :img-url="item ? item.img.url : ''" />
                 </div>
             </div>
@@ -174,11 +178,12 @@ import InputLink from "../../components/form/posts/inputLink";
 import InputImg from "../../components/form/posts/inputImg";
 import InputThumbnail from "../../components/form/posts/inputThumbnail";
 import InputAddress from "../../components/form/inputAddress";
+import InputYoutube from "../../components/form/posts/inputYoutube";
 import Form from "@/utils/Form";
 import {debounce} from "@/utils/debounce";
 
 export default {
-    components: {InputAddress, InputThumbnail, InputImg, InputLink, InputCamera},
+    components: {InputAddress, InputThumbnail, InputImg, InputLink, InputCamera, InputYoutube},
     auth: true,
     data() {
         return {
@@ -186,12 +191,14 @@ export default {
                 repImg: {},
                 contentImgs: [],
             },
+            vids:[],
             item: "",
 
             form: {
                 title: "",
                 content: "",
-                board: this.$route.query.board ? this.$route.query.board : "notices",
+                // board: this.$route.query.board ? this.$route.query.board : "notices",
+                board: "clips",
                 district_id: this.$store.state.district ? this.$store.state.district.id : 0,
                 thumbnail: "",
 
@@ -236,12 +243,16 @@ export default {
             }
             this.form.content = this.$refs.content ? this.$refs.content.innerHTML : "";
 
-            if(this.form.video_url) {
-                let youtubeInformation = this.getYoutubeInformation(this.form.video_url);
+            // if(this.form.video_url) {
+                // let youtubeInformation = this.getYoutubeInformation(this.form.video_url);
+                // this.form.video_url = youtubeInformation.embedUrl;
+                // this.form.video_id = youtubeInformation.id;
+                // this.form.video_thumbnail = youtubeInformation.thumbnail;
+            if(this.vids.length > 0) {
+                this.form.video_url = this.vids[0].embedUrl;
+                this.form.video_id = this.vids[0].id;
+                this.form.video_thumbnail = this.vids[0].thumbnail;
 
-                this.form.video_url = youtubeInformation.embedUrl;
-                this.form.video_id = youtubeInformation.id;
-                this.form.video_thumbnail = youtubeInformation.thumbnail;
             }
 
             let form = (new Form(this.form)).data();
@@ -274,6 +285,20 @@ export default {
 
         changeBoard(){
             this.reset();
+        },
+        getYoutubeThumbnail(obj) {
+            console.log({obj},323)
+            // this.form.video_url = obj.embedUrl;
+            // this.form.video_id = obj.id;
+            // this.form.video_thumbnail = obj.thumbnail;
+            this.vids.push(obj);
+            
+            const html = `
+                <div class="m-ratioBox-wrap m-video type01 mb-8"">
+                        <iframe src=${obj.embedUrl} allowfullscreen></iframe>
+                </div>
+            `
+            this.$refs.content.innerHTML += html
         },
 
         getYoutubeInformation(url){

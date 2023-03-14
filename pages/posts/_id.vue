@@ -182,11 +182,11 @@
 
                         <!-- 마을소식, 포토, 영상, 질문 등 -->
                         <div v-else>
-                            <div class="m-ratioBox-wrap m-video type01 mb-8" v-if="item.video_url">
+                            <!-- <div class="m-ratioBox-wrap m-video type01 mb-8" v-if="item.video_url">
                                 <div class="m-ratioBox">
                                     <iframe :src="item.video_url" allowfullscreen></iframe>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="editor-body" v-html="item.content"></div>
                         </div>

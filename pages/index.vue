@@ -388,18 +388,14 @@
             v-if="activateNoticePop"
             @cancel="closeNoticePopup"
         >
-            <div class="mt-8">
-                <vueper-slides autoplay fixed-height="300px">
-                    <vueper-slide
-                        v-for="(content, i) in noticePopupContents"
-                        :key="i"
-                        :image="content.image.url"
-                    >
-                    </vueper-slide>
-                </vueper-slides>
-
-            </div>
-            
+            <vueper-slides autoplay fixed-height="300px">
+                <vueper-slide
+                    v-for="(content, i) in noticePopupContents"
+                    :key="i"
+                    :image="content.image.url"
+                >
+                </vueper-slide>
+            </vueper-slides>
         </modal>
 
     </div>
