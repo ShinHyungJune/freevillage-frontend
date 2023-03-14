@@ -4,7 +4,9 @@
       <button class="btn-close" @click.prevent="emitEvent('cancel')">
         <img src="/images/x.png" alt="x" style="width:21px;">
       </button>
+      <div class="mt-8">
       <slot />
+      </div>
     </div>
   </div>
 </template>
