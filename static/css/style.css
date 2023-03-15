@@ -2326,3 +2326,7 @@ label {
 @-webkit-keyframes spin {
     to { -webkit-transform: rotate(360deg); }
 }
+
+.area-qnas-show .m-comments-top {
+    display:none !important;
+}

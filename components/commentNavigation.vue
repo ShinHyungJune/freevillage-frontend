@@ -26,19 +26,19 @@
 
 export default {
     props: {
-        post_id: {
+        commentable_id: {
             required: true,
             default() {
                 return "";
             }
         },
-        comment_id: {
+        commentable_type: {
             required: false,
             default() {
-                return "";
+                return "post";
             }
         }
-        
+
     },
     components: {},
     watch: {
@@ -53,8 +53,8 @@ export default {
     data() {
         return {
             form: {
-                commentable_type: "post",
-                commentable_id: this.post_id,
+                commentable_type: this.commentable_type,
+                commentable_id: this.commentable_id,
                 content: "",
             },
         }

@@ -48,7 +48,7 @@
         </div>
 
         <div class="m-comments" v-if="item.comments.length > 0 && activeReplies">
-            <comment v-for="reply in item.comments" :key="reply.id" :item="reply" @removed="replyRemoved" />
+            <comment v-for="reply in item.comments" :key="reply.id" :item="reply" @removed="replyRemoved" :commentable_id="reply.id" commentable_type="comment" />
         </div>
     </div>
 </template>
@@ -61,10 +61,13 @@ export default {
             required: true,
         },
 
-        post_id: {
+        commentable_id: {
 
         },
 
+        commentable_type: {
+            default : "post"
+        }
     },
     components: {SpamPop},
     data() {

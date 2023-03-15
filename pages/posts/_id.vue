@@ -232,7 +232,7 @@
                 </div>
 
                 <div class="wrap">
-                    <comments :post_id="item.id" @calculateCommentCount="calculateCommentCount" @removed="commentRemoved" v-if="item.id"/>
+                    <comments :commentable_id="item.id" commentable_type="post" @calculateCommentCount="calculateCommentCount" @removed="commentRemoved" v-if="item.id"/>
                 </div>
             </div>
 

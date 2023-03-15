@@ -24,7 +24,7 @@
         <div class="container">
             <div class="menus">
                 <div class="wrap">
-                    <nuxt-link to="/contents/customer" class="menu">
+                    <nuxt-link to="/qnas" class="menu">
                         <i class="xi-call"></i>
                         <p class="text">고객센터</p>
                     </nuxt-link>
