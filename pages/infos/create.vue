@@ -45,6 +45,56 @@
                         <div class="m-input-error" v-if="errors.x">{{errors.x[0]}}</div>
                         <div class="m-input-error" v-if="errors.y">{{errors.y[0]}}</div>
                     </div>
+
+                    <div class="m-input-wrap">
+                        <h3 class="m-input-title">관할 법정동</h3>
+
+                        <div class="m-input m-input-text type01">
+                            <input type="text" v-model="form.jurisdiction">
+                        </div>
+
+                        <div class="m-input-error" v-if="errors.jurisdiction">{{errors.jurisdiction[0]}}</div>
+                    </div>
+
+                    <div class="m-input-wrap">
+                        <h3 class="m-input-title">행정복지센터</h3>
+
+                        <div class="m-input m-input-text type01">
+                            <input type="text" v-model="form.administrative_welfare_center">
+                        </div>
+
+                        <div class="m-input-error" v-if="errors.administrative_welfare_center">{{errors.administrative_welfare_center[0]}}</div>
+                    </div>
+
+                    <div class="m-input-wrap">
+                        <h3 class="m-input-title">하위 행정구역</h3>
+
+                        <div class="m-input m-input-text type01">
+                            <input type="text" v-model="form.subdivision_administrative_district">
+                        </div>
+
+                        <div class="m-input-error" v-if="errors.subdivision_administrative_district">{{errors.subdivision_administrative_district[0]}}</div>
+                    </div>
+
+                    <div class="m-input-wrap">
+                        <h3 class="m-input-title">인구</h3>
+
+                        <div class="m-input m-input-text type01">
+                            <input type="number" v-model="form.population">
+                        </div>
+
+                        <div class="m-input-error" v-if="errors.population">{{errors.population[0]}}</div>
+                    </div>
+
+                    <div class="m-input-wrap">
+                        <h3 class="m-input-title">인구밀도</h3>
+
+                        <div class="m-input m-input-text type01">
+                            <input type="text" v-model="form.population_density">
+                        </div>
+
+                        <div class="m-input-error" v-if="errors.population_density">{{errors.population_density[0]}}</div>
+                    </div>
                 </section>
 
                 <section class="section">

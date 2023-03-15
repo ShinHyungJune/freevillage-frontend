@@ -52,6 +52,63 @@
 
                             <img :src="item.img.url" alt="" v-if="item && item.img">
                         </div>
+
+                        <div class="fragment mt-40">
+                            <div class="m-title type01 align-left">
+                                서정동 소개
+                            </div>
+
+<!--                            <div class="map">지도</div>-->
+
+                            <div class="mt-8"></div>
+
+                            <div class="infos">
+                                <div class="info">
+                                    <h3 class="info-title">광역자치단체:</h3>
+                                    <p class="info-body">경기도</p>
+                                </div>
+
+                                <div class="info">
+                                    <h3 class="info-title">기초자치단체:</h3>
+                                    <p class="info-body">평택시</p>
+                                </div>
+                            </div>
+
+                            <div class="infos">
+                                <div class="info">
+                                    <h3 class="info-title">행정표준코드:</h3>
+                                    <p class="info-body">3910076</p>
+                                </div>
+
+                                <div class="info">
+                                    <h3 class="info-title">면적:</h3>
+                                    <p class="info-body">2.84km</p>
+                                </div>
+                            </div>
+
+                            <div class="infos no-flex">
+                                <div class="info">
+                                    <h3 class="info-title">관할 법정동:</h3>
+                                    <p class="info-body">{{ item.jurisdiction }}</p>
+                                </div>
+                                <div class="info">
+                                    <h3 class="info-title">행정복지센터:</h3>
+                                    <p class="info-body">{{ item.administrative_welfare_center }}</p>
+                                </div>
+                                <div class="info">
+                                    <h3 class="info-title">하위 행정구역:</h3>
+                                    <p class="info-body">{{ item.subdivision_administrative_district }}</p>
+                                </div>
+                                <div class="info">
+                                    <h3 class="info-title">인구:</h3>
+                                    <p class="info-body">{{ item.population }}</p>
+                                </div>
+                                <div class="info">
+                                    <h3 class="info-title">인구밀도:</h3>
+                                    <p class="info-body">{{ item.population_density }}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="m-empty type01" v-else>준비중입니다.</div>
 
