@@ -82,34 +82,36 @@
                             <div class="fragment fragment-board">
                                 <h3 class="title">대표발의 의안</h3>
 
-                                <div class="boards">
+                                <div class="boards" v-if="proposals.length > 0">
                                     <template v-for="item in proposals">
-                                        <a :href="item.DETAIL_LINK" class="board" :key="item.BILL_ID">
+                                        <a :href="item.DETAIL_LINK" target="blank"  :key="item.BILL_ID" class="board" >
                                             <h3 class="title">{{item.BILL_NAME}}</h3>
                                             <p class="sub">{{item.PROPOSE_DT}}</p>
                                         </a>
                                     </template>
                                 </div>
+                                <div class="boards" v-if="proposals.length == 0">
+                                    <div class="m-empty type01">
+                                        데이터가 없습니다.
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="fragment fragment-board">
-                                <h3 class="title">발언 영상 (퍼블만 잡혀있음)</h3>
+                                <h3 class="title">발언 영상</h3>
 
-                                <div class="boards">
-                                    <a href="#" class="board">
-                                        <h3 class="title">사회보장급여의 이용제공 및 수정사항 진행</h3>
-                                        <p class="sub">2023-02-03</p>
-                                    </a>
-
-                                    <a href="#" class="board">
-                                        <h3 class="title">사회보장급여의 이용제공 및 수정사항 진행</h3>
-                                        <p class="sub">2023-02-03</p>
-                                    </a>
-
-                                    <a href="#" class="board">
-                                        <h3 class="title">사회보장급여의 이용제공 및 수정사항 진행</h3>
-                                        <p class="sub">2023-02-03</p>
-                                    </a>
+                                <div class="boards" v-if="speeches.length > 0">
+                                    <template v-for="item in speeches">
+                                        <a :href="item.LINK_URL" target="blank" :key="item.CT2" class="board">
+                                            <h3 class="title">{{item.TITLE}}</h3>
+                                            <p class="sub">{{item.TAKING_DATE}}</p>
+                                        </a>
+                                    </template>    
+                                </div>
+                                <div class="boards" v-if="speeches.length == 0">
+                                    <div class="m-empty type01">
+                                        데이터가 없습니다.
+                                    </div>
                                 </div>
                             </div>
 
@@ -146,7 +148,7 @@ export default {
             item: null,
             temp: null,
             proposals:[],
-
+            speeches:[],
             errors: {},
 
         }
@@ -157,27 +159,31 @@ export default {
                 const response = await this.$axios.get(`/districts/${this.$store.state.district.id}/contacts`)
                 if(response) {
                     this.temp = response.data.data;
-                    await this.nprlapfmaufmqytet();
-                    await this.nzmimeepazxkubdpn();
+                    await this.nprlapfmaufmqytet(this.temp.korean_name); //의원 약력 등 정보
+                    await this.nzmimeepazxkubdpn(this.temp.korean_name); //의원 대표발의 법안
+                    await this.npeslxqbanwkimebr(this.temp.korean_name); //의원 발언 영상
                 }
                     
             } catch (error) {
                 console.error(error);
             }
         },
-        async nprlapfmaufmqytet() {
+        /**
+         * 의원 약력 등 추가 정보
+         */
+        async nprlapfmaufmqytet(name) {
             try {
                 const {data} = await this.$axios.get(`https://open.assembly.go.kr/portal/openapi/nprlapfmaufmqytet`, {
                     params: {
                         DAESU: '21',
-                        NAME: this.temp.korean_name,
+                        NAME: name,
                         type: 'json',
                         key: 'e2e2ddc84af3448a85e4205a03b1bf3a'
                     }
                 })
 
                 if(data) {
-                    console.log(data.nprlapfmaufmqytet[1].row[0])
+                    // console.log(data.nprlapfmaufmqytet[1].row[0])
                     this.item = {
                         ...this.temp,
                         ...data.nprlapfmaufmqytet[1].row[0],
@@ -187,24 +193,52 @@ export default {
                 console.error(error);
             }
         },
-        async nzmimeepazxkubdpn() {
+        /**
+         * 의원 대표발의 법안
+         */
+        async nzmimeepazxkubdpn(name) {
             try {
                 const {data} = await this.$axios.get(`https://open.assembly.go.kr/portal/openapi/nzmimeepazxkubdpn`, {
                     params: {
                         age: '21',
-                        proposer: this.temp.korean_name,
+                        proposer: name,
                         type: 'json',
-                        key: 'e2e2ddc84af3448a85e4205a03b1bf3a'
+                        key: 'e2e2ddc84af3448a85e4205a03b1bf3a',
+                        pSize: 3,
                     }
                 })
                 if(data) {
-                    console.log(data.nzmimeepazxkubdpn[1].row)
-                    this.proposals = data.nzmimeepazxkubdpn[1].row.slice(0,3)
+                    // console.log(data.nzmimeepazxkubdpn[1].row)
+                    this.proposals = data.nzmimeepazxkubdpn[1].row;
                 }
             } catch (error) {
                 console.error(error);
             }
         },
+        /**
+         * 의원 발언 영상
+         */
+        async npeslxqbanwkimebr(name) {
+            try {
+                const {data} = await this.$axios.get(`https://open.assembly.go.kr/portal/openapi/npeslxqbanwkimebr`, {
+                    params: {
+                        CT1: '21',
+                        ESSENTIAL_PERSON: name,
+                        TAKING_DATE: '2023',
+                        type: 'json',
+                        key: 'e2e2ddc84af3448a85e4205a03b1bf3a',
+                        pSize: 3,
+                    }
+                })
+                if(data) {
+                    // console.log({data},3344);
+                    this.speeches =  data.npeslxqbanwkimebr[1].row;
+
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
     },
 
     computed: {
