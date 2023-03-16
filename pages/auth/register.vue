@@ -527,7 +527,7 @@ export default {
 
             this.$axios.post("/auth/register", this.form)
                 .then((response) => {
-                    alert('가입신청이 완료되었습니다.')
+                    alert('가입신청 완료되었습니다.')
                     this.$router.push("/");
                 })
                 .catch(e => {
