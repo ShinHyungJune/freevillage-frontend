@@ -611,7 +611,7 @@ export default {
         district (newCount, oldCount) {
             this.updatePosts(this.district.id);
 
-            // this.getRankings(10);
+            this.getRankings(10);
 
             if(this.district.id != 0)
                 this.$axios.get("/districts/" + this.district.id + "/register_rates")
@@ -633,7 +633,7 @@ export default {
             await this.getNoticeContents();
         }
 
-        // this.getRankings(10);
+        this.getRankings(10);
 
         if(this.district.id != 0)
             this.$axios.get("/districts/" + this.district.id + "/register_rates")

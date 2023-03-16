@@ -1,15 +1,16 @@
 import colors from 'vuetify/es5/util/colors'
 
-let baseUrl = process.env.NODE_ENV === "production" ? "https://api.jayuvillage.com" : "http://localhost:8000";
-
 export default {
-    dev: process.env.NODE_ENV !== 'production',
+    target: process.env.NODE_ENV == 'production' ? 'static' : 'server',
+    server: {
+        port: process.env.PORT, host: process.env.HOST
+    },
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
-        titleTemplate: '%s - jayuvillage',
-        title: '자유마을',
+        titleTemplate: '%s - ' + process.env.APP_NAME,
+        title: process.env.APP_NAME,
         htmlAttrs: {
-            lang: 'en'
+            lang: 'kr'
         },
         meta: [
             {charset: 'utf-8'},
@@ -63,7 +64,7 @@ export default {
         '@nuxtjs/auth-next',
     ],
     axios: {
-        baseUrl: baseUrl + "/api",
+        baseUrl: process.env.AXIOS_BASE_URL + "/api",
         credentials: true,
     },
     router: {
@@ -79,7 +80,7 @@ export default {
         strategies: {
             'laravelSanctum': {
                 provider: 'laravel/sanctum',
-                url: baseUrl,
+                url: process.env.AXIOS_BASE_URL,
                 endpoints: {
                     login: {url: '/api/auth/login'},
                     logout: {url: '/api/auth/logout'}
