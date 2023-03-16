@@ -50,6 +50,10 @@
 
                                 <div class="infos">
                                     <div class="info">
+                                        <h3 class="info-title">· 정당</h3>
+                                        <p class="info-body">{{computeDae}}</p>
+                                    </div>
+                                    <div class="info">
                                         <h3 class="info-title">· 홈페이지</h3>
                                         <p class="info-body">
                                             <a :href="homepage" target="_blank">{{item.congress_homepage}}</a>
@@ -68,7 +72,8 @@
 
                                     <div class="info">
                                         <h3 class="info-title">· 연락처</h3>
-                                        <p class="info-body">{{ item.congress_phone }}</p>
+                                        <!-- <p class="info-body">{{ item.congress_phone }}</p> -->
+                                        <a :href="`tel:${item.congress_phone}`" class="info-body">☎ {{ item.congress_phone }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -101,8 +106,8 @@
                                 <h3 class="title">발언 영상</h3>
 
                                 <div class="boards" v-if="speeches.length > 0">
-                                    <template v-for="item in speeches">
-                                        <a :href="item.LINK_URL" target="blank" :key="item.CT2" class="board">
+                                    <template v-for="(item,index) in speeches">
+                                        <a :href="item.LINK_URL" target="blank" :key="index" class="board">
                                             <h3 class="title">{{item.TITLE}}</h3>
                                             <p class="sub">{{item.TAKING_DATE}}</p>
                                         </a>
@@ -151,6 +156,24 @@ export default {
             speeches:[],
             errors: {},
 
+        }
+    },
+    computed: {
+        computeDae() {
+            let str = ['데이터가 없습니다'];
+            if(this.item.DAE) {
+                str = this.item.DAE.split(" ");
+                // console.log(str[str.length-1],444555)
+            }
+            return str[str.length-1];
+        },
+        district(){
+            return this.$store.state.district;
+        },
+
+        homepage(){
+            if(this.item && this.item.congress_homepage)
+                return this.item.congress_homepage.includes("http") ? this.item.congress_homepage : "http://" + this.item.congress_homepage;
         }
     },
     methods: {
@@ -240,18 +263,6 @@ export default {
             }
         }
     },
-
-    computed: {
-        district(){
-            return this.$store.state.district;
-        },
-
-        homepage(){
-            if(this.item && this.item.congress_homepage)
-                return this.item.congress_homepage.includes("http") ? this.item.congress_homepage : "http://" + this.item.congress_homepage;
-        }
-    },
-
     /*watch: {
         district (newData, oldData) {
             location.reload();
