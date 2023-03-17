@@ -15,7 +15,7 @@
                 <form action="" @submit.prevent="store" v-if="active">
                     <div class="m-input-withBtn type01">
                         <div class="m-input m-input-text type01">
-                            <input type="text" placeholder="댓글을 입력해주세요." v-model="form.content">
+                            <input type="text" placeholder="질문을 입력해주세요." v-model="form.content">
                         </div>
 
                         <button class="m-input-btn m-btn type02">저장</button>
