@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="wrap">
-                    <comments :commentable_id="item.id" commentable_type="qna" @removed="commentRemoved" v-if="item.id"/>
+                    <qnacomments :commentable_id="item.id" commentable_type="qna" @removed="commentRemoved" v-if="item.id"/>
                 </div>
             </div>
         </div>
