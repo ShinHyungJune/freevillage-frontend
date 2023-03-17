@@ -226,8 +226,11 @@ export default {
             this.$store.commit("changeDistrict", district);
 
             let route = this.$route.name;
-            if(route === 'infos' || route === 'staff' || route === 'contacts') {
+            if(route === 'infos' || route === 'staff' || route === 'contacts' 
+            || route === 'notices') {
                 location.href=`/${route}`;
+            }else if(route === 'index') {
+                location.href="/"
             }
 
 
