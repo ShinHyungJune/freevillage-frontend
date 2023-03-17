@@ -136,7 +136,8 @@
                             <template  v-if="$auth.user">
                                 <a href="#" :class="`link ${district.id == myDistrict.district.id ? 'active' : ''}`" v-for="myDistrict in $auth.user.my_districts" :key="myDistrict.district.id" @click.prevent="toDistrict(myDistrict.district)">{{myDistrict.district.district}}</a>
                             </template>
-                            <nuxt-link to="/myDistricts" class="link">동네 설정하기</nuxt-link>
+                            <nuxt-link to="/myDistricts" class="link">주요 동네 설정하기</nuxt-link>
+                            <a href="#" class="link" @click.prevent="activeDisSearch = true">동네 검색하기</a>
                         </div>
                     </button>
                 </div>
@@ -167,6 +168,21 @@
                 </div>
             </div>
         </div>
+        <modal
+            v-if="activeDisSearch"
+            @cancel="activeDisSearch = false"
+        >
+            <div class="m-pop-title">
+                <p class="subtitle">검색하신 마을에 방문합니다.</p>
+                <span class="point">동네 찾기</span>
+            </div>
+
+            <input-region @change="changeDistrict"/>
+
+            <div class="mt-20"></div>
+
+            <button type="button" class="m-btn type03 width-100" @click="searchDis">검색하기</button>
+        </modal>
     </div>
 
 </template>
@@ -177,6 +193,8 @@ export default {
             active: false,
             activeSidebar: false,
             activeSearch: false,
+            activeDisSearch: false,
+            searchingDistrict: {},
             form: {
                 district: "",
                 word: "",
@@ -192,6 +210,14 @@ export default {
         search() {
             window.location.href = "/posts?word=" + this.form.word;
         },
+        changeDistrict(data){
+            if(data.district)
+                this.searchingDistrict = data.district;
+        },
+        searchDis() {
+            this.activeDisSearch = false;
+            this.toDistrict(this.searchingDistrict);
+        },
 
         toDistrict(district){
             if(!this.$auth.user)
@@ -199,7 +225,13 @@ export default {
 
             this.$store.commit("changeDistrict", district);
 
-            location.href="/";
+            // this.$route.push
+            let route = this.$route.name;
+            if(route === 'index') {
+                route = ''
+            }
+            location.href=`/${route}`;
+            // location.href=`/`;
 
             this.activeSidebar = false;
         },
