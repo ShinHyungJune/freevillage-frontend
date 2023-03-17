@@ -27,7 +27,10 @@
                     <nuxt-link to="/mypage/comments" class="m-tab">내가 쓴 댓글</nuxt-link>
                 </div>-->
 
-                <div class="mt-12"></div>
+                <div class="mt-12">
+                    우측 하단 질문하기 버튼을 클릭하여 문의글을 남기세요. 
+                    <br />빠른시간내에 답변드립니다. 
+                </div>
 
                 <div class="m-boards type02">
                     <qna v-for="item in items.data" :key="item.id" :item="item" @removed="removed"/>
