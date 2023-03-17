@@ -220,18 +220,16 @@ export default {
         },
 
         toDistrict(district){
-            if(!this.$auth.user)
-                return this.$router.push("/auth/login");
+            // if(!this.$auth.user)
+            //     return this.$router.push("/auth/login");
 
             this.$store.commit("changeDistrict", district);
 
-            // this.$route.push
             let route = this.$route.name;
-            if(route === 'index') {
-                route = ''
+            if(route === 'infos' || route === 'staff' || route === 'contacts') {
+                location.href=`/${route}`;
             }
-            location.href=`/${route}`;
-            // location.href=`/`;
+
 
             this.activeSidebar = false;
         },
