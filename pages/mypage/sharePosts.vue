@@ -101,7 +101,7 @@ export default {
             if(this.items.meta.current_page <= this.items.meta.last_page){
                 this.form.page += 1;
 
-                this.$axios.get("/sharePosts", {
+                this.$axios.get("/api/sharePosts", {
                     params: this.form
                 }).then(response => {
                     this.items = {
@@ -117,7 +117,7 @@ export default {
         getItems(){
             this.form.page = 1;
 
-            this.$axios.get("/sharePosts")
+            this.$axios.get("/api/sharePosts")
                 .then(response => {
                     this.items = response.data;
                 });

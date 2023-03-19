@@ -94,7 +94,7 @@ export default {
         },
 
         remove(item){
-            this.$axios.delete("/scrapItems/" + item.id)
+            this.$axios.delete("/api/scrapItems/" + item.id)
                 .then(response => {
                     this.items.data = this.items.data.filter(itemData => item.id != itemData.id)
                 });
@@ -106,7 +106,7 @@ export default {
 
 
         getItems(){
-            this.$axios.get("/scrapItems", {
+            this.$axios.get("/api/scrapItems", {
                 params: this.form
             }).then(response => {
                 this.items = response.data;

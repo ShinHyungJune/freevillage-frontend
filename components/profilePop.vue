@@ -50,7 +50,7 @@ export default {
         async save() {
             let result = true;
 
-            await this.$axios.post("/auth/check-nickname", this.form).then((response) => {
+            await this.$axios.post("/api/auth/check-nickname", this.form).then((response) => {
                 if(!response.data.result)
                     result = false;
             });
@@ -63,7 +63,7 @@ export default {
             form.append("nickname",this.form.nickname);
           form.append("profile_photo",this.form.profile_photo);
           try {
-            const { data } = await this.$axios.post('/auth/profile', form)
+            const { data } = await this.$axios.post('/api/auth/profile', form)
             .then(response => {
                 alert(response.data.message);
                 this.$auth.setUser(response.data.data);

@@ -69,14 +69,14 @@ export default {
                 this.item.like_count += 1;
             }
 
-            this.$axios.put("/likes/comments/" + this.item.id);
+            this.$axios.put("/api/likes/comments/" + this.item.id);
         },
 
         store() {
             if(!this.$auth.user)
                 return this.$router.push("/auth/login");
 
-            this.$axios.post("/comments", this.form)
+            this.$axios.post("/api/comments", this.form)
                 .then(response => {
                     this.active = false;
 
@@ -87,7 +87,7 @@ export default {
         },
 
         remove(){
-            this.$axios.delete("/comments/" + this.item.id)
+            this.$axios.delete("/api/comments/" + this.item.id)
                 .then(response => {
                     this.item.deleted_at = true;
 

@@ -50,7 +50,7 @@ export default {
     },
 
     mounted() {
-        this.$axios.get("/scraps/" + this.$route.params.id)
+        this.$axios.get("/api/scraps/" + this.$route.params.id)
             .then(response => {
                 this.item = response.data.data;
             });

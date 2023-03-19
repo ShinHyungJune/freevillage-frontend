@@ -35,7 +35,7 @@ export default {
             window.scrollTo(0,0);
 
             if(this.$auth.user && this.$auth.user.id)
-                this.$axios.get("/users/hasNewNotice")
+                this.$axios.get("/api/users/hasNewNotice")
                     .then(response => {
                        this.$auth.setUser({
                            ...this.$auth.user,

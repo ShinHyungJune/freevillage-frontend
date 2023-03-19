@@ -89,7 +89,7 @@ export default {
             if(this.items.meta.current_page <= this.items.meta.last_page){
                 this.form.page += 1;
 
-                this.$axios.get("/myDistricts", {
+                this.$axios.get("/api/myDistricts", {
                     params: this.form
                 }).then(response => {
                     this.items = {
@@ -105,7 +105,7 @@ export default {
         getItems(){
             this.form.page = 1;
 
-            this.$axios.get("/myDistricts", {
+            this.$axios.get("/api/myDistricts", {
                 params: this.form
             }).then(response => {
                 this.items = response.data;
@@ -117,7 +117,7 @@ export default {
         },
 
         remove(item){
-            this.$axios.delete("/myDistricts/" + item.id)
+            this.$axios.delete("/api/myDistricts/" + item.id)
                 .then(response => {
                     this.$auth.fetchUser();
 
@@ -126,7 +126,7 @@ export default {
         },
 
         store(){
-            this.$axios.post("/myDistricts", this.form)
+            this.$axios.post("/api/myDistricts", this.form)
                 .then(response => {
                     this.items.data = [...this.items.data,response.data.data];
 

@@ -141,7 +141,7 @@ export default {
     },
 
     mounted() {
-            this.$axios.get(`/districts/${this.$store.state.district.id}/staff`)
+            this.$axios.get(`/api/districts/${this.$store.state.district.id}/staff`)
                 .then(response => {
                     this.items = [...response.data.data];
                 })

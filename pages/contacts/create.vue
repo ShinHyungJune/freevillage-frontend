@@ -157,7 +157,7 @@ export default {
         store() {
             let form = (new Form(this.form)).data();
 
-            this.$axios.post("/districts/" + this.form.district_id + "/contacts", form)
+            this.$axios.post("/api/districts/" + this.form.district_id + "/contacts", form)
                 .then((response) => {
                     this.items.push(response.data.data);
 
@@ -193,7 +193,7 @@ export default {
     },
 
     mounted() {
-        this.$axios.get("/districts/" + this.form.district_id + "/contacts")
+        this.$axios.get("/api/districts/" + this.form.district_id + "/contacts")
             .then(response => {
                 this.item = response.data.data;
 

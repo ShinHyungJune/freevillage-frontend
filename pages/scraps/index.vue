@@ -70,13 +70,13 @@ export default {
         },
 
         reorder(items){
-            this.$axios.post("/scrapItems/reorder", {
+            this.$axios.post("/api/scrapItems/reorder", {
                 items: items
             })
         },
 
         store(){
-            this.$axios.post("/scraps", this.form)
+            this.$axios.post("/api/scraps", this.form)
                 .then(response => {
                     this.items.data.push(response.data.data);
 
@@ -87,7 +87,7 @@ export default {
         },
 
         changeMain(){
-            this.$axios.patch("/scraps/updateUserMainScrap/" + this.form.scrap_id)
+            this.$axios.patch("/api/scraps/updateUserMainScrap/" + this.form.scrap_id)
                 .then(response => {
                     this.$auth.setUser({
                         ...this.$auth.user,

@@ -65,7 +65,7 @@ export default {
         }, */
 
         getItems(){
-            this.$axios.get(`/favorites`, {
+            this.$axios.get(`/api/favorites`, {
                 params: this.form
             }).then(response => {
                 this.items = response.data;

@@ -184,7 +184,7 @@ export default {
 
             let form = (new Form(this.form)).data();
 
-            this.$axios.post("/districts/" + this.form.district_id + "/infos", form)
+            this.$axios.post("/api/districts/" + this.form.district_id + "/infos", form)
                 .then((response) => {
                     alert("성공적으로 처리되었습니다.");
 
@@ -199,7 +199,7 @@ export default {
     },
 
     mounted() {
-        this.$axios.get(`/districts/${this.form.district_id}/infos`)
+        this.$axios.get(`/api/districts/${this.form.district_id}/infos`)
             .then(response => {
 
                 let item = response.data ? response.data.data : "";

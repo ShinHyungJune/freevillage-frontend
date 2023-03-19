@@ -55,7 +55,7 @@
 
                         <div class="fragment mt-40">
                             <div class="m-title type01 align-left">
-                                서정동 소개
+                                {{this.$store.state.district.district}} 소개
                             </div>
 
 <!--                            <div class="map">지도</div>-->
@@ -65,12 +65,12 @@
                             <div class="infos">
                                 <div class="info">
                                     <h3 class="info-title">광역자치단체:</h3>
-                                    <p class="info-body">경기도</p>
+                                    <p class="info-body">{{ item.metropolitan_government  }}</p>
                                 </div>
 
                                 <div class="info">
                                     <h3 class="info-title">기초자치단체:</h3>
-                                    <p class="info-body">평택시</p>
+                                    <p class="info-body">{{ item.local_government  }}</p>
                                 </div>
                             </div>
 
@@ -149,7 +149,7 @@ export default {
     },
     methods: {
         init(){
-            this.$axios.get(`/districts/${this.$store.state.district.id}/infos`)
+            this.$axios.get(`/api/districts/${this.$store.state.district.id}/infos`)
                 .then(response => {
                     this.item = response.data.data;
 

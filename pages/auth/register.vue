@@ -498,11 +498,11 @@ export default {
             if(!this.form.is_agree_privacy)
                 return alert("필수약관에 동의해주세요.");
 
-            // this.$axios.post("/auth/check-nickname", this.form).then((response) => {
+            // this.$axios.post("/api/auth/check-nickname", this.form).then((response) => {
             //     if(!response.data.result)
             //         return alert("금지된 이름입니다.");
 
-                this.$axios.post("/auth/register", this.form)
+                this.$axios.post("/api/auth/register", this.form)
                 .then((response) => {
                     this.login({
                         phone: this.form.phone,
@@ -525,7 +525,7 @@ export default {
             if(!this.form.is_agree_privacy)
                 return alert("필수약관에 동의해주세요.");
 
-            this.$axios.post("/auth/register", this.form)
+            this.$axios.post("/api/auth/register", this.form)
                 .then((response) => {
                     alert('가입신청 완료되었습니다.')
                     this.$router.push("/");

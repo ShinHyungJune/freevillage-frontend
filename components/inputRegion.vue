@@ -209,7 +209,7 @@ export default {
                 this.stateData = stateData;
             }
             // const data = stateData ? stateData : this.stateData
-            this.$axios.get(`/cities?state=${this.stateData}`)
+            this.$axios.get(`/api/cities?state=${this.stateData}`)
                 .then(response => {
                     this.cities = response.data;
 
@@ -230,7 +230,7 @@ export default {
             if(cityData && typeof cityData == 'string') {
                 this.cityData = cityData;
             }
-            this.$axios.get(`/districts?state=${this.stateData}&city=${this.cityData}`)
+            this.$axios.get(`/api/districts?state=${this.stateData}&city=${this.cityData}`)
                 .then(response => {
                     this.districts = response.data;
 
@@ -257,21 +257,21 @@ export default {
     },
 
     mounted() {
-        this.$axios.get("/states").then(response => {
+        this.$axios.get("/api/states").then(response => {
             this.states = response.data.sort((a,b) => {
                 return this.orders[a] - this.orders[b];
             });
         });
 
         if(this.state){
-            this.$axios.get(`/cities?state=${this.state}`)
+            this.$axios.get(`/api/cities?state=${this.state}`)
                 .then(response => {
                     this.cities = response.data;
                 });
         }
 
         if(this.city){
-            this.$axios.get(`/districts?state=${this.state}&city=${this.city}`)
+            this.$axios.get(`/api/districts?state=${this.state}&city=${this.city}`)
                 .then(response => {
                     this.districts = response.data;
                 });

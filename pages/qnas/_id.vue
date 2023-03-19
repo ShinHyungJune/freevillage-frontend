@@ -101,7 +101,7 @@ export default {
         },
 
         finish(){
-            this.$axios.patch(`/qnas/${this.item.id}/finish`)
+            this.$axios.patch(`/api/qnas/${this.item.id}/finish`)
                 .then(response => {
                     this.$router.back();
                 });
@@ -109,7 +109,7 @@ export default {
     },
 
     mounted() {
-        this.$axios.get("/qnas/" + this.$route.params.id)
+        this.$axios.get("/api/qnas/" + this.$route.params.id)
             .then(response => {
                 this.item = response.data.data;
             });

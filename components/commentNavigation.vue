@@ -64,7 +64,7 @@ export default {
             if(!this.$auth.user)
                 return this.$router.push("/auth/login");
 
-            this.$axios.post("/comments", this.form)
+            this.$axios.post("/api/comments", this.form)
                 .then(response => {
                     this.$emit("created", {
                         data:response.data.data,
