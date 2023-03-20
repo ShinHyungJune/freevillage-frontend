@@ -1,10 +1,8 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-    target: process.env.NODE_ENV == 'production' ? 'static' : 'server',
-    server: {
-        port: process.env.PORT, host: process.env.HOST
-    },
+    ssr: true,
+    dev: process.env.NODE_ENV !== 'production',
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
         titleTemplate: '%s - ' + process.env.APP_NAME,
@@ -62,10 +60,26 @@ export default {
     modules: [
         '@nuxtjs/axios',
         '@nuxtjs/auth-next',
+        '@nuxtjs/proxy',
     ],
     axios: {
-        baseUrl: process.env.AXIOS_BASE_URL + "/api",
         credentials: true,
+        proxy: true,
+        debug: process.env.NODE_ENV !== 'production',
+    },
+    proxy: {
+        '/api/': { 
+            target: process.env.AXIOS_BASE_URL,
+            changeOrigin: true,
+             },
+        '/addrlink/': {
+            target: process.env.ADDR_BASE_URL,
+            changeOrigin: true,
+        },
+        '/portal/': {
+            target: process.env.ASSEM_BASE_URL,
+            changeOrigin: true
+        }
     },
     router: {
         middleware: ['auth']
