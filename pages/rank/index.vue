@@ -47,7 +47,7 @@
                                         </h3>
                                         <p class="more">{{ rankingCount(districtRegisterCounts[1]) }}
                                             <span class="tri" v-if="rankingCount(districtRegisterCounts[1]) == 0">−</span>
-                                            <span class="tri" v-else-if="districtRegisterCounts[1].up_down === 'down'">▼</span>
+                                            <!-- <span class="tri" v-else-if="districtRegisterCounts[1].up_down === 'down'">▼</span> -->
                                             <span class="tri" v-else>▲</span>
                                         </p>
                                     </div>
@@ -70,7 +70,7 @@
                                         </h3>
                                         <p class="more">{{ rankingCount(districtRegisterCounts[0]) }}
                                             <span class="tri" v-if="rankingCount(districtRegisterCounts[0]) == 0">−</span>
-                                            <span class="tri" v-else-if="districtRegisterCounts[0].up_down === 'down'">▼</span>
+                                           <!-- <span class="tri" v-else-if="districtRegisterCounts[0].up_down === 'down'">▼</span> -->
                                             <span class="tri" v-else>▲</span>
                                         </p>
                                     </div>
@@ -92,7 +92,7 @@
                                         </h3>
                                         <p class="more">{{ rankingCount(districtRegisterCounts[2]) }}
                                             <span class="tri" v-if="rankingCount(districtRegisterCounts[2]) == 0">−</span>
-                                            <span class="tri" v-else-if="districtRegisterCounts[2].up_down === 'down'">▼</span>
+                                           <!-- <span class="tri" v-else-if="districtRegisterCounts[2].up_down === 'down'">▼</span> -->
                                             <span class="tri" v-else>▲</span>
                                         </p>
                                     </div>
@@ -119,7 +119,7 @@
                                     <td>{{index + 1}}위</td>
                                     <td>{{ districtRegisterCount.city}} {{districtRegisterCount.district}}</td>
                                         <td class="more" v-if="rankingCount(districtRegisterCount) == 0">{{rankingCount(districtRegisterCount)}} <span class="tri">−</span></td>
-                                    <td class="more down" v-else-if="districtRegisterCount.up_down === 'down'">{{rankingCount(districtRegisterCount)}} <span class="tri">▼</span></td>
+                                   <!-- <td class="more down" v-else-if="districtRegisterCount.up_down === 'down'">{{rankingCount(districtRegisterCount)}} <span class="tri">▼</span></td> -->
                                     <td class="more up" v-else>{{rankingCount(districtRegisterCount)}} <span class="tri">▲</span></td>
                                     </template>
                                 </tr>
