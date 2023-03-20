@@ -45,7 +45,7 @@ export default {
     },
     methods: {
         /*remove(){
-            this.$axios.delete("/qnas/" + this.item.id)
+            this.$axios.delete("/api/qnas/" + this.item.id)
                 .then(response => {
                     this.$emit("removed", this.item);
 

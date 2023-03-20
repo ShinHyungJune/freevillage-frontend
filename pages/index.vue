@@ -462,7 +462,7 @@ export default {
     methods: {
         async getNoticeContents() {
             try {
-                const {data} = await this.$axios.get('/banners/popups')
+                const {data} = await this.$axios.get('/api/banners/popups')
                 console.log({data});
                 if(data.banners.length) {
                     this.noticePopupContents = data.banners;
@@ -504,7 +504,7 @@ export default {
         },
 
         getRankings(count){
-            this.$axios.get(this.form.rankingUrl + "/" + count)
+            this.$axios.get('/api/' + this.form.rankingUrl + "/" + count)
                 .then(response => {
                     console.log(response.data.districtRegisterCounts);
                     this.districtRegisterCounts = response.data.districtRegisterCounts;
@@ -525,7 +525,7 @@ export default {
         },
 
         async updatePosts(districtId) {
-            this.$axios.get("/posts", {
+            this.$axios.get("/api/posts", {
                 params: {
                     board: "notices",
                     district_id: districtId
@@ -534,7 +534,7 @@ export default {
                 this.notices = response.data;
             });
 
-            this.$axios.get("/posts", {
+            this.$axios.get("/api/posts", {
                 params: {
                     board: "clips",
                     district_id: districtId,
@@ -543,7 +543,7 @@ export default {
                 this.clips = response.data;
             });
 
-            this.$axios.get("/posts", {
+            this.$axios.get("/api/posts", {
                 params: {
                     board: "photos",
                     district_id: districtId,
@@ -552,7 +552,7 @@ export default {
                 this.photos = response.data;
             });
 
-            this.$axios.get("/posts", {
+            this.$axios.get("/api/posts", {
                 params: {
                     board: "asks",
                     district_id: districtId,
@@ -614,7 +614,7 @@ export default {
             this.getRankings(10);
 
             if(this.district.id != 0)
-                this.$axios.get("/districts/" + this.district.id + "/register_rates")
+                this.$axios.get("/api/districts/" + this.district.id + "/register_rates")
                     .then(response => {
                         this.registerRates = response.data.registerRates;
                     });
@@ -636,7 +636,7 @@ export default {
         this.getRankings(10);
 
         if(this.district.id != 0)
-            this.$axios.get("/districts/" + this.district.id + "/register_rates")
+            this.$axios.get("/api/districts/" + this.district.id + "/register_rates")
                 .then(response => {
                     this.registerRates = response.data.registerRates;
                 });

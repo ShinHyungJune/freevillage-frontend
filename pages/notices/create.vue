@@ -94,7 +94,7 @@ export default {
 
             // update
             if(this.item)
-                return this.$axios.post("/notices/update/" + this.item.id, form)
+                return this.$axios.post("/api/notices/update/" + this.item.id, form)
                     .then((response) => {
                         alert("성공적으로 처리되었습니다.");
 
@@ -106,7 +106,7 @@ export default {
                     });
 
             // store
-            this.$axios.post("/notices", form)
+            this.$axios.post("/api/notices", form)
                 .then((response) => {
                     alert("성공적으로 처리되었습니다.");
 
@@ -121,7 +121,7 @@ export default {
 
     mounted() {
         if(this.$route.query.id){
-            this.$axios.get("/notices/" + this.$route.query.id)
+            this.$axios.get("/api/notices/" + this.$route.query.id)
                 .then(response => {
                     this.item = response.data.data;
 

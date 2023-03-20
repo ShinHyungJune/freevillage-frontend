@@ -88,7 +88,7 @@ export default {
             let form = (new Form(this.form)).data();
 
             if(this.item)
-                return this.$axios.post("/qnas/update/" + this.item.id, form)
+                return this.$axios.post("/api/qnas/update/" + this.item.id, form)
                     .then((response) => {
                         alert("성공적으로 처리되었습니다.");
 
@@ -100,7 +100,7 @@ export default {
                     });
 
             // store
-            this.$axios.post("/qnas", form)
+            this.$axios.post("/api/qnas", form)
                 .then((response) => {
                     alert("성공적으로 처리되었습니다.");
 
@@ -137,7 +137,7 @@ export default {
 
     mounted() {
         if(this.$route.query.id){
-            this.$axios.get("/qnas/" + this.$route.query.id)
+            this.$axios.get("/api/qnas/" + this.$route.query.id)
                 .then(response => {
                     this.item = response.data.data;
 

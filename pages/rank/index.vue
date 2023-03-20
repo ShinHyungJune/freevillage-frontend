@@ -183,7 +183,7 @@ export default {
         },
 
         getRankings(count){
-            this.$axios.get(this.form.rankingUrl + "/100")
+            this.$axios.get("/api/" + this.form.rankingUrl + "/100")
                 .then(response => {
                     console.log(response.data.districtRegisterCounts);
                     this.districtRegisterCounts = response.data.districtRegisterCounts;
@@ -216,7 +216,7 @@ export default {
             this.getRankings(100);
 
             if(this.district.id != 0)
-                this.$axios.get("/districts/" + this.district.id + "/register_rates")
+                this.$axios.get("/api/districts/" + this.district.id + "/register_rates")
                     .then(response => {
                         this.registerRates = response.data.registerRates;
                     });
@@ -232,7 +232,7 @@ export default {
         this.getRankings(100);
 
         if(this.district.id != 0)
-            this.$axios.get("/districts/" + this.district.id + "/register_rates")
+            this.$axios.get("/api/districts/" + this.district.id + "/register_rates")
                 .then(response => {
                     this.registerRates = response.data.registerRates;
                 });

@@ -93,7 +93,7 @@ export default {
             if(this.items.meta.current_page <= this.items.meta.last_page){
                 this.form.page += 1;
 
-                this.$axios.get("/notices", {
+                this.$axios.get("/api/notices", {
                     params: this.form
                 }).then(response => {
                     this.items = {
@@ -109,7 +109,7 @@ export default {
         getItems(){
             this.form.page = 1;
 
-            this.$axios.get("/notices", {
+            this.$axios.get("/api/notices", {
                 params: this.form
             }).then(response => {
                 this.items = response.data;
@@ -139,7 +139,7 @@ export default {
         this.getItems();
 
         if(this.$auth.user) {
-            this.$axios.patch("/users/readNotice");
+            this.$axios.patch("/api/users/readNotice");
             this.$auth.setUser({
                 ...this.$auth.user,
                 has_new_notice: 0

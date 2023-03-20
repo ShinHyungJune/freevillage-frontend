@@ -63,7 +63,7 @@ export default {
         },
 
         remove(){
-            this.$axios.delete("/users")
+            this.$axios.delete("/api/users")
                 .then(response => {
                     this.$emit("close");
                     this.$auth.setUser(null);

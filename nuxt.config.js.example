@@ -63,10 +63,26 @@ export default {
     modules: [
         '@nuxtjs/axios',
         '@nuxtjs/auth-next',
+        '@nuxtjs/proxy',
     ],
     axios: {
-        baseUrl: process.env.AXIOS_BASE_URL + "/api",
         credentials: true,
+        proxy: true,
+        debug: process.env.NODE_ENV !== 'production',
+    },
+    proxy: {
+        '/api/': { 
+            target: process.env.AXIOS_BASE_URL,
+            changeOrigin: true,
+             },
+        '/addrlink/': {
+            target: process.env.ADDR_BASE_URL,
+            changeOrigin: true,
+        },
+        '/portal/': {
+                target: process.env.ASSEM_BASE_URL,
+                changeOrigin: true
+        }
     },
     router: {
         middleware: ['auth']

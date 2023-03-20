@@ -50,7 +50,7 @@ export default {
             if(!this.form.scrap_id)
                 return alert("지갑을 선택해주세요.");
 
-            this.$axios.post(`/scrapItems`, this.form)
+            this.$axios.post(`/api/scrapItems`, this.form)
                 .then(response => {
                     alert(response.data.message);
 
@@ -67,7 +67,7 @@ export default {
 
 
         getItems(){
-            this.$axios.get("/scraps")
+            this.$axios.get("/api/scraps")
                 .then(response => {
                     this.items = response.data;
 

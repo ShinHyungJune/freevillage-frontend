@@ -54,7 +54,7 @@ export default {
             if(!this.form.reason_id)
                 return alert("사유를 선택해주세요.");
 
-            this.$axios.post(`/spam/${this.target_model}/${this.target_id}`, this.form)
+            this.$axios.post(`/api/spam/${this.target_model}/${this.target_id}`, this.form)
                 .then(response => {
                     alert(response.data.message);
 
@@ -71,7 +71,7 @@ export default {
 
 
         getItems(){
-            this.$axios.get("/spam/init")
+            this.$axios.get("/api/spam/init")
                 .then(response => {
                     this.items.data = response.data.reasonItems;
             });

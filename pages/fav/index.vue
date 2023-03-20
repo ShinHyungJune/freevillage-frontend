@@ -55,7 +55,7 @@ export default {
           if(this.items.meta.current_page <= this.items.meta.last_page){
               this.form.page += 1;
 
-              this.$axios.get("/posts", {
+              this.$axios.get("/api/posts", {
                   params: this.form
               }).then(response => {
                   this.items = {
@@ -71,7 +71,7 @@ export default {
       getItems(){
           this.form.page = 1;
 
-          this.$axios.get("/posts", {
+          this.$axios.get("/api/posts", {
               params: this.form
           }).then(response => {
               this.items = response.data;
@@ -102,7 +102,7 @@ export default {
               return itemData;
           });
 
-          this.$axios.put("/likes/posts/" + item.id);
+          this.$axios.put("/api/likes/posts/" + item.id);
       },
   },
   computed: {

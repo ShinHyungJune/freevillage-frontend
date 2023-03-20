@@ -112,7 +112,7 @@ export default {
 
     mounted() {
 
-        this.$axios.get("/notices/" + this.$route.params.id)
+        this.$axios.get("/api/notices/" + this.$route.params.id)
             .then(response => {
                 this.item = response.data.data;
             });

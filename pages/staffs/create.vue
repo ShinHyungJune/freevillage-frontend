@@ -215,7 +215,7 @@ export default {
         async updateItem() {
             try {
                 let form = (new Form(this.form).data());
-                const {data} = await this.$axios.post(`/districts/${this.form.district_id}/staff/update/${this.form.id}`, form);
+                const {data} = await this.$axios.post(`/api/districts/${this.form.district_id}/staff/update/${this.form.id}`, form);
                 const targetIdx = await this.items.findIndex(item => item.id === this.form.id);
                 if(data.result) {
                     this.items.splice(targetIdx,1,this.form);
@@ -233,7 +233,7 @@ export default {
 
             let form = (new Form(this.form)).data();
 
-            this.$axios.post("/districts/" + this.form.district_id + "/staff", form)
+            this.$axios.post("/api/districts/" + this.form.district_id + "/staff", form)
                 .then((response) => {
                     let {data} = response.data;
                     if(data.img === "") {
@@ -254,7 +254,7 @@ export default {
 
         remove(item){
             if(Object.keys(item).length !== 0) {
-                this.$axios.delete("/districts/" + this.form.district_id + "/staff/" + item.id)
+                this.$axios.delete("/api/districts/" + this.form.district_id + "/staff/" + item.id)
                     .then(response => {
                         this.items = this.items.filter(itemData => itemData.id != item.id);
                     });
@@ -293,7 +293,7 @@ export default {
     },
 
     mounted() {
-        this.$axios.get("/districts/" + this.form.district_id + "/staff")
+        this.$axios.get("/api/districts/" + this.form.district_id + "/staff")
             .then(response => {
                 this.items = [...response.data.data];
             });

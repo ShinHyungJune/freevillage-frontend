@@ -63,7 +63,7 @@ export default {
     },
     methods: {
         remove(){
-            this.$axios.delete("/comments/" + this.item.id)
+            this.$axios.delete("/api/comments/" + this.item.id)
                 .then(response => {
                     this.$emit("removed", this.item);
 

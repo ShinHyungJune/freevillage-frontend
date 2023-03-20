@@ -182,11 +182,11 @@
 
                         <!-- 마을소식, 포토, 영상, 질문 등 -->
                         <div v-else>
-                            <!-- <div class="m-ratioBox-wrap m-video type01 mb-8" v-if="item.video_url">
+                            <div class="m-ratioBox-wrap m-video type01 mb-8" v-if="item.video_url">
                                 <div class="m-ratioBox">
                                     <iframe :src="item.video_url" allowfullscreen></iframe>
                                 </div>
-                            </div> -->
+                            </div>
 
                             <div class="editor-body" v-html="item.content"></div>
                         </div>
@@ -279,14 +279,14 @@ export default {
     methods: {
         ...mapActions(['CLEAR_POST_STATE']),
         storeScrap() {
-            this.$axios.post(`/scrapItems`, this.form)
+            this.$axios.post(`/api/scrapItems`, this.form)
                 .then(response => {
                     this.activeScrapPop = true;
                 });
         },
 
         remove(){
-            this.$axios.delete("/posts/" + this.item.id)
+            this.$axios.delete("/api/posts/" + this.item.id)
                 .then(response => {
                     this.$router.back();
                 });
@@ -307,7 +307,7 @@ export default {
                 this.item.like_count += 1;
             }
 
-            this.$axios.put("/likes/posts/" + this.item.id);
+            this.$axios.put("/api/likes/posts/" + this.item.id);
         },
         calculateCommentCount(type) {
             if(type == 'add')
@@ -317,7 +317,7 @@ export default {
         },
 
         participate(){
-            this.$axios.post("/participants", {
+            this.$axios.post("/api/participants", {
                 post_id: this.item.id
             }).then(response => {
                 alert(response.data.message);
@@ -327,7 +327,7 @@ export default {
         },
 
         unparticipate(){
-            this.$axios.delete("/participants", {
+            this.$axios.delete("/api/participants", {
                 params: {
                     post_id: this.item.id
                 }
@@ -380,7 +380,7 @@ export default {
 
         let kakaoHelper = new KakaoHelper(Kakao);
 
-        this.$axios.get("/posts/" + this.$route.params.id)
+        this.$axios.get("/api/posts/" + this.$route.params.id)
             .then(response => {
                 this.item = response.data.data;
 

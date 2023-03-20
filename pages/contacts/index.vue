@@ -43,6 +43,7 @@
                             <div class="box-name">
                                 <p class="name">{{ item.korean_name }} ({{item.NAME_HAN}}) </p>
                                <!-- <p class="sub"><span class="point">KANG GIYUN</span> 1960-06-04</p> -->
+                               <p class="info-body"><span style="color: red">국회의원의 추가정보 업데이트 될 예정입니다.</span></p>
                             </div>
 
                             <div class="fragment">
@@ -51,7 +52,8 @@
                                 <div class="infos">
                                     <div class="info">
                                         <h3 class="info-title">· 정당</h3>
-                                        <p class="info-body">{{computeDae}}</p>
+                                        <p class="info-body">업데이트될 예정</p>
+                                       <!-- <p class="info-body">{{computeDae}}</p> -->
                                     </div>
                                     <div class="info">
                                         <h3 class="info-title">· 홈페이지</h3>
@@ -179,7 +181,7 @@ export default {
     methods: {
         async init(){
             try {
-                const response = await this.$axios.get(`/districts/${this.$store.state.district.id}/contacts`)
+                const response = await this.$axios.get(`/api/districts/${this.$store.state.district.id}/contacts`)
                 if(response) {
                     this.temp = response.data.data;
                     await this.nprlapfmaufmqytet(this.temp.korean_name); //의원 약력 등 정보
@@ -196,7 +198,7 @@ export default {
          */
         async nprlapfmaufmqytet(name) {
             try {
-                const {data} = await this.$axios.get(`https://open.assembly.go.kr/portal/openapi/nprlapfmaufmqytet`, {
+                const {data} = await this.$axios.get(`/portal/openapi/nprlapfmaufmqytet`, {
                     params: {
                         DAESU: '21',
                         NAME: name,
@@ -221,7 +223,7 @@ export default {
          */
         async nzmimeepazxkubdpn(name) {
             try {
-                const {data} = await this.$axios.get(`https://open.assembly.go.kr/portal/openapi/nzmimeepazxkubdpn`, {
+                const {data} = await this.$axios.get(`/portal/openapi/nzmimeepazxkubdpn`, {
                     params: {
                         age: '21',
                         proposer: name,
@@ -243,7 +245,7 @@ export default {
          */
         async npeslxqbanwkimebr(name) {
             try {
-                const {data} = await this.$axios.get(`https://open.assembly.go.kr/portal/openapi/npeslxqbanwkimebr`, {
+                const {data} = await this.$axios.get(`/portal/openapi/npeslxqbanwkimebr`, {
                     params: {
                         CT1: '21',
                         ESSENTIAL_PERSON: name,

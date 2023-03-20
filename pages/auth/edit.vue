@@ -129,7 +129,7 @@ export default {
     },
     methods: {
         update() {
-            this.$axios.put("/users", this.form)
+            this.$axios.put("/api/users", this.form)
                 .then((response) => {
                     this.$auth.setUser(response.data.data);
 
