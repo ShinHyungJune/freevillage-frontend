@@ -9,7 +9,7 @@
             <div class="mt-32"></div>
 
             <!-- 나의 마을 찾기 팝업 -->
-            <div class="m-pop type01" id="pop1" v-if="active">
+            <div class="m-pop type01" id="pop1" v-if="active" @click.stop="handleBackdropClick($event, 'm-pop type01')">
                 <div class="m-pop-inner">
                     <button class="btn-close m-script-pop" data-target="#pop1" @click="active = false">
                         <img src="/images/x.png" alt="" style="width:21px;">
@@ -60,11 +60,13 @@
 </template>
 
 <script>
+import common from '../../utils/common'
 
 import InputRegion from "../../components/inputRegion";
 export default {
     components: {InputRegion},
     auth: true,
+    mixins: [common],
     data() {
         return {
             form: {

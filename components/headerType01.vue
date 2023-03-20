@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- 사이드바 -->
-        <div class="m-sidebar type01" v-if="activeSidebar">
+        <div class="m-sidebar type01" v-if="activeSidebar" @click.stop="handleBackdropClick($event,'m-sidebar type01')">
             <div class="m-sidebar-inner">
                 <div class="top">
                     <button class="btn-close" @click="activeSidebar = false">
@@ -25,7 +25,7 @@
                             <h3 class="title">홈</h3>
                         </a>
 
-                        <a href="#" class="link" @click.prevent="toDistrict($auth.user.district)">
+                        <a href="#" class="link" @click.prevent="sideMenuToDistrict($auth.user.district)">
                             <div class="img-wrap">
                                 <img src="/images/circleMen.png" alt="" class="filter-white" style="width:30px;">
                             </div>
@@ -187,7 +187,9 @@
 
 </template>
 <script>
+import common from '../utils/common'
 export default {
+    mixins: [common],
     data() {
         return {
             active: false,
@@ -203,6 +205,11 @@ export default {
     },
 
     methods: {
+        // handleBackdropClick(e) {
+        //     console.log(e.srcElement._prevClass,33223)
+        //     if(e.srcElement._prevClass === 'm-sidebar type01')
+        //         this.activeSidebar = false;
+        // },
         scrollTop() {
             window.scrollTo(0, 0);
         },
@@ -235,6 +242,11 @@ export default {
 
 
             this.activeSidebar = false;
+        },
+        sideMenuToDistrict(district) {
+            this.$store.commit("changeDistrict", district);
+            location.href="/"
+
         },
 
         toMain(){

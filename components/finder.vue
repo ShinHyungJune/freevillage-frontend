@@ -1,5 +1,5 @@
 <template>
-  <div class="m-pop type01">
+  <div class="m-pop type01" @click.stop="handleBackdropClick($event, 'm-pop type01')">
     <div class="m-pop-inner">
       <button class="btn-close" @click.prevent="emitEvent('cancel')">
         <img src="/images/x.png" alt="" style="width:21px;">
@@ -8,7 +8,7 @@
       <div class="mt-8"></div>
       <div class="m-board-btns mt-20">
         <div class="m-input m-input-text type01">
-            <input type="text" placeholder="주소를 입력해주세요" :disabled="searchComplete" v-model="keyword">
+            <input type="text" placeholder="주소를 입력해주세요" :disabled="searchComplete" v-model="keyword" @keyup.enter="trans">
         </div>
         <div class="mt-16"></div>
         <div class="m-btns type01">
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import common from '../utils/common'
 export default {
   props: {
     title: {
@@ -48,6 +49,7 @@ export default {
       default: () => {}
     }
   },
+  mixins: [common],
   data() {
     return {
       keyword: "",
@@ -130,6 +132,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+input:disabled {
+  -webkit-text-fill-color: #000;
+  opacity: 1; /* required on iOS */
+}
 </style>

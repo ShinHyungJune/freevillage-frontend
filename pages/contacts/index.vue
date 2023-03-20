@@ -42,8 +42,7 @@
 
                             <div class="box-name">
                                 <p class="name">{{ item.korean_name }} ({{item.NAME_HAN}}) </p>
-                               <!-- <p class="sub"><span class="point">KANG GIYUN</span> 1960-06-04</p> -->
-                               <p class="info-body"><span style="color: red">국회의원의 추가정보 업데이트 될 예정입니다.</span></p>
+                               <!-- <p class="info-body"><span style="color: red">국회의원의 추가정보 업데이트 될 예정입니다.</span></p> -->
                             </div>
 
                             <div class="fragment">
@@ -52,8 +51,8 @@
                                 <div class="infos">
                                     <div class="info">
                                         <h3 class="info-title">· 정당</h3>
-                                        <p class="info-body">업데이트될 예정</p>
-                                       <!-- <p class="info-body">{{computeDae}}</p> -->
+                                        <!-- <p class="info-body">업데이트될 예정</p> -->
+                                       <p class="info-body">{{computeDae}}</p>
                                     </div>
                                     <div class="info">
                                         <h3 class="info-title">· 홈페이지</h3>
@@ -165,9 +164,16 @@ export default {
             let str = ['데이터가 없습니다'];
             if(this.item.DAE) {
                 str = this.item.DAE.split(" ");
-                // console.log(str[str.length-1],444555)
+                let partyName = str[str.length-1].trim();
+                if(partyName === '미래통합당') {
+                    partyName = '국민의힘';
+                }
+                // console.log(partyName,5655555555)
+                return partyName;
+            }else {
+                return str[0];
             }
-            return str[str.length-1];
+            
         },
         district(){
             return this.$store.state.district;

@@ -375,9 +375,9 @@
 
                         <p class="m-input-error" v-if="errors.district_id" v-text="errors.district_id[0]"></p>
 
-                      <!-- <div class="mt-8">
-                            <span style="color: red">*</span>행정동을 모르실 경우 찾기 버튼을 누르세요.  <button style="color: #0f38bd;" v-touch:tap="active">찾기</button>
-                        </div> -->
+                      <div class="mt-8">
+                            <span style="color: red">*</span>행정동을 모르실 경우 찾기 버튼을 누르세요.  <button style="color: #0f38bd;" v-touch:tap="openFinder">찾기</button>
+                        </div>
                     </div>
 
                     <div class="mt-16"></div>
@@ -447,18 +447,27 @@
                 </div>
             </div>
         </div>
-
+        <Finder
+            v-if="activeFinder"
+            :title="'주소로 행정동 찾기'"
+            :excecute="'변환하기'"
+            :cancel="'검색하기'"
+            @cancel="closeFinder"
+            @setContainer="setContainer"
+        />
        
     </div>
 
 </template>
 
 <script>
+import common from '../../utils/common'
 import InputRegion from "~/components/inputRegion";
 
 export default {
     components: {InputRegion},
     auth: 'guest',
+    mixins:[common],
     data() {
         return {
             activeFinder:false,
@@ -481,7 +490,7 @@ export default {
         }
     },
     methods: {
-        active() {
+        openFinder() {
             this.activeFinder = true;
         },
         closeFinder() {
@@ -495,6 +504,9 @@ export default {
             this.form.district_id = data.district_id
         },
         register() {
+            if(!this.validateDate(this.form.birth)) {
+                return alert('생년월일을 올바르게 입력해주세요.')
+            }
             if(!this.form.is_agree_privacy)
                 return alert("필수약관에 동의해주세요.");
 
@@ -522,6 +534,9 @@ export default {
 
         },
         helpRegister() {
+            if(!this.validateDate(this.form.birth)) {
+                return alert('생년월일을 올바르게 입력해주세요.')
+            }
             if(!this.form.is_agree_privacy)
                 return alert("필수약관에 동의해주세요.");
 

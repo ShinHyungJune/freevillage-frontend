@@ -79,7 +79,7 @@
 
                             <div class="m-board-content">
                                 <h3 class="title"><span :class="`point ${item.can_participate ? 'active' : ''}`" v-if="item.board === 'meetings'">[{{item.can_participate ? '모집중' : '모집마감'}}]</span> {{ item.title }}</h3>
-                                <p class="body" v-if="item.content">{{item.content.replace(/<\/?[^>]+>/ig, " ").replace(/&\s?nbsp;/ig, " ")}}</p>
+                                <p class="body" v-if="item.content">{{replaceContent(item.content)}}</p>
                                 <div class="m-thumbnail type01 mt-8" :style="`background-image:url(${item.img.preview_url})`" v-if="item.img">
                                     <div class="m-thumbnail-base" v-if="item.board === 'clips'">
                                         <img src="/images/circlePlay-white.png" alt="" class="deco" style="width:40px;">
@@ -228,6 +228,11 @@ export default {
                 this.FETCH_POST_META(data.meta);
 
             });
+        },
+
+        replaceContent(content) {
+            let replaced = content.replace(/<\/?[^>]+>/ig, " ").replace(/&\s?nbsp;/ig, " ").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g,'&');
+            return replaced;
         },
 
         move(item){

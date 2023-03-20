@@ -337,7 +337,7 @@ export default {
 
     mounted() {
         if(this.$route.query.id){
-            this.$axios.get("/posts/" + this.$route.query.id)
+            this.$axios.get("/api/posts/" + this.$route.query.id)
                 .then(response => {
                     this.item = response.data.data;
 

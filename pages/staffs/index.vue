@@ -120,11 +120,11 @@ export default {
         }
     },
 
-    // watch: {
-    //     district (newData, oldData) {
-    //         location.reload();
-    //     }
-    // },
+    watch: {
+        '$store.state.district.id'() {
+            this.init()
+        }
+    },
     methods: {
         phoneReplace(phone) {
             if(phone) {
@@ -137,15 +137,17 @@ export default {
         },
         nameReplace(name) {
             return name.slice(0,-1) + '*';
-        }
-    },
-
-    mounted() {
+        },
+        init() {
             this.$axios.get(`/api/districts/${this.$store.state.district.id}/staff`)
                 .then(response => {
                     this.items = [...response.data.data];
                 })
+        }
+    },
 
+    mounted() {
+        this.init();
     },
 }
 </script>

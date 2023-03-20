@@ -17,7 +17,6 @@
         <div class="container">
             <div class="m-center type01">
                 <div class="wrap">
-                    <form @submit.prevent="login">
                         <img src="/images/logo-big.png" alt="" class="logo" style="width:150px;">
 
                         <h3 class="title">
@@ -35,7 +34,7 @@
 
                         <div class="m-input-wrap">
                             <div class="m-input-text type01">
-                                <input type="password" placeholder="비밀번호 (초기비밀번호 : 생년월일 6자리)" v-model="form.password">
+                                <input type="password" placeholder="비밀번호 (초기비밀번호 : 생년월일 6자리)" v-model="form.password" @keyup.enter="login">
                             </div>
 
                             <p class="m-input-error" v-if="errors.password">{{ errors.password[0] }}</p>
@@ -46,12 +45,11 @@
                             <label for="agree">자동로그인</label>
                         </div>
 
-                        <button class="m-btn type02 width-100">로그인</button>
+                        <button class="m-btn type02 width-100" @click="login">로그인</button>
 
                         <div class="links">
                             <nuxt-link to="/auth/register" class="link">회원가입</nuxt-link>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
