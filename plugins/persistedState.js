@@ -4,7 +4,8 @@ import cookie from "cookie";
 
 export default ({ store, req }) => {
     createPersistedState({
-        // paths: ["*"],
+        paths: ["district"],
+        key:'vuex',
         storage: {
             getItem: (key) => {
                 if (process.server) {
