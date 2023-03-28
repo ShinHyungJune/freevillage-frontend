@@ -74,6 +74,17 @@
 
             <div v-if="$auth.hasScope('manager')">
                 <div class="menus-wrap">
+                    <h3 class="title">마을 명단</h3>
+                    <div class="menus">
+                        <div class="wrap">
+                            <nuxt-link to="/infos/namelist" class="menu">
+                                <img src="/images/board.png" alt="" class="icon" style="width:14px;">
+                                <p class="text">내 마을 명단</p>
+                            </nuxt-link>
+                        </div>
+                    </div>
+                </div>
+                <div class="menus-wrap">
                     <h3 class="title">나의 마을설정</h3>
 
                     <div class="menus">

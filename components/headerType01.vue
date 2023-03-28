@@ -131,7 +131,7 @@
                         <img src="/images/chevron-down.png" style="width:10px;" alt="" class="deco">
 
                         <div class="box-links" v-if="active">
-                            <a href="#" :class="`link ${district.id == 0 ? 'active' : ''}`" @click.prevent="toMain">자유마을 홈</a>
+                            <a href="#" :class="`link ${district.id == 0 ? 'active' : ''}`" @click.prevent="toDistrict()">자유마을 홈</a>
                             <a href="#" :class="`link ${$auth.user.district.id == district.id ? 'active' : ''}`" @click.prevent="toDistrict($auth.user.district)" v-if="$auth.user">{{$auth.user.district.district}}</a>
                             <template  v-if="$auth.user">
                                 <a href="#" :class="`link ${district.id == myDistrict.district.id ? 'active' : ''}`" v-for="myDistrict in $auth.user.my_districts" :key="myDistrict.district.id" @click.prevent="toDistrict(myDistrict.district)">{{myDistrict.district.district}}</a>
@@ -229,8 +229,16 @@ export default {
         toDistrict(district){
             // if(!this.$auth.user)
             //     return this.$router.push("/auth/login");
+            if(district) {
+                this.$store.commit("changeDistrict", district);
 
-            this.$store.commit("changeDistrict", district);
+            }else {
+                this.$store.commit("changeDistrict", {
+                    id: 0,
+                    district: "자유마을"
+                });
+            }
+
 
             let route = this.$route.name;
             if(route === 'infos' || route === 'staff' || route === 'contacts' 
