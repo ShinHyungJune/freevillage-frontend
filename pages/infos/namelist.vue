@@ -50,6 +50,11 @@ export default {
   components: {
     Name,
   },
+  middleware({store, redirect}) {
+      if(!store.$auth.hasScope('manager')) {
+        redirect('/')
+      }
+  },
   data() {
     return {
       form: {
@@ -71,7 +76,7 @@ export default {
   },
   computed: {
     total() {
-      return this.items.data.length 
+      return this.items.meta.total 
     }
   },
   methods: {
