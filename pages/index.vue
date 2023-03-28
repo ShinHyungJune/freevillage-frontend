@@ -295,7 +295,7 @@
                                 <div class="m-ratioBox" :style="`background-image:url('${notice.img.preview_url}');`"></div>
                             </div>
                             <div class="m-ratioBox-wrap" v-else>
-                                <div class="m-ratioBox" :style="`background-image:url('https://dotmzh1fysixs.cloudfront.net/1010/notice_thumbnail.jpg');`"></div>
+                                <div class="m-ratioBox" :style="{backgroundImage: `url('/images/posts/${Math.floor(Math.random() * 8) + 1}.jpg'`}"></div>
                             </div>
 
 
@@ -308,7 +308,6 @@
                     </div>
                 </div>
             </section>
-
             <section class="section-video">
                 <div class="wrap">
                     <div class="m-title type02">
