@@ -16,7 +16,6 @@
                                 <br/>대한민국을 사랑하는
                                 <br/>당신이 자유마을의 얼굴입니다!
                             </h3>
-
                             <div class="m-btns type01">
                                 <div class="m-btn-wrap">
                                     <nuxt-link to="/infos" class="m-btn type01">{{ district.district }}소개</nuxt-link>
@@ -31,7 +30,6 @@
                         </div>
                     </div>
                 </section>
-
                 <div class="mt-40"></div>
                 <section class="section-values">
                     <img src="https://dotmzh1fysixs.cloudfront.net/1018/base-town.png" alt="" class="base">
@@ -375,7 +373,7 @@
 
             <section class="section-ad2">
                 <a href="https://m.khmon.com/sign/6936" target="_blank" class="link">
-                    <img src="https://dotmzh1fysixs.cloudfront.net/1012/ad2.png" alt="">
+                    <img src="https://jayuvillage-bucket.s3.ap-northeast-2.amazonaws.com/1288/banner-3.jpg" alt="">
                 </a>
             </section>
 
