@@ -416,10 +416,10 @@
                     <div class="mt-16"></div>
 
                     <div class="m-input-wrap">
-                        <h3 class="m-input-title type01">추천인 이름 / 연락처 등록</h3>
+                        <h3 class="m-input-title type01">추천인 연락처 등록</h3>
 
                         <div class="m-input-text type01">
-                            <input type="text" placeholder="홍길동 / 01077775555" v-model="form.referrer">
+                            <input type="text" placeholder="예:01077775555" v-model="form.referrer">
                         </div>
 
                         <p class="m-input-error" v-if="errors.referrer" v-text="errors.referrer[0]"></p>
@@ -510,6 +510,8 @@ export default {
             if(!this.form.is_agree_privacy)
                 return alert("필수약관에 동의해주세요.");
 
+            if(this.form.referrer && !this.validatePhone(this.form.referrer))
+                return alert('추천인 전화 번호를 올바르게 입력해주세요. 예: 01012345678')
             // this.$axios.post("/api/auth/check-nickname", this.form).then((response) => {
             //     if(!response.data.result)
             //         return alert("금지된 이름입니다.");
@@ -539,6 +541,9 @@ export default {
             }
             if(!this.form.is_agree_privacy)
                 return alert("필수약관에 동의해주세요.");
+
+            if(this.form.referrer && !this.validatePhone(this.form.referrer))
+                return alert('추천인 전화 번호를 올바르게 입력해주세요. 예: 01012345678')
 
             this.$axios.post("/api/auth/register", this.form)
                 .then((response) => {
