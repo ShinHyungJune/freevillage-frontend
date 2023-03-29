@@ -46,7 +46,7 @@ export default {
       return true;
     },
     validatePhone(phoneNumber) {
-      return /^010\d{8}$/.test(Number(phoneNumber))
+      return /^010\d{8}$/.test(phoneNumber)
     }
   },
 }
