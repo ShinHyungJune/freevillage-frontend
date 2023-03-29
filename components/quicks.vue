@@ -1,6 +1,6 @@
 <template>
     <div class="m-quicks type01">
-        <a href="#" class="m-quick blbs orange" @click.prevent="createPost">글쓰기</a>
+        <a href="#" class="m-quick blbs orange" @click.prevent="createPost">{{btnName}}</a>
         <nuxt-link to="/auth/register" class="m-quick" v-if="!$auth.user">
             가입
             <br/>하기
@@ -19,6 +19,10 @@ export default {
             default(){
                 return "/posts/create";
             }
+        },
+        btnName: {
+            type: String,
+            defualt: ""
         }
     },
     data() {

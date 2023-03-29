@@ -136,7 +136,10 @@
               </a>
           </section>
 
-          <quicks />
+                      <quicks 
+                :createUrl="'/posts/create'"
+                :btnName="'글쓰기'"
+            />
       </div>
 
       <navigation />
