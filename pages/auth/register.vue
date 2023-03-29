@@ -355,7 +355,7 @@
                         <h3 class="m-input-title type01">생년월일</h3>
 
                         <div class="m-input-text type01">
-                            <input type="text" placeholder="6자리 숫자 입력 (660510)" v-model="form.birth">
+                            <input type="text" maxlength="6" placeholder="6자리 숫자 입력 (660510)" v-model="form.birth">
                         </div>
 
                         <p class="m-input-error" v-if="errors.birth" v-text="errors.birth[0]"></p>
@@ -386,7 +386,7 @@
                         <h3 class="m-input-title type01">연락처</h3>
 
                         <div class="m-input-text type01">
-                            <input type="text" placeholder="번호 입력(01077775555)" v-model="form.phone">
+                            <input type="text" maxlength="11" placeholder="번호 입력(01077775555)" v-model="form.phone">
                         </div>
 
                         <p class="m-input-error" v-if="errors.phone" v-text="errors.phone[0]"></p>
@@ -419,7 +419,7 @@
                         <h3 class="m-input-title type01">추천인 연락처 등록</h3>
 
                         <div class="m-input-text type01">
-                            <input type="text" placeholder="예:01077775555" v-model="form.referrer">
+                            <input type="text" maxlength="11" placeholder="예:01077775555" v-model="form.referrer">
                         </div>
 
                         <p class="m-input-error" v-if="errors.referrer" v-text="errors.referrer[0]"></p>
