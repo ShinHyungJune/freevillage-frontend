@@ -515,23 +515,23 @@ export default {
             // this.$axios.post("/api/auth/check-nickname", this.form).then((response) => {
             //     if(!response.data.result)
             //         return alert("금지된 이름입니다.");
-
-                this.$axios.post("/api/auth/register", this.form)
-                .then((response) => {
-                    this.login({
-                        phone: this.form.phone,
-                        password: this.form.birth,
-                    }, () => {
-                        this.$router.push("/auth/success");
-
-                            this.$store.commit("changeDistrict",this.$auth.user.district);
-                        });
-                    })
-                    .catch((error) => {
-                        if (error.response && error.response.data)
-                            this.errors = error.response.data.errors;
-                    });
             // });
+
+            this.$axios.post("/api/auth/register", this.form)
+            .then((response) => {
+                this.login({
+                    phone: this.form.phone,
+                    password: this.form.birth,
+                }, () => {
+                    this.$router.push("/auth/success");
+
+                        this.$store.commit("changeDistrict",this.$auth.user.district);
+                    });
+                })
+                .catch((error) => {
+                    if (error.response && error.response.data)
+                        this.errors = error.response.data.errors;
+                });
 
 
         },
