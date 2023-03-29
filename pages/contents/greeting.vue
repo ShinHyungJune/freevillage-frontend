@@ -198,7 +198,10 @@
 
         </div>
 
-        <quicks />
+                    <quicks 
+                :createUrl="'/posts/create'"
+                :btnName="'글쓰기'"
+            />
 
         <!-- 하단 네비게이션바 -->
         <navigation />

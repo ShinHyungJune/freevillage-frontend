@@ -213,6 +213,10 @@
                 </div>
                 -->
             </div>
+            <quicks 
+                :createUrl="'/qnas'"
+                :btnName="'고객센터'"
+            />
 
         </div>
 
