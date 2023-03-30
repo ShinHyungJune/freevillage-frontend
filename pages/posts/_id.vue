@@ -238,7 +238,7 @@
 
             <quicks 
                 :create-url="`/posts/create?board=${item.board}`"
-                :btnName="글쓰기"
+                :btnName="'글쓰기'"
             />
         </div>
 
