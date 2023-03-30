@@ -218,26 +218,49 @@ export default {
     },
     methods: {
         async store() {
+            // 마을모임 코드
             if(this.form.board === 'meetings' && this.parasole) {
                 const res = await fetch('/images/meetings-parasole.jpg')
                 const data = await res.blob();
                 const file = new File([data], 'parasole',{ type: 'image/jpeg'});
                 this.form.thumbnail = file;
             }
+            // 마을모임 코드 끝
+
+            //대표이미지 코드
             const editor = document.querySelector('.m-editor');
             const firstPic = editor.querySelectorAll(":scope > img")[0];
             if(!this.form.thumbnail && firstPic) { //대표이미지가 없을 경우: 에디터 내에 사진이 있을 경우 첫번째 사진정보를 this.form.thumbnail에 추가
                 const firstPicFileInfo = this.imgs.contentImgs.find(img => img.url === firstPic.src).file;
                 this.form.thumbnail = firstPicFileInfo;
             }
-            this.form.content = this.$refs.content ? this.$refs.content.innerHTML : "";
+            //대표이미지 코드 끝
 
+            //유튜브 코드
             if(this.form.video_url) {
                 let youtubeInformation = this.getYoutubeInformation(this.form.video_url);
 
                 this.form.video_url = youtubeInformation.embedUrl;
                 this.form.video_id = youtubeInformation.id;
                 this.form.video_thumbnail = youtubeInformation.thumbnail;
+            }
+            //유튜브 코드 끝
+
+            //콘텐츠 폼에 담기
+            this.form.content = this.$refs.content ? this.$refs.content.innerHTML : "";
+            //콘텐츠 폼에 담기 끝
+
+            //'마을 영상'이나 '마을 포토' 텝을 선택한 경우 이미지/영상 설정 안하면 글쓰기 블락
+            if(this.form.board === 'clips' || this.form.board === 'photos') {
+                if(!this.form.thumbnail || !this.video_thumbnail) {
+                    if(this.form.board === 'clips') {
+                        alert('영상을 등록해주세요.');
+                    }
+                    else if(this.form.board === 'photos') {
+                        alert('이미지를 등록해주세요.');
+                    }
+                    return;
+                }
             }
 
             let form = (new Form(this.form)).data();
