@@ -291,7 +291,7 @@ export default {
         remove(){
             this.$axios.delete("/api/posts/" + this.item.id)
                 .then(response => {
-                    this.$router.back();
+                    this.$router.push({name: 'posts', params: {deleted: true}});
                 });
         },
 

@@ -297,6 +297,9 @@ export default {
     async mounted() {
         if(this.postItems.length === 0) {
             await this.getItems();
+        }else if (this.$route.params.deleted) {
+            await this.getItems();
+            window.scrollTo(0,this.y)
         }else {
             window.scrollTo(0,this.y)
         }
