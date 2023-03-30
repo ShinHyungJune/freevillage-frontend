@@ -236,7 +236,10 @@
                 </div>
             </div>
 
-            <quicks :create-url="`/posts/create?board=${item.board}`"/>
+            <quicks 
+                :create-url="`/posts/create?board=${item.board}`"
+                :btnName="'글쓰기'"
+            />
         </div>
 
         <!-- 하단 네비게이션바 -->
