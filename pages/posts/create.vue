@@ -251,16 +251,13 @@ export default {
             //콘텐츠 폼에 담기 끝
 
             //'마을 영상'이나 '마을 포토' 텝을 선택한 경우 이미지/영상 설정 안하면 글쓰기 블락
-            if(this.form.board === 'clips' || this.form.board === 'photos') {
-                if(!this.form.thumbnail || !this.video_thumbnail) {
-                    if(this.form.board === 'clips') {
-                        alert('영상을 등록해주세요.');
-                    }
-                    else if(this.form.board === 'photos') {
-                        alert('이미지를 등록해주세요.');
-                    }
-                    return;
-                }
+            if(!this.form.thumbnail && this.form.board === 'photos') {
+                alert('이미지를 등록해주세요.')
+                return;
+            }
+            if(!this.form.video_thumbnail && this.form.board === 'clips') {
+                alert('영상을 등록해주세요.')
+                return;
             }
 
             let form = (new Form(this.form)).data();
