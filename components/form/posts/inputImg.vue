@@ -49,6 +49,8 @@ export default {
             let reader = new FileReader();
             let image = new Image();
 
+            console.log(file)
+            console.log(file.type)
             reader.readAsDataURL(file);
 
             reader.onload = function (readerEvent) {
