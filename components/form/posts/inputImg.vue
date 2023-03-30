@@ -44,12 +44,15 @@ export default {
 
     methods: {
         changeFile(event) {
-            let file = event.target.files[0];
+            let files = event.target.files;
+            let file = files[0];
             let self = this;
             let reader = new FileReader();
             let image = new Image();
-
-            console.log(file)
+            
+            if(files.length == 0) return;
+            
+            console.log(files)
             console.log(file.type)
             reader.readAsDataURL(file);
 
