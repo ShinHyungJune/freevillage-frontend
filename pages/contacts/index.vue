@@ -7,7 +7,7 @@
         <div class="container">
             <div class="m-visual type01">
                 <p class="subtitle">마을 소개</p>
-                <h3 class="title">{{this.$store.state.district.district}} 마을활동</h3>
+                <h3 class="title">{{this.$store.state.district.district}} 국회의원</h3>
             </div>
 
             <div class="m-tabs type01">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="m-tab-wrap">
                     <nuxt-link to="/contacts" class="m-tab active">
-                        <span class="text">마을활동</span>
+                        <span class="text">내마을 국회의원</span>
                     </nuxt-link>
                 </div>
             </div>

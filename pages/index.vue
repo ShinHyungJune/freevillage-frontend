@@ -24,7 +24,7 @@
                                     <nuxt-link to="/staffs" class="m-btn type01">임원진</nuxt-link>
                                 </div>
                                 <div class="m-btn-wrap">
-                                    <nuxt-link to="/contacts" class="m-btn type01">마을활동</nuxt-link>
+                                    <nuxt-link to="/contacts" class="m-btn type01">내마을 국회의원</nuxt-link>
                                 </div>
                             </div>
                         </div>
