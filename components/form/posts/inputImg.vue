@@ -50,6 +50,10 @@ export default {
             let reader = new FileReader();
             let image = new Image();
             
+            if (!(file instanceof Blob)) {
+                console.error('Invalid file type');
+                return;
+            }
             if(files.length == 0) return;
             
             console.log(files)
