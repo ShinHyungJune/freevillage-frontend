@@ -416,7 +416,7 @@
                     <div class="mt-16"></div>
 
                     <div class="m-input-wrap">
-                        <h3 class="m-input-title type01">추천인 연락처 등록</h3>
+                        <h3 class="m-input-title type01">추천인 연락처<span style="color: red">(숫자 11자리, 없을경우 빈칸)</span></h3>
 
                         <div class="m-input-text type01">
                             <input type="text" maxlength="11" placeholder="예:01077775555" v-model="form.referrer">
@@ -543,7 +543,7 @@ export default {
                 return alert("필수약관에 동의해주세요.");
 
             if(this.form.referrer && !this.validatePhone(this.form.referrer))
-                return alert('추천인 전화 번호를 올바르게 입력해주세요. 예: 01012345678')
+                return alert('추천인번호는 11자리로 입력해주세요. 예: 01012345678')
 
             this.$axios.post("/api/auth/register", this.form)
                 .then((response) => {
