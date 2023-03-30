@@ -57,7 +57,7 @@
                         <h3 class="m-input-title type01">연락처</h3>
 
                         <div class="m-input-text type01">
-                            <input type="text" placeholder="번호 입력(01077775555)" v-model="form.phone">
+                            <input type="text" maxlength="11" placeholder="번호 입력(01077775555)" v-model="form.phone">
                         </div>
 
                         <p class="m-input-error" v-if="errors.phone" v-text="errors.phone[0]"></p>
@@ -86,7 +86,7 @@
 
                     <div class="mt-16"></div>
 
-                    <div class="m-input-wrap">
+                    <!-- <div class="m-input-wrap">
                         <h3 class="m-input-title type01">추천인 이름 / 연락처 등록</h3>
 
                         <div class="m-input-text type01">
@@ -95,7 +95,7 @@
 
                         <p class="m-input-error" v-if="errors.referrer" v-text="errors.referrer[0]"></p>
 
-                    </div>
+                    </div> -->
 
                     <div class="mt-24"></div>
 
@@ -108,10 +108,12 @@
 </template>
 
 <script>
+import common from '../../utils/common'
 import InputRegion from "~/components/inputRegion";
 
 export default {
     components: {InputRegion},
+    mixins:[common],
     auth: true,
     data() {
         return {
@@ -121,7 +123,7 @@ export default {
                 birth: this.$auth.user.birth,
                 phone: this.$auth.user.phone,
                 gender: this.$auth.user.gender,
-                referrer: this.$auth.user.referrer,
+                // referrer: this.$auth.user.referrer,
                 district_id: this.$auth.user.district.id,
             },
             errors: {},
@@ -129,6 +131,12 @@ export default {
     },
     methods: {
         update() {
+            if(!this.validateDate(this.form.birth)) {
+                return alert('생년월일을 올바르게 입력해주세요.')
+            }
+            if(this.form.phone && !this.validatePhone(this.form.phone))
+                return alert('전화 번호를 올바르게 입력해주세요. 예: 01012345678')
+
             this.$axios.put("/api/users", this.form)
                 .then((response) => {
                     this.$auth.setUser(response.data.data);
