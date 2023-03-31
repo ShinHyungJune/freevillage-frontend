@@ -22,13 +22,15 @@
           <div class="button-container title-center-stamped" @click.once="stamp" :disabled="hasStamped" v-if="hasStamped">
             <div class="title-wrapper">
               <!-- <p class="title">출석도장찍기</p> -->
-              <button class="title">출석도장찍기 완료</button>
+              <button class="title">출석도장찍기 완료 </button>
+              <smile-gray/>
             </div>
           </div>
           <div class="button-container title-center" @click.once="stamp" :disabled="hasStamped" v-else>
             <div class="title-wrapper">
               <!-- <p class="title">출석도장찍기</p> -->
-              <button class="title">출석도장찍기</button>
+              <button class="title">출석도장찍기 </button>
+              <smile-green/>
             </div>
           </div>
           <div class="pt-40">
@@ -69,14 +71,19 @@
 export default {
   data() {
     return {
-      giftDays: [3, 7, 12, 19, 24, 28, 31],
-      stampedDays: 20,
-      stampInfo: [],
-      currentMonthLastDay: null,
-      hasStamped: false,
+      giftDays: [3, 7, 12, 19, 24, 28, 31], // 선물이 있는 날 (서버에서 받아옴)
+      stampedDays: 20, // 출석도장을 찍은 날짜들의 수   (서버에서 받아옴)
+      stampInfo: [],  // 출석도장 정보
+      currentMonthLastDay: null,  // 현재 달의 마지막 날
+      hasStamped: false, // 출석도장을 찍었는지 여부
     }
   },
   methods: {
+    /**
+     * 출석도장을 찍는다.
+     * @param {Object} item 출석도장 정보
+     * 
+     */
     stamp(item) {
       if(this.stampDisabled(item)) {
         return;
@@ -91,12 +98,22 @@ export default {
       this.makeStampInfo();
       alert('출석도장을 찍었습니다.')
     },
+    /**
+     * 출석도장을 찍을 수 있는지 여부를 반환한다.
+     * @param {Object} item 출석도장 정보
+     * @returns {Boolean} 출석도장을 찍을 수 있는지 여부
+     */
     stampDisabled(item) {
       if(item.day <= this.stampedDays) {
         return true;
       }
       return false;
     },
+
+    /**
+     * 현재 달의 마지막 날을 구한다.
+     * @returns {Number} 현재 달의 마지막 날
+     */
     getCurrentMonthLastDay() {
       const date = new Date();
       const year = date.getFullYear();
@@ -105,6 +122,10 @@ export default {
       this.currentMonthLastDay = lastDay;
     },
 
+    /**
+     * 출석도장 정보를 구한다.
+     * @returns {Array} 출석도장 정보
+     */
     makeStampInfo() {
       let i = 1;
       const stampInfo = [];
@@ -130,14 +151,30 @@ export default {
       this.stampInfo = stampInfo;
     },
 
+    /**
+     * 출석도장을 찍은 날짜들의 수보다 작거나 같은지 여부를 반환한다.
+     * @param {Object} item 출석도장 정보
+     * @returns {Boolean} 출석도장을 찍은 날짜들의 수보다 작거나 같은지 여부
+     */
     isUnderStamped(item) {
       return item.day <= this.stampedDays;
     },
 
+    /**
+     * 선물이 있는 날인지 여부를 반환한다.
+     * @param {Object} item 출석도장 정보
+     * @returns {Boolean} 선물이 있는 날인지 여부
+     */
     isGiftDay(item) {
       return this.giftDays.includes(item.day);
     },
 
+
+    /**
+     * 출석도장의 클래스를 반환한다.
+     * @param {Object} item 출석도장 정보
+     * @returns {String} 출석도장의 클래스
+     */
     getStampClass(item) {
       if(item.type === 'unstamped' || (item.type === 'gift' && !this.isUnderStamped(item)))
         return 'relative-group';
@@ -150,6 +187,7 @@ export default {
   mounted () {
     this.getCurrentMonthLastDay();
     this.makeStampInfo();
+    //TODO 서버에서 선물이 있는 날, 출석도장을 찍은 날짜들의 수를 받아온다.
   },
 }
 </script>
