@@ -23,7 +23,7 @@
                 </div>
                 <div class="m-tab-wrap">
                     <nuxt-link to="/contacts" class="m-tab">
-                        <span class="text">마을활동</span>
+                        <span class="text">내마을 국회의원</span>
                     </nuxt-link>
                 </div>
             </div>

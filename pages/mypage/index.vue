@@ -111,7 +111,7 @@
                             </nuxt-link>
                             <nuxt-link to="/contacts/create" class="menu">
                                 <img src="/images/chart.png" alt="" class="icon" style="width:14px;">
-                                <p class="text">내 마을 활동</p>
+                                <p class="text">내마을 국회의원</p>
                             </nuxt-link>
                             <nuxt-link to="/notices/create" class="menu">
                                 <img src="/images/board.png" alt="" class="icon" style="width:14px;">
@@ -257,7 +257,8 @@ export default {
     },
 
     computed: {
-        activityClass(){
+        activityClass(){            
+            
             let activityIndex = this.$auth.user.activity_index;
 
             if(activityIndex <= 10)
