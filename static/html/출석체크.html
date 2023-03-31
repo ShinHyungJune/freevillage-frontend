@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+< lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>출석체크</title>
+  <link rel="stylesheet" type="text/css" href="../css/common.css">
+  <link rel="stylesheet" type="text/css" href="../css/swiper.min.css">
+   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+  <script src="../js/jquery.js"></script>
+  <script src="../js/swiper.min.js"></script>
+  <script src="../js/common.js"></script>
+</head>
+<body>
+  <div class="app">
+    <div class="area-index">
+      <!-- 헤더영역 -->
+      <div class="m-header type01">
+        <div class="wrap">
+            <div class="selects">
+                <button class="btn-select">
+                    서정동
+
+                    <img src="../images/chevron-down.png" alt="" class="deco">
+                </button>
+            </div>
+
+            <div class="utils">
+                <button class="btn-util">
+                    <img src="../images/search.png" alt="">
+                </button>
+                <button class="btn-util">
+                    <img src="../images/bell.png" alt="">
+                </button>
+                <button class="btn-util">
+                    <img src="../images/menu.png" alt="" style='width:17px;'>
+                </button>
+            </div>
+        </div>
+      </div>
+      <div class="container">
+          <section class="section-attendance-back">
+            <div class="wrap">
+              <div class="content"></div>
+            </div>
+          </section>
+          <section class="section-attendance">
+            <div class="button-container title-center">
+              <div class="title-wrapper">
+                출석도장찍기
+                <!-- <button>출석도장찍기</button> -->
+              </div>
+            </div>
+            <div class="pt-40">
+              <div class="wrap">
+                <h3 class="title">출석 체크 미션을 완료해 보세요!</h3>
+                <div class="mt-8"></div>
+                <div class="flex-col">
+                  <div class="relative-group-temp">
+                    <img src="../images/attendance-success.png" class="stamp" alt="" srcset="">
+                  </div>
+                  <div class="relative-group-temp">
+                    <img src="../images/attendance-success.png" class="stamp" alt="" srcset="">
+                  </div>
+                  <div class="relative-group-temp">
+                    <img src="../images/attendance-success.png" class="stamp" alt="" srcset="">
+                  </div>
+                  <div class="relative-group-temp">
+                    <img src="../images/attendance-success.png" class="stamp" alt="" srcset="">
+                  </div>
+                  <div class="relative-group-temp">
+                    <img src="../images/attendance-success.png" class="stamp" alt="" srcset="">
+                  </div>
+  
+                  <div class="relative-group-temp">
+                    <img src="../images/attendance-gift.png" class="stamp" alt="" srcset="">
+                  </div>
+  
+                  <div class="relative-group">
+                    <div class="rotate">9</div> 
+                  </div>
+                  <div class="relative-group">
+                    <div class="rotate">9</div> 
+                  </div>
+                  <div class="relative-group">
+                    <div class="rotate">9</div> 
+                  </div>
+                  <div class="relative-group">
+                    <div class="rotate">9</div> 
+                  </div>
+                  <div class="relative-group">
+                    <div class="rotate">9</div> 
+                  </div>
+                  <div class="relative-group">
+                    <div class="rotate">9</div> 
+                  </div>
+                  <div class="relative-group">
+                    <div class="rotate">9</div> 
+                  </div>
+                  <div class="relative-group">
+                    <div class="rotate">9</div> 
+                  </div>
+                  <div class="relative-group">
+                    <div class="mt-12">
+                      <img src="../images/gift.png" class="stamp-gift" alt="" srcset="">  
+                    </div> 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+      </div>
+        <!-- 하단 네비게이션바 -->
+        <div class="m-navigation type01">
+          <div class="navs">
+              <div class="nav-wrap active">
+                  <a href="#" class="nav">
+                      <div class="img-wrap">
+                          <img src="../images/home.png" alt="">
+                      </div>
+
+                      <h3 class="title">홈</h3>
+                  </a>
+              </div>
+
+              <div class="nav-wrap">
+                  <a href="#" class="nav">
+                      <div class="img-wrap">
+                          <img src="../images/newspaper.png" alt="">
+                      </div>
+
+                      <h3 class="title">마을소식</h3>
+                  </a>
+              </div>
+
+              <div class="nav-wrap">
+                  <a href="#" class="nav">
+                      <div class="img-wrap">
+                          <img src="../images/location-marker.png" alt="">
+                      </div>
+
+                      <h3 class="title">내 근처</h3>
+                  </a>
+              </div>
+
+              <div class="nav-wrap">
+                  <a href="#" class="nav">
+                      <div class="img-wrap">
+                          <img src="../images/chat-alt-2.png" alt="">
+                      </div>
+
+                      <h3 class="title">채팅</h3>
+                  </a>
+              </div>
+
+              <div class="nav-wrap">
+                  <a href="#" class="nav">
+                      <div class="img-wrap">
+                          <img src="../images/user.png" alt="">
+                      </div>
+
+                      <h3 class="title">내 정보</h3>
+                  </a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</body>
+<style>
+  .pt-40 {
+  padding-top: 40px;
+}
+.container {
+  background: lightgray;
+  min-height: 100vh;
+  overflow: scroll;
+}
+.area-index .section-attendance-back .content {
+    /* padding:40px 20px 30px 20px; */
+    background:url("../images/attendance.png") no-repeat; background-size:cover; border-radius:5px;
+    text-align: center;
+    min-height: 150px;
+    max-width: 100%;
+    min-width: 300px;
+}
+
+.title-center {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.title-center .title-wrapper {
+    display:flex; align-items: center; justify-content: center;
+    height:45px; padding:0 16px;
+    font-weight:500; font-size:20px;
+    background-color:#0BAF00; color:#fff; border-radius:5px;
+    border:1px solid transparent;
+
+}
+
+.area-index .section-attendance {
+    margin:0px 15px 30px 15px;
+    background:#fff; border-radius:5px;
+    text-align: center;
+    min-height: 100vh;
+    box-shadow: 12px 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+}
+
+.section-attendance .flex-col {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.relative-group {
+  flex: 1 0 21%; /* explanation below */
+  flex:none;
+  margin: 5px;
+  background:url("../images/attendance-base.png") no-repeat; background-size:cover;
+  width:65px;
+  height:65px;
+}
+.relative-group-temp {
+  flex: 1 0 21%; /* explanation below */
+  flex:none;
+  margin: 5px;
+  width:65px;
+  height:65px;
+}
+
+.stamp {
+  position: relative;
+  width: 65px;
+  height: 65px;
+}
+
+.stamp-gift {
+  position: relative;
+  width: 40px;
+  height: 45px;
+  margin: -3px 0px 12px 0px;
+}
+.rotate {
+  position:absolute;
+  margin: 2rem;
+  transform: translate(-50%, -50%) rotate(-20deg);
+  font-size: 20px;
+  font-weight: bold;
+  opacity: 0.3;
+
+}
+</style>
+</html>

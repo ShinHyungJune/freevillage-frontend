@@ -72,6 +72,18 @@
                 </div>
             </div>
 
+            <div class="menus-wrap">
+                <div class="mt-12"></div>
+                <div class="menus">
+                    <div class="wrap">
+                        <nuxt-link to="/mypage/attendance" class="menu">
+                            <img src="/images/heart-active.png" alt="" class="icon" style="width:14px;">
+                            <p class="text">출석체크</p>
+                        </nuxt-link>
+                    </div>
+                </div>
+            </div>
+
             <div v-if="$auth.hasScope('manager')">
                 <div class="menus-wrap">
                     <h3 class="title">마을 명단</h3>
