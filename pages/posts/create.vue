@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="right">
-                    <a href="#" class="btn-text primary" @click.prevent="store">등록</a>
+                    <a href="#" class="btn-text primary" @click.prevent="debounceStore">등록</a>
                 </div>
             </div>
         </div>
@@ -176,6 +176,7 @@ import InputImg from "../../components/form/posts/inputImg";
 import InputThumbnail from "../../components/form/posts/inputThumbnail";
 import InputAddress from "../../components/form/inputAddress";
 import Form from "@/utils/Form";
+import {debounce} from "@/utils/debounce";
 export default {
     components: {InputAddress, InputThumbnail, InputImg, InputLink, InputCamera},
     auth: true,
@@ -376,7 +377,16 @@ export default {
                 });
         }
 
-    }
+    },
+    created () {
+        /**
+         * SEE : https://dmitripavlutin.com/vue-debounce-throttle/
+         * 3.A word of aution...
+         */
+        this.debounceStore = debounce(() => {
+            this.store()
+        },500);
+    },
 }
 </script>
 
