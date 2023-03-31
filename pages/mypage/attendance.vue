@@ -19,7 +19,13 @@
           </div>
         </section>
         <section class="section-attendance">
-          <div class="button-container title-center" @click.once="stamp" :disabled="hasStamped">
+          <div class="button-container title-center-stamped" @click.once="stamp" :disabled="hasStamped" v-if="hasStamped">
+            <div class="title-wrapper">
+              <!-- <p class="title">출석도장찍기</p> -->
+              <button class="title">출석도장찍기 완료</button>
+            </div>
+          </div>
+          <div class="button-container title-center" @click.once="stamp" :disabled="hasStamped" v-else>
             <div class="title-wrapper">
               <!-- <p class="title">출석도장찍기</p> -->
               <button class="title">출석도장찍기</button>
@@ -30,7 +36,7 @@
               <h3 class="title">출석 체크 미션을 완료해 보세요!</h3>
               <div class="mt-8"></div>
               <div class="flex-col">
-                <div :class="getStampClass(item)" v-for="(item, index) in stampInfo" @click.once="stamp">
+                <div :class="getStampClass(item)" v-for="(item, index) in stampInfo" :disabled="stampDisabled(item)" @click.once="stamp(item)">
                   
                   <img
                     v-if="item.type === 'stamped' && !isGiftDay(item)"
@@ -64,14 +70,17 @@ export default {
   data() {
     return {
       giftDays: [3, 7, 12, 19, 24, 28, 31],
-      stampedDays: 30,
+      stampedDays: 20,
       stampInfo: [],
       currentMonthLastDay: null,
       hasStamped: false,
     }
   },
   methods: {
-    stamp() {
+    stamp(item) {
+      if(this.stampDisabled(item)) {
+        return;
+      }
       if(this.hasStamped) {
         alert('이미 출석도장을 찍으셨습니다.')
         return;
@@ -81,6 +90,12 @@ export default {
       //axios 요청
       this.makeStampInfo();
       alert('출석도장을 찍었습니다.')
+    },
+    stampDisabled(item) {
+      if(item.day <= this.stampedDays) {
+        return true;
+      }
+      return false;
     },
     getCurrentMonthLastDay() {
       const date = new Date();
@@ -189,7 +204,7 @@ export default {
   border-radius: 10px;
 
 }
-.title-center:hover {
+.title-center-stamped {
   position: absolute;
   min-width: 300px;
   height: 50px;
@@ -199,13 +214,13 @@ export default {
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
-.title-center .title-wrapper {
+.button-container .title-wrapper {
     display:flex; align-items: center; justify-content: center;
     height:45px; padding:0 16px;
     border-radius:5px;
     border:1px solid transparent;
 }
-.title-center .title-wrapper .title {
+.button-container .title-wrapper .title {
     font-size: 20px;
     font-weight: 500;
     color: #fff;
