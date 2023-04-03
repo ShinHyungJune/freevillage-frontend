@@ -71,8 +71,9 @@
 export default {
   data() {
     return {
-      giftDays: [3, 7, 12, 19, 24, 28, 31], // 선물이 있는 날 (서버에서 받아옴)
-      stampedDays: 20, // 출석도장을 찍은 날짜들의 수   (서버에서 받아옴)
+      // giftDays: [3, 7, 12, 19, 24, 28, 31], // 선물이 있는 날 (서버에서 받아옴)
+      giftDays: [], // 선물이 있는 날 (서버에서 받아옴)
+      stampedDays: null, // 출석도장을 찍은 날짜들의 개수   (서버에서 받아옴)
       stampInfo: [],  // 출석도장 정보
       currentMonthLastDay: null,  // 현재 달의 마지막 날
       hasStamped: false, // 출석도장을 찍었는지 여부
@@ -80,11 +81,30 @@ export default {
   },
   methods: {
     /**
+     * 
+     */
+    async getStamp() {
+      // ### 도장확인
+      // GET /api/stamps
+      try {
+        const response = await this.$axios.get('/api/stamps');
+        console.log(response.data);
+        if(response.data) {
+          this.stampedDays = response.data.stampedDays;
+          this.hasStamped = response.data.hasStamped;
+          this.makeStampInfo();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    /**
      * 출석도장을 찍는다.
      * @param {Object} item 출석도장 정보
      * 
      */
-    stamp(item) {
+    async stamp(item) {
       if(this.stampDisabled(item)) {
         return;
       }
@@ -95,6 +115,16 @@ export default {
       this.hasStamped = true;
       this.stampedDays++;
       //axios 요청
+      try {
+        const response = await this.$axios.post('/api/stamps',{
+          stampedDays: this.stampedDays,
+          hasStamped: this.hasStamped,
+
+        });
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
       this.makeStampInfo();
       alert('출석도장을 찍었습니다.')
     },
@@ -184,7 +214,8 @@ export default {
     }
 
   },
-  mounted () {
+  async mounted () {
+    await this.getStamp();
     this.getCurrentMonthLastDay();
     this.makeStampInfo();
     //TODO 서버에서 선물이 있는 날, 출석도장을 찍은 날짜들의 수를 받아온다.
