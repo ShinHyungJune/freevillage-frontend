@@ -57,7 +57,7 @@
 </template>
 
 <script>
-
+import * as Cookies from 'js-cookie';
 export default {
     name: "login",
     auth: 'guest',
@@ -89,7 +89,13 @@ export default {
         }
     },
     mounted() {
+        Object.keys(Cookies.get()).forEach((cookie) => {
+            Cookies.remove(cookie);
 
+            // if (cookie.startsWith('TIARA')) {
+            //     Cookies.remove(cookie);
+            // }
+        });
 
     }
 }
