@@ -71,7 +71,7 @@
 export default {
   data() {
     return {
-      // giftDays: [3, 7, 12, 19, 24, 28, 31], // 선물이 있는 날 (서버에서 받아옴)
+      // giftDays: [3, 7, 12, 19, 24, 28,], // 선물이 있는 날 (서버에서 받아옴)
       giftDays: [], // 선물이 있는 날 (서버에서 받아옴)
       stampedDays: null, // 출석도장을 찍은 날짜들의 개수   (서버에서 받아옴)
       stampInfo: [],  // 출석도장 정보
@@ -92,6 +92,7 @@ export default {
         if(response.data) {
           this.stampedDays = response.data.stampedDays;
           this.hasStamped = response.data.hasStamped;
+          this.giftDays = response.data.giftDays.map(item => Number(item));
           this.makeStampInfo();
         }
       } catch (error) {
