@@ -5,7 +5,7 @@
 <script>
 
 export default {
-    name: "login",
+    name: "logout",
     auth: true,
     data() {
         return {
