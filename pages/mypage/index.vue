@@ -24,10 +24,32 @@
 
         <!-- 내용 영역 -->
         <div class="container">
-            <div class="mt-20"></div>
+            <div class="box-info">
+                <div class="back">
+                    <div class="m-thumbnail type03" :style="`background-image:url('${this.$auth.user.img.url}')`" v-if="this.$auth.user.img"></div>
+                    <div class="mt-16 btn-wrap">
+                        <div class="inner">
+                            <p class="btn-title">{{$auth.user.position ? $auth.user.position : '임원'}}</p>
 
+                        </div>
+                    </div>
+                    <div class="mt-8"></div>
+                    <div class="nick-wrap">
+                        <span class="nick" @click="isProfilePopActive = true">{{ this.$auth.user.nickname }}</span>
+                        <button @click="isProfilePopActive = true">
+                            <img src="/images/edit.png" alt="" class="edit">
+                        </button>
+                    </div>
+                    <div class="mt-16 btn-wrap">
+                        <div class="edit-button">
+                            <nuxt-link to="/auth/edit" class="edit-btn-title">내 정보 수정</nuxt-link>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
             <div class="wrap">
-                <div class="box-info">
+                <!-- <div class="box-info">
                     <div class="info">
                         <div class="m-thumbnail type02" :style="`background-image:url('${this.$auth.user.img.url}')`" v-if="this.$auth.user.img"></div>
                         <h3 class="title">{{ this.$auth.user.nickname }}</h3>
@@ -43,7 +65,7 @@
                             <nuxt-link to="/auth/edit" class="m-btn type03 bg-lightGray black" style="background-color:#DDDDDD !important;">내 정보 수정</nuxt-link>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="mt-20"></div>
 
@@ -299,5 +321,65 @@ export default {
 </script>
 
 <style scoped>
+.m-thumbnail.type03 {
+    content:"";
+    width:75px; height:75px;
+    position:relative;
+    background-size:cover; background-position:center; border-radius:100%;
+    overflow:hidden;
 
+}
+.area-mypage .box-info .back {
+    padding: 20px 20px 30px 20px;
+    background:url("/images/profile-back.png") no-repeat; background-size:cover;
+    display:flex; align-items: center; justify-content: center;
+    flex-direction: column;
+}
+.btn-wrap {
+  /* div center */
+  position: relative;
+  display: inline-block;
+}
+.btn-wrap .inner {
+  min-width: 10%;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 24px;
+  background: #ffde00;
+  border-radius: 20px;
+}
+.btn-wrap .edit-button {
+  min-width: 20%;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 45px;
+  background: #88a0a3;
+  border-radius: 5px;
+}
+.btn-wrap .btn-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 400;
+  color: #000;
+}
+.btn-wrap .edit-btn-title {
+  padding-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 400;
+  color: #fff;
+}
+.nick-wrap .nick {
+    font-size: 25px;
+    font-weight: 500;
+    color: #000;
+}
+.nick-wrap .edit {
+    width: 20px;
+    height: 20px;
+}
 </style>
