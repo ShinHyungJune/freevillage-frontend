@@ -426,6 +426,25 @@ export default {
     components: {
         VueperSlides,VueperSlide
     },
+    created() {
+
+
+        //post axios POST /api/districts/1/visit
+        if(this.district.id == 0) {
+            this.district_idx = 9999;
+        } else {
+            this.district_idx = this.district.id
+        }
+
+        this.$axios.post(`/api/districts/${this.district_idx}/visit`)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+    },  
     data() {
         return {
             notOpenChecked:false,
