@@ -125,7 +125,7 @@
 
                         <img src="/images/chevron-down.png" style="width:10px;" alt="" class="deco">
                     </button> -->
-                    <button class="btn-select point" @click="active = !active">
+                    <button class="btn-select point" @click="handleActive">
                         {{ district.id == 0 ? "자유마을" : district.district }}
 
                         <img src="/images/chevron-down.png" style="width:10px;" alt="" class="deco">
@@ -205,11 +205,10 @@ export default {
     },
 
     methods: {
-        // handleBackdropClick(e) {
-        //     console.log(e.srcElement._prevClass,33223)
-        //     if(e.srcElement._prevClass === 'm-sidebar type01')
-        //         this.activeSidebar = false;
-        // },
+        handleActive() {
+            this.active = !this.active;
+            this.activeSearch = false;
+        },
         scrollTop() {
             window.scrollTo(0, 0);
         },
