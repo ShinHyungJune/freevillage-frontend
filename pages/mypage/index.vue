@@ -331,7 +331,7 @@ export default {
 }
 .area-mypage .box-info .back {
     padding: 20px 20px 30px 20px;
-    background:url("/images/profile-back.png") no-repeat; background-size:cover;
+    background:url("/images/profile-back.jpg") no-repeat; background-size:cover;
     display:flex; align-items: center; justify-content: center;
     flex-direction: column;
 }
