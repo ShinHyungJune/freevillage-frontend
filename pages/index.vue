@@ -8,6 +8,14 @@
         <div class="container">
             <!-- 지역이 본부 x & 로그인 -->
             <div class="fragment" v-if="district && district.id != 0">
+                <section class="section-ad">
+                    <div class="wrap">
+                        <nuxt-link to="/mypage/attendance" class="link">
+                            <img src="/images/attendance-banner.png" alt="">
+                        </nuxt-link>
+                    </div>
+                </section>
+                <div class="mt-8"></div>
                 <section class="section-banner">
                     <div class="wrap">
                         <div class="content">
@@ -85,6 +93,13 @@
 
             <!-- 지역이 본부 | 비로그인 -->
             <div class="fragment" v-else>
+                <section class="section-ad">
+                    <div class="wrap">
+                        <nuxt-link to="/mypage/attendance" class="link">
+                            <img src="/images/attendance-banner.png" alt="">
+                        </nuxt-link>
+                    </div>
+                </section>
                 <section class="section-banner">
                     <div class="wrap">
                         <div class="content">

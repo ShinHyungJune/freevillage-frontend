@@ -1602,7 +1602,7 @@ html {
     content:"";
     width:100%; height:200px;
     position:relative;
-    background-size:cover; background-position:center; border-radius:5px;
+    background-size:contain; background-repeat:no-repeat; background-position:center; border-radius:5px;
     overflow:hidden;
 }
 .m-thumbnail.type01 .m-thumbnail-base {
