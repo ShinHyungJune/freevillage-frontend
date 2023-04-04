@@ -29,7 +29,7 @@
                     <div class="m-thumbnail type03" :style="`background-image:url('${this.$auth.user.img.url}')`" v-if="this.$auth.user.img"></div>
                     <div class="mt-16 btn-wrap">
                         <div class="inner">
-                            <p class="btn-title">{{$auth.user.position ? $auth.user.position : '임원'}}</p>
+                            <p class="btn-title">회원</p>
 
                         </div>
                     </div>
@@ -365,7 +365,7 @@ export default {
   color: #000;
 }
 .btn-wrap .edit-btn-title {
-  padding-top: 0.5rem;
+  padding-top: 0.4rem;
   display: flex;
   justify-content: center;
   align-items: center;
