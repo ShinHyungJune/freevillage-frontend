@@ -1,6 +1,24 @@
 <template>
   <div class="area-index">
-    <header-type01/>
+    <!-- <header-type01/>-->
+    <!-- 헤더영역 -->
+    <div class="m-header type02">
+        <div class="wrap">
+            <div class="left">
+                <button class="btn-util">
+                    <img src="/images/back.png" alt="" style="width:10px;" @click="$router.push('/mypage')">
+                </button>
+            </div>
+
+            <div class="center">
+                <h3 class="title">출석 체크</h3>
+            </div>
+
+            <nuxt-link to="/contents/settings" class="btn-util">
+                <img src="/images/setting.png" alt="" style="width:20px;">
+            </nuxt-link>
+        </div>
+    </div>
     <div class="container">
         <section class="section-attendance-back">
           <div class="wrap">
@@ -79,26 +97,45 @@ export default {
       hasStamped: false, // 출석도장을 찍었는지 여부
     }
   },
-  methods: {
-    /**
-     * 
-     */
-    async getStamp() {
-      // ### 도장확인
-      // GET /api/stamps
-      try {
-        const response = await this.$axios.get('/api/stamps');
-        console.log(response.data);
-        if(response.data) {
-          this.stampedDays = response.data.stampedDays;
-          this.hasStamped = response.data.hasStamped;
-          this.giftDays = response.data.giftDays.map(item => Number(item));
-          this.makeStampInfo();
+  async asyncData({ $axios }) {
+    // ### 도장확인
+    // GET /api/stamps
+    try {
+      const response = await $axios.get('/api/stamps');
+      if(response.data) {
+        return {
+          stampedDays: response.data.stampedDays,
+          hasStamped: response.data.hasStamped,
+          giftDays: response.data.giftDays.map(item => Number(item)),
         }
-      } catch (error) {
-        console.log(error);
       }
-    },
+    } catch (error) {
+      console.log(error);
+      //로드 중 문제가 발생했다 알리며 마이페이지로 라우팅
+      alert('로드 중 문제가 발생했습니다.');
+      this.$router.push('/mypage');
+    }
+  },
+  methods: {
+    // async getStamp() {
+    //   // ### 도장확인
+    //   // GET /api/stamps
+    //   try {
+    //     const response = await this.$axios.get('/api/stamps');
+    //     console.log(response.data);
+    //     if(response.data) {
+    //       this.stampedDays = response.data.stampedDays;
+    //       this.hasStamped = response.data.hasStamped;
+    //       this.giftDays = response.data.giftDays.map(item => Number(item));
+    //       this.makeStampInfo();
+    //     }
+    //   } catch (error) {
+    //     console.log(error);
+    //     //로드 중 문제가 발생했다 알리며 마이페이지로 라우팅
+    //     alert('로드 중 문제가 발생했습니다.');
+    //     this.$router.push('/mypage');
+    //   }
+    // },
 
     /**
      * 출석도장을 찍는다.
@@ -215,8 +252,8 @@ export default {
     }
 
   },
-  async mounted () {
-    await this.getStamp();
+  mounted () {
+    // await this.getStamp();
     this.getCurrentMonthLastDay();
     this.makeStampInfo();
     //TODO 서버에서 선물이 있는 날, 출석도장을 찍은 날짜들의 수를 받아온다.
