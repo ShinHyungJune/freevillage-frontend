@@ -80,7 +80,7 @@
                             <div class="m-board-content">
                                 <h3 class="title"><span :class="`point ${item.can_participate ? 'active' : ''}`" v-if="item.board === 'meetings'">[{{item.can_participate ? '모집중' : '모집마감'}}]</span> {{ item.title }}</h3>
                                 <p class="body" v-if="item.content">{{replaceContent(item.content)}}</p>
-                                <div class="m-thumbnail type01 mt-8" :style="`background-image:url(${item.img.preview_url})`" v-if="item.img">
+                                <div class="m-thumbnail type01 mt-8" :style="`background-image:url(${item.img.url})`" v-if="item.img">
                                     <div class="m-thumbnail-base" v-if="item.board === 'clips'">
                                         <img src="/images/circlePlay-white.png" alt="" class="deco" style="width:40px;">
                                     </div>
@@ -253,20 +253,24 @@ export default {
         },
 
         toggleLike(e, item){
+            let tempItem = {...item};
             e.preventDefault();
             e.stopPropagation();
-
-            if(item.is_like){
-                item.is_like = 0;
-                item.like_count -= 1;
+            if(!this.$auth.user) {
+                this.$router.push("/auth/login");
+                return;
+            }
+            if(tempItem.is_like){
+                tempItem.is_like = 0;
+                tempItem.like_count -= 1;
             }else{
-                item.is_like = 1;
-                item.like_count += 1;
+                tempItem.is_like = 1;
+                tempItem.like_count += 1;
             }
 
             this.FETCH_POST_ITEMS(this.postItems.map(itemData => {
-                if(itemData.id == item.id)
-                    return item;
+                if(itemData.id == tempItem.id)
+                    return tempItem;
                 return itemData;
             }));
             // this.items.data = this.items.data.map(itemData => {
