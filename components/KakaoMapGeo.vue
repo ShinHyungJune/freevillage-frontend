@@ -75,8 +75,8 @@ export default {
       this.setCircle(location.center, 750)
       this.displayMyPosition(location.center);
       // TODO(아래 두 줄)api문제로 주석처리
-      // const coords = await this.setBounds(this.map, this.circle);
-      // this.displayNearMarkers(coords);
+      const coords = await this.setBounds(this.map, this.circle);
+      this.displayNearMarkers(coords);
       kakao.maps.event.addListener(this.map, 'dragend', async () => {
           this.circle.setMap(null);
           this.setCircle(this.map.getCenter(), 750);
@@ -215,7 +215,7 @@ enableHighAccuracy: false,
      * 마커 별 이미지 지정
      */
     makeMarkerImage(imageUrl) {
-      const imageSrc = `${process.env.baseURL}${imageUrl}`; // 마커이미지의 주소입니다    
+      const imageSrc = `/api${imageUrl}`; // 마커이미지의 주소입니다    
       const imageSize = new kakao.maps.Size(51, 55); // 마커이미지의 크기입니다
       const imageOption = {
         offset: new kakao.maps.Point(24, 51),

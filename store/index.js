@@ -18,6 +18,8 @@ export const state = () => ({
     postCurrentY: '',
 
     //for mapView
+    coords: [],
+    currentAddr: '',
     currentStoreList: [],
 });
 
@@ -101,5 +103,8 @@ export const mutations = {
     },
     setCurrentAddr(state, addr) {
         state.currentAddr = addr;
+    },
+    setCoords(state, coords) {
+        state.coords = [...coords];
     },
 }
