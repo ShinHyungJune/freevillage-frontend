@@ -150,17 +150,22 @@ export default {
             activeLinkPop: false,
         }
     },
+    async asyncData({ $axios, store}) {
+        try {
+            const response = await $axios.get(`/api/districts/${store.state.district.id}/infos`)
+            if(response.data) {
+                return {
+                    item: response.data.data
+                }
+            }   
+        } catch (error) {
+            console.log(error);
+            //에러처리
+            //alert(에러가 발생했습니다.)
+            //기본좌표로 등록
+        }
+    },
     methods: {
-        init(){
-            this.$axios.get(`/api/districts/${this.$store.state.district.id}/infos`)
-                .then(response => {
-                    this.item = response.data.data;
-
-                    if(this.item.x && this.item.y)
-                        kakao.maps.load(this.initMap);
-                });
-        },
-
         initMap() {
             let self = this;
 
@@ -203,7 +208,8 @@ export default {
     },*/
 
     mounted() {
-        this.init();
+        if(this.item.x && this.item.y)
+            kakao.maps.load(this.initMap);
     },
 }
 </script>

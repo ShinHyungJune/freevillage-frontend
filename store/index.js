@@ -1,19 +1,24 @@
 // import {getDistrict, setDistrict} from '../utils/LocalStorage';
 
+import { fetchStores, fetchNearCoords } from '../api/index'
+
 export const state = () => ({
     district: {
         id: 0,
         district: "자유마을"
     },
-    postItems:[],
-    postLinks:{
+    postItems: [],
+    postLinks: {
         first: null,
         last: null,
-        next: null, 
+        next: null,
         prev: null
     },
-    postMeta:{},
-    postCurrentY:'',
+    postMeta: {},
+    postCurrentY: '',
+
+    //for mapView
+    currentStoreList: [],
 });
 
 export const getters = {
@@ -37,7 +42,7 @@ export const getters = {
 export const actions = {
     //TODO axios codes would be needed here
     FETCH_POST_ITEMS({ commit }, items) {
-        commit('SET_POST_ITEMS',items);
+        commit('SET_POST_ITEMS', items);
     },
     FETCH_POST_LINKS({ commit }, links) {
         commit('SET_POST_LINKS', links);
@@ -50,7 +55,16 @@ export const actions = {
     },
     CLEAR_POST_STATE({ commit }) {
         commit('INIT_POST_STATE')
-    }
+    },
+
+    async fetchCurrentStores({ commit }, payload) {
+        const { data } = await fetchStores(payload);
+        commit('setCurrentStores', data);
+    },
+    async fetchNearCoords({ commit }, payload) {
+        const { data } = await fetchNearCoords(payload.data);
+        commit('setCoords', data);
+    },
 }
 
 export const mutations = {
@@ -58,7 +72,7 @@ export const mutations = {
         state.district = data;
     },
 
-    SET_POST_ITEMS(state,items) {
+    SET_POST_ITEMS(state, items) {
         state.postItems = items;
     },
     SET_POST_LINKS(state, links) {
@@ -75,10 +89,17 @@ export const mutations = {
         state.postLinks = {
             first: null,
             last: null,
-            next: null, 
+            next: null,
             prev: null
         };
         state.postMeta = {};
         state.postCurrentY = 0;
-    }
+    },
+
+    setCurrentStores(state, stores) {
+        state.currentStoreList = stores;
+    },
+    setCurrentAddr(state, addr) {
+        state.currentAddr = addr;
+    },
 }
