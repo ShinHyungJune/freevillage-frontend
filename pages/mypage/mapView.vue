@@ -14,7 +14,7 @@
                 :lat-lng="latLng"
               />
           </div>
-        </div>
+        </div>  
       </section>
     </div>
 
@@ -37,7 +37,8 @@ export default {
     }
   },
   mounted () {
-    // test();
+    //district_id에 따라서 데이터 불러오기 /api/maps/{district_id
+
   },
   methods: {
   }
