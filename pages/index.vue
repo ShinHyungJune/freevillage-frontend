@@ -8,13 +8,13 @@
         <div class="container">
             <!-- 지역이 본부 x & 로그인 -->
             <div class="fragment" v-if="district && district.id != 0">
-                <section class="section-ad">
+               <!--  <section class="section-ad">
                     <div class="wrap">
                         <nuxt-link to="/mypage/attendance" class="link">
                             <img src="/images/attendance-banner.png" alt="">
                         </nuxt-link>
                     </div>
-                </section>
+                </section> -->
                 <div class="mt-8"></div>
                 <section class="section-banner">
                     <div class="wrap">
@@ -427,16 +427,8 @@ export default {
         VueperSlides,VueperSlide
     },
     created() {
-
-
         //post axios POST /api/districts/1/visit
-        if(this.district.id == 0) {
-            this.district_idx = 9999;
-        } else {
-            this.district_idx = this.district.id
-        }
-
-        this.$axios.post(`/api/districts/${this.district_idx}/visit`)
+        this.$axios.post(`/api/districts/${this.district.id}/visit`)
             .then((response) => {
                 console.log(response);
             })
