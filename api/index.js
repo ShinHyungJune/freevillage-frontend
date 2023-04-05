@@ -19,7 +19,7 @@ function fetchStores({ query, x, y, radius, categoryGroupCode }) {
 }
 
 function fetchNearCoords(mapInfo) {
-  return instance.get('/api/geo', {
+  return instance.get('/api/maps', {
     params: {
       nex: mapInfo.ne[0].toString(),
       ney: mapInfo.ne[1].toString(),
