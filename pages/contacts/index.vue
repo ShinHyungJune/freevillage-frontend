@@ -1,5 +1,5 @@
 <template>
-    <div class="area-region-activity">
+    <div class="area-region-activity" style="overflow:scroll">
         <!-- 헤더영역 -->
         <header-type01 />
 
@@ -39,7 +39,8 @@
                             <div class="img-wrap">
                                 <img :src="item.img.url" alt="">
                             </div>
-
+                            <button class="m-btn type02 width-100" @click="openEvaluateModal">의원 평가하기</button>
+                            <div class="mt-12"></div>
                             <div class="box-name">
                                 <p class="name">{{ item.korean_name }} ({{item.NAME_HAN}}) </p>
                                <!-- <p class="info-body"><span style="color: red">국회의원의 추가정보 업데이트 될 예정입니다.</span></p> -->
@@ -137,6 +138,66 @@
 
         <!-- 하단 네비게이션바 -->
         <navigation />
+        <modal
+            v-if="evaluatePop"
+            @cancel="closeEvaluteModal"
+        >
+            <div class="m-pop-title" style="margin-top:-40px">
+                의원 평가하기
+            </div>
+            <section class="head-wrapper">
+                <div class="img-container">
+                    <div class="crop-image" :style="`background-image:url('${item.img.url}')`"></div>
+                    <div class="mt-8"></div>
+                    <div class="m-pop-title bold">
+                        {{item.korean_name}} 의원
+                    </div>
+                </div>
+            </section>
+            <section class="body-wrapper">
+                <div class="m-pop-title left">
+                    <span class="point">Q1</span>
+                    <span class="question">{{item.korean_name}} 의원의 활동에 만족하시나요?</span>
+                     
+                </div>
+                <div class="mt-8"></div>
+                <div class="smile-container">
+                    <div class="smile" :class="{'active':selectedOption === option.value}"
+                        v-for="(option,index) in options" :key="option.value"
+                    >
+                        <label>
+                            <input type="radio" :value="option.value" v-model="selectedOption">
+                            <img :src="option.image" :alt="option.label">
+                        </label>
+                        <div class="m-pop-title">
+                            {{option.label}}
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="m-pop-title">
+                    <star-rating
+                        :star-size="20"
+                        :show-rating="false"
+                        :read-only="false"
+                        :increment="0.5"
+                        :rating="temp.evaluate"
+                        @rating-selected="onRatingSelected"
+                    />
+                </div> -->
+                <div class="mt-8"></div>
+                <div class="m-pop-title left">
+                    <span class="point">Q2</span>
+                     <span class="question">의원에 대한 의견을 남겨주세요.</span>
+                </div>
+                <div class="m-input-textarea type01 lightgrey">
+                    <textarea name="" id="" placeholder="의원 평가를 입력해주세요" cols="30" rows="10"></textarea>
+                </div>
+            </section>
+            <div class="mt-8"></div>
+            <div class="m-pop-title">
+                <button class="m-btn type02 width-100" @click="">의원 평가 제출하기</button>
+            </div>
+        </modal>
     </div>
 
 </template>
@@ -159,7 +220,15 @@ export default {
             proposals:[],
             speeches:[],
             errors: {},
-
+            evaluatePop: false,
+            selectedOption: undefined,
+            options: [
+                { value: 5, label: '최고', image: '/images/contacts/f_5.png' },
+                { value: 4, label: '좋음', image: '/images/contacts/f_4.png' },
+                { value: 3, label: '보통', image: '/images/contacts/f_3.png' },
+                { value: 2, label: '별로', image: '/images/contacts/f_2.png' },
+                { value: 1, label: '최악', image: '/images/contacts/f_1.png' },
+            ],
         }
     },
     computed: {
@@ -196,6 +265,7 @@ export default {
                     await this.nprlapfmaufmqytet(this.temp.korean_name); //의원 약력 등 정보
                     await this.nzmimeepazxkubdpn(this.temp.korean_name); //의원 대표발의 법안
                     await this.npeslxqbanwkimebr(this.temp.korean_name); //의원 발언 영상
+                    this.openEvaluateModal();
                 }
                     
             } catch (error) {
@@ -272,7 +342,13 @@ export default {
             } catch (error) {
                 console.error(error);
             }
-        }
+        },
+        openEvaluateModal() {
+            this.evaluatePop = true;
+        },
+        closeEvaluteModal() {
+            this.evaluatePop = false;
+        },
     },
     /*watch: {
         district (newData, oldData) {
@@ -282,10 +358,68 @@ export default {
 
     mounted() {
         this.init();
+        console.log(this.options)
     },
 }
 </script>
 
 <style scoped>
+    .head-wrapper {
+        background: #f8f8f8;
+    }
+    .img-container {
+        width: 100%;
+        height: 100%;
+        padding-top:10%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #f8f8f8;
+        
+    }
+    
+    .img-container .crop-image {
+        width: 100px;
+        height: 100px;
+        background-size: cover; 
+        border-radius:5px;
+        box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.25);
+    }
 
+    .smile-container {
+        /* max-width: 400px; */
+        height: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+       
+    }
+    .smile-container .smile {
+         opacity: 0.3;
+    }
+    .smile-container .smile.active {
+        opacity: 1;
+    }
+    .smile-container .smile img {
+        width: 45px;
+        height: 45px;
+        
+    }
+    
+    .m-pop-title.bold {
+        font-weight: 700;
+    }
+    .m-pop-title.left {
+        text-align: left;
+    }
+    .m-pop-title.left .question {
+        font-size: 19px;
+        font-weight: 400;
+    }
+
+    .m-input-textarea.type01 textarea {
+        border: 1px solid #e5e5e5;
+        background: #f8f8f8;
+    }
 </style>
