@@ -1,5 +1,5 @@
 <template>
-    <div class="area-region-activity" style="overflow:scroll">
+    <div class="area-region-activity">
         <!-- 헤더영역 -->
         <header-type01 />
 
@@ -145,6 +145,7 @@
             <div class="m-pop-title" style="margin-top:-40px">
                 의원 평가하기
             </div>
+            <div class="pop-container">
             <section class="head-wrapper">
                 <div class="img-container">
                     <div class="crop-image" :style="`background-image:url('${item.img.url}')`"></div>
@@ -194,7 +195,9 @@
                 </div>
             </section>
             <div class="mt-8"></div>
-            <div class="m-pop-title">
+
+            </div>
+            <div class="m-pop-title sticky">
                 <button class="m-btn type02 width-100" @click="">의원 평가 제출하기</button>
             </div>
         </modal>
@@ -265,7 +268,6 @@ export default {
                     await this.nprlapfmaufmqytet(this.temp.korean_name); //의원 약력 등 정보
                     await this.nzmimeepazxkubdpn(this.temp.korean_name); //의원 대표발의 법안
                     await this.npeslxqbanwkimebr(this.temp.korean_name); //의원 발언 영상
-                    this.openEvaluateModal();
                 }
                     
             } catch (error) {
@@ -358,12 +360,18 @@ export default {
 
     mounted() {
         this.init();
-        console.log(this.options)
     },
 }
 </script>
 
 <style scoped>
+    .pop-container {
+        overflow:scroll;
+        height: 500px;
+    }
+    .pop-container::-webkit-scrollbar {
+        display:none;
+    }
     .head-wrapper {
         background: #f8f8f8;
     }
@@ -421,5 +429,10 @@ export default {
     .m-input-textarea.type01 textarea {
         border: 1px solid #e5e5e5;
         background: #f8f8f8;
+    }
+
+    .m-pop-title.sticky {
+        position: sticky;
+        z-index: 1;
     }
 </style>
