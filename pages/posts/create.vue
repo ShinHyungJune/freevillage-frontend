@@ -23,7 +23,6 @@
                 </div>
             </div>
         </div>
-
         <!-- 내용 영역 -->
         <div class="container">
             <div class="wrap">

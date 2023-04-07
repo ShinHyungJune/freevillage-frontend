@@ -16,7 +16,6 @@
                 </div>
             </div>
         </div>
-
         <!-- 신고 팝업 -->
         <spam-pop :target_id="item.id" target_model="posts" v-if="activeSpamPop" @close="activeSpamPop = false" />
 

@@ -427,14 +427,16 @@ export default {
         VueperSlides,VueperSlide
     },
     created() {
+
+        console.log(this.district.id)
         //post axios POST /api/districts/1/visit
-        this.$axios.post(`/api/districts/${this.district.id}/visit`)
+      /*  this.$axios.post(`/api/districts/${this.district.id}/visit`)
             .then((response) => {
                 console.log(response);
             })
             .catch((error) => {
                 console.log(error);
-            });
+            }); */
 
     },  
     data() {
@@ -497,7 +499,6 @@ export default {
             } catch (error) {
 
             }
-
         },
         active() {
             this.activeFinder = true;
